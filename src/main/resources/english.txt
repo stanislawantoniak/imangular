@@ -1,0 +1,65 @@
+generic;translations
+"app.name","Item Maker 1.0"
+"leftpanel.menu.manageitems","Manage Items"
+"leftpanel.menu.manageUsers", "Manage Users"
+"search.widget.text","Search..."
+"boolean.yes","Yes"
+"boolean.no","No"
+
+
+sahsboard;translations
+"dashboard.content","Dashboard"
+
+"login.title","Login Page"
+"loginpleasesignin","Please Sign In"
+"login.username.label","Enter Name"
+"login.pass.label","Enter password"
+"login.button.login","Log In"
+"login.error.message","Invalid username or password"
+"navbar.menu.action.logout","Log Out"
+
+itemslist;translations
+"itemslist.title","Items"
+"itemslist.heading","Manage Items"
+"itemslist.heading.button.additem","Add Item"
+"itemslist.itemstable.heading","Item List"
+"itemslist.itemstable.heading.id","ItemID"
+"itemslist.itemstable.heading.name","Name"
+"itemslist.itemstable.heading.iscomposed","Is composed"
+"itemslist.itemstable.heading.actions","Actions"
+"itemslist.itemstable.editbutton","Edit"
+"itemslist.itemstable.deletebutton","Delete"
+edit form, item
+"edititem.heading.additem","Add Item"
+"edititem.heading.edititem","Edit Item"
+"edititem.label.itemname","Name"
+"edititem.button.save","Save Name"
+"edititem.button.cancel","Back To List"
+"editcomponents.button.add","Add Component"
+
+component,editform
+"component.editform.button.cancel","Cancel"
+
+users; userlist
+"userslist.title","Users"
+"userslist.heading","All Users"
+"userslist.userstable.button.delete","Delete"
+"userslist.userstable.button.edit","Edit"
+"userslist.heading.button.user.add","Add user"
+"userslist.userstable.heading.id","Id"
+"userslist.userstable.heading.name","Login (email)"
+"userslist.userstable.heading.enabled","Active"
+"userslist.userstable.heading.actions","Actions"
+
+users; useredit
+"edituser.heading.additem","Add User"
+"edituser.heading.edituser","Edit User"
+"edituser.label.name","User email"
+"edituser.help.name","User is identified by his email. Enter valis email."
+"edituser.label.password","Password"
+"edituser.help.password","Password must be at least 6 characters. Leave blank if you do not want to change."
+"edituser.label.enabled","Active"
+"edituser.help.enabled","Active = User may log in."
+"edituser.label.roles","Assigned Roles"
+"edituser.button.save","Save User"
+"edituser.button.cancel","Back To List"

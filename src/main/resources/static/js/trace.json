@@ -1,0 +1,3043 @@
+[
+	{
+		"timestamp": 1476199829284,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:30:28 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199829266,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:30:28 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199829259,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:30:28 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199829252,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:30:28 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199829079,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/login.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199828873,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199828800,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:30:28 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199828798,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:30:28 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199828146,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-route.min.js.map",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"pragma": "no-cache",
+					"cache-control": "no-cache"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"status": "404"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827804,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827802,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827794,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827789,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.config.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827784,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827779,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827762,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-bootstrap.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827758,
+		"info": {
+			"method": "GET",
+			"path": "/css/angular-bootstrap.css",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/css,*/*;q=0.1",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199827597,
+		"info": {
+			"method": "GET",
+			"path": "/",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"upgrade-insecure-requests": "1"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "text/html",
+					"Content-Language": "pl",
+					"Content-Length": "1311",
+					"Date": "Tue, 11 Oct 2016 15:30:27 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199806702,
+		"info": {
+			"method": "GET",
+			"path": "/tracetrace",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=58E4AB97589EA5B4AE8D6C02EEDDF9AA; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"upgrade-insecure-requests": "1"
+				},
+				"response": {
+					"Set-Cookie": "JSESSIONID=3FA74BCF30E1228B49E60E82B44B4A76;path=/;HttpOnly",
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Strict-Transport-Security": "max-age=31536000 ; includeSubDomains",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:30:06 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199753902,
+		"info": {
+			"method": "GET",
+			"path": "/beans",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"upgrade-insecure-requests": "1"
+				},
+				"response": {
+					"Set-Cookie": "JSESSIONID=58E4AB97589EA5B4AE8D6C02EEDDF9AA;path=/;HttpOnly",
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Strict-Transport-Security": "max-age=31536000 ; includeSubDomains",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:29:13 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476199701679,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-route.min.js.map",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"pragma": "no-cache",
+					"cache-control": "no-cache"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"status": "404"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198685059,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:11:24 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198685059,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:11:24 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198685055,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:11:24 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198685051,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:11:24 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198684475,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198684462,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:11:24 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198684460,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:11:24 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683650,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-route.min.js.map",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"pragma": "no-cache",
+					"cache-control": "no-cache"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"status": "404"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683058,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683054,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683048,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683047,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683047,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.config.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683043,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-bootstrap.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683041,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198683037,
+		"info": {
+			"method": "GET",
+			"path": "/css/angular-bootstrap.css",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/css,*/*;q=0.1",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=2BD76546DD33305DA16E87A373ADB813; XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198682798,
+		"info": {
+			"method": "GET",
+			"path": "/",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"upgrade-insecure-requests": "1"
+				},
+				"response": {
+					"Set-Cookie": "XSRF-TOKEN=b2b17088-ff71-458a-9d59-c51033b32a1b;path=/",
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "text/html",
+					"Content-Language": "pl",
+					"Content-Length": "1311",
+					"Date": "Tue, 11 Oct 2016 15:11:22 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198638298,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "7452d028-3bf1-4597-a110-62acda2198e2",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:10:38 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198638298,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "7452d028-3bf1-4597-a110-62acda2198e2",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:10:38 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198638295,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "7452d028-3bf1-4597-a110-62acda2198e2",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:10:38 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198638294,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "7452d028-3bf1-4597-a110-62acda2198e2",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:10:38 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198636179,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/login.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "7452d028-3bf1-4597-a110-62acda2198e2",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198636169,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "7452d028-3bf1-4597-a110-62acda2198e2",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:10:36 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198636163,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "7452d028-3bf1-4597-a110-62acda2198e2",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:10:36 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198604253,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-route.min.js.map",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"pragma": "no-cache",
+					"cache-control": "no-cache"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"status": "404"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602033,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602032,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602031,
+		"info": {
+			"method": "GET",
+			"path": "/css/angular-bootstrap.css",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/css,*/*;q=0.1",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602029,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602027,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602022,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602017,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-bootstrap.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198602008,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.config.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=F3A0C069DE6680BFF90646F47A398D89; XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198601703,
+		"info": {
+			"method": "GET",
+			"path": "/",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"upgrade-insecure-requests": "1",
+					"cache-control": "max-age=0"
+				},
+				"response": {
+					"Set-Cookie": "XSRF-TOKEN=7452d028-3bf1-4597-a110-62acda2198e2;path=/",
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "text/html",
+					"Content-Language": "pl",
+					"Content-Length": "1311",
+					"Date": "Tue, 11 Oct 2016 15:10:01 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198523326,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "8c9e7fca-1959-4f1f-8a94-53f311bf0349",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=0971722AACA3733BD7950A7A9ABEBE71; XSRF-TOKEN=8c9e7fca-1959-4f1f-8a94-53f311bf0349"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:08:43 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198523321,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "8c9e7fca-1959-4f1f-8a94-53f311bf0349",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=0971722AACA3733BD7950A7A9ABEBE71; XSRF-TOKEN=8c9e7fca-1959-4f1f-8a94-53f311bf0349"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:08:43 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198523312,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "8c9e7fca-1959-4f1f-8a94-53f311bf0349",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=0971722AACA3733BD7950A7A9ABEBE71; XSRF-TOKEN=8c9e7fca-1959-4f1f-8a94-53f311bf0349"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:08:43 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198523309,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "8c9e7fca-1959-4f1f-8a94-53f311bf0349",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=0971722AACA3733BD7950A7A9ABEBE71; XSRF-TOKEN=8c9e7fca-1959-4f1f-8a94-53f311bf0349"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:08:43 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198523246,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "8c9e7fca-1959-4f1f-8a94-53f311bf0349",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=0971722AACA3733BD7950A7A9ABEBE71; XSRF-TOKEN=8c9e7fca-1959-4f1f-8a94-53f311bf0349",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198523231,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"Set-Cookie": "JSESSIONID=0971722AACA3733BD7950A7A9ABEBE71;path=/;HttpOnly",
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:08:43 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198479168,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:58 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198479164,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:58 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198479078,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:58 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478965,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-route.min.js.map",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"status": "404"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478723,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478721,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478718,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478718,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.config.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478714,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478710,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478704,
+		"info": {
+			"method": "GET",
+			"path": "/css/angular-bootstrap.css",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "text/css,*/*;q=0.1",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478702,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-bootstrap.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"if-modified-since": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"status": "304"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198478676,
+		"info": {
+			"method": "GET",
+			"path": "/",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"cache-control": "max-age=0",
+					"upgrade-insecure-requests": "1",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "text/html",
+					"Content-Language": "pl-PL",
+					"Content-Length": "1311",
+					"Date": "Tue, 11 Oct 2016 15:07:58 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198473764,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:53 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198473753,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:53 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198473703,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/login.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"if-modified-since": "Tue, 11 Oct 2016 14:20:01 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d; JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "text/html",
+					"Content-Length": "1131",
+					"Date": "Tue, 11 Oct 2016 15:07:53 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466935,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466920,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466911,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466904,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466555,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/login.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:20:01 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "text/html",
+					"Content-Length": "1131",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466163,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 11:17:33 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "text/html",
+					"Content-Length": "20",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466034,
+		"info": {
+			"method": "GET",
+			"path": "/userDetails",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198466027,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "application/json, text/plain, */*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"x-requested-with": "XMLHttpRequest",
+					"x-xsrf-token": "a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:46 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462875,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-route.min.js.map",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"pragma": "no-cache",
+					"cache-control": "no-cache"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"status": "404"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462458,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-bootstrap.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:28:04 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "251564",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462458,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:19:39 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "1637",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462442,
+		"info": {
+			"method": "GET",
+			"path": "/js/common/navigation.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 11:05:00 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "85",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462442,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 12:32:26 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "378",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462427,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.config.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 12:01:02 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "441",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462427,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 11:19:04 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "83",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462427,
+		"info": {
+			"method": "GET",
+			"path": "/js/app.module.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "*/*",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 11:04:14 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "172",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462427,
+		"info": {
+			"method": "GET",
+			"path": "/css/angular-bootstrap.css",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/css,*/*;q=0.1",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"referer": "http://localhost:8080/",
+					"cookie": "JSESSIONID=0FA984C9F6DA97DEEBC5000A3A6923D7; XSRF-TOKEN=a33867a5-1159-4a19-a18e-89e5b8e9bbdb",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:28:04 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "text/css",
+					"Content-Length": "146495",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198462185,
+		"info": {
+			"method": "GET",
+			"path": "/",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0",
+					"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+					"accept-language": "pl,en-US;q=0.7,en;q=0.3",
+					"accept-encoding": "gzip, deflate",
+					"cookie": "JSESSIONID=61F7548E296BCDC586966F9A8DE35EEC; XSRF-TOKEN=7eafc1d7-270f-4a7f-af81-cb695b9d6c1b",
+					"authorization": "Basic c3RhbkB3cC5wbDoxMjM0NTY=",
+					"connection": "keep-alive",
+					"upgrade-insecure-requests": "1"
+				},
+				"response": {
+					"Set-Cookie": "XSRF-TOKEN=;Max-Age=0;path=/",
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "text/html",
+					"Content-Language": "pl",
+					"Content-Length": "1311",
+					"Date": "Tue, 11 Oct 2016 15:07:42 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198433579,
+		"info": {
+			"method": "GET",
+			"path": "/common/labels",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=CC2CDBB16385EB0B9403A33258557A14; XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Set-Cookie": "JSESSIONID=E72D00B2CD98351DE8776D366EB9FD36;path=/;HttpOnly",
+					"X-Content-Type-Options": "nosniff",
+					"X-XSS-Protection": "1; mode=block",
+					"Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+					"Pragma": "no-cache",
+					"Expires": "0",
+					"X-Frame-Options": "DENY",
+					"Content-Type": "application/json;charset=UTF-8",
+					"Transfer-Encoding": "chunked",
+					"Date": "Tue, 11 Oct 2016 15:07:12 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198433542,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.html",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"accept": "application/json, text/plain, */*",
+					"x-xsrf-token": "397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"x-requested-with": "XMLHttpRequest",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=CC2CDBB16385EB0B9403A33258557A14; XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d",
+					"if-modified-since": "Tue, 11 Oct 2016 11:17:33 GMT"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "text/html",
+					"Content-Length": "20",
+					"Date": "Tue, 11 Oct 2016 15:07:12 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198433364,
+		"info": {
+			"method": "GET",
+			"path": "/js/angular-route.min.js.map",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=CC2CDBB16385EB0B9403A33258557A14; XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"status": "404"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198433122,
+		"info": {
+			"method": "GET",
+			"path": "/js/dashboard/dashboard.component.js",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 12:32:26 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "*/*",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=CC2CDBB16385EB0B9403A33258557A14; XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 14:59:16 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "application/javascript",
+					"Content-Length": "378",
+					"Date": "Tue, 11 Oct 2016 15:07:12 GMT",
+					"status": "200"
+				}
+			}
+		}
+	},
+	{
+		"timestamp": 1476198433109,
+		"info": {
+			"method": "GET",
+			"path": "/css/angular-bootstrap.css",
+			"headers": {
+				"request": {
+					"host": "localhost:8080",
+					"connection": "keep-alive",
+					"if-modified-since": "Tue, 11 Oct 2016 14:28:04 GMT",
+					"user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+					"accept": "text/css,*/*;q=0.1",
+					"referer": "http://localhost:8080/",
+					"accept-encoding": "gzip, deflate, sdch",
+					"accept-language": "pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4",
+					"cookie": "JSESSIONID=CC2CDBB16385EB0B9403A33258557A14; XSRF-TOKEN=397cd34e-233a-4a26-8628-ab3d1c78895d"
+				},
+				"response": {
+					"X-Application-Context": "application",
+					"Last-Modified": "Tue, 11 Oct 2016 15:06:36 GMT",
+					"Accept-Ranges": "bytes",
+					"Content-Type": "text/css",
+					"Content-Length": "146495",
+					"Date": "Tue, 11 Oct 2016 15:07:12 GMT",
+					"status": "200"
+				}
+			}
+		}
+	}
+]

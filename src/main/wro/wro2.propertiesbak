@@ -1,2 +1,2 @@
 preProcessors=lessCssImport
-postProcessors=less4j
+postProcessors=less4j,jsMin

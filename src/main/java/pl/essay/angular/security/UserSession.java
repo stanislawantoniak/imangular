@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
-import pl.essay.imangular.languages.Language;
-import pl.essay.imangular.languages.Languages;
+import pl.essay.languages.Language;
+import pl.essay.languages.Languages;
 
 @Component
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)

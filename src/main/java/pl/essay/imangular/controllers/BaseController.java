@@ -1,19 +1,19 @@
 package pl.essay.imangular.controllers;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import pl.essay.angular.security.UserSession;
-import pl.essay.imangular.languages.Language;
-import pl.essay.imangular.languages.Languages;
+import pl.essay.languages.Language;
+import pl.essay.languages.Languages;
 
-@Controller
 public class BaseController {
 
 	//with scope session
@@ -22,13 +22,6 @@ public class BaseController {
 
 	@Autowired
 	protected Languages languages; 
-	
-	public void setUserSession(UserSession us){
-		this.userSession = us;
-	}
-	public UserSession getUserSession(){
-		return this.userSession;
-	}
 
 	protected void addGenericDataToModel(Model model){
 		this.userSession.setName(this.getUsername());
@@ -37,12 +30,12 @@ public class BaseController {
 		System.out.println("language selected: "+lSelected.getName());
 		model.addAttribute("languages", this.languages.getLanguages());//languages for selector
 		model.addAttribute("__static__", lSelected.getTranslator().getTranslations());//translations of static elements
-		
-		//to fix
-		//probably not the best place to define classes for view elements
-		model.addAttribute("buttonDefaultClasses","btn btn-default btn-sm");
-		model.addAttribute("buttonOutlineClasses","btn  btn-outline btn-primary");
-		
+	}
+	
+	protected Map<String,String> getUserTranslations(){
+		Language lSelected = this.userSession.getLanguageSelected();
+		System.out.println("language selected: "+lSelected.getName());
+		return lSelected.getTranslator().getTranslations();
 	}
 
 	protected String getUsername() {

@@ -5,11 +5,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
-import javax.inject.Inject;
+
+import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
 
@@ -18,16 +20,32 @@ import org.springframework.util.ReflectionUtils;
 @Transactional
 public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 
-	@Inject private SessionFactory sessionFactory;
+	//@Autowired 
+	private SessionFactory sessionFactory;
 	private Class<T> domainClass;
+	
+	@Autowired
+	private EntityManagerFactory entityManagerFactory;
+
+	public SessionFactory getSessionFactory() {
+	    if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
+	        throw new NullPointerException("Not a hibernate factory exception");
+	    }
+	    return entityManagerFactory.unwrap(SessionFactory.class);
+	}
+	
+	public void init(){
+		this.sessionFactory = this.getSessionFactory();
+		System.out.println("in init @@@@@@@@@@@@@@@@@@@@@@");
+	}
 
 	protected Session getSession() {
 		try {
-			return sessionFactory.getCurrentSession();
+			return getSessionFactory().getCurrentSession();
 		} 
 		catch (HibernateException e) 
 		{
-			return sessionFactory.openSession();
+			return getSessionFactory().openSession();
 		}
 	}
 

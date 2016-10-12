@@ -1,0 +1,37 @@
+generic;translations
+"app.name","Item Maker 1.0"
+"leftpanel.menu.manageitems","Zarządzanie produktami"
+"leftpanel.menu.manageUsers", "Zarządzanie użytkownikami"
+"search.widget.text","Szukaj..."
+
+dahsboard;translations
+"dashboard.content","Panel"
+
+
+"login.title","Strona logowania"
+"login.pleasesignin","Prosimy o zalogowanie"
+"login.username.label","Nazwa użytkownika"
+"login.pass.label","Hasło"
+"login.button.login","Zaloguj"
+"login.error.message","Niepoprawna nazwa lub hasło użytkownika"
+"navbar.menu.action.logout","Wyloguj"
+
+
+itemslist;translations
+"itemslist.title","Produkty"
+"itemslist.heading","Zarządzaj produktami"
+"itemslist.heading.button.additem","Dodaj produkt"
+"itemslist.itemstable.heading","Lista produktów"
+"itemslist.itemstable.heading.id","Kod"
+"itemslist.itemstable.heading.name","Nazwa"
+"itemslist.itemstable.heading.iscomposed","Złożony"
+"itemslist.itemstable.heading.actions",""
+"itemslist.itemstable.editbutton","Edytuj"
+"itemslist.itemstable.deletebutton","Usuń"
+edit form;sss
+"edititem.heading.additem","Dodawanie produktu"
+"edititem.heading.edititem","Edycja produktu"
+"edititem.label.itemname","Nazwa"
+"edititem.button.save","Zapisz"
+"edititem.button.cancel","Anuluj"
+"editcomponents.button.add","Dodaj komponent"

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<beans:bean id="polish" class="pl.essay.languages.Language">
+		<beans:property name="acronym" value="PL" />
+		<beans:property name="name" value="Polski" />
+		<beans:property name="flag" value="polish.png" />
+		<beans:property name="translator" ref="polishTranslator" />
+	</beans:bean>
+
+	<beans:bean id="english" class="pl.essay.languages.Language">
+		<beans:property name="acronym" value="EN" />
+		<beans:property name="name" value="English" />
+		<beans:property name="flag" value="uk.png" />
+		<beans:property name="translator" ref="englishTranslator" />
+	</beans:bean>
+
+	<beans:bean id="englishTranslator" class="pl.essay.languages.Translator"
+		init-method="init">
+		<beans:property name="language" value="English" />
+		<beans:property name="translationFile" value="english.txt" />
+	</beans:bean>
+
+	<beans:bean id="polishTranslator" class="pl.essay.languages.Translator"
+		init-method="init">
+		<beans:property name="language" value="Polski" />
+		<beans:property name="translationFile" value="polish.txt" />
+	</beans:bean>
+
+	<beans:bean id="languages" class="pl.essay.languages.Languages"
+		scope="singleton" init-method="init">
+		<beans:property name="defaultLanguage">
+			<beans:ref bean="english" />
+		</beans:property>
+		<beans:property name="languages">
+			<beans:list>
+				<beans:ref bean="polish" />
+				<beans:ref bean="english" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>
