@@ -40,7 +40,7 @@ public class Translator {
 			for (Map.Entry<String,String[]> lineCsv: tempMap.entrySet()){
 				if (lineCsv.getValue().length == 2) {//just skip bad lines
 					this.translations.put(lineCsv.getValue()[0].trim(), lineCsv.getValue()[1].trim());
-					logger.info(lineCsv.getValue()[0]+":"+lineCsv.getValue()[1]);
+					//logger.info(lineCsv.getValue()[0]+":"+lineCsv.getValue()[1]);
 				}
 			}
 			logger.info("translation file for language "+this.language+" processed, "+this.translations.size()+" translation records read");

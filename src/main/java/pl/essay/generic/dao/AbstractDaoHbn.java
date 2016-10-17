@@ -21,23 +21,22 @@ import org.springframework.util.ReflectionUtils;
 public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 
 	//@Autowired 
-	private SessionFactory sessionFactory;
+	//private SessionFactory sessionFactory;
 	private Class<T> domainClass;
-	
+
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
 	public SessionFactory getSessionFactory() {
-	    if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
-	        throw new NullPointerException("Not a hibernate factory exception");
-	    }
-	    return entityManagerFactory.unwrap(SessionFactory.class);
+		if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
+			throw new NullPointerException("Not a hibernate factory exception");
+		}
+		return entityManagerFactory.unwrap(SessionFactory.class);
 	}
-	
-	public void init(){
-		this.sessionFactory = this.getSessionFactory();
-		System.out.println("in init @@@@@@@@@@@@@@@@@@@@@@");
-	}
+
+	//public void init(){
+	//	this.sessionFactory = this.getSessionFactory();
+	//}
 
 	protected Session getSession() {
 		try {
@@ -89,14 +88,28 @@ public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 	public List<T> getAll() {
 		return getSession()
 				.createQuery("from " + getDomainClassName())
-				.getResultList();
+				.list();
 	}
 
-	public void update(T t) { getSession().update(t); }
+	public void update(T t) { 
+		System.out.println("updating object "+t.getClass()+"::"+t.toString());
+		Session session = getSession();
+		session.update(t);
+		session.flush();
+	}
 
-	public void delete(T t) { getSession().delete(t); }
+	public void delete(T t) { 
+		Session session = getSession();
+		session.delete(t); 
+		session.flush();
+	}
 
-	public void deleteById(Serializable id) { delete(load(id)); }
+	public void deleteById(Serializable id) { 
+		Session session = getSession();
+		T obj = session.load(getDomainClass(), id);
+		session.delete(obj);
+		session.flush();
+	}
 
 	public void deleteAll() {
 		getSession()
@@ -107,7 +120,7 @@ public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 	public long count() {
 		return (Long) getSession()
 				.createQuery("select count(*) from " + getDomainClassName())
-				.getSingleResult();
+				.uniqueResult();
 	}
 
 	public boolean exists(Serializable id) { return (get(id) != null); }

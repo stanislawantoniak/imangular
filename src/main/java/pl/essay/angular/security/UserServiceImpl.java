@@ -16,10 +16,6 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired private UserDao userDao;
 
-	@PostConstruct
-	public void init(){
-	}
-
 	public void updateUser(UserT i){
 		this.userDao.update(i);
 	}
@@ -47,4 +43,7 @@ public class UserServiceImpl implements UserService{
 			throw new UsernameNotFoundException("User : "+username +" not found.");
 	}
 
+	public boolean existsUser(String username){
+		return userDao.existsUserByName(username);
+	}
 }

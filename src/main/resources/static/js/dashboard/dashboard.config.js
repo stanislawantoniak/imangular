@@ -2,12 +2,13 @@
 
 //Register `navigation` component, along with its associated controller and template
 angular.
-module('dashboard', []).
-controller( 'dashboard', function DashboardController($rootScope, $http, $location) {
-	var self = this;
-	if (!$rootScope.authenticated){
-		$location.path("/login");
-		self.error = true;
-	}
-	console.log('from dashboard controller');
-});
+module('dashboard', ['translationService']).
+controller( 'dashboard', ['$scope', 'translator', function DashboardController($scope, translator) {
+	
+	console.log('from dashboard controller - start');
+
+	$scope.translator = translator;
+
+	console.log('from dashboard controller - end');
+
+}]);

@@ -1,28 +1,32 @@
 package pl.essay.angular.security;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import pl.essay.languages.Language;
-import pl.essay.languages.Languages;
+import pl.essay.languages.*;
 
 @Component
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class UserSession {
+public class UserSession implements Serializable{
 	private String cookie;
 	@Autowired(required=true)
 	@Qualifier(value="english")
 	private Language languageSelected;
-	
+
 	@Autowired(required=true)
 	@Qualifier(value="languages")
 	private Languages languages;
 	
-	String name;
-		
+	private String name  = "Guest";
+
 	public UserSession(){
 	}
 
@@ -38,12 +42,36 @@ public class UserSession {
 	public Language getLanguageSelected(){
 		return this.languageSelected;
 	}
-	
-	public String getName(){
-		return this.name;
+
+	public void updateName() {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		if (auth != null){
+
+			if (auth.isAuthenticated()){
+
+				Object principal = auth.getPrincipal();
+				
+				String username;
+
+				if (principal instanceof UserDetails) {
+					username = ((UserDetails) principal).getUsername();
+				} else {
+					username = principal.toString();
+				}
+				
+				this.name = username;
+			}
+		}
 	}
-	public void setName(String n){
-		this.name = n;
-	}
 	
+	public String toJson(){
+		return
+				"{"+
+				"\"name\":\""+this.name+"\","+
+				"\"languageSelectedFlag\":\""+this.languageSelected.getFlag()+"\""+
+				"}";
+	}
+
 }

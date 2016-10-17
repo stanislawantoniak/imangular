@@ -1,55 +1,40 @@
 package pl.essay.angular.security;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.essay.imangular.controllers.BaseController;
+import pl.essay.imangular.controller.BaseController;
 
 @RestController
 public class LoginController extends BaseController {
 
-	//@Autowired private UserService userService;
-	
-	@RequestMapping("/userDetails")
-	public Map<String,String> user(HttpServletRequest request, Principal user) {
-		System.out.println("User details request:\n"+request);
-		//initUser();//#toremove
-		Map<String,String> simpleUser = new HashMap<String,String>();
-		simpleUser.put("name", user.getName());
-		System.out.println("from userDetails");
-		
-		return simpleUser;
+	//this is protected resource used for authentication
+	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
+	public String user(HttpServletRequest request, Principal user) {
+		this.userSession.updateName(); //update name when authenticated
+		return this.userSession.toJson();
 	}
 	
-	@RequestMapping(value="/logout", method = RequestMethod.POST)
-	public String logoutPage (HttpServletRequest request, HttpServletResponse response){
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getPrincipal().toString();
-		if (auth != null){    
-			new SecurityContextLogoutHandler().logout(request, response, auth);
-			//persistentTokenBasedRememberMeServices.logout(request, response, auth);
-			SecurityContextHolder.getContext().setAuthentication(null);
-		}
-		return "user logged out succesfully, user details "+name;
+	//this is unprotected resource used for fetching data for guest user
+	@RequestMapping(value = "common/userSession", method = RequestMethod.GET)
+	public String getSession() {
+		return this.userSession.toJson();
 	}
-
-	//init for dev purposes
+	
+	@RequestMapping(value = "common/selectLanguage/{languageSelected}", method = RequestMethod.GET)
+	public String selectLanguage(@PathVariable String languageSelected) {
+		this.userSession.setLanguageSelected(languageSelected);
+		return this.userSession.toJson();
+	}
+	
+	//init first user for dev purposes
 	//just to have a user in db in case of db re-creation
-	//to fix
 	/*
 	private void initUser(){
 		String name = "stan@wp.pl";

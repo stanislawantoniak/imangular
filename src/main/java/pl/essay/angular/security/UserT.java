@@ -1,5 +1,6 @@
 package pl.essay.angular.security;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -95,13 +96,9 @@ public class UserT implements UserDetails{
 		this.roles += ";"+r; 
 	}
 
-	public String toString(){
-		return this.getId() + ":: name : "+this.getUsername();
-	}
-
 	public Collection<GrantedAuthority> getAuthorities() {
 		Roles roles = new Roles(this.roles);
-		return roles.getGrantedAutority();
+		return roles.getGrantedAuthority();
 	}
 
 	public List<String> getRolesList() {
@@ -139,11 +136,12 @@ public class UserT implements UserDetails{
 		List<String> rolesList;
 
 		public Roles(String rolesSerialized){
+			
 			grantedAuthority = new ArrayList<GrantedAuthority>();
 			rolesList = new ArrayList<String>();
 
 			if (!"".equals(rolesSerialized)){
-				String[] roles = rolesSerialized.split(";");
+				String[] roles = rolesSerialized.split(",");
 				for (String role: roles)
 					if (!"".equals(role)) {
 						grantedAuthority.add(new SimpleGrantedAuthority(role));
@@ -152,7 +150,7 @@ public class UserT implements UserDetails{
 			}
 		}
 
-		public Collection<GrantedAuthority> getGrantedAutority(){
+		public Collection<GrantedAuthority> getGrantedAuthority(){
 			return grantedAuthority;
 		}
 
@@ -160,7 +158,7 @@ public class UserT implements UserDetails{
 			return rolesList;
 		}
 
-		private class SimpleGrantedAuthority implements GrantedAuthority{
+		private class SimpleGrantedAuthority implements GrantedAuthority, Serializable{
 
 			String role;
 			public SimpleGrantedAuthority(String r){
@@ -170,9 +168,32 @@ public class UserT implements UserDetails{
 			public String getAuthority() {
 				return this.role;
 			}
+			
+			@Override 
+			public String toString(){
+				return this.role;
+			}
 
 		}
 
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof UserT))
+			return false;
+		UserT other = (UserT) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override 
+	public String toString(){
+		return this.id+":"+this.username+":: active->"+this.enabled;
+	}
 }

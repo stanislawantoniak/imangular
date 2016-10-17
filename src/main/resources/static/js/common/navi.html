@@ -1,0 +1,102 @@
+
+<nav class="navbar navbar-default navbar-static-top"
+	style="margin-bottom: 0" role="navigation">
+	<div class="navbar-header">
+		<button class="navbar-toggle" data-target=".navbar-collapse"
+			data-toggle="collapse" type="button">
+			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+			<span class="icon-bar"></span> <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#/">{{nav.translator.label.appname}}</a>
+	</div>
+
+	<ul class="nav navbar-top-links navbar-right">
+
+		<li class="dropdown"><a class="dropdown-toggle"
+			data-toggle="dropdown" aria-expanded="true"> <img
+				ng-src="css/{{nav.authService.session.languageSelectedFlag}}" /> <i
+				class="fa fa-caret-down"></i>
+		</a>
+			<ul class="dropdown-menu dropdown-alerts">
+				<li ng-repeat="language in nav.languages"><a
+					ng-click="nav.selectLanguage(language.acronym)"> <img
+						ng-src="css/{{language.flag}}" /> {{language.name}}
+				</a></li>
+			</ul></li>
+
+		<li class="dropdown"><a class="dropdown-toggle active"
+			data-toggle="dropdown" aria-expanded="true"> {{nav.authService.session.name}}
+				<i class="fa fa-caret-down"></i>
+		</a>
+			<ul class="dropdown-menu dropdown-user">
+				<li><a href="" ng-click="nav.authService.logout()"><i
+						class="fa fa-sign-out fa-fw"></i>
+						{{nav.translator.label.navbarmenuactionlogout}}</a></li>
+			</ul></li>
+
+	</ul>
+
+	<div ng-show="authenticated" class="navbar-default sidebar"
+		role="navigation">
+		<div class="sidebar-nav navbar-collapse">
+			<ul id="side-menu" class="nav">
+				<li class="sidebar-search">
+					<div class="input-group custom-search-form">
+						<input class="form-control" type="text"
+							placeholder="{{nav.translator.label.searchwidgettext}}">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+					</div>
+				</li>
+				<li><a class="active" href="#!/items"> <i
+						class="fa fa-table fa-fw"></i> <span
+						ng-bind="nav.translator.label.leftpanelmenumanageitems"></span>
+				</a></li>
+				<li><a class="active" href="#!/users"> <i
+						class="fa fa-wrench fa-fw"></i></i><span
+						ng-bind="nav.translator.label.leftpanelmenumanageUsers"></span>
+				</a></li>
+
+				<li><a class="active"> <i class="fa fa-wrench fa-fw"></i></i><span>
+							current route {{nav.route.absUrl()|json}} </span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div ng-if="!authenticated" ng-cloak class="ng-cloak">
+	<div class="alert alert-danger" ng-show="nav.authService.error">There was a
+		problem logging in. Please try again.</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">{{nav.translator.label.loginpleasesignin}}
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form role="form" ng-submit="nav.authService.login(nav.credentials)">
+							<div class="form-group">
+								<label for="username">Username:</label> <input type="text"
+									class="form-control" id="username" name="username"
+									ng-model="nav.credentials.username" />
+							</div>
+							<div class="form-group">
+								<label for="password">Password:</label> <input type="password"
+									class="form-control" id="password" name="password"
+									ng-model="nav.credentials.password" />
+							</div>
+							<button class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

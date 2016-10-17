@@ -13,10 +13,8 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 @ComponentScan({
 	"pl.essay.imangular",
-	"pl.essay.session",
 	"pl.essay.generic",
 	"pl.essay.angular"
 })
@@ -44,7 +42,7 @@ public class ImAngularApplication {
 			.httpBasic()
 			.and()
 			  .authorizeRequests()
-			    .antMatchers("/login.html","/","/logout","/common/labels").permitAll().anyRequest()
+			    .antMatchers("/login.html","/","/logout","/common/**").permitAll().anyRequest()
 			    .authenticated().and()
 			  .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 

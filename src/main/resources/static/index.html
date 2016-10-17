@@ -2,31 +2,30 @@
 <html>
 <head>
 <title>ItemMaker</title>
-<link href="css/angular-bootstrap.css" rel="stylesheet">
+<link href="css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/vendor/datatables-plugins/dataTables.bootstrap.css"
+	rel="stylesheet">
+<link href="css/vendor/datatables-responsive/dataTables.responsive.css"
+	rel="stylesheet">
+<link href="css/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="css/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
 <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
 }
 </style>
+
 </head>
 
-<body ng-cloak class="ng-cloak"  ng-app="imangular">
+<body ng-cloak class="ng-cloak" ng-app="imangular">
 	<div id="wrapper">
-		{{angular.version|json}}<br> 
-		<div id="page-wrapper" style="min-height: 618px;">
-			<div class="row">
-				<div class="col-lg-12">
-					<div ng-controller="navigation as nav" class="container">
-						<ul class="nav nav-pills" role="tablist">
-							<li class="active"><a href="#/">home</a></li>
-							<li ng-show="!authenticated"><a href="#/login">login</a></li>
-							<li ng-show="authenticated"><a href=""
-								ng-click="nav.logout()">logout</a></li>
-						</ul>
-					</div>
-					<div ng-view class="container"></div>
-				</div>
-			</div>
+		<div ng-controller="navigation as nav"
+			ng-include="'js/common/navi.html'"></div>
+		<div id="page-wrapper" ng-if="authenticated" style="min-height: 618px;">
+			<div ng-view></div>
 		</div>
 	</div>
 
@@ -35,7 +34,21 @@
 
 	<script src="js/app.config.js"></script>
 	<script src="js/common/navigation.config.js"></script>
+	<script src="js/common/translator.config.js"></script>
+	<script src="js/common/checklist-model.config.js"></script>
+	<script src="js/common/generic-restservice.js"></script>
 	<script src="js/dashboard/dashboard.config.js"></script>
+	<script src="js/user/users.config.js"></script>
+	<script src="js/user/userservice.js"></script>
+	<script src="js/item/items.config.js"></script>
+	<script src="js/item/itemservice.js"></script>	
+
+	<script src="css/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="css/vendor/metisMenu/metisMenu.min.js"></script>
+	<script src="css/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="css/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+	<script src="css/vendor/datatables-responsive/dataTables.responsive.js"></script>
+	<script src="css/dist/js/sb-admin-2.js"></script>
 
 </body>
 </html>

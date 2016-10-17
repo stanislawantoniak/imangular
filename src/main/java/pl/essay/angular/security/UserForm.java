@@ -2,6 +2,8 @@ package pl.essay.angular.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+
 
 public class UserForm {
 	
@@ -27,6 +29,19 @@ public class UserForm {
 		this.username = u.getUsername();
 		this.enabled = u.isEnabled();
 		this.rolesSelected = u.getRolesList();
+		this.password = "";
+	}
+	
+	public UserT updateUserT(UserT u){
+		u.setUsername(this.username);
+		if (!"".equals(this.password))
+			u.setPassword(this.password);
+		u.setEnabled(this.enabled);
+		String roles = "";
+		for (String role: this.rolesSelected)
+			roles+=role+",";
+		u.setRoles(StringUtils.substringBeforeLast(roles,","));
+		return u;
 	}
 	
 	public void setUsername(String s){
@@ -61,4 +76,8 @@ public class UserForm {
 		return this.id;
 	}
 		
+	@Override 
+	public String toString(){
+		return this.username+":: active->"+this.enabled+"::pass->"+this.getPassword();
+	}
 }

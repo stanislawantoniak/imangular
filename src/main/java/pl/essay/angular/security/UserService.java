@@ -10,5 +10,6 @@ public interface UserService extends UserDetailsService{
 		public List<UserT> listUsers();
 		public UserT getUserById(int id);
 		public void removeUser(int id);
+		public boolean existsUser(String username);
 
 }
