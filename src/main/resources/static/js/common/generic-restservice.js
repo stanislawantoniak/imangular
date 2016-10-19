@@ -25,6 +25,7 @@ factory('restservice', ['$http', '$q', function($http, $q){
             },
             function(errResponse){
                 console.error('Error while fetching from url '+url);
+                //console.error('Response::'+errResponse);
                 deferred.reject(errResponse);
             }
         );
@@ -39,14 +40,14 @@ factory('restservice', ['$http', '$q', function($http, $q){
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while creating User');
+                console.error('Error while creating '+entity);
                 deferred.reject(errResponse);
             }
         );
         return deferred.promise;
     }
   
-    Service.prototype.update = function(REST_SERVICE_ONE, entity, id) {
+    Service.prototype.update = function( entity, id) {
         var deferred = $q.defer();
         $http.put(this.REST_SERVICE_ONE+id, entity)
             .then(
@@ -55,7 +56,7 @@ factory('restservice', ['$http', '$q', function($http, $q){
             },
             function(errResponse){
                 console.error('Error while updating '+entity);
-                console.error(errResponse);
+                //console.error(errResponse);
                 deferred.reject(errResponse);
             }
         );
@@ -65,10 +66,10 @@ factory('restservice', ['$http', '$q', function($http, $q){
     Service.prototype.createOrUpdate = function(entity){
         if(entity.id==0){
             console.log('Saving to '+this.REST_SERVICE_ONE, entity);
-            return this.create(this.REST_SERVICE_ONE, entity);
+            return this.create(entity);
         }else{
             console.log('Updating to '+this.REST_SERVICE_ONE, entity);
-            return this.update(this.REST_SERVICE_ONE, entity, entity.id);
+            return this.update(entity, entity.id);
         }
     }
  
@@ -90,6 +91,8 @@ factory('restservice', ['$http', '$q', function($http, $q){
     var Factory = {
     		getService : function(){ return new Service(); }
     }
+    
+    console.log("rest service in factory : ",Factory.getService());
     
     return Factory;
  

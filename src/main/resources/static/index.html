@@ -2,53 +2,155 @@
 <html>
 <head>
 <title>ItemMaker</title>
-<link href="css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="css/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-<link href="css/vendor/datatables-plugins/dataTables.bootstrap.css"
-	rel="stylesheet">
-<link href="css/vendor/datatables-responsive/dataTables.responsive.css"
-	rel="stylesheet">
-<link href="css/dist/css/sb-admin-2.css" rel="stylesheet">
-<link href="css/vendor/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
+
+<!-- CSS INCLUDE -->
+<link rel="stylesheet" type="text/css" id="theme"
+	href="css/joli/css/theme-default.css" />
+<!-- EOF CSS INCLUDE -->
 
 <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
 }
 </style>
-
 </head>
 
-<body ng-cloak class="ng-cloak" ng-app="imangular">
-	<div id="wrapper">
-		<div ng-controller="navigation as nav"
-			ng-include="'js/common/navi.html'"></div>
-		<div id="page-wrapper" ng-if="authenticated" style="min-height: 618px;">
+<body ng-cloak class="ng-cloak" ng-app="imangular"
+	ng-controller="translation">
+
+	<div class="page-container" ng-controller="navigation as nav">
+		<div id="sidebar" class="page-sidebar">
+
+			<ul class="x-navigation">
+
+				<li class="xn-logo"><a href="#!/">{{translator.label.appname}}</a>
+					<a class="x-navigation-control"></a></li>
+
+				<li class="xn-title">{{translator.label.leftpanelcaption}}</li>
+				<li ng-if="authenticated"><a href="#!/items"><span
+						class="fa fa-list-ul"></span> <span class="xn-text">{{translator.label.leftpanelmenumanageitems}}</span></a></li>
+				<li ng-if="authenticated"><a href="#!/users"><span
+						class="fa fa-users"></span> <span class="xn-text">{{translator.label.leftpanelmenumanageUsers}}</span></a></li>
+
+				<li class="xn-title">debug</li>
+				<li class="xn-text"><a> <span class="message">current
+							route</br> {{nav.route.absUrl()}}
+					</span></a></li>
+			</ul>
+		</div>
+
+		<div id=container class="page-content">
+
+			<div>
+				<ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+
+					<!-- TOGGLE NAVIGATION -->
+					<li class="xn-icon-button"><a class="x-navigation-minimize"><span
+							class="fa fa-dedent"></span></a></li>
+					<!-- END TOGGLE NAVIGATION -->
+					<!-- SEARCH -->
+					<li class="xn-search">
+						<form role="form">
+							<input type="text" name="search"
+								placeholder="{{translator.label.searchwidgettext}}" />
+						</form>
+					</li>
+					<!-- END SEARCH -->
+					<!-- SIGN OUT -->
+					<li class="xn-icon-button pull-right"><a><span
+							class="fa fa-user"></span> </a>
+						<div
+							class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+
+							<div class="panel-body list-group scroll">
+								<a ng-if="authenticated" class="list-group-item"
+									ng-click="nav.authService.logout()"> <span
+									class="fa fa-sign-out"></span><strong>
+										{{translator.label.navbarmenuactionlogout}}</strong>
+								</a> <a ng-if="!authenticated" class="list-group-item"
+									href="#!/login"> <span class="fa fa-sign-in"></span><strong>
+										{{translator.label.navbarmenuactionlogin}}</strong>
+								</a>
+							</div>
+							<div class="panel-footer text-center">
+								<span>{{nav.authService.session.name}}</span>
+							</div></li>
+					<!-- END SIGN OUT -->
+
+					<!-- TASKS -->
+					<li id="language-selector" class="xn-icon-button pull-right"><a><img
+							ng-src="css/{{nav.authService.session.languageSelectedFlag}}" /></a>
+						<div
+							class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+
+							<div class="panel-body list-group scroll">
+								<a ng-repeat="language in nav.authService.languages"
+									class="list-group-item"
+									ng-click="nav.selectLanguage(language.acronym)"> <img
+									ng-src="css/{{language.flag}}" /><strong>
+										{{language.name}} </strong>
+								</a>
+							</div>
+							<div ng-show="authenticated" class="panel-footer text-center">
+								<span>{{translator.label.navbarlogincanlogout}}</span>
+							</div>
+							<div ng-show="!authenticated" class="panel-footer text-center">
+								<span>{{translator.label.navbarloginpleaselogin}}</span>
+							</div>
+						</div></li>
+				</ul>
+				<!-- <div ng-if="!authenticated" ng-include="js/common/login.html" ng-controller="login as login"></div>
+			 -->
+			</div>
+			<!-- END OF HEADER-->
+
 			<div ng-view></div>
+
 		</div>
 	</div>
-
 
 	<script src="js/angular-bootstrap.js" type="text/javascript"></script>
 
 	<script src="js/app.config.js"></script>
 	<script src="js/common/navigation.config.js"></script>
 	<script src="js/common/translator.config.js"></script>
+	<script src="js/common/authenticator.config.js"></script>
 	<script src="js/common/checklist-model.config.js"></script>
 	<script src="js/common/generic-restservice.js"></script>
 	<script src="js/dashboard/dashboard.config.js"></script>
 	<script src="js/user/users.config.js"></script>
 	<script src="js/user/userservice.js"></script>
 	<script src="js/item/items.config.js"></script>
-	<script src="js/item/itemservice.js"></script>	
+	<script src="js/item/itemservice.js"></script>
 
-	<script src="css/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="css/vendor/metisMenu/metisMenu.min.js"></script>
-	<script src="css/vendor/datatables/js/jquery.dataTables.min.js"></script>
-	<script src="css/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-	<script src="css/vendor/datatables-responsive/dataTables.responsive.js"></script>
-	<script src="css/dist/js/sb-admin-2.js"></script>
+	<!-- START SCRIPTS -->
+	<!-- START PLUGINS -->
+	<script type="text/javascript"
+		src="css/joli/js/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="css/joli/js/plugins/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript"
+		src="css/joli/js/plugins/bootstrap/bootstrap.min.js"></script>
+	<!-- END PLUGINS -->
 
+	<!-- START THIS PAGE PLUGINS-->
+	<script type='text/javascript'
+		src='css/joli/js/plugins/icheck/icheck.min.js'></script>
+	<script type="text/javascript"
+		src="css/joli/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+	<script type="text/javascript"
+		src="css/joli/js/plugins/highlight/jquery.highlight-4.js"></script>
+	<!-- END THIS PAGE PLUGINS-->
+
+	<!-- START TEMPLATE -->
+	<script type="text/javascript" src="js/common/joli-settings.js"></script>
+	
+	<script type="text/javascript" src="css/joli/js/plugins.js"></script>
+	<script type="text/javascript" src="css/joli/js/actions.js"></script>
+	<script type="text/javascript" src="css/joli/js/faq.js"></script>
+	<!-- END TEMPLATE -->
+
+	<!-- END SCRIPTS -->
 </body>
 </html>

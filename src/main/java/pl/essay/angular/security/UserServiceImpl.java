@@ -1,5 +1,6 @@
 package pl.essay.angular.security;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -23,8 +24,14 @@ public class UserServiceImpl implements UserService{
 		this.userDao.create(i);
 		return i.getId();
 	}
-	public List<UserT> listUsers(){
-		return this.userDao.getAll();
+	public List<UserForm> listUsers(){
+		//return safe UserForm list - with no passwords
+		List<UserForm> users = new ArrayList<UserForm>();
+		List<UserT> list = this.userDao.getAll();
+		for (int i = 0; i < list.size(); i++){
+			users.add( new UserForm(list.get(i)) );
+		}
+		return users;
 
 	}
 	public UserT getUserById(int id){

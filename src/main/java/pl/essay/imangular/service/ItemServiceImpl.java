@@ -66,5 +66,9 @@ public class ItemServiceImpl implements ItemService{
 	public Set<ItemComponent> getItemComponentsByParent(int id) {
 		return this.itemComponentDao.getItemComponentsByParent(id);
 	}
+	
+	public boolean existsItem(String name){
+		return itemDao.existsItemByName(name);
+	}
 
 }

@@ -9,37 +9,37 @@ config(['$routeProvider', function mainController( $routeProvider ) {
 
 	$routeProvider.when('/users/edit/:id', {
 		templateUrl : 'js/user/userEdit.html',
-		controller : 'userEdit'
+		controller : 'userEdit as userCtrl'
 	}).when('/users/add/:id', {
 		templateUrl : 'js/user/userEdit.html',
-		controller : 'userEdit'
+		controller : 'userEdit as userCtrl'
 	});
 
 	console.log('users config ending');
 }]).
-controller( 'userslist', ['$scope', '$http', 'translator', 'userService',  function usersController($scope, $http, translator, userService ) {
+controller( 'userslist', ['$http', 'translator', 'userService',  function($http, translator, userService ) {
 
 	var self = this;
 	self.service = userService;
 	
 	console.log('userslist controller starting');
 
-	$scope.translator = translator;
+	self.translator = translator;
 	
-	$scope.fetchAllUsers = function(){
+	self.fetchAllUsers = function(){
 		console.log('starting fetching users');
 		self.service.fetchAll().then(function(response) {
 			console.log('users fetched '+response.length);
-			$scope.users = response;
+			self.users = response;
 		}, function(){
 			console.log('get users from service - fail');
 		})
 	};
 
-	$scope.deleteUser = function(id){
+	self.deleteUser = function(id){
 		self.service.deleteEntity(id).
 		then( function(response){
-			$scope.fetchAllUsers()
+			self.fetchAllUsers()
 		},
 		function(errResponse){
 			console.error('Error while deleting User');
@@ -47,30 +47,30 @@ controller( 'userslist', ['$scope', '$http', 'translator', 'userService',  funct
 		);
 	}
 
-	$scope.fetchAllUsers();
+	self.fetchAllUsers();
 
 	console.log('userslist controller - ending');
 }]).
-controller( 'userEdit', ['$scope', '$http', '$location', '$routeParams', 'translator','userService', function usersController($scope, $http, $location, $routeParams, translator, userService ) {
+controller( 'userEdit', ['$http', '$location', '$routeParams', 'translator','userService', function( $http, $location, $routeParams, translator, userService ) {
 	var self = this;
 	self.service = userService;
 
 	console.log('userEdit controller starting');
 
-	$scope.translator = translator;
+	self.translator = translator;
 
 	var userId = $routeParams.id;
 
 	//fetch user - when adding user get empty user but populated with all roles
 	self.service.fetch(userId).then(function(response) {
-		$scope.user = response;
-		$scope.user.enabledPreselected = $scope.user.enabled;
-		console.log($scope.user);
+		self.user = response;
+		self.user.enabledPreselected = self.user.enabled;
+		console.log(self.user);
 	}, function(){
 		console.log('get user from service - fail');
 	});
 
-	$scope.createOrUpdateUser = function(user){
+	self.createOrUpdateUser = function(user){
 		self.service.createOrUpdate(user)
 		.then( function(response){
 			$location.path('/users')

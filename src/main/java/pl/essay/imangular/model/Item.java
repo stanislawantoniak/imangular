@@ -17,7 +17,11 @@ import javax.validation.constraints.*;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @DynamicInsert
@@ -25,6 +29,12 @@ import org.hibernate.annotations.Type;
 @Table(uniqueConstraints = {
 		@UniqueConstraint(columnNames = "name")}
 )
+@NamedQueries(
+		@NamedQuery(
+				name = "getItemByName",
+				query = "select i from Item i where name = :nameParam"
+				)
+		)
 //@SequenceGenerator(name="item_seq", initialValue=1, allocationSize=100)
 public class Item {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
@@ -39,10 +49,12 @@ public class Item {
 	@Column @Type(type="yes_no")
 	private Boolean isComposed = false;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "parent", cascade={CascadeType.ALL})
+	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "parent", cascade={CascadeType.ALL})
+	@JsonManagedReference(value="component")
 	private Set<ItemComponent> components = new HashSet<ItemComponent>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "component")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "component")
+	@JsonManagedReference(value="usedIn")
 	private Set<ItemComponent> usedIn = new HashSet<ItemComponent>();
 	
 	public Item(){
@@ -63,18 +75,14 @@ public class Item {
 	public void setIsComposed(Boolean composed_TF){
 		this.isComposed = composed_TF;
 	}
-
+	public boolean getIsComposed(){
+		return this.isComposed;
+	}
 	public int getId(){
 		return this.id;
 	}
 	public String getName(){
 		return this.name;
-	}
-	public Boolean getIsComposed(){
-		return this.isComposed;
-	}
-	public String getIsComposedString(){
-		return (this.isComposed ? "Yes" : "No") ;
 	}
 
 	public Set<ItemComponent> getComponents() {
@@ -119,6 +127,6 @@ public class Item {
 	}
 
 	public String toString(){
-		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.getIsComposedString();
+		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.isComposed;
 	}
 }

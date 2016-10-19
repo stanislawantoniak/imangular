@@ -27,11 +27,19 @@ public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	public SessionFactory getSessionFactory() {
-		if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
-			throw new NullPointerException("Not a hibernate factory exception");
+
+		if (this.sessionFactory == null){
+			if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
+				throw new NullPointerException("Not a hibernate factory exception");
+			}
+			this.sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		}
-		return entityManagerFactory.unwrap(SessionFactory.class);
+		
+		return this.sessionFactory;
 	}
 
 	//public void init(){
@@ -40,10 +48,12 @@ public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 
 	protected Session getSession() {
 		try {
+			System.out.println("get current session success");
 			return getSessionFactory().getCurrentSession();
 		} 
 		catch (HibernateException e) 
 		{
+			System.out.println("get current session fail");
 			return getSessionFactory().openSession();
 		}
 	}
@@ -95,7 +105,7 @@ public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 		System.out.println("updating object "+t.getClass()+"::"+t.toString());
 		Session session = getSession();
 		session.update(t);
-		session.flush();
+		//session.flush();
 	}
 
 	public void delete(T t) { 
@@ -108,7 +118,7 @@ public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 		Session session = getSession();
 		T obj = session.load(getDomainClass(), id);
 		session.delete(obj);
-		session.flush();
+		//session.flush();
 	}
 
 	public void deleteAll() {

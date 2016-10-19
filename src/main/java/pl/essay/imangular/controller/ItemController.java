@@ -12,6 +12,9 @@ import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,8 +56,8 @@ public class ItemController extends BaseController {
 			BindingResult result, //must follow modelattribute!!!!
 			RedirectAttributes redirectAttributes,
 			Model model){
-		logger.info("update item data: "+item);
-		logger.info("has errors?:"+result.hasFieldErrors());
+		logger.trace("update item data: "+item);
+		logger.trace("has errors?:"+result.hasFieldErrors());
 		if (result.hasErrors()) {
 			//disable language selector - because staying on the same url and it doesnt support RequestMethod.GET
 			model.addAttribute("languageSelectorClass","disabled"); 
@@ -113,7 +117,7 @@ public class ItemController extends BaseController {
 	//in path id component id passed
 	@RequestMapping("/items/component/add/{id}")
 	public String addItemComponent(@PathVariable("id") int itemId, Model model){
-		logger.info("from controller.addItemComponent");
+		logger.trace("from controller.addItemComponent");
 
 
 		ItemComponent ic = new ItemComponent();
@@ -145,17 +149,67 @@ public class ItemController extends BaseController {
 		return "items/componentEdit";
 	}
 
-	//todo
-	//check if not used in other items
-	@RequestMapping("/items/item/remove/{id}")
-	public String removeItem(@PathVariable("id") int id){
+	@RequestMapping(value = "/itemrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Item> getItem(@PathVariable("id") int id) {
+		System.out.println("Fetching Item with id " + id);
+		Item item = (id != 0 ? this.itemService.getItemById(id) : new Item());//init item or get from db 
+		return new ResponseEntity<Item>(item, HttpStatus.OK);
+	}
+
+	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item item){
+
+		logger.trace("update itemform data: "+item);
+
+		Item test = this.itemService.getItemById(id);
+		if (test == null){
+			System.out.println("Item "+id+" does not exist, update failed");
+			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+		}
+		
+		logger.trace("before update item data: "+item);
+		this.itemService.updateItem( item );
+		logger.trace("after update item data: "+item);
+		
+		return new ResponseEntity<Item>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value= "/itemrest/", method = RequestMethod.POST)
+	public ResponseEntity<Void> createItem(@RequestBody Item item){
+
+		logger.trace("create itemform data: "+item);
+		
+		if ( this.itemService.existsItem( item.getName() ) ){
+			 System.out.println("Item with name " + item.getName() + " already exist and requested create");
+	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+		
+		logger.trace("before create item data: "+item);
+		this.itemService.addItem( item );
+		logger.trace("after create item data: "+item);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteItem(@PathVariable int id){
+	
+		Item item = this.itemService.getItemById(id);
+		if (item == null){			 
+			System.out.println("Item " +id+ " does not exist but requested delete");
+	        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		
+		logger.trace("before delete item: "+item);
 		this.itemService.removeItem(id);
-		return "redirect:/items";
+		logger.trace("after delete item: "+item);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@RequestMapping("/items/item/edit/{id}")
 	public String editItem(@PathVariable("id") int id, Model model){
-		logger.info("from controller.editItem");
+		logger.trace("from controller.editItem");
 
 		Item item =  (id != 0 ? this.itemService.getItemById(id) : new Item());
 		model.addAttribute("item", item);

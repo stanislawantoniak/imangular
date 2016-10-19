@@ -1,0 +1,87 @@
+
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			<div ng-show="item.id > 0">
+				{{translator.label.edititemheadingedititem}}</div>
+			<div ng-show="item.id == 0">
+				{{translator.label.edititeheadingadditem}}</div>
+		</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div ng-show="item.id > 0">
+					{{translator.label.edititemheadingedititem}}</div>
+				<div ng-show="item.id == 0">
+					{{translator.label.edititemheadingadditem}}</div>
+			</div>
+			<div class="panel-body">
+
+				<div class="panel-group">
+					<div class="well">
+						<form role="form" ng-submit="createOrUpdateItem(item)">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label path="name">
+										{{translator.label.edititemlabelitemname}} </label> <input
+										class="form-control" path="name" ng-model="item.name" />
+									<errors path="name" />
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<button class="btn btn-default" type="submit">
+									{{translator.label.edititembuttonsave}}</button>
+								<a href="#!/items" class="btn btn-default">
+									{{translator.label.edititembuttoncancel}} </a>
+							</div>
+						</form>
+
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">Edit components</div>
+						<div class="panel-body">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th width="40%">Component</th>
+										<th width="30%">Remarks</th>
+										<th width="10%">Quantity</th>
+										<th width="20%">Actions</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr ng-repeat="itemComponent in item.components">
+										<td>{{itemComponent.componentName}}
+											(#{{itemComponent.componentId}})</td>
+										<td>{{itemComponent.remarks}}</td>
+										<td>{{itemComponent.quantity}}</td>
+										<td><div class="col-lg-6">
+												<form
+													action="${deleteComponentAction}/${item.id }-${itemComponent.id}">
+													<button class="btn btn-default" type="submit">Delete</button>
+												</form>
+
+											</div>
+											<div class="col-lg-6">
+												<form action="${editComponentAction}/${itemComponent.id}">
+													<button class="btn btn-default" type="submit">Edit</button>
+												</form>
+											</div></td>
+									</tr>
+								</tbody>
+
+							</table>
+							<form action="${eddComponentAction}">
+								<button class="btn btn-default" type="submit">{{translator.label.editcomponentsbuttonadd}}</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

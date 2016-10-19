@@ -1,22 +1,25 @@
 generic;translations
-"appname","Item Maker 1.0 Angular"
+"appname","Item Maker 1.1"
+"leftpanelcaption","Navigation"
 "leftpanelmenumanageitems","Manage Items"
 "leftpanelmenumanageUsers", "Manage Users"
+"navbarmenuactionlogin","Sign in"
+"navbarmenuactionlogout","Sign out"
+"navbarloginpleaselogin","Please sign in"
+"navbarloginpcanlogout","You can sign out here"
 "searchwidgettext","Search"
 "booleanyes","Yes"
 "booleanno","No"
-
 
 sahsboard;translations
 "dashboardcontent","Dashboard"
 
 "logintitle","Login Page"
-"loginpleasesignin","Please Sign In"
+"loginpleasesignin","Welcome, you can log in with your email and password"
 "loginusernamelabel","Enter Name"
 "loginpasslabel","Enter password"
 "loginbuttonlogin","Log In"
 "loginerrormessage","Invalid username or password"
-"navbarmenuactionlogout","Log Out"
 
 itemslist;translations
 "itemslisttitle","Items"
@@ -24,7 +27,7 @@ itemslist;translations
 "itemslistheadingbuttonadditem","Add Item"
 "itemslistheadingbuttonrefresh","Refresh"
 "itemslistitemstableheading","Item List"
-"itemslistitemstableheadingid","ItemID"
+"itemslistitemstableheadingid","Item ID"
 "itemslistitemstableheadingname","Name"
 "itemslistitemstableheadingiscomposed","Is composed"
 "itemslistitemstableheadingactions","Actions"

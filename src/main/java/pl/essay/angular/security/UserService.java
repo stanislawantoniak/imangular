@@ -7,7 +7,7 @@ public interface UserService extends UserDetailsService{
 
 	    public long addUser(UserT i);
 		public void updateUser(UserT i);
-		public List<UserT> listUsers();
+		public List<UserForm>  listUsers();
 		public UserT getUserById(int id);
 		public void removeUser(int id);
 		public boolean existsUser(String username);

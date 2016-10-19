@@ -8,11 +8,11 @@ config(['$routeProvider', function mainController( $routeProvider ) {
 	console.log('items config starting');
 
 	$routeProvider.when('/items/edit/:id', {
-		templateUrl : 'js/user/itemEdit.html',
-		controller : 'userEdit'
+		templateUrl : 'js/item/itemEdit.html',
+		controller : 'itemEdit'
 	}).when('/items/add/:id', {
-		templateUrl : 'js/user/itemEdit.html',
-		controller : 'userEdit'
+		templateUrl : 'js/item/itemEdit.html',
+		controller : 'itemEdit'
 	});
 
 	console.log('items config ending');
@@ -27,7 +27,7 @@ controller( 'itemlist', ['$scope', '$http', 'translator', 'itemService',  functi
 	$scope.translator = translator;
 	
 	$scope.fetchAllItems = function(){
-		console.log('starting fetching items');
+		//console.log('starting fetching items');
 		self.service.fetchAll().then(function(response) {
 			console.log('items fetched '+response.length);
 			$scope.items = response;
@@ -51,34 +51,35 @@ controller( 'itemlist', ['$scope', '$http', 'translator', 'itemService',  functi
 
 	console.log('itemslist controller - ending');
 }]).
+
 controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams', 'translator','itemService', function itemsController($scope, $http, $location, $routeParams, translator, itemService ) {
 	var self = this;
-	self.service = userService;
+	self.service = itemService;
 
-	console.log('userEdit controller starting');
+	console.log('itemEdit controller starting');
 
 	$scope.translator = translator;
 
-	var userId = $routeParams.id;
+	var itemId = $routeParams.id;
 
-	//fetch user - when adding user get empty user but populated with all roles
-	self.service.fetch(userId).then(function(response) {
-		$scope.user = response;
-		$scope.user.enabledPreselected = $scope.user.enabled;
-		console.log($scope.user);
+	//fetch item - when adding item get empty item but populated predefined fields
+	self.service.fetch(itemId).then(function(response) {
+		$scope.item = response;
+
+		console.log($scope.item);
 	}, function(){
-		console.log('get user from service - fail');
+		console.log('get item from service - fail');
 	});
 
-	$scope.createOrUpdateUser = function(user){
-		self.service.createOrUpdate(user)
+	$scope.createOrUpdateItem = function(item){
+		self.service.createOrUpdate(item)
 		.then( function(response){
 			$location.path('/items')
 		},	function(errResponse){
-			console.error('Error while creating/saving User');
+			console.error('Error while creating/saving item');
 		});
 	}
 
-	console.log('userEdit controller - ending');
+	console.log('itemEdit controller - ending');
 }]);
 

@@ -16,6 +16,8 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.validation.constraints.*;
 
 @Entity
@@ -40,12 +42,14 @@ public class ItemComponent {
 	@ManyToOne//(fetch = FetchType.EAGER)
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
+	@JsonBackReference(value="component")
 	private Item parent;
 
 	@ManyToOne//(fetch = FetchType.EAGER)
 	@Fetch(FetchMode.JOIN)
 	@NotNull(message="Component must not be empty")
 	@JoinColumn(referencedColumnName = "id", nullable = false)
+	@JsonBackReference(value="usedIn")
 	private Item component;
 
 	@Column

@@ -1,7 +1,10 @@
 generic;translations
-"appname","Item Maker 1.0 Angular"
-"leftpanelmenumanageitems","Zarządzanie produktami"
-"leftpanelmenumanageUsers", "Zarządzanie użytkownikami"
+"leftpanelmenumanageitems","Produkty"
+"leftpanelmenumanageUsers", "Użytkownicy"
+"navbarmenuactionlogin","Zaloguj się"
+"navbarmenuactionlogout","Wyloguj"
+"navbarloginpleaselogin","Prosimy o zalogowanie"
+"navbarloginpcanlogout","Tutaj możesz się wylogować"
 "searchwidgettext","Szukaj"
 "true","tak"
 "false","nie"
@@ -11,12 +14,11 @@ dahsboard;translations
 
 
 "logintitle","Strona logowania"
-"loginpleasesignin","Prosimy o zalogowanie"
+"loginpleasesignin","Witam, tutaj możesz zalogować się swoim emailem i hasłem"
 "loginusernamelabel","Nazwa użytkownika"
 "loginpasslabel","Hasło"
 "loginbuttonlogin","Zaloguj"
 "loginerrormessage","Niepoprawna nazwa lub hasło użytkownika"
-"navbarmenuactionlogout","Wyloguj"
 
 
 itemslist;translations

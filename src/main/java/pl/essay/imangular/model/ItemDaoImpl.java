@@ -13,4 +13,14 @@ public class ItemDaoImpl extends AbstractDaoHbn<Item> implements ItemDao {
 		this.update(item);
 	}
 
+	@Override
+	public boolean existsItemByName(String name) {
+		Item item = (Item) getSession()
+				.getNamedQuery("getItemByName") 
+				.setParameter("nameParam", name)
+				.uniqueResult();
+
+		return item != null;
+	}
+
 }

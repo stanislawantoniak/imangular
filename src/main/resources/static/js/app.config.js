@@ -13,13 +13,13 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',  function ma
 		controller : 'dashboard'
 	}).when('/users', {
 		templateUrl : 'js/user/userList.html',
-		controller : 'userslist'
+		controller : 'userslist as usersCtrl'
 	}).when('/items', {
 		templateUrl : 'js/item/itemList.html',
-		controller : 'itemlist'
+		controller : 'itemlist as itemsCtrl'
 	}).when('/login', {
-		template : '<span/>',
-		controller : 'navigation'
+		templateUrl : 'js/common/login.html',
+		controller : 'login as login'
 	}).otherwise({
 		redirectTo: '/'
 	});
@@ -32,17 +32,26 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',  function ma
 app.run(['$rootScope', '$location', function ($rootScope, $location) {
 
 	console.log('app.run start');
-	$rootScope.$on('$routeChangeStart', function (event, next, current) {
+/*	$rootScope.$on('$routeChangeStart', function (event, next, current) {
 		//console.log('$rootScope.$on::$routeChangeStart start');
 		//just for checking if route change is fired
 		if (!$rootScope.authenticated) {
-			//console.log('AuthentionProvider:: Deny - not authenticated');
-			//event.preventDefault();
-			//$location.path('/login');
+			if ($location.path() !== '/login'){
+				console.log('Authentication:: Deny - not authenticated');
+				event.preventDefault();
+				$location.path('/login');
+			} else {
+				if ($location.path() == '/login'){
+					console.log('Authentication:: already authenticated');
+					event.preventDefault();
+					$location.path('#!/');
+				}
+			}
+
 		} 
 		//console.log('$rootScope.$on::$routeChangeStart ending');
 	});
-	
+*/
 	console.log('app.run end');
 
 }]);

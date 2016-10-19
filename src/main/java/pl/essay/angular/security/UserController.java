@@ -34,8 +34,8 @@ public class UserController extends BaseController {
 	//get all users
 
 	@RequestMapping(value = "userslistrest/12qs", method = RequestMethod.GET)
-	public List<UserT> listUsers() {
-		List<UserT> theList = (List<UserT>) this.userService.listUsers();
+	public List<UserForm> listUsers() {
+		List<UserForm> theList = (List<UserForm>) this.userService.listUsers();
 		logger.info("list size: "+theList.size());
 
 		return theList;
