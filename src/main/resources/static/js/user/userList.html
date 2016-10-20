@@ -35,10 +35,18 @@
 							<tr ng-repeat="user in usersCtrl.users">
 								<td>{{user.id}}</td>
 								<td>{{user.username}}</td>
+								
+								<!-- editable username (text with validation) -->
+								<span editable-text="user.name" e-name="name" e-form="rowform"
+									onbeforesave="checkName($data, user.id)"> {{ user.name
+									|| 'empty' }} </span>
+								
+								
 								<td>{{user.enabled}}</td>
 								<td><a class="btn btn-default"
-									href="#!/users/edit/{{user.id}}">{{translator.label.userslistuserstablebuttonedit}}
-								</a> <a class="btn btn-default" ng-click="usersCtrl.deleteUser(user.id)">{{translator.label.userslistuserstablebuttondelete}}</a>
+									href="#!/users/edit/{{user.id}}">{{translator.label.userslistuserstablebuttonedit}}<!-- "#!/users/edit/{{user.id}}" -->
+								</a> <a class="btn btn-default"
+									ng-click="usersCtrl.deleteUser(user.id)">{{translator.label.userslistuserstablebuttondelete}}</a>
 								</td>
 							</tr>
 						</tbody>
@@ -49,5 +57,5 @@
 	</div>
 </div>
 <script>
-
+	
 </script>

@@ -14,7 +14,7 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 
 				console.log('authenticate credentials: ', AuthService.credentials);
 
-				var headers = AuthService.credentials.name ? {authorization : "Basic "
+				var headers = AuthService.credentials.username ? {authorization : "Basic "
 					+ btoa(AuthService.credentials.username + ":" + AuthService.credentials.password)
 				} : {};
 				

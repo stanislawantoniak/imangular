@@ -17,6 +17,42 @@ config(['$routeProvider', function mainController( $routeProvider ) {
 
 	console.log('users config ending');
 }]).
+
+controller( 'userslistx', ['$http', 'translator', 'userService',  function($http, translator, userService ) {
+
+	var self = this;
+	self.service = userService;
+	
+	console.log('userslist controller starting');
+
+	self.translator = translator;
+	
+	self.fetchAllUsers = function(){
+		console.log('starting fetching users');
+		self.service.fetchAll().then(function(response) {
+			console.log('users fetched '+response.length);
+			self.users = response;
+		}, function(){
+			console.log('get users from service - fail');
+		})
+	};
+
+	self.deleteUser = function(id){
+		self.service.deleteEntity(id).
+		then( function(response){
+			self.fetchAllUsers()
+		},
+		function(errResponse){
+			console.error('Error while deleting User');
+		}
+		);
+	}
+
+	self.fetchAllUsers();
+
+	console.log('userslist controller - ending');
+}]).
+
 controller( 'userslist', ['$http', 'translator', 'userService',  function($http, translator, userService ) {
 
 	var self = this;
@@ -51,6 +87,7 @@ controller( 'userslist', ['$http', 'translator', 'userService',  function($http,
 
 	console.log('userslist controller - ending');
 }]).
+
 controller( 'userEdit', ['$http', '$location', '$routeParams', 'translator','userService', function( $http, $location, $routeParams, translator, userService ) {
 	var self = this;
 	self.service = userService;

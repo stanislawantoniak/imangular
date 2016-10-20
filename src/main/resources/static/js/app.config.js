@@ -16,7 +16,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',  function ma
 		controller : 'userslist as usersCtrl'
 	}).when('/items', {
 		templateUrl : 'js/item/itemList.html',
-		controller : 'itemlist as itemsCtrl'
+		controller : 'itemlistx as itemsCtrl'
 	}).when('/login', {
 		templateUrl : 'js/common/login.html',
 		controller : 'login as login'
