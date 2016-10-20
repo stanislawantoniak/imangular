@@ -40,6 +40,12 @@ public class UserController extends BaseController {
 
 		return theList;
 	}
+	
+	@RequestMapping(value = "allRoles", method = RequestMethod.GET)
+	public List<String> getAllRoles() {
+		UserForm uf = new UserForm();
+		return uf.getAllRoles();
+	}
 
 	@RequestMapping(value = "/userrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserForm> getUser(@PathVariable("id") int id) {

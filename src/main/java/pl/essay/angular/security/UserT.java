@@ -48,8 +48,8 @@ public class UserT implements UserDetails{
 	private String username = "";
 
 	@Column
-	@NotNull(message="Password must not be empty")
-	@Size(min=6, message="Password must be at least 6 characters long")
+	//@NotNull(message="Password must not be empty")
+	//@Size(min=6, message="Password must be at least 6 characters long")
 	private String password = "";
 
 	@Column(columnDefinition="boolean") 

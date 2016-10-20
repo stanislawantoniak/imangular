@@ -13,10 +13,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',  function ma
 		controller : 'dashboard'
 	}).when('/users', {
 		templateUrl : 'js/user/userList.html',
-		controller : 'userslist as usersCtrl'
+		controller : 'userslistx as usersCtrl'
 	}).when('/items', {
 		templateUrl : 'js/item/itemList.html',
-		controller : 'itemlistx as itemsCtrl'
+		controller : 'itemlist as itemsCtrl'
 	}).when('/login', {
 		templateUrl : 'js/common/login.html',
 		controller : 'login as login'

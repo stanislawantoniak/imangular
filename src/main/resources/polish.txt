@@ -6,8 +6,8 @@ generic;translations
 "navbarloginpleaselogin","Prosimy o zalogowanie"
 "navbarloginpcanlogout","Tutaj możesz się wylogować"
 "searchwidgettext","Szukaj"
-"true","tak"
-"false","nie"
+"booleanyes","tak"
+"booleanno","nie"
 
 dahsboard;translations
 "dashboardcontent","Panel"
@@ -65,5 +65,5 @@ users; useredit
 "edituserlabelenabled","Aktywny"
 "edituserhelpenabled","Aktywny oznacza że użytkownik może się logować"
 "edituserlabelroles","Przypisane role"
-"edituserbuttonsave","Zapisz użytkownika"
-"edituserbuttoncancel","Powrót do listy"
+"edituserbuttonsave","Zapisz"
+"edituserbuttoncancel","Anuluj"

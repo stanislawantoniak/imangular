@@ -16,12 +16,19 @@ transl.factory('translator', ['$q','$http', function($q,$http){
 	var Translator = {
 
 			label: {},
+			
+			yesno : [],
 
 			refresh : function(){
 
 				$http.get('/common/labels').then( function(response) {
 
 					Translator.label = response.data;
+
+					Translator.yesno = [
+				             {value: 'true', text: Translator.label.booleanyes},
+				             {value: 'false', text: Translator.label.booleanno}
+				           ];
 					
 					console.log('translator refresh service', Translator.label);
 
