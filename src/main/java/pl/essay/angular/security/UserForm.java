@@ -1,7 +1,10 @@
 package pl.essay.angular.security;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -9,16 +12,16 @@ public class UserForm {
 	
 	public static final String roleAdmin = "ROLE_ADMIN";
 	public static final String roleUser = "ROLE_USER";
-	public List<String> getAllRoles(){
-		List<String> list = new ArrayList<String>();
-		list.add(UserForm.roleAdmin);
-		list.add(UserForm.roleUser);
+	public Map<String,String> getAllRoles(){
+		Map<String,String> list = new HashMap<String,String>();
+		list.put(UserForm.roleAdmin,UserForm.roleAdmin);
+		list.put(UserForm.roleUser,UserForm.roleUser);
 		return list;
 	}
 	
 	private int id;
 	private String username, password;
-	private List<String> rolesSelected;
+	private List<String> rolesSelected = new ArrayList<String>();
 	
 	private boolean enabled;
 	
@@ -34,7 +37,7 @@ public class UserForm {
 	
 	public UserT updateUserT(UserT u){
 		u.setUsername(this.username);
-		if (!"".equals(this.password))
+		if (this.password != null && !"".equals(this.password))
 			u.setPassword(this.password);
 		u.setEnabled(this.enabled);
 		String roles = "";

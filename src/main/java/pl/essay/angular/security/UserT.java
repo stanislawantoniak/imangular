@@ -56,7 +56,7 @@ public class UserT implements UserDetails{
 	private boolean enabled = false;
 
 	@Column(nullable = false) 
-	private String roles = ""; //roles serialized with ; as separator
+	private String roles = ""; //roles serialized with , as separator
 
 	public UserT(){}
 

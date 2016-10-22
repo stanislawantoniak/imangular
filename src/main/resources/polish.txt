@@ -25,6 +25,7 @@ itemslist;translations
 "itemslisttitle","Produkty"
 "itemslistheading","Zarządzaj produktami"
 "itemslistheadingbuttonadditem","Dodaj produkt"
+"itemslistheadingbuttonrefresh","Odśwież listę"
 "itemslistitemstableheading","Lista produktów"
 "itemslistitemstableheadingid","Kod"
 "itemslistitemstableheadingname","Nazwa"

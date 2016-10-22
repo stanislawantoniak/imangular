@@ -30,6 +30,7 @@ itemslist;translations
 "itemslistitemstableheadingid","Item ID"
 "itemslistitemstableheadingname","Name"
 "itemslistitemstableheadingiscomposed","Is composed"
+"itemslistitemstableheadingcomponents","Components"
 "itemslistitemstableheadingactions","Actions"
 "itemslistitemstableeditbutton","Edit"
 "itemslistitemstabledeletebutton","Delete"

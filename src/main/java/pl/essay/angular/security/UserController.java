@@ -1,6 +1,7 @@
 package pl.essay.angular.security;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -33,23 +34,23 @@ public class UserController extends BaseController {
 
 	//get all users
 
-	@RequestMapping(value = "userslistrest/12qs", method = RequestMethod.GET)
+	@RequestMapping(value = "/userslistrest/12qs", method = RequestMethod.GET)
 	public List<UserForm> listUsers() {
 		List<UserForm> theList = (List<UserForm>) this.userService.listUsers();
-		logger.info("list size: "+theList.size());
+		//logger.info("list size: "+theList.size());
 
 		return theList;
 	}
 	
-	@RequestMapping(value = "allRoles", method = RequestMethod.GET)
-	public List<String> getAllRoles() {
+	@RequestMapping(value = "/allRoles", method = RequestMethod.GET)
+	public Map<String,String> getAllRoles() {
 		UserForm uf = new UserForm();
 		return uf.getAllRoles();
 	}
 
 	@RequestMapping(value = "/userrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserForm> getUser(@PathVariable("id") int id) {
-		System.out.println("Fetching User with id " + id);
+		//logger.info("Fetching User with id " + id);
 		UserForm user = new UserForm( (id != 0 ? this.userService.getUserById(id) : new UserT()) );//init user for with new user or get from db 
 		return new ResponseEntity<UserForm>(user, HttpStatus.OK);
 	}
@@ -61,15 +62,15 @@ public class UserController extends BaseController {
 
 		UserT user = this.userService.getUserById(id);
 		if (user == null){
-			System.out.println("User "+id+" does not exist, update failed");
+			logger.info("User "+id+" does not exist, update failed");
 			return new ResponseEntity<UserForm>(HttpStatus.NOT_FOUND);
 		}
 
 		user = userForm.updateUserT(user);
 		
-		logger.info("before update user data: "+user);
+		//logger.info("before update user data: "+user);
 		this.userService.updateUser( user );
-		logger.info("after update user data: "+user);
+		//logger.info("after update user data: "+user);
 		
 		return new ResponseEntity<UserForm>(HttpStatus.OK);
 	}
@@ -80,16 +81,16 @@ public class UserController extends BaseController {
 		logger.info("create userform data: "+userForm);
 		
 		if ( this.userService.existsUser( userForm.getUsername() ) ){
-			 System.out.println("User with name " + userForm.getUsername() + " already exist and requested create");
+			logger.info("User with name " + userForm.getUsername() + " already exist and requested create");
 	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
 			
 		UserT user = new UserT();
 		user = userForm.updateUserT(user);
 		
-		logger.info("before create user data: "+user);
+		//logger.info("before create user data: "+user);
 		this.userService.addUser( user );
-		logger.info("after create user data: "+user);
+		//logger.info("after create user data: "+user);
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -99,13 +100,13 @@ public class UserController extends BaseController {
 	
 		UserT user = this.userService.getUserById(id);
 		if (user == null){			 
-			System.out.println("User " +id+ " does not exist but requested delete");
+			logger.info("User " +id+ " does not exist but requested delete");
 	        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		
-		logger.info("before delete user: "+user);
+		//logger.info("before delete user: "+user);
 		this.userService.removeUser(id);
-		logger.info("after delete user: "+user);
+		//logger.info("after delete user: "+user);
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

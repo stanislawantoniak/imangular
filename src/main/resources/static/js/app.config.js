@@ -29,29 +29,31 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',  function ma
 	console.log('imangular ending');
 }]);
 
-app.run(['$rootScope', '$location', function ($rootScope, $location) {
+app.run(['$rootScope', '$location', 'editableOptions', function ($rootScope, $location, editableOptions ) {
+
+	editableOptions.theme = 'bs3';//xeditable config - use bootstrap 3
 
 	console.log('app.run start');
-/*	$rootScope.$on('$routeChangeStart', function (event, next, current) {
+	$rootScope.$on('$routeChangeStart', function (event, next, current) {
 		//console.log('$rootScope.$on::$routeChangeStart start');
 		//just for checking if route change is fired
 		if (!$rootScope.authenticated) {
-			if ($location.path() !== '/login'){
+			if ($location.path() == '/users' 
+				|| $location.path() == '/items'){
 				console.log('Authentication:: Deny - not authenticated');
 				event.preventDefault();
 				$location.path('/login');
-			} else {
-				if ($location.path() == '/login'){
-					console.log('Authentication:: already authenticated');
-					event.preventDefault();
-					$location.path('#!/');
-				}
+			}
+		}else { //authenticated
+			if ($location.path() == '/login'){
+				console.log('Authentication:: already authenticated');
+				event.preventDefault();
+				$location.path('/');
 			}
 
 		} 
 		//console.log('$rootScope.$on::$routeChangeStart ending');
 	});
-*/
 	console.log('app.run end');
 
 }]);
