@@ -78,7 +78,7 @@ public class ImAngularApplication {
 		@Bean 
 		DataSourceBuilder realDataSourceBuilder() throws URISyntaxException { 
 
-			//System.out.println("full url from props::"+this.dataSourceProperties.getUrl());
+			System.out.println("full url from props::"+this.dataSourceProperties.getUrl());
 			
 			URI uri = new URI(this.dataSourceProperties.getUrl());
 
@@ -86,9 +86,9 @@ public class ImAngularApplication {
 			String username = uri.getUserInfo().split(":")[0];
 			String password = uri.getUserInfo().split(":")[1];
 
-			//System.out.println("url from props::"+url);
-			//System.out.println("name from props::"+username);
-			//System.out.println("pass from props::"+password);
+			System.out.println("url from props::"+url);
+			System.out.println("name from props::"+username);
+			System.out.println("pass from props::"+password);
 
 			DataSourceBuilder factory = DataSourceBuilder 
 					.create(this.dataSourceProperties.getClassLoader()) 
