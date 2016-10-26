@@ -48,12 +48,12 @@ public abstract class AbstractDaoHbn<T extends Object> implements Dao<T> {
 
 	protected Session getSession() {
 		try {
-			System.out.println("get current session success");
+			//System.out.println("get current session success");
 			return getSessionFactory().getCurrentSession();
 		} 
 		catch (HibernateException e) 
 		{
-			System.out.println("get current session fail");
+			//System.out.println("get current session fail");
 			return getSessionFactory().openSession();
 		}
 	}

@@ -47,6 +47,8 @@ public class LoginController extends BaseController {
 	private void initUser(){
 		String name = "stan@wp.pl";
 		String pass  = "123456";
+		
+		System.out.println("user init in progress");
 
 		try {
 			this.userService.loadUserByUsername(name);
