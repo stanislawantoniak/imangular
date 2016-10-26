@@ -56,14 +56,14 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value= "/userrest/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<UserForm> updateUser(@PathVariable int id, @RequestBody UserForm userForm){
+	public ResponseEntity<Void> updateUser(@PathVariable int id, @RequestBody UserForm userForm){
 
 		logger.info("update userform data: "+userForm);
 
 		UserT user = this.userService.getUserById(id);
 		if (user == null){
 			logger.info("User "+id+" does not exist, update failed");
-			return new ResponseEntity<UserForm>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
 		user = userForm.updateUserT(user);
@@ -72,27 +72,27 @@ public class UserController extends BaseController {
 		this.userService.updateUser( user );
 		//logger.info("after update user data: "+user);
 		
-		return new ResponseEntity<UserForm>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value= "/userrest", method = RequestMethod.POST)
-	public ResponseEntity<Void> createUser(@RequestBody UserForm userForm){
+	public ResponseEntity<Long> createUser(@RequestBody UserForm userForm){
 
 		logger.info("create userform data: "+userForm);
 		
 		if ( this.userService.existsUser( userForm.getUsername() ) ){
 			logger.info("User with name " + userForm.getUsername() + " already exist and requested create");
-	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+	            return new ResponseEntity<Long>(0L, HttpStatus.CONFLICT);
 		}
 			
 		UserT user = new UserT();
 		user = userForm.updateUserT(user);
 		
 		//logger.info("before create user data: "+user);
-		this.userService.addUser( user );
+		long id = this.userService.addUser( user );
 		//logger.info("after create user data: "+user);
 		
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<Long>( id, HttpStatus.OK);
 	}
 
 	@RequestMapping(value= "/userrest/{id}", method = RequestMethod.DELETE)

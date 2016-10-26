@@ -60,6 +60,10 @@ public class Item {
 	public Item(){
 	}
 
+	public Item(int id){
+		this.id = id;
+	}
+	
 	public Item(String name, Boolean composed_TF){
 		this.setName(name);
 		this.setIsComposed(composed_TF);

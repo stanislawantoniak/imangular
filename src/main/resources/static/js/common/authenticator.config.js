@@ -12,20 +12,24 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 
 			authenticate : function(callback) {
 
-				console.log('authenticate credentials: ', AuthService.credentials);
+				//console.log('authenticate credentials: ', AuthService.credentials);
 
 				var headers = AuthService.credentials.username ? {authorization : "Basic "
 					+ btoa(AuthService.credentials.username + ":" + AuthService.credentials.password)
 				} : {};
 				
-				console.log('authenticate headers: ', headers);
+				//console.log('authenticate headers: ', headers);
 
 
 				$http.get('userDetails', {headers : headers}).then(function(response) {
 					if (response.data.name) {
-						console.log('authenticated from user details')
+						//console.log('authenticated from user details')
 						$rootScope.authenticated = true;
-						$route.reload(); //very important - makes route refresh and show right template after authentication (for instance when page is reloaded)
+						if ($rootScope.redirect){ //redirect to target page if there was a redirect previously
+							$location.path($rootScope.redirect);
+						} else {
+							$location.path('/');
+						}
 						AuthService.session = response.data;
 					} else {
 						$rootScope.authenticated = false;
@@ -41,7 +45,11 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 				AuthService.authenticate( function() {
 					if ($rootScope.authenticated) {
 						AuthService.error = false;
-						$location.path('#!/')
+						if ($rootScope.redirect){ //redirect to target page if there was a redirect to login  
+							$location.path($rootScope.redirect);
+						} else {
+							$location.path('/');
+						}
 					} else {
 						AuthService.error = true;
 					}
@@ -51,7 +59,7 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 			logout : function() {
 				$http.post('logout', {}).finally(function() {
 					$rootScope.authenticated = false;
-					$location.path('#!/'); 
+					$location.path('/'); 
 					AuthService.getSession();
 				});
 			},
@@ -85,7 +93,7 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 			}
 	}
 
-	console.log("auth service in factory: ", AuthService);
+	//console.log("auth service in factory: ", AuthService);
 	
 	$rootScope.authenticated = false;
 	AuthService.authenticate();

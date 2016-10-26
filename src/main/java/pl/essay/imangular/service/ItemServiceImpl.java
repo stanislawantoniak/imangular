@@ -49,7 +49,7 @@ public class ItemServiceImpl implements ItemService{
 		return this.itemComponentDao.load(id);
 	}
 
-	public int addItemComponent(ItemComponent component){
+	public int addOrUpdateItemComponent(ItemComponent component){
 
 		if (component.getId() == 0){
 			int itemId = component.getParent().getId();

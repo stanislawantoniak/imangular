@@ -39,7 +39,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
-//@ContextConfiguration(classes = {ImAngularApplication.class})
 @RestClientTest(UserController.class)
 public class UserControllerUpdateUserTests {
 
@@ -52,14 +51,11 @@ public class UserControllerUpdateUserTests {
 
 	@Mock
 	private UserService userServiceMock;
-	
+
 	@Before
-	public void setup() 
-	{
-		MockitoAnnotations.initMocks(this);
+	public void setup() {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
-
 
 	@Test
 	public void testUpdateUser_WhenUserExists() throws Exception{

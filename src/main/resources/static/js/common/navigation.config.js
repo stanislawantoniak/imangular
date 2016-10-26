@@ -10,7 +10,7 @@ navi.controller( 'navigation', ['$rootScope', '$http', '$location', '$scope', 't
 	console.log('navigation controller starting');
 	
 	self.authService = authService;
-	console.log('navigation::authservice: ',self.authService);
+	//console.log('navigation::authservice: ',self.authService);
 	self.authService.getSession();
 
 	self.translatorHandler = translator;
@@ -32,7 +32,7 @@ navi.controller( 'login', ['$rootScope', '$http', '$location', '$scope', 'transl
 	console.log('login controller starting');
 	
 	self.authService = authService;
-	console.log('login::authservice: ',self.authService);
+	//console.log('login::authservice: ',self.authService);
 
 	console.log('login controller - ending');
 

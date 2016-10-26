@@ -36,7 +36,6 @@ import static org.hamcrest.core.Is.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-//@ContextConfiguration(classes = {ImAngularApplication.class})
 @RestClientTest(UserController.class)
 public class UserControllerAllGetsTests {
 

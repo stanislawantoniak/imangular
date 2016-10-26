@@ -1,44 +1,36 @@
 'use strict';
 
 //Register `users` component, along with its associated controller and template
-angular.
-module('users', ['translationService','checklist-model','generic-restservice','xeditable']).
-config(['$routeProvider', function mainController( $routeProvider ) {
+var userApp = angular.module('users', ['translationService','checklist-model','generic-restservice','xeditable']);
+userApp.config(['$routeProvider', function mainController( $routeProvider ) {
 
-	console.log('users config starting');
-
-	$routeProvider.when('/users/edit/:id', {
+	//console.log('users config starting');
+	$routeProvider.when('/users/add/:id', {
 		templateUrl : 'js/user/userEdit.html',
-		controller : 'userEdit as userCtrl'
-	}).when('/users/add/:id', {
-		templateUrl : 'js/user/userEdit.html',
-		controller : 'userEdit as userCtrl'
+		controller : 'useredit',
+		controllerAs : 'userCtrl'
 	});
+	//console.log('users config ending');
+}]);
 
-	console.log('users config ending');
-}]).
-
-controller( 'userslistx', ['$http', 'translator', 'userService',  function($http, translator, userService ) {
+userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService',  function($http, $scope, translator, userService ) {
 
 	var self = this;
 	self.service = userService;
+	self.editUserContext = false;
 
-	console.log('userslist controller starting');
-
-	self.translator = translator;
-
-	console.log(self.translator.yesno);
+	//console.log('userslist controller starting');
 
 	self.fetchAllUsers = function(){
-		console.log('starting fetching users');
+		//console.log('starting fetching users');
 		self.service.fetchAll().then(function(response) {
-			console.log('users fetched '+response.length);
+			//console.log('users fetched '+response.length);
 			self.users = response;
 		}, function(){
 			console.log('get users from service - fail');
 		})
 	};
-	
+
 	self.deleteUser = function(id){
 		self.service.deleteEntity(id).
 		then( function(response){
@@ -49,28 +41,31 @@ controller( 'userslistx', ['$http', 'translator', 'userService',  function($http
 		}
 		);
 	}
-	
+
 	self.createOrUpdateUser = function(user,id){
 		user.id = id;
 		self.service.createOrUpdate(user)
 		.then( function(response){
-			console.log('User saved');
+			//console.log('User saved');
 			self.fetchAllUsers();
+			self.unsetEditRowContext();
 		},	function(errResponse){
 			console.error('Error while creating/saving User');
 		});
 	}
-
-	// add user
-	self.addUserToModel = function() {
-		self.inserted = {
-				id: 0,
-				name: '',
-				enabled: false
-		};
-		self.users.push(self.inserted);
-		console.log(self.inserted);
-	};
+	
+	self.setEditRowContext = function(){
+		self.editContext = true;
+	}
+	
+	self.cancelEditRow = function(formScope){
+		self.unsetEditRowContext();
+		formScope['rowform'].$cancel();
+	}
+	
+	self.unsetEditRowContext = function(){
+		self.editContext = false;
+	}
 
 	self.checkEmail = function(data) {
 		//console.log('email check fn on: ',data);
@@ -87,7 +82,6 @@ controller( 'userslistx', ['$http', 'translator', 'userService',  function($http
 
 	//get all roles checkboxes edit
 	self.service.fetchAnyData('/allRoles').then(function(response) {
-		console.log('al; roles fetched '+response.length);
 		var roles = response;
 		self.allRoles = [];
 		angular.forEach(roles, function(value, key) { 
@@ -97,6 +91,35 @@ controller( 'userslistx', ['$http', 'translator', 'userService',  function($http
 	});
 
 	self.fetchAllUsers();
-	
-	console.log('userslist controller - ending');
+
+	//console.log('userslist controller - ending');
+}]);
+
+userApp.controller( 'useredit', ['$http', '$routeParams', '$location', 'userService',   function($http, $routeParams,$location, userService ) {
+	var self = this;
+	self.service = userService;
+
+	console.log('userEdit controller starting');
+
+	var userId = $routeParams.id;
+
+	//fetch user - when adding user get empty user but populated with all roles
+	self.service.fetch(userId).then(function(response) {
+		self.user = response;
+		self.user.enabledPreselected = self.user.enabled;
+		console.log(self.user);
+	}, function(){
+		console.log('get user from service - fail');
+	});
+
+	self.createOrUpdateUser = function(user){
+		self.service.createOrUpdate(user)
+		.then( function(response){
+			$location.path('/users')
+		},	function(errResponse){
+			console.error('Error while creating/saving User');
+		});
+	}
+
+	console.log('userEdit controller - ending');
 }]);

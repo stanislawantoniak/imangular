@@ -3,11 +3,11 @@ var transl = angular.module('translationService', []);
 
 transl.controller( 'translation',['translator', '$scope', function(translator, $scope) {
 
-	console.log('translation controller starting');
+	//console.log('translation controller starting');
 	
 	$scope.translator = translator;
 	
-	console.log('translation controller ending');
+	//console.log('translation controller ending');
 	
 }]);
 
@@ -30,7 +30,7 @@ transl.factory('translator', ['$q','$http', function($q,$http){
 				             {value: 'false', text: Translator.label.booleanno}
 				           ];
 					
-					console.log('translator refresh service', Translator.label);
+					//console.log('translator refresh service', Translator.label);
 
 				} , function(){
 

@@ -10,6 +10,7 @@ generic;translations
 "searchwidgettext","Search"
 "booleanyes","Yes"
 "booleanno","No"
+"clicktoedit","Click on text to edit."
 
 sahsboard;translations
 "dashboardcontent","Dashboard"
@@ -38,12 +39,17 @@ edit form, item
 "edititemheadingadditem","Add Item"
 "edititemheadingedititem","Edit Item"
 "edititemlabelitemname","Name"
-"edititembuttonsave","Save Name"
-"edititembuttoncancel","Back To List"
+"edititembuttonsave","Save"
+"edititembuttoncancel","Cancel"
 "editcomponentsbuttonadd","Add Component"
+"edititemheadercomponentname","Component name"
+"edititemheadercomponentremarks","Remarks"
+"edititemheadercomponentquantity","Quantity"
+"edititemheadingactions","Actions"
 
 component,editform
 "componenteditformbuttoncancel","Cancel"
+"componenteditformbuttonsave", "Save component"
 
 users; userlist
 "userslisttitle","Users"

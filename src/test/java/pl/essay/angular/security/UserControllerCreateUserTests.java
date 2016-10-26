@@ -34,6 +34,8 @@ import pl.essay.angular.security.UserForm;
 import pl.essay.angular.security.UserService;
 import pl.essay.angular.security.UserT;
 
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import org.mockito.runners.*;
@@ -41,8 +43,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
-//@ContextConfiguration(classes = {ImAngularApplication.class})
-//@RestClientTest(UserController.class)
+@RestClientTest(UserController.class)
 public class UserControllerCreateUserTests {
 
 	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
@@ -54,13 +55,10 @@ public class UserControllerCreateUserTests {
 
 	@Mock
 	private UserService userServiceMock;
-
+	
 	@Before
-	public void setup() 
-	{
-		MockitoAnnotations.initMocks(this);
-		this.mockMvc = MockMvcBuilders
-				.standaloneSetup(controller).build();
+	public void setup() {
+		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 
 	@Test
@@ -92,7 +90,6 @@ public class UserControllerCreateUserTests {
 				req
 				)
 		.andExpect(status().isConflict());
-
 	}
 	
 	@Test
@@ -105,6 +102,10 @@ public class UserControllerCreateUserTests {
 
 		when(userServiceMock.existsUser( uf.getUsername() )).thenReturn( false );
 
+		when(userServiceMock.addUser( user )).thenReturn( (long) 109 );
+
+		uf.setId(109);
+		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
@@ -121,14 +122,15 @@ public class UserControllerCreateUserTests {
 		mockMvc.perform(
 				req
 				)
-		.andExpect(status().isOk());
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", equalTo( 109 ) ));
 		
 		ArgumentCaptor<UserT> userCaptured = ArgumentCaptor.forClass(UserT.class);
 		verify(userServiceMock).addUser( userCaptured.capture() );
 		assertEquals("changed", userCaptured.getValue().getPassword());
 		assertEquals("bolko@wp.pl", userCaptured.getValue().getUsername());
-
 	}
 
-
+	
+	
 }

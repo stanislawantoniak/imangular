@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pl.essay.angular.security.UserT;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
 import pl.essay.imangular.service.ItemService;
@@ -40,6 +41,7 @@ public class ItemController extends BaseController {
 
 	@Autowired private ItemService itemService;
 
+
 	@InitBinder
 	public void registerCustomEditors(WebDataBinder binder) {
 		binder.registerCustomEditor(Item.class, null, new ItemMakerPropertyEditor(this.itemService));
@@ -47,106 +49,37 @@ public class ItemController extends BaseController {
 
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
 	public List<Item> listItems() {
-
 		return this.itemService.listItems();
 	}
 
-	@RequestMapping(value= "/items/item/update", method = RequestMethod.POST)
-	public String updateItem(@Valid @ModelAttribute("item") Item item,  
-			BindingResult result, //must follow modelattribute!!!!
-			RedirectAttributes redirectAttributes,
-			Model model){
-		logger.trace("update item data: "+item);
-		logger.trace("has errors?:"+result.hasFieldErrors());
-		if (result.hasErrors()) {
-			//disable language selector - because staying on the same url and it doesnt support RequestMethod.GET
-			model.addAttribute("languageSelectorClass","disabled"); 
+	//update or add component
+	@RequestMapping(value= "/items/component", method = {RequestMethod.POST})
+	public ResponseEntity<Integer> createItemComponent(@RequestBody ItemComponent itemComponent){
 
-			model.addAttribute("item", item);
+		//Item parent = itemComponent.getParent();
+		//parent.addComponent(itemComponent);
 
-			model.addAttribute("itemComponents", this.itemService.getItemComponentsByParent(item.getId()));
-			return "items/itemEdit";
-		} else {
-			if (item.getId() == 0)
-				this.itemService.addItem(item);
-			else
-				this.itemService.updateItem(item);
-			return  "redirect:/items" ;
-		}
+		this.itemService.addOrUpdateItemComponent(itemComponent);
+		//this.itemService.addOrUpdateItemComponent(itemComponent);
+
+		return new ResponseEntity<Integer>(itemComponent.getId(), HttpStatus.OK);
 	}
 
 	//update or add component
-	@RequestMapping(value= "/items/component/update", method = RequestMethod.POST)
-	public String updateItemComponent(@Valid @ModelAttribute("itemComponent") ItemComponent itemComponent,
-			BindingResult result,
-			Model model,
-			RedirectAttributes redirectAttributes){
+	@RequestMapping(value= "/items/component/{id}", method = {RequestMethod.PUT})
+	public ResponseEntity<Void> updateItemComponent(@PathVariable int id, @RequestBody ItemComponent itemComponent){
 
-		if (result.hasErrors()){
-			System.out.println("component: "+itemComponent.getComponent());
-			System.out.println("parent: "+itemComponent.getParent());
+		this.itemService.addOrUpdateItemComponent(itemComponent);
 
-			//disable language selector - because staying on the same url and it doesnt support RequestMethod.GET
-			model.addAttribute("languageSelectorClass","disabled"); 
-
-			model.addAttribute("allItems", getItemListForSelect(itemComponent.getParent()));
-			model.addAttribute("item", itemComponent.getParent());
-			model.addAttribute("itemComponent", itemComponent);
-
-			return "items/componentEdit";
-		} else {
-
-			this.itemService.addItemComponent(itemComponent);
-
-			return  "redirect:/items/item/edit/"+itemComponent.getParent().getId();
-		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping("/items/component/delete/{itemId}-{componentId}")
-	public String deleteItemComponent(
-			@PathVariable("itemId") int itemId,
-			@PathVariable("componentId") int componentId
-			){
+	@RequestMapping(value= "/items/component/{componentId}", method = {RequestMethod.DELETE})
+	public ResponseEntity<Void> deleteItemComponent( @PathVariable("componentId") int componentId	){
 
 		this.itemService.removeItemComponent(componentId);
 
-		return "redirect:/items/item/edit/"+itemId;
-	}
-
-	//edit existing component
-	//in path id component id passed
-	@RequestMapping("/items/component/add/{id}")
-	public String addItemComponent(@PathVariable("id") int itemId, Model model){
-		logger.trace("from controller.addItemComponent");
-
-
-		ItemComponent ic = new ItemComponent();
-		Item item = this.itemService.getItemById(itemId);
-		ic.setParent(item);
-
-		model.addAttribute("allItems", getItemListForSelect(item));
-		model.addAttribute("item", item);
-		model.addAttribute("itemComponent", ic);
-
-		return "items/componentEdit";
-	}
-
-	//edit existing component
-	//in path id item id passed
-	@RequestMapping("/items/component/edit/{id}")
-	public String editItemComponent(@PathVariable("id") int id, Model model){
-
-		ItemComponent ic = this.itemService.getItemComponent(id);
-		System.out.println("component in controller: "+ic);
-
-
-		int itemId = ic.getParent().getId();
-		Item item = this.itemService.getItemById( itemId );
-
-		model.addAttribute("allItems", getItemListForSelect(item));
-		model.addAttribute("item", item);
-		model.addAttribute("itemComponent", ic);
-		return "items/componentEdit";
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/itemrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -157,53 +90,55 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item item){
+	public ResponseEntity<Void> updateItem(@PathVariable int id, @RequestBody Item item){
 
-		logger.trace("update itemform data: "+item);
+		logger.trace("update item data: "+item);
 
-		Item test = this.itemService.getItemById(id);
-		if (test == null){
+		Item itemFromDB = this.itemService.getItemById(id);
+		if (itemFromDB == null){
 			System.out.println("Item "+id+" does not exist, update failed");
-			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		
-		logger.trace("before update item data: "+item);
-		this.itemService.updateItem( item );
-		logger.trace("after update item data: "+item);
-		
-		return new ResponseEntity<Item>(HttpStatus.OK);
+
+		itemFromDB.setName(item.getName());
+
+		logger.trace("before update item data: "+itemFromDB);
+		this.itemService.updateItem( itemFromDB );
+		logger.trace("after update item data: "+itemFromDB);
+
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value= "/itemrest/", method = RequestMethod.POST)
-	public ResponseEntity<Void> createItem(@RequestBody Item item){
+	public ResponseEntity<Integer> createItem(@RequestBody Item item){
 
 		logger.trace("create itemform data: "+item);
-		
+
 		if ( this.itemService.existsItem( item.getName() ) ){
-			 System.out.println("Item with name " + item.getName() + " already exist and requested create");
-	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			System.out.println("Item with name " + item.getName() + " already exist and requested create");
+			return new ResponseEntity<Integer>(0,HttpStatus.CONFLICT);
 		}
-		
+
 		logger.trace("before create item data: "+item);
 		this.itemService.addItem( item );
 		logger.trace("after create item data: "+item);
-		
-		return new ResponseEntity<Void>(HttpStatus.OK);
+
+		return new ResponseEntity<Integer>(item.getId(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteItem(@PathVariable int id){
-	
+
 		Item item = this.itemService.getItemById(id);
 		if (item == null){			 
 			System.out.println("Item " +id+ " does not exist but requested delete");
-	        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		
+
 		logger.trace("before delete item: "+item);
 		this.itemService.removeItem(id);
 		logger.trace("after delete item: "+item);
-		
+
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
@@ -221,14 +156,19 @@ public class ItemController extends BaseController {
 		return "items/itemEdit";
 	}
 
+	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String,String>> itemsForSelect(@PathVariable("id") int id) {
+		return new ResponseEntity<Map<String,String>>(this.getItemListForSelect(id),  HttpStatus.OK);
+	}
+
 	//#todo
 	//check for any circular reference in item components
 	//a is composed of b, b is composed of a
-	protected Map<String, String> getItemListForSelect(Item exclude) {
+	protected Map<String, String> getItemListForSelect(int id) {
 		Map<String,String> allItems = new LinkedHashMap<String, String>();
 		Map<String,String> notSorted = new TreeMap<String, String>();
 		for (Item i: this.itemService.listItems()){
-			if (i.getId() != exclude.getId()) 
+			if (i.getId() != id ) 
 				notSorted.put(i.getName(), ""+i.getId()); //sort by names
 		}
 		for (Map.Entry<String, String> i : notSorted.entrySet())

@@ -41,8 +41,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
-//@ContextConfiguration(classes = {ImAngularApplication.class})
-//@RestClientTest(UserController.class)
+@RestClientTest(UserController.class)
 public class UserControllerDeleteGetUserTests {
 
 	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
@@ -54,13 +53,12 @@ public class UserControllerDeleteGetUserTests {
 
 	@Mock
 	private UserService userServiceMock;
-
+	
 	@Before
 	public void setup() 
 	{
 		MockitoAnnotations.initMocks(this);
-		this.mockMvc = MockMvcBuilders
-				.standaloneSetup(controller).build();
+		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 
 	@Test

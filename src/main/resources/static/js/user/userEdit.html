@@ -42,7 +42,8 @@
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 col-xs-12 control-label">
-							{{translator.label.edituserlabelenabled}} : {{userCtrl.user.enabled}}</label>
+							{{translator.label.edituserlabelenabled}} :
+							{{userCtrl.user.enabled}}</label>
 						<div class="col-md-8 col-xs-12">
 							<label for="enabledTrue" class="radio-inline"> <input
 								type="radio" ng-checked="userCtrl.user.enabledPreselected"
@@ -50,8 +51,8 @@
 								value="true"> {{translator.label.booleanyes}}
 							</label> <label class="radio-inline" for="enabledFalse"> <input
 								type="radio" ng-checked="!userCtrl.user.enabledPreselected"
-								ng-model="userCtrl.user.enabled" name="enabled" id="enabledFalse"
-								value="false">{{translator.label.booleanno}}
+								ng-model="userCtrl.user.enabled" name="enabled"
+								id="enabledFalse" value="false">{{translator.label.booleanno}}
 							</label>
 						</div>
 					</div>
@@ -64,12 +65,16 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="panel-footer">
 					<button class="btn btn-primary pull-right" type="submit">
-						{{translator.label.edituserbuttonsave}}</button>
-					<a href="#!/users" class="btn btn-default">
-						{{translator.label.edituserbuttoncancel}} </a>
+						<i class="fa fa-save"></i> {{translator.label.edituserbuttonsave}}
+					</button>
+					<a href="#!/users" class="btn btn-default"> <i
+						class="fa fa-undo"></i> {{translator.label.edituserbuttoncancel}}
+					</a>
 				</div>
+
 			</div>
 		</form>
 	</div>

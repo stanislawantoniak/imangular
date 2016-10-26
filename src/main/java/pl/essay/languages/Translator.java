@@ -54,6 +54,10 @@ public class Translator {
 
 		return this.translations;
 	}
+	
+	public void setTranslations(Map<String,String> t){
+		this.translations = t;
+	}
 
 	public void addTranslations(Translator fromTranslator){
 		for (Map.Entry<String,String> row : fromTranslator.getTranslations().entrySet()){

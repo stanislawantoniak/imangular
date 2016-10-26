@@ -14,7 +14,7 @@ public interface ItemService {
 	public Item getItemById(int id);
 	public void removeItem(int id);
 	public void removeItemComponent(int componentId);
-	public int addItemComponent(ItemComponent component);
+	public int addOrUpdateItemComponent(ItemComponent component);
 	public ItemComponent getItemComponent(int id);
 	public Set<ItemComponent> getItemComponentsByParent(int id);
 	public boolean existsItem(String name);

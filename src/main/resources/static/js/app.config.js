@@ -13,10 +13,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',  function ma
 		controller : 'dashboard'
 	}).when('/users', {
 		templateUrl : 'js/user/userList.html',
-		controller : 'userslistx as usersCtrl'
+		controller : 'userslist as usersCtrl'
 	}).when('/items', {
 		templateUrl : 'js/item/itemList.html',
-		controller : 'itemlist as itemsCtrl'
+		controller : 'itemslist as itemsCtrl'
 	}).when('/login', {
 		templateUrl : 'js/common/login.html',
 		controller : 'login as login'
@@ -38,8 +38,9 @@ app.run(['$rootScope', '$location', 'editableOptions', function ($rootScope, $lo
 		//console.log('$rootScope.$on::$routeChangeStart start');
 		//just for checking if route change is fired
 		if (!$rootScope.authenticated) {
-			if ($location.path() == '/users' 
-				|| $location.path() == '/items'){
+			if ($location.path().startsWith('/users' ) 
+				|| $location.path().startsWith( '/items') ){
+				$rootScope.redirect = $location.path();
 				console.log('Authentication:: Deny - not authenticated');
 				event.preventDefault();
 				$location.path('/login');

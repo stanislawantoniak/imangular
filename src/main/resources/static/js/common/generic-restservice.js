@@ -20,12 +20,11 @@ factory('restservice', ['$http', '$q', function($http, $q){
         $http.get( url )
             .then(
             function (response) {
-            	console.log(response.data);
+            	//console.log(response.data);
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while fetching from url '+url);
-                //console.error('Response::'+errResponse);
+                //console.error('Error while fetching from url '+url);
                 deferred.reject(errResponse);
             }
         );
@@ -40,7 +39,7 @@ factory('restservice', ['$http', '$q', function($http, $q){
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while creating '+entity);
+                //console.error('Error while creating '+entity);
                 deferred.reject(errResponse);
             }
         );
@@ -55,8 +54,7 @@ factory('restservice', ['$http', '$q', function($http, $q){
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while updating '+entity);
-                //console.error(errResponse);
+                //console.error('Error while updating '+entity);
                 deferred.reject(errResponse);
             }
         );
@@ -65,23 +63,24 @@ factory('restservice', ['$http', '$q', function($http, $q){
     
     Service.prototype.createOrUpdate = function(entity){
         if(entity.id==0){
-            console.log('Saving to '+this.REST_SERVICE_ONE, entity);
+            //console.log('Saving to '+this.REST_SERVICE_ONE, entity);
             return this.create(entity);
         }else{
-            console.log('Updating to '+this.REST_SERVICE_ONE, entity);
+            //console.log('Updating to '+this.REST_SERVICE_ONE, entity);
             return this.update(entity, entity.id);
         }
     }
  
     Service.prototype.deleteEntity = function(id) {
         var deferred = $q.defer();
+        var rest = this.REST_SERVICE_ONE;
         $http.delete(this.REST_SERVICE_ONE+id)
             .then(
             function (response) {
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while deleting from '+this.REST_SERVICE_ONE);
+                //console.error('Error while deleting from '+rest);
                 deferred.reject(errResponse);
             }
         );
@@ -92,7 +91,7 @@ factory('restservice', ['$http', '$q', function($http, $q){
     		getService : function(){ return new Service(); }
     }
     
-    console.log("rest service in factory : ",Factory.getService());
+    //console.log("rest service in factory : ",Factory.getService());
     
     return Factory;
  

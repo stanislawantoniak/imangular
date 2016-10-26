@@ -8,6 +8,7 @@ generic;translations
 "searchwidgettext","Szukaj"
 "booleanyes","tak"
 "booleanno","nie"
+"clicktoedit","Kliknij żeby wyedytować."
 
 dahsboard;translations
 "dashboardcontent","Panel"
@@ -39,7 +40,11 @@ edit form;sss
 "edititemlabelitemname","Nazwa"
 "edititembuttonsave","Zapisz"
 "edititembuttoncancel","Anuluj"
-"editcomponentsbuttonadd","Dodaj komponent"
+"editcomponentsbuttonadd","Dodaj składnik"
+"edititemheadercomponentname","Nazwa składnika"
+"edititemheadercomponentremarks","Uwagi"
+"edititemheadercomponentquantity","Ilość"
+"edititemheadingactions",""
 
 
 component,editform
