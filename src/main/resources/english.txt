@@ -36,6 +36,7 @@ itemslist;translations
 "itemslistitemstableeditbutton","Edit"
 "itemslistitemstabledeletebutton","Delete"
 "itemslistdeletewarning","Are you sure to delete item:"
+
 edit form, item
 "edititemheadingadditem","Add Item"
 "edititemheadingedititem","Edit Item"

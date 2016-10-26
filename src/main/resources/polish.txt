@@ -50,7 +50,8 @@ edit form;sss
 
 
 component,editform
-"componenteditformbuttoncancel","Cancel"
+"componenteditformbuttoncancel","Anuluj"
+"componenteditformbuttonsave", "Zapisz składnik"
 
 users; userlist
 "userslisttitle","Użytkownicy"
