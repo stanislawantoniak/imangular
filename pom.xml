@@ -142,7 +142,7 @@
 	</dependencies>
 
 	<build>
-	<finalName>imangular</finalName>
+		<finalName>imangular</finalName>
 		<plugins>
 
 			<plugin>
@@ -213,11 +213,11 @@
 				</executions>
 				<configuration>
 					<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-					<cssDestinationFolder>${project.build.directory}/classes/static/css</cssDestinationFolder>
+					<cssDestinationFolder>${project.build.directory}/classes/static/css/css</cssDestinationFolder>
 					<jsDestinationFolder>${project.build.directory}/classes/static/js</jsDestinationFolder>
 					<wroFile>${project.build.directory}/wro/wro.xml</wroFile>
 					<extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
-					<contextFolder>${basedir}/src/main/wro</contextFolder>
+					<contextFolder>${basedir}/src/main/wro,${basedir}/src/main/resources/static</contextFolder>
 					<minimize>false</minimize>
 					<parallelProcessing>true</parallelProcessing>
 				</configuration>
