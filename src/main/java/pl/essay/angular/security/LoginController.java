@@ -24,14 +24,15 @@ public class LoginController extends BaseController {
 	public String user(HttpServletRequest request, Principal user) {
 		this.userSession.updateName(); //update name when authenticated
 		
-		this.initUser();
-		
 		return this.userSession.toJson();
 	}
 	
 	//this is unprotected resource used for fetching data for guest user
 	@RequestMapping(value = "common/userSession", method = RequestMethod.GET)
 	public String getSession() {
+		
+		this.initFirstUser();
+		
 		return this.userSession.toJson();
 	}
 	
@@ -44,7 +45,7 @@ public class LoginController extends BaseController {
 	//init first user for dev purposes
 	//just to have a user in db in case of db re-creation
 	
-	private void initUser(){
+	private void initFirstUser(){
 		String name = "stan@wp.pl";
 		String pass  = "123456";
 		
