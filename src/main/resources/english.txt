@@ -35,6 +35,7 @@ itemslist;translations
 "itemslistitemstableheadingactions","Actions"
 "itemslistitemstableeditbutton","Edit"
 "itemslistitemstabledeletebutton","Delete"
+"itemslistdeletewarning","Are you sure to delete item:"
 edit form, item
 "edititemheadingadditem","Add Item"
 "edititemheadingedititem","Edit Item"
@@ -46,6 +47,7 @@ edit form, item
 "edititemheadercomponentremarks","Remarks"
 "edititemheadercomponentquantity","Quantity"
 "edititemheadingactions","Actions"
+"componentslistdeletewarning","Are you sure to delete component from item:"
 
 component,editform
 "componenteditformbuttoncancel","Cancel"
@@ -62,6 +64,7 @@ users; userlist
 "userslistuserstableheadingname","Login (email)"
 "userslistuserstableheadingenabled","Active"
 "userslistuserstableheadingactions","Actions"
+"userslistdeletewarning","Are you sure to delete user:"
 
 users; useredit
 "edituserheadingadditem","Add User"
