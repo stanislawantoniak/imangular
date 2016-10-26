@@ -36,7 +36,7 @@
 	<beans:bean id="languages" class="pl.essay.languages.Languages"
 		scope="singleton" init-method="init">
 		<beans:property name="defaultLanguage">
-			<beans:ref bean="english" />
+			<beans:ref bean="polish" />
 		</beans:property>
 		<beans:property name="languages">
 			<beans:list>
