@@ -53,12 +53,33 @@
 								<td><a class="btn btn-default"
 									href="#!/items/edit/{{item.id}}">{{translator.label.itemslistitemstableeditbutton}}
 								</a> <a ng-show="item.usedIn.length==0" class="btn btn-default"
-									ng-click="itemsCtrl.deleteItem(item.id)">{{translator.label.itemslistitemstabledeletebutton}}</a>
+									ng-click="itemsCtrl.deleteDialog.open(item)">{{translator.label.itemslistitemstabledeletebutton}}</a>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- delete dialog-->
+<div class="message-box animated fadeIn" id="message-box-default"
+	ng-class="itemsCtrl.deleteDialog.getClass()">
+	<div class="mb-container">
+		<div class="mb-middle">
+			<div class="mb-title">
+				<span class="fa fa-scissors"></span>Sure to delete item: {{itemsCtrl.deleteDialog.object.name}}?
+			</div>
+			<div class="mb-content">
+			</div>
+			<div class="mb-footer">
+				<button class="btn btn-default btn-lg"
+					ng-click="itemsCtrl.deleteDialog.close()">{{translator.label.edititembuttoncancel}}</button>
+				<button class="btn btn-default btn-lg pull-right"
+					ng-click="itemsCtrl.deleteItem()">{{translator.label.userslistuserstablebuttondelete}}</button>
 			</div>
 		</div>
 	</div>

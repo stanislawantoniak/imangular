@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('imangular', [ 'ngRoute', 'navigation', 'dashboard', 'users', 'items' ] );
+var app = angular.module('imangular', [ 'ngRoute', 'navigation', 'dashboard', 'users', 'items','toolbox' ] );
 
 app.config(['$routeProvider', '$httpProvider', '$locationProvider',  function mainController( $routeProvider, $httpProvider,$locationProvider ) {
 

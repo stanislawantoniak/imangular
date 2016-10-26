@@ -1,7 +1,7 @@
 'use strict';
 
 //Register `items` component, along with its associated controller and template
-var itemApp = angular.module('items', ['translationService','checklist-model','xeditable','ui.select']);
+var itemApp = angular.module('items', ['translationService','toolbox', 'checklist-model','xeditable','ui.select']);
 
 itemApp.config(['$routeProvider', function mainController( $routeProvider ) {
 
@@ -18,10 +18,11 @@ itemApp.config(['$routeProvider', function mainController( $routeProvider ) {
 	console.log('items config ending');
 }]);
 
-itemApp.controller( 'itemslist', ['$scope', '$http', 'translator', 'itemService',  function itemsController($scope, $http, translator, itemService ) {
+itemApp.controller( 'itemslist', ['$scope', '$http', 'translator', 'itemService',  'dialogFactory', function itemsController($scope, $http, translator, itemService, dialogFactory ) {
 
 	var self = this;
 	self.service = itemService;
+	self.deleteDialog = dialogFactory.getService();
 
 	console.log('itemslist controller starting');
 
@@ -35,10 +36,11 @@ itemApp.controller( 'itemslist', ['$scope', '$http', 'translator', 'itemService'
 		})
 	};
 
-	self.deleteItem = function(id){
-		self.service.deleteEntity(id).
+	self.deleteItem = function(){
+		self.service.deleteEntity(self.deleteDialog.object.id).
 		then( function(response){
-			self.fetchAllItems()
+			self.fetchAllItems();
+			self.deleteDialog.close();
 		},
 		function(errResponse){
 			console.error('Error while deleting item');
@@ -50,13 +52,18 @@ itemApp.controller( 'itemslist', ['$scope', '$http', 'translator', 'itemService'
 	console.log('itemslist controller - ending');
 }]);
 
-itemApp.controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams', 'translator','itemService', 'itemComponentService', 
-                                 function itemsController($scope, $http, $location, $routeParams, translator, itemService, itemComponentService ) {
+itemApp.controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams', 'translator','itemService', 'itemComponentService', 'dialogFactory',
+                                 function itemsController($scope, $http, $location, $routeParams, translator, itemService, itemComponentService, dialogFactory ) {
 	console.log('itemEdit controller starting');
-	
+
 	var self = this;
 	self.service = itemService;
 	self.componentService = itemComponentService;
+	
+	self.deleteDialog = dialogFactory.getService();
+	console.log('self.deleteDialog',self.deleteDialog);
+	console.log('openedDialog',self.deleteDialog.openedDialog);
+	
 	self.addItemCtx = false;
 
 	self.translator = translator;
@@ -150,10 +157,11 @@ itemApp.controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams',
 		self.unsetAddComponentCtx();
 	}
 
-	self.deleteItemComponent = function(id){
-		self.componentService.deleteEntity(id).
+	self.deleteItemComponent = function(){
+		self.componentService.deleteEntity(self.deleteDialog.object.id).
 		then( function(response){
-			self.fetchItem()
+			self.fetchItem();
+			self.deleteDialog.close();
 		},
 		function(errResponse){
 			console.error('Error while deleting component');
@@ -165,18 +173,20 @@ itemApp.controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams',
 		if (formScope['nameBtnForm'].$visible){
 			return false; 
 		}
-		
+
 		if ( self.nameEditShow ) { //edit name mode when new item
 			formScope['nameBtnForm'].$show();
 			self.nameEditShow = false;
 			return false;
 		}
-		
+
 		return !self.addItemCtx;
 	}
-	
+
+
+
 	if (self.itemId == 0){ //if new item - set edit name flag 
-							// will be used in editNameIfEmpty
+		// will be used in editNameIfEmpty
 		self.nameEditShow = true;
 	} else {
 		self.nameEditShow = false;
@@ -185,21 +195,4 @@ itemApp.controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams',
 	console.log('itemEdit controller - ending');
 }]);
 
-itemApp.directive('onlyDigits', function () {
-	return {
-		restrict: 'A',
-		require: '?ngModel',
-		link: function (scope, element, attrs, modelCtrl) {
-			modelCtrl.$parsers.push(function (inputValue) {
-				if (inputValue == undefined) return '';
-				var transformedInput = inputValue.replace(/[^0-9]/g, '');
-				if (transformedInput !== inputValue) {
-					modelCtrl.$setViewValue(transformedInput);
-					modelCtrl.$render();
-				}
-				return transformedInput;
-			});
-		}
-	};
-});
 

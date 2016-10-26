@@ -13,11 +13,13 @@ userApp.config(['$routeProvider', function mainController( $routeProvider ) {
 	//console.log('users config ending');
 }]);
 
-userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService',  function($http, $scope, translator, userService ) {
+userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService', 'dialogFactory', function($http, $scope, translator, userService,dialogFactory ) {
 
 	var self = this;
 	self.service = userService;
 	self.editUserContext = false;
+	
+	self.deleteDialog = dialogFactory.getService();
 
 	//console.log('userslist controller starting');
 
@@ -31,10 +33,11 @@ userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService'
 		})
 	};
 
-	self.deleteUser = function(id){
-		self.service.deleteEntity(id).
+	self.deleteUser = function(){
+		self.service.deleteEntity(self.deleteDialog.object.id).
 		then( function(response){
-			self.fetchAllUsers()
+			self.fetchAllUsers();
+			self.deleteDialog.close();
 		},
 		function(errResponse){
 			console.error('Error while deleting User');
