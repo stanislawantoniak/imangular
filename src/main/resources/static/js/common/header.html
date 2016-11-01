@@ -1,0 +1,134 @@
+<ul class="header-inner clearfix" ng-controller="navigation as nav">
+	<li id="menu-trigger" data-target="mainmenu" data-toggle-sidebar
+		data-model-left="mactrl.sidebarToggle.left"
+		data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
+		<div class="line-wrap">
+			<div class="line top"></div>
+			<div class="line center"></div>
+			<div class="line bottom"></div>
+		</div>
+	</li>
+
+	<li class="logo hidden-xs"><a data-ui-sref="home"
+		data-ng-click="mactrl.sidebarStat($event)">{{translator.label.appname}}</a>
+	</li>
+
+	<li class="pull-right">
+		<ul class="top-menu">
+
+			<li id="toggle-width">
+				<div class="toggle-switch">
+					<input id="tw-switch" type="checkbox" hidden="hidden"
+						data-change-layout="mactrl.layoutType"> <label
+						for="tw-switch" class="ts-helper"></label>
+				</div>
+			</li>
+
+			<li class="dropdown" uib-dropdown><a uib-dropdown-toggle href="">
+					<i class="tm-icon"> <img style="width: 36px;height: 27px !important;"
+						ng-src="img/{{nav.authService.session.languageSelectedFlag}}" />
+				</i>
+			</a>
+				<div
+					class="dropdown-menu dropdown-menu-lg stop-propagate pull-right"
+					style="max-width: 155px !important;">
+					<div class="listview" id="notifications">
+						<div class="lv-header">
+							{{translator.label.navbarlanguagecanchoose}}</div>
+						<div class="lv-body" style="min-height: 125px !important;">
+							<a class="lv-item" ng-href=""
+								ng-click="nav.selectLanguage(language.acronym)"
+								ng-repeat="language in nav.authService.languages">
+								<div class="media">
+									<div class="pull-left">
+										<img class="lv-img-sm" style="width: 36px;height: 27px !important;"
+										ng-src="img/{{language.flag}}" alt="{{language.name}}">
+									</div>
+									<div class="media-body">
+										<div class="lv-title">{{language.name}}</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
+						<div class="clearfix"></div>
+
+					</div>
+
+				</div></li>
+
+			<li class="dropdown" uib-dropdown><a uib-dropdown-toggle href="">
+					<i class="tm-icon zmdi zmdi-sign-in"></i>
+			</a>
+				<div
+					class="dropdown-menu dropdown-menu-lg stop-propagate pull-right"
+					style="max-width: 155px !important;">
+					<div class="listview">
+						<div class="lv-header">
+							<div ng-show="authenticated">
+								<span>{{translator.label.navbarlogincanlogout}}</span>
+							</div>
+							<div ng-show="!authenticated">
+								<span>{{translator.label.navbarloginpleaselogin}}</span>
+							</div>
+
+						</div>
+						<div class="lv-body" style="min-height: 35px !important;">
+							<a class="lv-item" ng-href="" ng-click="nav.authService.logout()"
+								ng-if="authenticated">
+								<div class="media">
+									<div class="pull-left">
+										<i class="tm-icon zmdi zmdi-sign-in f-20"></i>
+									</div>
+									<div class="media-body">
+										<div class="lv-title">
+											<strong>{{translator.label.navbarmenuactionlogout}}</strong>
+										</div>
+									</div>
+								</div>
+							</a> <a class="lv-item" data-ui-sref="login" ng-if="!authenticated">
+								<div class="media">
+									<div class="pull-left">
+										<i class="tm-icon zmdi zmdi-sign-in f-20"></i>
+									</div>
+									<div class="media-body">
+										<div class="lv-title">
+											<strong>{{translator.label.navbarmenuactionlogin}}</strong>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+
+						<div class="clearfix"></div>
+
+						<div class="lv-footer">
+							<span>{{nav.authService.session.name}}</span>
+						</div>
+					</div>
+				</div></li>
+
+
+			<li class="dropdown" uib-dropdown><a uib-dropdown-toggle href="">
+					<i class="tm-icon zmdi zmdi-more-vert"></i>
+			</a>
+				<ul class="dropdown-menu dm-icon pull-right">
+					<li class="skin-switch hidden-xs"><span
+						ng-repeat="w in mactrl.skinList | limitTo : 6"
+						class="ss-skin bgm-{{ w }}" data-ng-click="mactrl.skinSwitch(w)"></span>
+					</li>
+					<li class="divider hidden-xs"></li>
+					<li class="hidden-xs"><a data-ng-click="hctrl.fullScreen()"
+						href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+					</li>
+					<li><a data-ng-click="hctrl.clearLocalStorage()" href=""><i
+							class="zmdi zmdi-delete"></i> Clear Local Storage</a></li>
+					<li><a href=""><i class="zmdi zmdi-face"></i> Privacy
+							Settings</a></li>
+					<li><a href=""><i class="zmdi zmdi-settings"></i> Other
+							Settings</a></li>
+				</ul></li>
+		</ul>
+	</li>
+</ul>
+

@@ -1,0 +1,144 @@
+
+<div class="container">
+	<div class="block-header">
+
+		<h2>{{translator.label.bomslistheading}}</h2>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<a href data-ui-sref="root.bomWizard">
+				<div class="card">
+					<div class="card-body card-padding bgm-teal c-white z-depth-4">
+						<div class="row">
+							<div class="col-md-3 col-xs-1">
+								<p>
+								<div class="text-center" style="font-size: 300%;">
+									<i class="zmdi zmdi-sun"></i>
+								</div>
+								</p>
+							</div>
+							<div class="col-md-9 col-xs-11">
+								<p>
+								<div>{{translator.label.clickto}}</div>
+								<div  class="f-15">{{translator.label.bomslistheadingbuttonaddbom}}</div>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-md-4" ng-repeat="bom in bomsCtrl.boms">
+			<a href="#!/boms/edit/{{bom.id}}">
+				<div class="card">
+					<div class="card-body card-padding bgm-lime c-white z-depth-4">
+						<div class="row">
+							<div class="col-md-3 col-xs-1">
+								<p>
+								<div class="text-center" style="font-size: 300%;">
+									<i class="zmdi zmdi-format-color-fill"></i>
+								</div>
+								</p>
+							</div>
+							<div class="col-md-9 col-xs-11">
+								<p>
+								<div class="f-15">{{translator.label.bomslistbomstableheadingname}}
+									{{bom.forItem.name}}</div>
+								<div>{{bom.requiredQuantity}} {{translator.label.pcs}}
+									</div>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+
+
+	<div class="card">
+		<div class="card-header">
+			<a class="btn btn-default" ng-click="bomsCtrl.fetchAllBoms()"><i
+				class="fa fa-refresh"></i>
+				{{translator.label.bomslistheadingbuttonrefresh}}</a>
+			<div class="pull-right">
+				<a class="btn btn-default" ng-click="bomsCtrl.kick()"> <i
+					class="fa fa-plus"></i>
+					{{translator.label.bomslistheadingbuttonaddbom}}
+				</a>
+			</div>
+		</div>
+
+		<div class="card-body">
+			<div class="table-responsive">
+
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th width="5">{{translator.label.bomslistbomstableheadingid}}</th>
+							<th width="20">{{translator.label.bomslistbomstableheadingname}}</th>
+							<th width="55">components</th>
+							<th width="5">{{translator.label.bomslistbomstableheadingqty}}</th>
+							<th width="55">requirements</th>
+							<th width="15">{{translator.label.bomslistbomstableheadingactions}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="bom in bomsCtrl.boms">
+							<td>{{bom.id}}</td>
+							<td>{{bom.forItem.name}}</td>
+							<td>
+								<div class="panel-body list-group">
+									<div class="list-group-item"
+										ng-repeat="itemComponent in bom.forItem.components">
+										<span class="label label-success">{{itemComponent.quantity}}
+											pcs</span> {{itemComponent.componentName}} <a
+											href="#!/items/edit/{{itemComponent.componentId}}"><span
+											class="fa fa-external-link"></span></a>
+									</div>
+								</div>
+							</td>
+
+							<td>{{bom.requiredQuantity}}</td>
+							<td>
+								<div class="panel-body list-group">
+									<div class="list-group-item"
+										ng-repeat="requirement in bom.requirementsList">
+										<span class="label label-success">{{requirement.effectiveRequiredQuantity}}
+											pcs</span> {{requirement.forItem.name}}
+									</div>
+								</div>
+							</td>
+							<td><a class="btn btn-default"
+								href="#!/boms/edit/{{bom.id}}">{{translator.label.bomslistbomstableeditbutton}}
+							</a> <a class="btn btn-default"
+								ng-click="bomsCtrl.deleteDialog.open(bom)">{{translator.label.bomslistbomstabledeletebutton}}</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- delete dialog-->
+<div class="message-box animated fadeIn" id="message-box-default"
+	ng-class="bomsCtrl.deleteDialog.getClass()">
+	<div class="mb-container">
+		<div class="mb-middle">
+			<div class="mb-title">
+				<span class="fa fa-scissors"></span>{{translator.label.bomslistdeletewarning}}
+				{{bomsCtrl.deleteDialog.object.forItem.name}}?
+			</div>
+			<div class="mb-content"></div>
+			<div class="mb-footer">
+				<button class="btn btn-default btn-lg"
+					ng-click="bomsCtrl.deleteDialog.close()">{{translator.label.editbombuttoncancel}}</button>
+				<button class="btn btn-default btn-lg pull-right"
+					ng-click="bomsCtrl.deleteBom()">{{translator.label.userslistuserstablebuttondelete}}</button>
+			</div>
+		</div>
+	</div>
+</div>

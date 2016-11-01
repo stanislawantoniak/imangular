@@ -25,9 +25,13 @@ navi.controller( 'navigation', ['$rootScope', '$http', '$location', '$scope', 't
 
 }]);
 
-navi.controller( 'login', ['$rootScope', '$http', '$location', '$scope', 'translator', 'authService', function($rootScope, $http, $location, $scope,  translator, authService) {
+navi.controller( 'login', [ 'authService', function( authService) {
 
 	var self = this;
+	
+	self.loginActive = 1;
+	self.registerActive = 0;
+	self.forgotActive = 0;
 	
 	console.log('login controller starting');
 	

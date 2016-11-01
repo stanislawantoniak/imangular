@@ -28,6 +28,9 @@
 		<mockito.version>1.10.19</mockito.version>
 		<rest-assured.version>2.4.0</rest-assured.version>
 
+		<jquery.version>2.1.4</jquery.version>
+		<angularjs.version>1.4.7</angularjs.version>
+		
 		<unit-tests.skip>false</unit-tests.skip>
 		<integration-tests.skip>true</integration-tests.skip>
 
@@ -225,12 +228,23 @@
 					<dependency>
 						<groupId>org.webjars</groupId>
 						<artifactId>jquery</artifactId>
-						<version>3.1.1</version>
+						<version>${jquery.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.webjars</groupId>
 						<artifactId>angularjs</artifactId>
-						<version>1.5.8</version>
+						<version>${angularjs.version}</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.webjars</groupId>
+						<artifactId>angular-ui-router</artifactId>
+						<version>0.2.18</version>
+					</dependency>
+					<dependency>
+						<groupId>org.webjars</groupId>
+						<artifactId>angular-ui-bootstrap</artifactId>
+						<version>1.3.3</version>
 					</dependency>
 					<dependency>
 						<groupId>org.webjars</groupId>

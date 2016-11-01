@@ -1,0 +1,35 @@
+<div class="sidebar-inner" xx="c-overflow">
+	<div class="profile-menu">
+		<a href="" toggle-submenu>
+			<div class="profile-pic">
+				<img src="img/profile-pics/1.jpg" alt="">
+			</div>
+
+		</a>
+
+	</div>
+
+	<ul class="main-menu">
+
+		<li data-ui-sref-active="active"><a data-ui-sref="root.boms"
+			data-ng-click="mactrl.sidebarStat($event)"><i
+				class="zmdi zmdi-view-quilt"></i>
+				{{translator.label.leftpanelmenumanageBoms}}</a></li>
+
+		<li data-ui-sref-active="active"><a data-ui-sref="root.items"
+			data-ng-click="mactrl.sidebarStat($event)"><i
+				class="zmdi zmdi-view-list-alt "></i>
+				{{translator.label.leftpanelmenumanageitems}}</a></li>
+				
+				
+		<li data-ui-sref-active="active"><a data-ui-sref="root.users"
+			data-ng-click="mactrl.sidebarStat($event)"><i
+				class="zmdi zmdi-accounts-alt"></i>
+				{{translator.label.leftpanelmenumanageUsers}}</a></li>
+
+		<li data-ui-sref-active="active"><a 
+			data-ng-click="mactrl.sidebarStat($event)"><i
+				class="zmdi zmdi-home"></i> Home</a></li>
+
+	</ul>
+</div>

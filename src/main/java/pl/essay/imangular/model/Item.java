@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.*;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.NamedQueries;
@@ -28,13 +30,17 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @DynamicUpdate
 @Table(uniqueConstraints = {
 		@UniqueConstraint(columnNames = "name")}
-)
-@NamedQueries(
-		@NamedQuery(
-				name = "getItemByName",
-				query = "select i from Item i where name = :nameParam"
-				)
 		)
+@NamedQueries({
+	@NamedQuery(
+			name = "getItemByName",
+			query = "select i from Item i where name = :nameParam"
+			),
+	@NamedQuery(
+			name = "getAllItems",
+			query = "select i.id, i.name, i.isComposed from Item i order by i.name"
+			)
+})
 //@SequenceGenerator(name="item_seq", initialValue=1, allocationSize=100)
 public class Item {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
@@ -56,14 +62,14 @@ public class Item {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "component")
 	@JsonManagedReference(value="usedIn")
 	private Set<ItemComponent> usedIn = new HashSet<ItemComponent>();
-	
+
 	public Item(){
 	}
 
 	public Item(int id){
 		this.id = id;
 	}
-	
+
 	public Item(String name, Boolean composed_TF){
 		this.setName(name);
 		this.setIsComposed(composed_TF);
@@ -100,7 +106,7 @@ public class Item {
 		this.isComposed = true;
 		ic.setParent(this);
 	}
-	
+
 	public void removeComponent(int icId){
 		System.out.println("components size (1): "+components.size());
 		ItemComponent icToRemove = null;
@@ -121,7 +127,7 @@ public class Item {
 	public void setComponents(Set<ItemComponent> ic) {
 		this.components = ic;
 	}
-	
+
 	public Set<ItemComponent> getUsedIn() {
 		return this.usedIn;
 	}
@@ -133,4 +139,26 @@ public class Item {
 	public String toString(){
 		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.isComposed;
 	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) return true;
+
+		if ( !(other instanceof Item) ) return false;
+
+		final Item b2 = (Item) other;
+
+		EqualsBuilder eb = new EqualsBuilder();
+		eb.append(b2.getName(), this.getName());
+
+		return eb.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hcb = new HashCodeBuilder();
+		hcb.append(this.getName());
+		return hcb.toHashCode();
+	}
+
 }

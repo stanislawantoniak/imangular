@@ -1,86 +1,92 @@
 
-<div class="page-title">
-	<h2>{{translator.label.itemslistheading}}</h2>
-</div>
+<div class="container">
+	<div class="block-header">
+		<h2>{{translator.label.itemslistheading}}</h2>
+	</div>
 
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default ">
+	<div class="row">
+		<div class="col-lg-12">
+				<div class="card">
 
-			<div class="panel-heading">
-				<a class="btn btn-default" ng-click="itemsCtrl.fetchAllItems()"><i
-					class="fa fa-refresh"></i>
-					{{translator.label.itemslistheadingbuttonrefresh}}</a>
-				<div class="pull-right">
-					<a class="btn btn-default" href="#!/items/edit/0"> <i
-						class="fa fa-plus"></i>
-						{{translator.label.itemslistheadingbuttonadditem}}
-					</a>
+				<div class="card-header">
+					<a class="btn btn-default" ng-click="itemsCtrl.fetchAllItems()"><i
+						class="fa fa-refresh"></i>
+						{{translator.label.itemslistheadingbuttonrefresh}}</a>
+					<div class="pull-right">
+						<a class="btn btn-default" href data-ui-sref="root.itemAdd"
+							ng-show="nav.authService.session.isSupervisor"> <i
+							class="fa fa-plus"></i>
+							{{translator.label.itemslistheadingbuttonadditem}}
+						</a>
+					</div>
 				</div>
-			</div>
 
-			<div class="panel-body panel-body-table">
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th width="5">{{translator.label.itemslistitemstableheadingid}}</th>
-								<th width="25">{{translator.label.itemslistitemstableheadingname}}</th>
-								<th width="55">{{translator.label.itemslistitemstableheadingcomponents}}</th>
-								<th width="15">{{translator.label.itemslistitemstableheadingactions}}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="item in itemsCtrl.items">
-								<td>{{item.id}}</td>
-								<td>{{item.name}}</td>
-								<td>
-									<div ng-show="item.isComposed" class="panel panel-default">
-										<div class="panel-body list-group">
-											<div class="list-group-item"
-												ng-repeat="itemComponent in item.components">
-												<span class="label label-success">{{itemComponent.quantity}}
-													pcs</span> {{itemComponent.componentName}}
-												<div ng-show="itemComponent.remarks" class="list-group-item">
-													<span class="fa fa-comments"> </span>
-													{{itemComponent.remarks}}
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th width="5">{{translator.label.itemslistitemstableheadingid}}</th>
+									<th width="25">{{translator.label.itemslistitemstableheadingname}}</th>
+									<th width="55">{{translator.label.itemslistitemstableheadingcomponents}}</th>
+									<th width="15">{{translator.label.itemslistitemstableheadingactions}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in itemsCtrl.items">
+									<td>{{item.id}}</td>
+									<td>{{item.name}}</td>
+									<td>
+										<div ng-show="item.isComposed" class="panel panel-default">
+											<div class="panel-body list-group">
+												<div class="list-group-item"
+													ng-repeat="itemComponent in item.components">
+													<span class="label label-success">{{itemComponent.quantity}}
+														{{translator.label.pcs}}</span> {{itemComponent.componentName}}
+													<div ng-show="itemComponent.remarks"
+														class="list-group-item">
+														<span class="fa fa-comments"> </span>
+														{{itemComponent.remarks}}
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</td>
+									</td>
 
-								<td><a class="btn btn-default"
-									href="#!/items/edit/{{item.id}}">{{translator.label.itemslistitemstableeditbutton}}
-								</a> <a ng-show="item.usedIn.length==0" class="btn btn-default"
-									ng-click="itemsCtrl.deleteDialog.open(item)">{{translator.label.itemslistitemstabledeletebutton}}</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+									<td><a class="btn btn-default" ui-sref="root.itemEdit({id: item.id})"
+										ng-show="nav.authService.session.isSupervisor">{{translator.label.itemslistitemstableeditbutton}}</a>
+										<a class="btn btn-default" href
+										ui-sref="root.itemDetails({id: item.id})"
+										ng-hide="nav.authService.session.isSupervisor">{{translator.label.itemslistitemstableshowbutton}}</a>
+										<a ng-show="item.usedIn.length==0" class="btn btn-default"
+										ng-click="itemsCtrl.deleteDialog.open(item)"
+										ng-show="nav.authService.session.isSupervisor">{{translator.label.itemslistitemstabledeletebutton}}</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
-<!-- delete dialog-->
-<div class="message-box animated fadeIn" id="message-box-default"
-	ng-class="itemsCtrl.deleteDialog.getClass()">
-	<div class="mb-container">
-		<div class="mb-middle">
-			<div class="mb-title">
-				<span class="fa fa-scissors"></span>{{translator.label.itemslistdeletewarning}} {{itemsCtrl.deleteDialog.object.name}}?
-			</div>
-			<div class="mb-content">
-			</div>
-			<div class="mb-footer">
-				<button class="btn btn-default btn-lg"
-					ng-click="itemsCtrl.deleteDialog.close()">{{translator.label.edititembuttoncancel}}</button>
-				<button class="btn btn-default btn-lg pull-right"
-					ng-click="itemsCtrl.deleteItem()">{{translator.label.userslistuserstablebuttondelete}}</button>
+	<!-- delete dialog-->
+	<div class="message-box animated fadeIn" id="message-box-default"
+		ng-class="itemsCtrl.deleteDialog.getClass()">
+		<div class="mb-container">
+			<div class="mb-middle">
+				<div class="mb-title">
+					<span class="fa fa-scissors"></span>{{translator.label.itemslistdeletewarning}}
+					{{itemsCtrl.deleteDialog.object.name}}?
+				</div>
+				<div class="mb-content"></div>
+				<div class="mb-footer">
+					<button class="btn btn-default btn-lg"
+						ng-click="itemsCtrl.deleteDialog.close()">{{translator.label.edititembuttoncancel}}</button>
+					<button class="btn btn-default btn-lg pull-right"
+						ng-click="itemsCtrl.deleteItem()">{{translator.label.userslistuserstablebuttondelete}}</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>

@@ -59,6 +59,8 @@ public class Translator {
 		this.translations = t;
 	}
 
+	//add transaltions from any translater to current one
+	//used to fill all missing translations
 	public void addTranslations(Translator fromTranslator){
 		for (Map.Entry<String,String> row : fromTranslator.getTranslations().entrySet()){
 			if (! this.translations.containsKey(row.getKey())){

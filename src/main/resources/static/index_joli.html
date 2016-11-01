@@ -1,0 +1,154 @@
+<!doctype html  data-ng-app="materialAdmin" data-ng-controller="imangular">
+<html>
+<head>
+<title>ItemMaker</title>
+
+
+<link href="css/app.min.1.css" rel="stylesheet" id="app-level">
+<link href="css/app.min.2.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" id="xeditable"
+	href="css/xeditable/css/xeditable.min.css" />
+
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
+</head>
+
+<body ng-cloak class="ng-cloak" ng-app="imangular"
+	ng-controller="translation">
+
+	<div class="page-container" ng-controller="navigation as nav">
+		<div id="sidebar" class="page-sidebar">
+
+			<ul class="x-navigation">
+
+				<li class="xn-logo"><a href="#!/">{{translator.label.appname}}</a>
+					<a class="x-navigation-control"></a></li>
+
+				<li class="xn-title">{{translator.label.leftpanelcaption}}</li>
+				<li><a href="#!/boms"><span class="fa fa-sitemap"></span> <span
+						class="xn-text">{{translator.label.leftpanelmenumanageBoms}}</span></a></li>
+				<li><a href="#!/items"><span class="fa fa-list-ul"></span>
+						<span class="xn-text">{{translator.label.leftpanelmenumanageitems}}</span></a></li>
+				<li ng-show="nav.authService.session.isAdmin"><a
+					href="#!/users"><span class="fa fa-users"></span> <span
+						class="xn-text">{{translator.label.leftpanelmenumanageUsers}}</span></a></li>
+
+				<li class="xn-title" ng-show="nav.authService.session.isAdmin">debug</li>
+				<li class="xn-text" ng-show="nav.authService.session.isAdmin"><a>
+						<span class="message">current route</br> {{nav.route.absUrl()}}
+					</span>
+				</a></li>
+				<li class="xn-text" ng-show="nav.authService.session.isAdmin"><span
+					class="message">{{nav.authService.session}}</span></li>
+			</ul>
+		</div>
+
+		<div id=container class="page-content">
+
+			<div>
+				<ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+
+					<!-- TOGGLE NAVIGATION -->
+					<li class="xn-icon-button"><a class="x-navigation-minimize"><span
+							class="fa fa-dedent"></span></a></li>
+					<!-- END TOGGLE NAVIGATION -->
+					<!-- SEARCH -->
+					<li class="xn-search">
+						<form role="form">
+							<input type="text" name="search"
+								placeholder="{{translator.label.searchwidgettext}}" />
+						</form>
+					</li>
+					<!-- END SEARCH -->
+					<!-- SIGN OUT -->
+					<li class="xn-icon-button pull-right"><a><span
+							class="fa fa-user"> </span> </a>
+						<div
+							class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+
+							<div class="panel-body list-group scroll">
+								<a ng-if="authenticated" class="list-group-item"
+									ng-click="nav.authService.logout()"> <span
+									class="fa fa-sign-out"></span><strong>
+										{{translator.label.navbarmenuactionlogout}}</strong>
+								</a> <a ng-if="!authenticated" class="list-group-item"
+									href="#!/login"> <span class="fa fa-sign-in"></span><strong>
+										{{translator.label.navbarmenuactionlogin}}</strong>
+								</a>
+							</div>
+							<div ng-show="authenticated" class="panel-footer text-center">
+								<span>{{translator.label.navbarlogincanlogout}}</span>
+							</div>
+							<div ng-show="!authenticated" class="panel-footer text-center">
+								<span>{{translator.label.navbarloginpleaselogin}}</span>
+							</div>
+							<div class="panel-footer text-center">
+								<span>{{nav.authService.session.name}}</span>
+							</div></li>
+					<!-- END SIGN OUT -->
+
+					<!-- TASKS -->
+					<li id="language-selector" class="xn-icon-button pull-right"><a><img
+							ng-src="css/{{nav.authService.session.languageSelectedFlag}}" /></a>
+						<div
+							class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+
+							<div class="panel-body list-group scroll">
+								<a ng-repeat="language in nav.authService.languages"
+									class="list-group-item"
+									ng-click="nav.selectLanguage(language.acronym)"> <img
+									ng-src="css/{{language.flag}}" /><strong>
+										{{language.name}} </strong>
+								</a>
+							</div>
+							<div class="panel-footer text-center">
+								<span>{{translator.label.navbarlanguagecanchoose}}</span>
+							</div>
+						</div></li>
+				</ul>
+			</div>
+			<!-- END OF HEADER-->
+
+			<div ng-view></div>
+
+		</div>
+	</div>
+
+	<script src="js/angular-bootstrap.js" type="text/javascript"></script>
+
+	<script src="js/app.config.js"></script>
+	<script src="js/common/navigation.config.js"></script>
+	<script src="js/common/toolbox.js"></script>
+	<script src="js/common/translator.config.js"></script>
+	<script src="js/common/authenticator.config.js"></script>
+	<script src="js/common/checklist-model.config.js"></script>
+	<script src="js/common/generic-restservice.js"></script>
+	<script src="js/dashboard/dashboard.config.js"></script>
+	<script src="js/user/users.config.js"></script>
+	<script src="js/user/userservice.js"></script>
+	<script src="js/item/items.config.js"></script>
+	<script src="js/item/itemservice.js"></script>
+	<script src="js/item/boms.config.js"></script>
+	<script src="js/item/bomservice.js"></script>
+
+	<script src="js/skin.js"></script>
+
+	<script type="text/javascript"
+		src="http://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="http://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.css">
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.js"></script>
+
+	<link
+		href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.css"
+		rel="stylesheet" media="screen">
+
+</body>
+</html>

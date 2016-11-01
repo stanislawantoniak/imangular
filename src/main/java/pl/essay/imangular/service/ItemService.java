@@ -3,6 +3,7 @@ package pl.essay.imangular.service;
 import java.util.List;
 import java.util.Set;
 
+import pl.essay.imangular.model.IdNameIsComposedQueryResult;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
 
@@ -18,4 +19,6 @@ public interface ItemService {
 	public ItemComponent getItemComponent(int id);
 	public Set<ItemComponent> getItemComponentsByParent(int id);
 	public boolean existsItem(String name);
+	
+	public List<IdNameIsComposedQueryResult> getAllItemsInShort();
 }

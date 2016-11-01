@@ -1,16 +1,21 @@
 generic;translations
 "appname","Item Maker 1.1"
 "leftpanelcaption","Navigation"
+"leftpanelmenumanageBoms", "Item Factory"
 "leftpanelmenumanageitems","Manage Items"
 "leftpanelmenumanageUsers", "Manage Users"
 "navbarmenuactionlogin","Sign in"
 "navbarmenuactionlogout","Sign out"
 "navbarloginpleaselogin","Please sign in"
-"navbarloginpcanlogout","You can sign out here"
+"navbarlogincanlogout","You can sign out here"
+"navbarlanguagecanchoose","You can choose your language here"
+"refreshbutton","Refresh"
 "searchwidgettext","Search"
 "booleanyes","Yes"
 "booleanno","No"
+"pcs","pcs"
 "clicktoedit","Click on text to edit."
+"clickto","Click Here To"
 
 sahsboard;translations
 "dashboardcontent","Dashboard"
@@ -34,6 +39,7 @@ itemslist;translations
 "itemslistitemstableheadingcomponents","Components"
 "itemslistitemstableheadingactions","Actions"
 "itemslistitemstableeditbutton","Edit"
+"itemslistitemstableshowbutton","Show Details"
 "itemslistitemstabledeletebutton","Delete"
 "itemslistdeletewarning","Are you sure to delete item:"
 
@@ -50,7 +56,7 @@ edit form, item
 "edititemheadingactions","Actions"
 "componentslistdeletewarning","Are you sure to delete component from item:"
 
-component,editform
+component;editform
 "componenteditformbuttoncancel","Cancel"
 "componenteditformbuttonsave", "Save component"
 
@@ -79,3 +85,33 @@ users; useredit
 "edituserlabelroles","Assigned Roles"
 "edituserbuttonsave","Save User"
 "edituserbuttoncancel","Cancel"
+
+boms; boms
+"bomslistheadingbuttonaddbom","Add new recipe"
+"bomslistheading","Factory jobs"
+"bomslistheadingbuttonadditem","Add Item"
+"bomslistheadingbuttonrefresh","Refresh"
+"bomslistbomstableheading","Recipe List"
+"bomslistbomstableheadingid","Recipe ID"
+"bomslistbomstableheadingname","Recipe for item"
+"bomslistbomstableheadingqty","Qty regired"
+"bomslistbomstableheadingactions","Actions"
+"bomslistbomstableeditbutton","Edit"
+"bomslistbomstabledeletebutton","Delete"
+"bomslistdeletewarning","Are you sure to delete recipe:"
+
+bom;wizard
+"bomWizardHeader","Create recipe"
+"bomWizardStep1","Choose product"
+"bomWizardStep1Desc","You can select product on list, just click on it.<br>Then hit next."
+"bomWizardStep2","Enter required quantity"
+"bomWizardStep2Desc","Enter quantity. You can change it later if you want."
+"bomWizardNext","Next step"
+"bomWizardPrev","Previous step"
+"bomWizardFinish","Create recipe"
+"bomWizardItemNameLabel","You selected: "
+"bomWizardChangeItemButton","Change product"
+"bomWizardItemQuantityLabel","Quantity to make: "
+
+
+

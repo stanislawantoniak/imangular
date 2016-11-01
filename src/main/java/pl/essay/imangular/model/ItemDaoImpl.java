@@ -1,8 +1,9 @@
 package pl.essay.imangular.model;
 
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import pl.essay.generic.dao.AbstractDaoHbn;
+
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class ItemDaoImpl extends AbstractDaoHbn<Item> implements ItemDao {
@@ -21,6 +22,16 @@ public class ItemDaoImpl extends AbstractDaoHbn<Item> implements ItemDao {
 				.uniqueResult();
 
 		return item != null;
+	}
+
+	@Override
+	public List<IdNameIsComposedQueryResult> getAllItemsInShort(){
+		return (List<IdNameIsComposedQueryResult>) getSession()
+				.createQuery(
+						"select new pl.essay.imangular.model.IdNameIsComposedQueryResult("+
+								"i.id, i.name, i.isComposed) "+
+						"from Item i order by i.name") 
+				.list();
 	}
 
 }

@@ -2,23 +2,27 @@
 
 //Register `users` component, along with its associated controller and template
 var userApp = angular.module('users', ['translationService','checklist-model','generic-restservice','xeditable']);
-userApp.config(['$routeProvider', function mainController( $routeProvider ) {
+userApp.config(function mainController( ) {
 
 	//console.log('users config starting');
+
+	/*
 	$routeProvider.when('/users/add/:id', {
 		templateUrl : 'js/user/userEdit.html',
 		controller : 'useredit',
 		controllerAs : 'userCtrl'
 	});
+	 */
 	//console.log('users config ending');
-}]);
+});
 
-userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService', 'dialogFactory', function($http, $scope, translator, userService,dialogFactory ) {
+userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService', 'dialogFactory', 
+                                  function( $http,   $scope,   translator,    userService,  dialogFactory ) {
 
 	var self = this;
 	self.service = userService;
 	self.editUserContext = false;
-	
+
 	self.deleteDialog = dialogFactory.getService();
 
 	//console.log('userslist controller starting');
@@ -45,6 +49,8 @@ userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService'
 		);
 	}
 
+	self.test = function(){ console.log('obj::'); };
+
 	self.createOrUpdateUser = function(user,id){
 		user.id = id;
 		self.service.createOrUpdate(user)
@@ -56,16 +62,16 @@ userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService'
 			console.error('Error while creating/saving User');
 		});
 	}
-	
+
 	self.setEditRowContext = function(){
 		self.editContext = true;
 	}
-	
+
 	self.cancelEditRow = function(formScope){
 		self.unsetEditRowContext();
 		formScope['rowform'].$cancel();
 	}
-	
+
 	self.unsetEditRowContext = function(){
 		self.editContext = false;
 	}
@@ -97,6 +103,52 @@ userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService'
 
 	//console.log('userslist controller - ending');
 }]);
+
+userApp
+.directive('swalExec', function(){
+	return {
+		restrict: 'A',
+		scope: {
+			object : '@',
+			dialogTitle : '@',
+			mainText : '@',
+			confirmButton : '@',
+			cancelButton : '@',
+			execFn : '&'          //will be called with scope.object parameter
+		},
+		link: function(scope, element, attrs) {
+
+			console.log('obj :: ',scope.object);
+
+			var callbackFn = function(isConfirm){   
+				if (isConfirm) {
+					console.log('obj :: ',scope.object);
+					//scope.execFn(scope.object);
+					swal("!!!!Deleted! "+scope.object, "Your imaginary file has been deleted.", "success");   
+				} else {     
+					swal("Cancelled", "Your imaginary file is safe :)", "error");   
+				}
+			};
+
+			element.click(function(){
+				console.log('obj :: ',scope);
+				swal({   
+					title: scope.dialogTitle,   
+					text: scope.mainText, 
+					type: "warning",   
+					showCancelButton: true,   
+					confirmButtonColor: "#DD6B55",   
+					confirmButtonText:  scope.confirmButton,  
+					cancelButtonText: scope.cancelButton,    
+					closeOnConfirm: false,   
+					closeOnCancel: false 
+				}, 
+				callbackFn
+				);
+			});
+		}
+	}
+})
 
 userApp.controller( 'useredit', ['$http', '$routeParams', '$location', 'userService',   function($http, $routeParams,$location, userService ) {
 	var self = this;

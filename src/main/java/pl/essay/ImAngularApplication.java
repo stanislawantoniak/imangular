@@ -19,7 +19,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -37,6 +39,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 	"classpath:/datasource-config.xml",
 	"classpath:/language-beans.xml"
 })
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class ImAngularApplication {
 
 	@Configuration
@@ -53,10 +56,16 @@ public class ImAngularApplication {
 			 */	
 			http
 			.httpBasic()
+			
 			.and()
 			.authorizeRequests()
-			.antMatchers("/login.html","/","/logout","/common/**").permitAll().anyRequest()
-			.authenticated().and()
+			.antMatchers(
+					"/fonts/**","/img/**","/vendors/**",
+					"/login", "/","/logout","/common/**",
+					"/boms/**","/bomrest/**",
+					"/items/**", "/itemrest/**").permitAll().anyRequest().authenticated().
+			
+			and()
 			.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
 		}

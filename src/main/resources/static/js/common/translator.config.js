@@ -30,7 +30,7 @@ transl.factory('translator', ['$q','$http', function($q,$http){
 				             {value: 'false', text: Translator.label.booleanno}
 				           ];
 					
-					//console.log('translator refresh service', Translator.label);
+					console.log('translator refresh service', Translator.label);
 
 				} , function(){
 

@@ -11,10 +11,12 @@ import org.apache.commons.lang3.StringUtils;
 public class UserForm {
 	
 	public static final String roleAdmin = "ROLE_ADMIN";
+	public static final String roleSupervisor = "ROLE_SUPERVISOR";
 	public static final String roleUser = "ROLE_USER";
 	public Map<String,String> getAllRoles(){
 		Map<String,String> list = new HashMap<String,String>();
 		list.put(UserForm.roleAdmin,UserForm.roleAdmin);
+		list.put(UserForm.roleSupervisor,UserForm.roleSupervisor);
 		list.put(UserForm.roleUser,UserForm.roleUser);
 		return list;
 	}

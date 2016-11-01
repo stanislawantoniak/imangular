@@ -1,195 +1,202 @@
-<div class="page-title">
-	<h2>
-		<div ng-show="item.id > 0">
-			{{translator.label.edititemheadingedititem}}</div>
-		<div ng-show="item.id == 0">
-			{{translator.label.edititeheadingadditem}}</div>
-	</h2>
-</div>
-<div class="row">
-	<div class="col-lg-8">
 
-		<div class="panel panel-default">
-			<div class="panel-heading">Item: {{itemCtrl.item.name}}</div>
-			<div class="panel-body">
-				<div class="col-lg-8">
-					<p>
-						<span editable-text="itemCtrl.item.name" e-form="nameBtnForm"
-							onbeforesave="itemCtrl.createOrUpdateItem()" e-required>{{itemCtrl.item.name}}
-						</span> <span> </span>
-						<button class="btn btn-default" ng-click="nameBtnForm.$show()"
-							ng-show="itemCtrl.editNameIfEmpty(this)">
-							<i class="fa fa-pencil"></i>
-							{{translator.label.userslistuserstablebuttonedit}}
-						</button>
-					</p>
-					{{dtranslator.label.clicktoedit}}
+<div class="container">
+	<div class="block-heade
+		<h2>
+			<div ng-show="item.id > 0">
+				{{translator.label.edititemheadingedititem}}</div>
+			<div ng-show="item.id == 0">
+				{{translator.label.edititeheadingadditem}}</div>
+		</h2>
+	</div>
+	<div class="row">
+		<div class="col-lg-8">
+
+			<div class="card">
+				<div class="card-header">Item: {{itemCtrl.item.name}}</div>
+				<div class="card-body">
+					<div class="col-lg-8">
+						<p>
+							<span editable-text="itemCtrl.item.name" e-form="nameBtnForm"
+								onbeforesave="itemCtrl.createOrUpdateItem()" e-required>{{itemCtrl.item.name}}
+							</span> <span> </span>
+						<div ng-show="nav.authService.session.isSupervisor">
+							<button class="btn btn-default" ng-click="nameBtnForm.$show()"
+								ng-show="itemCtrl.editNameIfEmpty(this)">
+								<i class="fa fa-pencil"></i>
+								{{translator.label.userslistuserstablebuttonedit}}
+							</button>
+						</div>
+						</p>
+						{{dtranslator.label.clicktoedit}}
+					</div>
+					<div class="col-lg-4" ng-hide="itemCtrl.item.isComposed">
+						<div class="pull-right"
+							ng-show="nav.authService.session.isSupervisor">
+							<a class="btn btn-default" ng-click="itemCtrl.addItemComponent()">
+								<i class="fa fa-plus"></i>
+								{{translator.label.editcomponentsbuttonadd}}
+							</a>
+						</div>
+					</div>
+
 				</div>
-				<div class="col-lg-4" ng-hide="itemCtrl.item.isComposed">
-					<div class="pull-right">
+			</div>
+
+			<div class="card" ng-show="itemCtrl.addItemCtx">
+				<form name="addIC" role="form" class="form-horizontal"
+					ng-submit="itemCtrl.createOrUpdateItemComponent(itemCtrl.inserted, itemCtrl.inserted)">
+					<div class="card-header">
+						<h3 class="panel-title">
+							<strong> {{translator.label.edititemheadingedititem}} </strong>
+						</h3>
+					</div>
+					<div class="card-body">
+
+						<div class="form-group">
+							<label class="col-md-3 col-xs-12 control-label">
+								{{translator.label.edititemheadercomponentname}} </label>
+							<div class="col-md-8 col-xs-12">
+								<div class="input-group">
+									<select class="form-control" name="component"
+										ng-model="itemCtrl.inserted.component"
+										ng-options="item.text for item in itemCtrl.itemsForSelect track by item.value"
+										required>
+										<option value="">------</option>
+									</select> <span ng-show="addIC.component.$error.itemFromSelect">Select!!!!</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-3 col-xs-12 control-label">
+								{{translator.label.edititemheadercomponentquantity}} </label>
+							<div class="col-md-8 col-xs-12">
+								<div class="input-group">
+									<input class="form-control"
+										ng-model="itemCtrl.inserted.quantity" type="text" only-digits
+										required />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 col-xs-12 control-label">
+								{{translator.label.edititemheadercomponentremarks}} </label>
+							<div class="col-md-8 col-xs-12">
+								<div class="input-group">
+									<textarea class="form-control"
+										ng-model="itemCtrl.inserted.remarks" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="card">
+						<button class="btn btn-primary pull-right" type="submit">
+							<i class="fa fa-save"></i>
+							{{translator.label.componenteditformbuttonsave}}
+						</button>
+						<a ng-click="itemCtrl.cancelAddComponent()"
+							class="btn btn-default"> <i class="fa fa-undo"></i>
+							{{translator.label.componenteditformbuttoncancel}}
+						</a>
+					</div>
+				</form>
+			</div>
+
+
+			<div class="card" ng-show="itemCtrl.item.isComposed">
+				<div class="card-header" ng-show="!itemCtrl.editContext">
+					<a class="btn btn-default" ng-click="itemCtrl.fetchItem()"
+						ng-show="itemCtrl.item.isComposed"><i class="fa fa-refresh"></i>
+						{{translator.label.userslistheadingbuttonrefresh}}</a>
+					<div class="pull-right"
+						ng-show="nav.authService.session.isSupervisor">
 						<a class="btn btn-default" ng-click="itemCtrl.addItemComponent()">
 							<i class="fa fa-plus"></i>
 							{{translator.label.editcomponentsbuttonadd}}
 						</a>
 					</div>
 				</div>
+				<div class="card-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th width="5%"></th>
+								<th width="25%">{{translator.label.edititemheadercomponentname}}</th>
+								<th width="5%">{{translator.label.edititemheadercomponentquantity}}</th>
+								<th width="45%">{{translator.label.edititemheadercomponentremarks}}</th>
+								<th width="20%" ng-show="nav.authService.session.isSupervisor">{{translator.label.edititemheadingactions}}</th>
+							</tr>
+						</thead>
 
-			</div>
-		</div>
+						<tbody>
+							<tr ng-repeat="itemComponent in itemCtrl.item.components">
+								<td><a class="btn btn-default btn-sm"
+									href="#!/items/edit/{{itemComponent.componentId}}"><i
+										class="fa fa-external-link"></i></a></td>
 
-		<div class="panel panel-default" ng-show="itemCtrl.addItemCtx">
-			<form name="addIC" role="form" class="form-horizontal"
-				ng-submit="itemCtrl.createOrUpdateItemComponent(itemCtrl.inserted, itemCtrl.inserted)">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<strong> {{translator.label.edititemheadingedititem}} </strong>
-					</h3>
-				</div>
-				<div class="panel-body">
+								<td><span editable-select="itemComponent.componentId"
+									e-name="component"
+									e-ng-options="s.value as s.text for s in itemCtrl.itemsForSelect"
+									e-form="rowform"> {{ itemComponent.componentName }} </span></td>
 
-					<div class="form-group">
-						<label class="col-md-3 col-xs-12 control-label">
-							{{translator.label.edititemheadercomponentname}} </label>
-						<div class="col-md-8 col-xs-12">
-							<div class="input-group">
-								<select class="form-control" name="component"
-									ng-model="itemCtrl.inserted.component"
-									ng-options="item.text for item in itemCtrl.itemsForSelect track by item.value"
-									required>
-									<option value="">------</option>
-								</select> <span ng-show="addIC.component.$error.itemFromSelect">Select!!!!</span>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-md-3 col-xs-12 control-label">
-							{{translator.label.edititemheadercomponentquantity}} </label>
-						<div class="col-md-8 col-xs-12">
-							<div class="input-group">
-								<input class="form-control"
-									ng-model="itemCtrl.inserted.quantity" type="text" only-digits
-									required />
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 col-xs-12 control-label">
-							{{translator.label.edititemheadercomponentremarks}} </label>
-						<div class="col-md-8 col-xs-12">
-							<div class="input-group">
-								<textarea class="form-control"
-									ng-model="itemCtrl.inserted.remarks" />
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="panel-footer">
-					<button class="btn btn-primary pull-right" type="submit">
-						<i class="fa fa-save"></i>
-						{{translator.label.componenteditformbuttonsave}}
-					</button>
-					<a ng-click="itemCtrl.cancelAddComponent()" class="btn btn-default">
-						<i class="fa fa-undo"></i>
-						{{translator.label.componenteditformbuttoncancel}}
-					</a>
-				</div>
-			</form>
-		</div>
-
-
-		<div class="panel panel-default" ng-show="itemCtrl.item.isComposed">
-			<div class="panel-heading" ng-show="!itemCtrl.editContext">
-				<a class="btn btn-default" ng-click="itemCtrl.fetchItem()"
-					ng-show="itemCtrl.item.isComposed"><i class="fa fa-refresh"></i>
-					{{translator.label.userslistheadingbuttonrefresh}}</a>
-				<div class="pull-right">
-					<a class="btn btn-default" ng-click="itemCtrl.addItemComponent()">
-						<i class="fa fa-plus"></i>
-						{{translator.label.editcomponentsbuttonadd}}
-					</a>
-				</div>
-			</div>
-			<div class="panel-body panel-body-table">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th width="5%"></th>
-							<th width="25%">{{translator.label.edititemheadercomponentname}}</th>
-							<th width="5%">{{translator.label.edititemheadercomponentquantity}}</th>
-							<th width="45%">{{translator.label.edititemheadercomponentremarks}}</th>
-							<th width="20%">{{translator.label.edititemheadingactions}}</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<tr ng-repeat="itemComponent in itemCtrl.item.components">
-							<td><a class="btn btn-default btn-sm"
-								href="#!/items/edit/{{itemComponent.componentId}}"><i
-									class="fa fa-list"></i></a></td>
-
-							<td><span editable-select="itemComponent.componentId"
-								e-name="component"
-								e-ng-options="s.value as s.text for s in itemCtrl.itemsForSelect"
-								e-form="rowform"> {{ itemComponent.componentName }} </span></td>
-
-							<td><span editable-text="itemComponent.quantity"
-								e-name=quantity "
+								<td><span editable-text="itemComponent.quantity"
+									e-name=quantity "
 								e-form="rowform" e-only-digits>
-									{{ itemComponent.quantity }} </span></td>
+										{{ itemComponent.quantity }} </span></td>
 
-							<td><span editable-textarea="itemComponent.remarks"
-								e-name="remarks" e-form="rowform"> {{
-									itemComponent.remarks }} </span></td>
-							<td>
-								<form editable-form name="rowform"
-									onshow="itemCtrl.setEditRowContext()"
-									onaftersave="itemCtrl.setEditRowContext()"
-									onbeforesave="itemCtrl.createOrUpdateItemComponent($data,itemComponent)"
-									ng-show="rowform.$visible" class="form-buttons form-inline">
+								<td><span editable-textarea="itemComponent.remarks"
+									e-name="remarks" e-form="rowform"> {{
+										itemComponent.remarks }} </span></td>
+								<td ng-show="nav.authService.session.isSupervisor">
+									<form editable-form name="rowform"
+										onshow="itemCtrl.setEditRowContext()"
+										onaftersave="itemCtrl.setEditRowContext()"
+										onbeforesave="itemCtrl.createOrUpdateItemComponent($data,itemComponent)"
+										ng-show="rowform.$visible" class="form-buttons form-inline">
 
-									<button type="submit" ng-disabled="rowform.$waiting"
-										class="btn btn-default">
-										<i class="fa fa-save"></i>
-										{{translator.label.edititembuttonsave}}
-									</button>
+										<button type="submit" ng-disabled="rowform.$waiting"
+											class="btn btn-default">
+											<i class="fa fa-save"></i>
+											{{translator.label.edititembuttonsave}}
+										</button>
 
-									<button type="button" ng-disabled="rowform.$waiting"
-										ng-click="itemCtrl.cancelEditRow(this)"
-										class="btn btn-default">
-										<i class="fa fa-undo"></i>
-										{{translator.label.edititembuttoncancel}}
-									</button>
+										<button type="button" ng-disabled="rowform.$waiting"
+											ng-click="itemCtrl.cancelEditRow(this)"
+											class="btn btn-default">
+											<i class="fa fa-undo"></i>
+											{{translator.label.edititembuttoncancel}}
+										</button>
 
-								</form>
+									</form>
 
-								<div ng-show="!rowform.$visible && !itemCtrl.editContext">
-									<a class="btn btn-default" ng-click="rowform.$show()"><i
-										class="fa fa-pencil"></i>
-										{{translator.label.userslistuserstablebuttonedit}} </a> <a
-										class="btn btn-default"
-										ng-click="itemCtrl.deleteDialog.open(itemComponent)"><i
-										class="fa fa-times"></i>
-										{{translator.label.userslistuserstablebuttondelete}}</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+									<div ng-show="!rowform.$visible && !itemCtrl.editContext">
+										<a class="btn btn-default" ng-click="rowform.$show()"><i
+											class="fa fa-pencil"></i>
+											{{translator.label.userslistuserstablebuttonedit}} </a> <a
+											class="btn btn-default"
+											ng-click="itemCtrl.deleteDialog.open(itemComponent)"><i
+											class="fa fa-times"></i>
+											{{translator.label.userslistuserstablebuttondelete}}</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
 
+		</div>
 	</div>
 </div>
-
 <!-- delete dialog-->
 <div class="message-box animated fadeIn" id="message-box-default"
 	ng-class="itemCtrl.deleteDialog.getClass()">
 	<div class="mb-container">
 		<div class="mb-middle">
 			<div class="mb-title">
-				<span class="fa fa-scissors"></span>{{translator.label.componentslistdeletewarning}}: {{itemCtrl.item.name}}?
+				<span class="fa fa-scissors"></span>{{translator.label.componentslistdeletewarning}}:
+				{{itemCtrl.item.name}}?
 			</div>
 			<div class="mb-content">
 				<p>{{translator.label.edititemheadercomponentname}}:
@@ -206,4 +213,3 @@
 		</div>
 	</div>
 </div>
-

@@ -1,14 +1,19 @@
 generic;translations
+"leftpanelmenumanageBoms", "Fabryka"
 "leftpanelmenumanageitems","Produkty"
 "leftpanelmenumanageUsers", "Użytkownicy"
 "navbarmenuactionlogin","Zaloguj się"
 "navbarmenuactionlogout","Wyloguj"
 "navbarloginpleaselogin","Prosimy o zalogowanie"
-"navbarloginpcanlogout","Tutaj możesz się wylogować"
+"navbarlogincanlogout","Tutaj możesz się wylogować"
+"navbarlanguagecanchoose","Tutaj możesz wybrać swój język"
+"refreshbutton","Odśwież"
 "searchwidgettext","Szukaj"
 "booleanyes","tak"
 "booleanno","nie"
+"pcs","szt"
 "clicktoedit","Kliknij żeby wyedytować."
+"clickto","Kliknij tutaj aby"
 
 dahsboard;translations
 "dashboardcontent","Panel"
@@ -33,6 +38,7 @@ itemslist;translations
 "itemslistitemstableheadingiscomposed","Złożony"
 "itemslistitemstableheadingactions",""
 "itemslistitemstableeditbutton","Edytuj"
+"itemslistitemstableshowbutton","Szczegóły"
 "itemslistitemstabledeletebutton","Usuń"
 "itemslistdeletewarning","Na pewno chcesz usunąć produkt:"
 edit form;sss
@@ -60,6 +66,7 @@ users; userlist
 "userslistuserstablebuttonedit","Edytuj"
 "userslistheadingbuttonuseradd","Dodaj użytkownika"
 "userslistuserstableheadingid","Id"
+"userslistheadingbuttonrefresh","Odśwież"
 "userslistuserstableheadingname","Login (email)"
 "userslistuserstableheadingenabled","Aktywny"
 "userslistuserstableheadingactions",""
@@ -77,3 +84,32 @@ users; useredit
 "edituserlabelroles","Przypisane role"
 "edituserbuttonsave","Zapisz"
 "edituserbuttoncancel","Anuluj"
+
+boms; boms
+"bomslistheadingbuttonaddbom","Dodać nowe zadanie"
+"bomslistheading","Fabryka"
+"bomslistheadingbuttonrefresh","Odswiez"
+"bomslistbomstableheading","Lista składników"
+"bomslistbomstableheadingid","Id zadania"
+"bomslistbomstableheadingname","Receptura na produkt"
+"bomslistbomstableheadingqty","Wymgana ilość"
+"bomslistbomstableheadingactions",""
+"bomslistbomstableeditbutton","Edytuj"
+"bomslistbomstabledeletebutton","Usun"
+"bomslistdeletewarning","Czy napewno chcesz usunać zadanie:"
+
+bom;wizard
+"bomWizardHeader","Tworzenie nowej receptury"
+"bomWizardStep1","Wybierz produkt"
+"bomWizardStep1Desc","Musisz wybrać produkt z listy klikając na niego. Potem kliknij dalej."
+"bomWizardStep2","Wprowadź ilość"
+"bomWizardStep2Desc","Ilośc mozna takze zmienić później."
+"bomWizardNext","Dalej"
+"bomWizardPrev","Poprzedni krok"
+"bomWizardFinish","Załóż recepturę"
+"bomWizardItemNameLabel","Wybrano produkt: "
+"bomWizardChangeItemButton","Zmień produkt"
+"bomWizardItemQuantityLabel","Ilość do wyproduktowania: "
+
+
+

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ public class UserController extends BaseController {
 	//get all users
 
 	@RequestMapping(value = "/userslistrest/12qs", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public List<UserForm> listUsers() {
 		List<UserForm> theList = (List<UserForm>) this.userService.listUsers();
 		//logger.info("list size: "+theList.size());
@@ -43,12 +45,14 @@ public class UserController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/allRoles", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public Map<String,String> getAllRoles() {
 		UserForm uf = new UserForm();
 		return uf.getAllRoles();
 	}
 
 	@RequestMapping(value = "/userrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<UserForm> getUser(@PathVariable("id") int id) {
 		//logger.info("Fetching User with id " + id);
 		UserForm user = new UserForm( (id != 0 ? this.userService.getUserById(id) : new UserT()) );//init user for with new user or get from db 
@@ -56,6 +60,7 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value= "/userrest/{id}", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<Void> updateUser(@PathVariable int id, @RequestBody UserForm userForm){
 
 		logger.info("update userform data: "+userForm);
@@ -76,6 +81,7 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value= "/userrest", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<Long> createUser(@RequestBody UserForm userForm){
 
 		logger.info("create userform data: "+userForm);
@@ -96,6 +102,7 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value= "/userrest/{id}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<Void> deleteUser(@PathVariable int id){
 	
 		UserT user = this.userService.getUserById(id);

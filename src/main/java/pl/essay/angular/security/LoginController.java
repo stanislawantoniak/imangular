@@ -22,7 +22,6 @@ public class LoginController extends BaseController {
 	//this is protected resource used for authentication
 	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
 	public String user(HttpServletRequest request, Principal user) {
-		this.userSession.updateName(); //update name when authenticated
 		
 		return this.userSession.toJson();
 	}
@@ -54,10 +53,10 @@ public class LoginController extends BaseController {
 		try {
 			this.userService.loadUserByUsername(name);
 		} catch (UsernameNotFoundException e) {
-			System.out.println("User "+name+" does not exist in db.");
+			//System.out.println("User "+name+" does not exist in db.");
 			UserT user = new UserT(name,pass,UserForm.roleAdmin,true);
 			this.userService.addUser(user);
-			System.out.println("User : "+user+" added to db");
+			//System.out.println("User : "+user+" added to db");
 		} finally {
 
 		}

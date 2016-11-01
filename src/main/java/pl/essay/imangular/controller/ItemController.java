@@ -1,35 +1,28 @@
 package pl.essay.imangular.controller;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
-import javax.validation.Valid;
-
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pl.essay.angular.security.UserT;
+import pl.essay.angular.security.UserForm;
+import pl.essay.imangular.model.IdNameIsComposedQueryResult;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
 import pl.essay.imangular.service.ItemService;
@@ -53,7 +46,8 @@ public class ItemController extends BaseController {
 	}
 
 	//update or add component
-	@RequestMapping(value= "/items/component", method = {RequestMethod.POST})
+	@RequestMapping(value= "/componentrest", method = {RequestMethod.POST})
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Integer> createItemComponent(@RequestBody ItemComponent itemComponent){
 
 		//Item parent = itemComponent.getParent();
@@ -66,7 +60,8 @@ public class ItemController extends BaseController {
 	}
 
 	//update or add component
-	@RequestMapping(value= "/items/component/{id}", method = {RequestMethod.PUT})
+	@RequestMapping(value= "/componentrest/{id}", method = {RequestMethod.PUT})
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Void> updateItemComponent(@PathVariable int id, @RequestBody ItemComponent itemComponent){
 
 		this.itemService.addOrUpdateItemComponent(itemComponent);
@@ -74,7 +69,8 @@ public class ItemController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value= "/items/component/{componentId}", method = {RequestMethod.DELETE})
+	@RequestMapping(value= "/componentrest/{componentId}", method = {RequestMethod.DELETE})
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Void> deleteItemComponent( @PathVariable("componentId") int componentId	){
 
 		this.itemService.removeItemComponent(componentId);
@@ -90,6 +86,7 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Void> updateItem(@PathVariable int id, @RequestBody Item item){
 
 		logger.trace("update item data: "+item);
@@ -110,6 +107,7 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value= "/itemrest/", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Integer> createItem(@RequestBody Item item){
 
 		logger.trace("create itemform data: "+item);
@@ -127,6 +125,7 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Void> deleteItem(@PathVariable int id){
 
 		Item item = this.itemService.getItemById(id);
@@ -142,37 +141,19 @@ public class ItemController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping("/items/item/edit/{id}")
-	public String editItem(@PathVariable("id") int id, Model model){
-		logger.trace("from controller.editItem");
-
-		Item item =  (id != 0 ? this.itemService.getItemById(id) : new Item());
-		model.addAttribute("item", item);
-
-		if (id != 0 ){
-			Set<ItemComponent> set =  this.itemService.getItemComponentsByParent(id);
-			model.addAttribute("itemComponents", set);
-		}
-		return "items/itemEdit";
-	}
-
 	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String,String>> itemsForSelect(@PathVariable("id") int id) {
-		return new ResponseEntity<Map<String,String>>(this.getItemListForSelect(id),  HttpStatus.OK);
+	public ResponseEntity<List<IdNameIsComposedQueryResult>> itemsForSelect(@PathVariable("id") int id) {
+		return new ResponseEntity<List<IdNameIsComposedQueryResult>>(this.getItemListForSelect(id),  HttpStatus.OK);
 	}
 
 	//#todo
 	//check for any circular reference in item components
 	//a is composed of b, b is composed of a
-	protected Map<String, String> getItemListForSelect(int id) {
-		Map<String,String> allItems = new LinkedHashMap<String, String>();
-		Map<String,String> notSorted = new TreeMap<String, String>();
-		for (Item i: this.itemService.listItems()){
-			if (i.getId() != id ) 
-				notSorted.put(i.getName(), ""+i.getId()); //sort by names
-		}
-		for (Map.Entry<String, String> i : notSorted.entrySet())
-			allItems.put(i.getValue(), i.getKey()+" (#"+i.getValue()+")");//put in linked map to save order
+	protected List<IdNameIsComposedQueryResult> getItemListForSelect(int id) {
+		List<IdNameIsComposedQueryResult> allItems = new LinkedList<IdNameIsComposedQueryResult>();
+		for (IdNameIsComposedQueryResult i : this.itemService.getAllItemsInShort())
+			if (i.id != id ) 
+				allItems.add(i);//put in linked map to save order
 		return allItems;
 	}
 

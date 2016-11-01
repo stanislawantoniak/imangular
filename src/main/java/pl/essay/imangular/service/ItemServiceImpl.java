@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.essay.imangular.model.IdNameIsComposedQueryResult;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
 import pl.essay.imangular.model.ItemComponentDao;
@@ -70,5 +71,9 @@ public class ItemServiceImpl implements ItemService{
 	public boolean existsItem(String name){
 		return itemDao.existsItemByName(name);
 	}
-
+	
+	public List<IdNameIsComposedQueryResult> getAllItemsInShort(){
+		return itemDao.getAllItemsInShort();
+	}
+	
 }

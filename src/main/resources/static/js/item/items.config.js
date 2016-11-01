@@ -3,14 +3,24 @@
 //Register `items` component, along with its associated controller and template
 var itemApp = angular.module('items', ['translationService','toolbox', 'checklist-model','xeditable','ui.select']);
 
-itemApp.config(['$routeProvider', function mainController( $routeProvider ) {
+itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
 	console.log('items config starting');
 
-	$routeProvider.when('/items/edit/:id', {
+	$stateProvider
+
+	.state ('root.itemEdit', {
+		url: 'items/edit/:id',
 		templateUrl : 'js/item/itemEdit.html',
 		controller : 'itemEdit as itemCtrl'
-	}).when('/items/add/:id', {
+	})
+	.state ('root.itemDetails', {
+		url: 'items/itemdetails/:id',
+		templateUrl : 'js/item/itemEdit.html',
+		controller : 'itemEdit as itemCtrl'
+	})
+	.state ('root.itemAdd', {
+		url: 'items/add/:id',
 		templateUrl : 'js/item/itemEdit.html',
 		controller : 'itemEdit as itemCtrl'
 	});
@@ -18,7 +28,8 @@ itemApp.config(['$routeProvider', function mainController( $routeProvider ) {
 	console.log('items config ending');
 }]);
 
-itemApp.controller( 'itemslist', ['$scope', '$http', 'translator', 'itemService',  'dialogFactory', function itemsController($scope, $http, translator, itemService, dialogFactory ) {
+itemApp.controller( 'itemslist', ['$scope','$http','translator','itemService','dialogFactory', 
+          function itemsController( $scope,   $http,  translator,  itemService,  dialogFactory ) {
 
 	var self = this;
 	self.service = itemService;
@@ -52,23 +63,23 @@ itemApp.controller( 'itemslist', ['$scope', '$http', 'translator', 'itemService'
 	console.log('itemslist controller - ending');
 }]);
 
-itemApp.controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams', 'translator','itemService', 'itemComponentService', 'dialogFactory',
-                                 function itemsController($scope, $http, $location, $routeParams, translator, itemService, itemComponentService, dialogFactory ) {
+itemApp.controller( 'itemEdit', ['$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory',
+         function itemsController($stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory ) {
 	console.log('itemEdit controller starting');
 
 	var self = this;
 	self.service = itemService;
 	self.componentService = itemComponentService;
-	
+
 	self.deleteDialog = dialogFactory.getService();
 	console.log('self.deleteDialog',self.deleteDialog);
 	console.log('openedDialog',self.deleteDialog.openedDialog);
-	
+
 	self.addItemCtx = false;
 
 	self.translator = translator;
 
-	self.itemId = $routeParams.id;
+	self.itemId = $stateParams.id;
 
 	//fetch item - when adding item get empty item but populated predefined fields
 	self.fetchItem = function(){
@@ -97,8 +108,8 @@ itemApp.controller( 'itemEdit', ['$scope', '$http', '$location', '$routeParams',
 	self.service.fetchAnyData('/items/forselect/'+self.itemId).then(function(response){
 		var items = response;
 		self.itemsForSelect = [];
-		angular.forEach(items, function(value, key) { 
-			self.itemsForSelect.push({value: parseInt(key), text: value});
+		angular.forEach(items, function(row) { 
+			self.itemsForSelect.push({value: row.id, text: row.name});
 		});
 		console.log('items for select',self.itemsForSelect);
 	}, function(){

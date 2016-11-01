@@ -2,7 +2,7 @@
 
 var auth = angular.module('authenticationService',[]);
 
-auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , function($http, $rootScope, $location, $route){
+auth.factory('authService', ['$http', '$rootScope', '$location', function($http, $rootScope, $location){
 
 	var AuthService = {
 
@@ -17,20 +17,14 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 				var headers = AuthService.credentials.username ? {authorization : "Basic "
 					+ btoa(AuthService.credentials.username + ":" + AuthService.credentials.password)
 				} : {};
-				
+
 				//console.log('authenticate headers: ', headers);
 
-
-				$http.get('userDetails', {headers : headers}).then(function(response) {
+				$http.get('userDetails', {headers : headers}).then( function(response) {
 					if (response.data.name) {
-						//console.log('authenticated from user details')
 						$rootScope.authenticated = true;
-						if ($rootScope.redirect){ //redirect to target page if there was a redirect previously
-							$location.path($rootScope.redirect);
-						} else {
-							$location.path('/');
-						}
-						AuthService.session = response.data;
+						AuthService.setSession(response);
+						AuthService.manageRedirectsOnAuthentication();
 					} else {
 						$rootScope.authenticated = false;
 					}
@@ -45,15 +39,32 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 				AuthService.authenticate( function() {
 					if ($rootScope.authenticated) {
 						AuthService.error = false;
-						if ($rootScope.redirect){ //redirect to target page if there was a redirect to login  
-							$location.path($rootScope.redirect);
-						} else {
-							$location.path('/');
-						}
+						//AuthService.manageRedirectsOnAuthentication();
 					} else {
 						AuthService.error = true;
 					}
 				});
+			},
+
+			manageRedirectsOnAuthentication : function(){
+				//authenticated - check rights and manage redirects if not authorized
+				//only users and item paths are restricted
+				//console.log("session::",AuthService.session);
+				if ($rootScope.redirect){ //redirect to target page if there was a redirect to login  
+					if ($rootScope.redirect.startsWith('/users' )){
+						if (AuthService.session.isAdmin)
+							$location.path($rootScope.redirect);
+						else {
+							$location.path('/');
+							console.log("/users** not authorized");
+						}
+					} else {
+						$location.path($rootScope.redirect);
+					}
+					$rootScope.redirect = null;
+				} else {
+					$location.path('/');
+				}
 			},
 
 			logout : function() {
@@ -93,8 +104,8 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$route' , func
 			}
 	}
 
-	//console.log("auth service in factory: ", AuthService);
-	
+//	console.log("auth service in factory: ", AuthService);
+
 	$rootScope.authenticated = false;
 	AuthService.authenticate();
 	AuthService.getLanguages();

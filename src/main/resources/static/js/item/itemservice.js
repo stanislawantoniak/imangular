@@ -14,7 +14,7 @@ factory('itemService', ['$http', '$q', 'restservice', function( $http, $q, rests
 factory('itemComponentService', ['$http', '$q', 'restservice', function( $http, $q, restservice){
 	
 	var ItemComponentService = restservice.getService();
-	ItemComponentService.setRestServiceOne('items/component/');
+	ItemComponentService.setRestServiceOne('componentrest/');
 	//console.log(ItemComponentService);
 	return ItemComponentService;
 

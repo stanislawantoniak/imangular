@@ -1,0 +1,106 @@
+<div class="container">
+	<div class="block-header">
+		<h2>
+			<span class="fa fa fa-magic"></span>
+			{{translator.label.bomWizardHeader}}
+		</h2>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+
+			<wizard on-finish="finishedWizard()" indicators-position="top"
+				template="/js/item/wizard.html"> <wz-step
+				wz-title="{{translator.label.bomWizardStep1}}"
+				description="{{translator.label.bomWizardStep1Desc}}"
+				canexit="bomCtrl.itemSelected">
+
+			<div class="card">
+				<div class="card-body"
+					ng-hide="bomCtrl.itemSelected()">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th width="5">{{translator.label.itemslistitemstableheadingid}}</th>
+									<th width="25">{{translator.label.itemslistitemstableheadingname}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in bomCtrl.itemsForSelect"
+									ng-click="bomCtrl.selectItem(item)">
+									<td>{{item.id}}</td>
+									<td>{{item.name}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+
+				<div class="card-body" ng-show="bomCtrl.itemSelected()">
+					<h4>
+						<div class="col-md-6 col-xs-12">
+							<div class="col-md-8 col-xs-12" style="text-align: center">
+								<span>{{translator.label.bomWizardItemNameLabel}}</span>
+								{{bomCtrl.bom.item.name}}
+							</div>
+							<div class="col-md-4 col-xs-12">
+								<a class="btn btn-default btn-sm btn-rounded"
+									ng-click="bomCtrl.selectItem(null)" ng-mouseover="test"><span
+									class="fa fa-pencil"></span>
+									{{translator.label.bomWizardChangeItemButton}} </a>
+							</div>
+						</div>
+						<div class="col-md-6 col-xs-12"></div>
+					</h4>
+				</div>
+
+			</div>
+
+			<div class="card">
+				<div class="card-body">
+					<input uib-tooltip="test" tooltip-enable="!bomCtrl.itemSelected()"
+						ng-disabled="!bomCtrl.itemSelected()"
+						class="btn btn-primary pull-right" type="submit" wz-next
+						value="{{translator.label.bomWizardNext}}" />
+				</div>
+			</div>
+
+			</wz-step> <wz-step wz-title="{{translator.label.bomWizardStep2}}"
+				description="{{translator.label.bomWizardStep2Desc}}">
+			<div class="card">
+
+				<div class="card-body">
+					<div class="col-md-6 col-xs-12"></div>
+					<div class="col-md-6 col-xs-12">
+						<form role="form" class="form-horizontal">
+							<div class="form-group">
+								<label path="quantity" for="quantity"
+									class="col-md-6 col-xs-12 control-label">
+									{{translator.label.bomWizardItemQuantityLabel}}</label>
+								<div class="col-md-6 col-xs-12">
+									<div class="input-group">
+										<span class="input-group-addon"><span
+											class="fa fa-pencil"></span></span><input class="form-control"
+											name="quantity" ng-model="bomCtrl.bom.quantity" only-digits />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-body">
+					<input class="btn btn-default pull-left waves-effect" type="submit" wz-previous
+						value="{{translator.label.bomWizardPrev}}" /> <input
+						class="btn btn-primary pull-right waves-effect" type="submit" wz-finish
+						value="{{translator.label.bomWizardFinish}}" />
+				</div>
+			</div>
+			</wz-step> </wizard>
+
+		</div>
+	</div>
+</div>

@@ -36,7 +36,6 @@ toolbox.factory('dialogFactory', [function(){
 
 }]);
 
-
 toolbox.directive('onlyDigits', function () {
 	return {
 		restrict: 'A',
