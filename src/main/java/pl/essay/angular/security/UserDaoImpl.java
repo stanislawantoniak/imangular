@@ -3,10 +3,10 @@ package pl.essay.angular.security;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import pl.essay.generic.dao.AbstractDaoHbn;
+import pl.essay.generic.dao.GenericDaoHbnImpl;
 
 @Repository
-public class UserDaoImpl extends AbstractDaoHbn<UserT> implements UserDao {
+public class UserDaoImpl extends GenericDaoHbnImpl<UserT> implements UserDao {
 
 	public UserT getUserByName(String name) {
 		UserT user = (UserT) getSession()

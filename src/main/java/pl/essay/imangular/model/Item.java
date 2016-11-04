@@ -43,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 })
 //@SequenceGenerator(name="item_seq", initialValue=1, allocationSize=100)
 public class Item {
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
 	@Column
 	private int id;
@@ -62,6 +63,18 @@ public class Item {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "component")
 	@JsonManagedReference(value="usedIn")
 	private Set<ItemComponent> usedIn = new HashSet<ItemComponent>();
+
+	@Column @Type(type="yes_no")
+	private Boolean isBuilding;
+
+	@Column 
+	private String whereManufactured;
+
+	@Column @Type(type="yes_no")
+	private Boolean isAvailableInOtherSources = false;
+
+	@Column 
+	private String otherSources;
 
 	public Item(){
 	}
@@ -100,28 +113,10 @@ public class Item {
 	}
 
 	public void addComponent(ItemComponent ic){
-		this.removeComponent(ic.getId());			
+		this.components.remove(ic);			
 		this.components.add(ic);
-		ic.setParent(this);
 		this.isComposed = true;
 		ic.setParent(this);
-	}
-
-	public void removeComponent(int icId){
-		System.out.println("components size (1): "+components.size());
-		ItemComponent icToRemove = null;
-		for (ItemComponent ic : components){
-			if (icId == ic.getId()){
-				icToRemove = ic;
-				System.out.println("ic: "+icId+" current comp:"+ic);
-				break;
-			}
-		}
-		System.out.println("to remove "+icToRemove);
-		components.remove(icToRemove);
-		System.out.println("components size (2): "+components.size());
-		if (components.size() == 0)
-			this.isComposed = false;
 	}
 
 	public void setComponents(Set<ItemComponent> ic) {
@@ -136,10 +131,42 @@ public class Item {
 		this.usedIn = ic;
 	}
 
+	public Boolean getIsBuilding(){
+		return this.isBuilding;
+	}
+	public void setIsBuilding(Boolean b){
+		this.isBuilding = b;
+	}
+
+	public String getWhereManufactured(){
+		return this.whereManufactured;
+	};
+	public void setWhereManufactured(String w){
+		this.whereManufactured = w;
+	};
+
+	public Boolean getIsAvailableInOtherSources(){
+		return this.isAvailableInOtherSources;
+	}
+	public void setIsAvailableInOtherSources(Boolean b){
+		this.isAvailableInOtherSources = b;
+	}
+
+	public String getOtherSources(){
+		return this.otherSources;
+	}
+	public void setOtherSources(String o){
+		this.otherSources = o;
+	}
+
 	public String toString(){
 		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.isComposed;
 	}
 
+	public String getDafaulSortColumn(){
+		return "name";
+	}
+	
 	@Override
 	public boolean equals(Object other) {
 		if (this == other) return true;
@@ -149,7 +176,7 @@ public class Item {
 		final Item b2 = (Item) other;
 
 		EqualsBuilder eb = new EqualsBuilder();
-		eb.append(b2.getName(), this.getName());
+		eb.append(b2.name, this.name);
 
 		return eb.isEquals();
 	}
@@ -157,7 +184,7 @@ public class Item {
 	@Override
 	public int hashCode() {
 		HashCodeBuilder hcb = new HashCodeBuilder();
-		hcb.append(this.getName());
+		hcb.append(this.name);
 		return hcb.toHashCode();
 	}
 

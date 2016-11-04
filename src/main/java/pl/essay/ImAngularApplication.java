@@ -63,7 +63,7 @@ public class ImAngularApplication {
 					"/fonts/**","/img/**","/vendors/**",
 					"/login", "/","/logout","/common/**",
 					"/boms/**","/bomrest/**",
-					"/items/**", "/itemrest/**").permitAll().anyRequest().authenticated().
+					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			
 			and()
 			.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());

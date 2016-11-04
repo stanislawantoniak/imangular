@@ -23,6 +23,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -37,7 +38,7 @@ public class BillOfMaterial {
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	private Item forItem;
+	private Item forItem;	
 
 	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade={CascadeType.ALL})
 	@JsonManagedReference(value="stocks")
@@ -104,7 +105,7 @@ public class BillOfMaterial {
 		final BillOfMaterial b2 = (BillOfMaterial) other;
 
 		EqualsBuilder eb = new EqualsBuilder();
-		eb.append(b2.getForItem(), this.getForItem());
+		eb.append(b2.getForItem().getName(), this.getForItem().getName());
 
 		return eb.isEquals();
 

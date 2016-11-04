@@ -1,82 +1,82 @@
-<div class="row">&nbsp;</div>
-<div class="row">
-	<div class="col-md-12">
-		<form role="form" class="form-horizontal"
-			ng-submit="userCtrl.createOrUpdateUser(userCtrl.user)">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<strong>
-							<div ng-show="userCtrl.user.id > 0">
-								{{translator.label.edituserheadingedituser}}</div>
-							<div ng-show="userCtrl.user.id == 0">
-								{{translator.label.edituserheadingadditem}}</div>
-						</strong>
-					</h3>
+<div class="container">
+
+	<div class="card">
+		<div class="card-header">
+			<h2>
+				<strong>
+					<div ng-show="userCtrl.user.id > 0">
+						{{translator.label.edituserheadingedituser}}</div>
+					<div ng-show="userCtrl.user.id == 0">
+						{{translator.label.edituserheadingadditem}}</div>
+				</strong>
+			</h2>
+		</div>
+		<div class="card-body card-padding">
+			<form role="form" name="uform"
+				ng-submit="userCtrl.createOrUpdateUser(userCtrl.user)">
+				<div class="form-group"
+					ng-class="{ 'has-error' : uform.name.$invalid && !uform.name.$pristine || userCtrl.userExists }">
+					<div class="fg-line">
+						<label path="username" class="control-label" for="name">
+							{{translator.label.edituserlabelname}} </label> <input id="name"
+							class="form-control" ng-model="userCtrl.user.username"
+							type="email" required /> <small class="help-block"
+							ng-hide="userCtrl.userExists && userCtrl.userChecked == userCtrl.user.username">{{translator.label.edituserhelpname}}</small>
+						<small class="help-block"
+							ng-show="userCtrl.userExists && userCtrl.userChecked == userCtrl.user.username"><strong>{{userCtrl.userChecked}}
+						</strong> {{translator.label.edituseruserexistserror}}</small>
+					</div>
 				</div>
-				<div class="panel-body">
-					<div class="form-group">
-						<label path="username" class="col-md-3 col-xs-12 control-label">
-							{{translator.label.edituserlabelname}} </label>
-						<div class="col-md-8 col-xs-12">
-							<div class="input-group">
-								<span class="input-group-addon"><span
-									class="fa fa-pencil"></span></span><input class="form-control"
-									ng-model="userCtrl.user.username" type="email" />
-							</div>
-							<p class="help-block">{{translator.label.edituserhelpusername}}</p>
-						</div>
+				<div class="form-group">
+					<div class="fg-line">
+						<label path="password" class="control-label" for="pass">
+							{{translator.label.edituserlabelpassword}} </label> <input id="pass"
+							class="form-control" ng-model="userCtrl.user.password"
+							type="password" autocomplete="new-password" required
+							ng-minlength="6" />
 					</div>
-					<div class="form-group">
-						<label path="password" class="col-md-3 col-xs-12 control-label">
-							{{translator.label.edituserlabelpassword}} </label>
-						<div class="col-md-8 col-xs-12">
-							<div class="input-group">
-								<span class="input-group-addon"><span
-									class="fa fa-pencil"></span></span><input class="form-control"
-									ng-model="userCtrl.user.password" type="password"
-									autocomplete="new-password" />
-							</div>
-							<p class="help-block">{{translator.label.edituserhelppassword}}</p>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 col-xs-12 control-label">
-							{{translator.label.edituserlabelenabled}} :
-							{{userCtrl.user.enabled}}</label>
-						<div class="col-md-8 col-xs-12">
-							<label for="enabledTrue" class="radio-inline"> <input
-								type="radio" ng-checked="userCtrl.user.enabledPreselected"
-								ng-model="userCtrl.user.enabled" name="enabled" id="enabledTrue"
-								value="true"> {{translator.label.booleanyes}}
-							</label> <label class="radio-inline" for="enabledFalse"> <input
-								type="radio" ng-checked="!userCtrl.user.enabledPreselected"
-								ng-model="userCtrl.user.enabled" name="enabled"
-								id="enabledFalse" value="false">{{translator.label.booleanno}}
-							</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="roles" class="col-md-3 col-xs-12 control-label">{{translator.label.edituserlabelroles}}</label>
-						<div class="col-md-8 col-xs-12">
-							<label class="check" ng-repeat="role in userCtrl.user.allRoles"><input
-								type="checkbox" checklist-model="userCtrl.user.rolesSelected"
-								checklist-value="role"> &nbsp;{{role}}&nbsp;&nbsp; </label>
-						</div>
-					</div>
+					<small class="help-block">{{translator.label.edituserhelppassword}}</small>
 				</div>
 
-				<div class="panel-footer">
-					<button class="btn btn-primary pull-right" type="submit">
+				<div class="form-group">
+					<div class="toggle-switch" data-ts-color="green">
+						<label class="ts-label" for="enabled">{{userCtrl.user.enabled
+							? translator.label.edituserlabelenabled :
+							translator.label.edituserlabeldisabled}} </label> <input
+							ng-model="userCtrl.user.enabled" id="enabled" type="checkbox"
+							hidden="hidden"> <label class="ts-helper" for="enabled"></label>
+					</div>
+					<small class="help-block">{{translator.label.edituserhelpenabled}}</small>
+				</div>
+
+				<p class="c-black m-b-20 m-t-10">{{translator.label.edituserlabelroles}}</p>
+
+				<div class="form-group m-l-10"
+					ng-repeat="role in userCtrl.rolesForToggle">
+					<div class="toggle-switch" data-ts-color="green">
+						<input ng-model="role.enabled" id="{{role.role}}" type="checkbox"
+							hidden="hidden"> <label class="ts-helper"
+							for="{{role.role}}"></label><span>&nbsp;&nbsp;</span> <label
+							class="ts-label" for="{{role.role}}"
+							ng-class="{'c-gray':!role.enabled}">{{role.role}} </label>
+					</div>
+				</div>
+				<div class="pull-right m-t-20"
+					ng-class="{'has-error':uform.$invalid}">
+					<button class="btn btn-primary waves-effect" type="submit"
+						uib-popover="{{translator.label.edituserinvalidforminfo}}"
+						popover-trigger="none"
+						uib-popover-placement="top-left" 
+						uib-popover-is-open="(userCtrl.userExists && userCtrl.userChecked == userCtrl.user.username)">
 						<i class="fa fa-save"></i> {{translator.label.edituserbuttonsave}}
 					</button>
-					<a href="#!/users" class="btn btn-default"> <i
-						class="fa fa-undo"></i> {{translator.label.edituserbuttoncancel}}
-					</a>
 				</div>
+				<a ui-sref="root.users" class="btn btn-default m-t-20 waves-effect">
+					<i class="fa fa-undo"></i>
+					{{translator.label.edituserbuttoncancel}}
+				</a> 
+			</form>
+		</div>
 
-			</div>
-		</form>
 	</div>
 </div>
-

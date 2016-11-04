@@ -43,6 +43,15 @@ itemslist;translations
 "itemslistitemstabledeletebutton","Delete"
 "itemslistdeletewarning","Are you sure to delete item:"
 
+delete; dialogs
+"itemslistdeleteheading","Are you sure to delete item:"
+"itemslistdeletewarning","The action cannot be undone."
+"itemsdeletesuccessheading","Successful operation."
+"itemsdeletesuccessinfo","Item has been deleted."
+"itemsdeletefailureheading","Something went wrong."
+"itemsdeletefailureinfo","Our Admin has been. He's on a jet coming to rescue!"
+"itemdeleteoncancelinfo","Item was not deleted"
+
 edit form, item
 "edititemheadingadditem","Add Item"
 "edititemheadingedititem","Edit Item"
@@ -70,14 +79,25 @@ users; userlist
 "userslistuserstableheadingid","Id"
 "userslistuserstableheadingname","Login (email)"
 "userslistuserstableheadingenabled","Active"
+"edituserlabeldisabled","Inactive"
 "userslistuserstableheadingactions","Actions"
-"userslistdeletewarning","Are you sure to delete user:"
+
+delete; dialogs
+"userslistdeleteheading","Are you sure to delete user:"
+"userslistdeletewarning","The action cannot be undone."
+"usersdeletesuccessheading","Successful operation."
+"usersdeletesuccessinfo","User has been deleted."
+"usersdeletefailureheading","Something went wrong."
+"usersdeletefailureinfo","Our Admin has been. He's on a jet coming to rescue!"
+"userdeleteoncancelinfo","User was not deleted"
+
 
 users; useredit
 "edituserheadingadditem","Add User"
 "edituserheadingedituser","Edit User"
 "edituserlabelname","User email"
 "edituserhelpname","User is identified by his email. Enter valid email please."
+"edituseruserexistserror","This user already exists. Please enter another email."
 "edituserlabelpassword","Password"
 "edituserhelppassword","Password must be at least 6 characters Leave blank if you do not want to change"
 "edituserlabelenabled","Active"
@@ -85,6 +105,7 @@ users; useredit
 "edituserlabelroles","Assigned Roles"
 "edituserbuttonsave","Save User"
 "edituserbuttoncancel","Cancel"
+"edituserinvalidforminfo","Please enter correct data"
 
 boms; boms
 "bomslistheadingbuttonaddbom","Add new recipe"

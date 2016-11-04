@@ -6,7 +6,7 @@ factory('itemService', ['$http', '$q', 'restservice', function( $http, $q, rests
 	
 	var ItemService = restservice.getService();
 	ItemService.setRestServiceOne('itemrest/');
-	ItemService.setRestServiceAll('items/');
+	ItemService.setRestServiceAll('items');
 	//console.log(ItemService);
 	return ItemService;
 

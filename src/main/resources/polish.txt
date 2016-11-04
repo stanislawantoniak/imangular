@@ -41,6 +41,16 @@ itemslist;translations
 "itemslistitemstableshowbutton","Szczegóły"
 "itemslistitemstabledeletebutton","Usuń"
 "itemslistdeletewarning","Na pewno chcesz usunąć produkt:"
+items; delete
+"itemslistdeleteheading","Na pewno chcesz usunąć produkt:"
+"itemslistdeletewarning","Tej operacji nie mozna cofnąć."
+"itemsdeletesuccessheading","Operacja powiodła się."
+"itemsdeletesuccessinfo","Produkt został usunięty."
+"itemsdeletefailureheading","Coś poszło nie tak."
+"itemsdeletefailureinfo","Administrator został powiadomiony. Właśnie przerywa wakacje żeby się tym zajac."
+"itemdeleteoncancelinfo","Produkt nie będzie jednak skasowany"
+
+
 edit form;sss
 "edititemheadingadditem","Dodawanie produktu"
 "edititemheadingedititem","Edycja produktu"
@@ -70,20 +80,33 @@ users; userlist
 "userslistuserstableheadingname","Login (email)"
 "userslistuserstableheadingenabled","Aktywny"
 "userslistuserstableheadingactions",""
-"userslistdeletewarning","Na pewno chcesz usunąć użytkownika:"
+delete; dialogs
+"userslistdeleteheading","Na pewno chcesz usunąć użytkownika:"
+"userslistdeletewarning","Tej operacji nie mozna cofnąć."
+"usersdeletesuccessheading","Operacja powiodła się."
+"usersdeletesuccessinfo","Użytkownik został usunięty."
+"usersdeletefailureheading","Coś poszło nie tak."
+"usersdeletefailureinfo","Administrator został powiadomiony. Właśnie przerywa wakacje żeby się tym zajac."
+"userdeleteoncancelinfo","Użytkownik nie będzie jednak skasowany"
+
 
 users; useredit
 "edituserheadingadditem","Dodawanie użytkownika"
 "edituserheadingedituser","Edycja użytkownika"
 "edituserlabelname","Email"
 "edituserhelpname","Użytkownik jest identyfikowany przez adres email. Proszę wprowadzić poprawny email."
+"edituseruserexistserror","Ten użytownik już istnieje. Proszę wprowadzić inny email."
 "edituserlabelpassword","Hasło"
 "edituserhelppassword","Hasło musi mieć co najmniej 6 znaków. Pozostaw puste jeśli nie chcesz zmieniać."
-"edituserlabelenabled","Aktywny"
+"edituserlabelenabled","Użytkownik aktywny"
+"edituserlabeldisabled", "Użytkownik nieaktywny"
 "edituserhelpenabled","Aktywny oznacza że użytkownik może się logować"
 "edituserlabelroles","Przypisane role"
 "edituserbuttonsave","Zapisz"
 "edituserbuttoncancel","Anuluj"
+"edituserinvalidforminfo","Proszę wprowadzić poprawne dane"
+
+
 
 boms; boms
 "bomslistheadingbuttonaddbom","Dodać nowe zadanie"

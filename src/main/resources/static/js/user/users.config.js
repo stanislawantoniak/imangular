@@ -6,18 +6,11 @@ userApp.config(function mainController( ) {
 
 	//console.log('users config starting');
 
-	/*
-	$routeProvider.when('/users/add/:id', {
-		templateUrl : 'js/user/userEdit.html',
-		controller : 'useredit',
-		controllerAs : 'userCtrl'
-	});
-	 */
 	//console.log('users config ending');
 });
 
-userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService', 'dialogFactory', 
-                                  function( $http,   $scope,   translator,    userService,  dialogFactory ) {
+userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userService', 'dialogFactory', 
+                                  function( $q,   $http,   $scope,   translator,    userService,  dialogFactory ) {
 
 	var self = this;
 	self.service = userService;
@@ -37,19 +30,27 @@ userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService'
 		})
 	};
 
-	self.deleteUser = function(){
-		self.service.deleteEntity(self.deleteDialog.object.id).
-		then( function(response){
-			self.fetchAllUsers();
-			self.deleteDialog.close();
-		},
-		function(errResponse){
-			console.error('Error while deleting User');
-		}
-		);
-	}
+	self.deleteUserPromise = function(obj){ 
 
-	self.test = function(){ console.log('obj::'); };
+		var res = $q.defer();
+
+		self
+		.service
+		.deleteEntity(obj.id)
+		.then( 
+				function(response){
+					self.fetchAllUsers();
+					res.resolve(translator.label.usersdeletesuccessinfo);
+				},
+				function(errResponse){
+					console.error('Error while deleting User');
+					res.reject(translator.label.usersdeletefailureinfo);
+				}
+		);
+
+		return res.promise;
+
+	};
 
 	self.createOrUpdateUser = function(user,id){
 		user.id = id;
@@ -105,75 +106,58 @@ userApp.controller( 'userslist', ['$http', '$scope', 'translator', 'userService'
 }]);
 
 userApp
-.directive('swalExec', function(){
-	return {
-		restrict: 'A',
-		scope: {
-			object : '@',
-			dialogTitle : '@',
-			mainText : '@',
-			confirmButton : '@',
-			cancelButton : '@',
-			execFn : '&'          //will be called with scope.object parameter
-		},
-		link: function(scope, element, attrs) {
 
-			console.log('obj :: ',scope.object);
-
-			var callbackFn = function(isConfirm){   
-				if (isConfirm) {
-					console.log('obj :: ',scope.object);
-					//scope.execFn(scope.object);
-					swal("!!!!Deleted! "+scope.object, "Your imaginary file has been deleted.", "success");   
-				} else {     
-					swal("Cancelled", "Your imaginary file is safe :)", "error");   
-				}
-			};
-
-			element.click(function(){
-				console.log('obj :: ',scope);
-				swal({   
-					title: scope.dialogTitle,   
-					text: scope.mainText, 
-					type: "warning",   
-					showCancelButton: true,   
-					confirmButtonColor: "#DD6B55",   
-					confirmButtonText:  scope.confirmButton,  
-					cancelButtonText: scope.cancelButton,    
-					closeOnConfirm: false,   
-					closeOnCancel: false 
-				}, 
-				callbackFn
-				);
-			});
-		}
-	}
-})
-
-userApp.controller( 'useredit', ['$http', '$routeParams', '$location', 'userService',   function($http, $routeParams,$location, userService ) {
+userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userService',   function($http, $stateParams,$location, userService ) {
 	var self = this;
 	self.service = userService;
 
 	console.log('userEdit controller starting');
 
-	var userId = $routeParams.id;
-
+	var userId = $stateParams.id;
 	//fetch user - when adding user get empty user but populated with all roles
+
 	self.service.fetch(userId).then(function(response) {
 		self.user = response;
 		self.user.enabledPreselected = self.user.enabled;
+		self.rolesForToggle = [];
+		angular.forEach(self.user.allRoles, function(row) { 
+			self.rolesForToggle.push({role: row, enabled : self.user.rolesSelected[row] != null});
+		});
+		console.log("toggle",self.rolesForToggle);
 		console.log(self.user);
 	}, function(){
 		console.log('get user from service - fail');
 	});
 
+	self.userExists = false;
+	self.userChecked = "";
+
 	self.createOrUpdateUser = function(user){
-		self.service.createOrUpdate(user)
-		.then( function(response){
-			$location.path('/users')
-		},	function(errResponse){
-			console.error('Error while creating/saving User');
-		});
+
+		var theUser = user;
+
+		$http
+		.put('/userexists',theUser.username)
+		.then( 
+				function(){
+					self.userExists = true, 	
+					self.userChecked = theUser.username;
+				},
+
+				function(){
+					theUser.rolesSelected = [];
+					angular.forEach(self.rolesForToggle, function(row) { 
+						if (row.enabled) theUser.rolesSelected.push(row.role);
+					});
+					console.log(theUser);
+					self.service.createOrUpdate(theUser)
+					.then( function(response){
+						$location.path('/users')
+					},	function(errResponse){
+						console.error('Error while creating/saving User');
+					});
+				}
+		)
 	}
 
 	console.log('userEdit controller - ending');

@@ -1,7 +1,7 @@
 'use strict';
 
 //Register `items` component, along with its associated controller and template
-var itemApp = angular.module('items', ['translationService','toolbox', 'checklist-model','xeditable','ui.select']);
+var itemApp = angular.module('items', ['translationService','toolbox', 'checklist-model','xeditable','ui.select', 'ngTable']);
 
 itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
@@ -28,8 +28,8 @@ itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 	console.log('items config ending');
 }]);
 
-itemApp.controller( 'itemslist', ['$scope','$http','translator','itemService','dialogFactory', 
-          function itemsController( $scope,   $http,  translator,  itemService,  dialogFactory ) {
+itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemService','dialogFactory', 'ngTableParams',
+                                  function itemsController( $q,  $scope,   $http,  translator,  itemService,  dialogFactory,  ngTableParams ) {
 
 	var self = this;
 	self.service = itemService;
@@ -37,34 +37,60 @@ itemApp.controller( 'itemslist', ['$scope','$http','translator','itemService','d
 
 	console.log('itemslist controller starting');
 
-	self.fetchAllItems = function(){
-		//console.log('starting fetching items');
-		self.service.fetchAll().then(function(response) {
-			console.log('items fetched '+response.length);
-			self.items = response;
-		}, function(){
-			console.log('get items from service - fail');
-		})
-	};
+	//Filtering
+	this.itemTable = new ngTableParams({
+		page: 1,            // show first page
+		count: 25,
+        sorting: {
+            name: 'asc'     // initial sorting
+        }
 
-	self.deleteItem = function(){
-		self.service.deleteEntity(self.deleteDialog.object.id).
+	}, {
+		total: 0, 
+		getData: function($defer, params) {
+
+			//console.log('get data 1');
+			self
+			.service
+			.count()   //get total count
+			.then( function(response){
+				params.total(response);  //and set data setsize 
+				console.log(params.orderBy());
+				self
+				.service
+				.fetchAll(params.page(), params.count(), params.orderBy())
+				.then( function(response){
+					$defer.resolve(response);
+				} );
+			}
+			);
+		}
+	})
+
+	self.deleteItemPromise = function(item){
+		var res = $q.defer();
+
+		self
+		.service
+		.deleteEntity(item.id).
 		then( function(response){
 			self.fetchAllItems();
-			self.deleteDialog.close();
+			res.resolve(translator.label.itemsdeletesuccessinfo);
 		},
 		function(errResponse){
 			console.error('Error while deleting item');
+			res.reject(translator.label.itemsdeletefailureinfo);
 		});
-	}
 
-	self.fetchAllItems();
+		return res.promise;
+
+	}
 
 	console.log('itemslist controller - ending');
 }]);
 
-itemApp.controller( 'itemEdit', ['$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory',
-         function itemsController($stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory ) {
+itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory',
+                                 function itemsController(  $q,  $stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory ) {
 	console.log('itemEdit controller starting');
 
 	var self = this;
@@ -168,16 +194,41 @@ itemApp.controller( 'itemEdit', ['$stateParams','$scope', '$http', '$location', 
 		self.unsetAddComponentCtx();
 	}
 
-	self.deleteItemComponent = function(){
-		self.componentService.deleteEntity(self.deleteDialog.object.id).
+	self.deleteItemComponent = function(ic){
+
+		var res = $q.defer();
+
+		self
+		.componentService
+		.deleteEntity(ic.id).
 		then( function(response){
 			self.fetchItem();
-			self.deleteDialog.close();
+			res.resolve(translator.label.itemsdeletesuccessinfo);
 		},
 		function(errResponse){
 			console.error('Error while deleting component');
+			res.reject(translator.label.itemsdeletefailureinfo);
 		});
+		return res.promise;
 	}
+
+	self.deleteItemPromise = function(item){
+		var res = $q.defer();
+
+		self
+		.service
+		.deleteEntity(item.id).
+		then( function(response){
+			self.fetchAllItems();
+			res.resolve(translator.label.itemsdeletesuccessinfo);
+		},
+		function(errResponse){
+			console.error('Error while deleting item');
+			res.reject(translator.label.itemsdeletefailureinfo);
+		});
+
+	}
+
 
 	//return value is input for ng-show form button
 	self.editNameIfEmpty = function(formScope){

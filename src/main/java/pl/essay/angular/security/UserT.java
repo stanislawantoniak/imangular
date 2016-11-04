@@ -129,6 +129,10 @@ public class UserT implements UserDetails{
 	public boolean isEnabled() {
 		return this.enabled;
 	}
+	
+	public String getDafaulSortColumn(){
+		return "username";
+	}
 
 	private class Roles{
 

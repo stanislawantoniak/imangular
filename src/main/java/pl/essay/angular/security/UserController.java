@@ -35,7 +35,7 @@ public class UserController extends BaseController {
 
 	//get all users
 
-	@RequestMapping(value = "/userslistrest/12qs", method = RequestMethod.GET)
+	@RequestMapping(value = "/userslistrest", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public List<UserForm> listUsers() {
 		List<UserForm> theList = (List<UserForm>) this.userService.listUsers();
@@ -43,6 +43,16 @@ public class UserController extends BaseController {
 
 		return theList;
 	}
+	
+	@RequestMapping(value = "/userexists", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> userExists(@RequestBody String username) {
+		System.out.println(username);
+		if (this.userService.existsUser(username))
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		else
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);	
+	}
+
 	
 	@RequestMapping(value = "/allRoles", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")

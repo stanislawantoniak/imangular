@@ -7,11 +7,11 @@ import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
-import pl.essay.generic.dao.AbstractDaoHbn;
+import pl.essay.generic.dao.GenericDaoHbnImpl;
 
 
 @Repository
-public class ItemComponentDaoImpl extends AbstractDaoHbn<ItemComponent> implements ItemComponentDao{
+public class ItemComponentDaoImpl extends GenericDaoHbnImpl<ItemComponent> implements ItemComponentDao{
 
 	@Override
 	public ItemComponent load(Serializable id) {

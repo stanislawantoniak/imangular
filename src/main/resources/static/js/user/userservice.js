@@ -6,7 +6,7 @@ factory('userService', ['$http', '$q', 'restservice', function( $http, $q, rests
  
     var UserService = restservice.getService();
     UserService.setRestServiceOne('userrest/');
-    UserService.setRestServiceAll('userslistrest/12qs');
+    UserService.setRestServiceAll('userslistrest/');
     return UserService;
  
 }]);

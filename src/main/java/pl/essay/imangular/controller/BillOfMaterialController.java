@@ -32,6 +32,7 @@ public class BillOfMaterialController extends BaseController {
 
 	@RequestMapping(value = "/kick/", method = RequestMethod.GET)
 	public ResponseEntity<Void>  kick() {
+		//this.kickCreate();
 		List<BillOfMaterial> boms = this.bomService.listBoms();
 		for(BillOfMaterial bom : boms){
 			this.bomService.calculateBom(bom);
@@ -76,14 +77,15 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomrest/", method = RequestMethod.POST)
 	public ResponseEntity<Long> createBillOfMaterial(@RequestBody BillOfMaterial bom){
 
-		logger.trace("create bom from data: "+bom);
+		logger.trace("create bom for item: "+bom.getForItem().getId());
 
 		//if ( this.bomService.existsBillOfMaterial( bom.getName() ) ){
 		//	System.out.println("BillOfMaterial with name " + bom.getName() + " already exist and requested create");
 		//	return new ResponseEntity<Integer>(0,HttpStatus.CONFLICT);
 		//}
 
-		logger.trace("before create bom data: "+bom);
+		Item forItem = this.itemService.getItemById(bom.getForItem().getId());
+		bom.setForItem(forItem);
 		this.bomService.addBom( bom );
 		logger.trace("after create bom data: "+bom);
 

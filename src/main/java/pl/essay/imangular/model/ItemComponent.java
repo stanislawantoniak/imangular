@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NamedQueries;
@@ -108,5 +110,28 @@ public class ItemComponent {
 	}
 	public String toString(){
 		return "component id: "+this.getId()+" parent :: "+this.getParent().getId()+ ":: item: #"+this.getComponentId()+" "+this.getComponentName()+":: qty: "+this.getQuantity();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) return true;
+
+		if ( !(other instanceof ItemComponent) ) return false;
+
+		final ItemComponent b2 = (ItemComponent) other;
+
+		EqualsBuilder eb = new EqualsBuilder();
+		eb.append(b2.parent.getName(), this.parent.getName());
+		eb.append(b2.component.getName(), this.component.getName());
+		
+		return eb.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hcb = new HashCodeBuilder();
+		hcb.append(this.parent.getName());
+		hcb.append(this.component.getName());
+		return hcb.toHashCode();
 	}
 }

@@ -10,7 +10,7 @@ var materialAdmin = angular
 		 //'angular-loading-bar',
 		 //'oc.lazyLoad',
 		 //'nouislider',
-		 //'ngTable',
+		 'ngTable',
 		 
 		 'navigation', 
 		 'dashboard', 
@@ -21,14 +21,16 @@ var materialAdmin = angular
 		 'authenticationService' ] );
 
 materialAdmin
-.config(['$stateProvider', '$httpProvider', '$locationProvider', function mainController( $stateProvider, $httpProvider, $locationProvider ) {
+.config(                ['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', 
+ function mainController( $stateProvider,   $httpProvider,   $urlRouterProvider,   $locationProvider ) {
 
 	console.log('imangular starting');
 
 	//$locationProvider.hashPrefix('!');
 	//$locationProvider.html5Mode(true);
 
-	//$routeProvider.when('','/');
+	
+	$urlRouterProvider.when('','/');
 	
 	$stateProvider
 
@@ -51,8 +53,8 @@ materialAdmin
 		templateUrl : 'js/user/userList.html',
 		controller : 'userslist as usersCtrl'
 	})
-	.state('root.users.add', {
-		url: '/add/:id',
+	.state('root.useradd', {
+		url: 'users/add/:id',
 		templateUrl : 'js/user/userEdit.html',
 		controller : 'useredit',
 		controllerAs : 'userCtrl'
@@ -74,27 +76,6 @@ materialAdmin
 	});
 
 
-	/*
-	$routeProvider.when('/', {
-		templateUrl : 'js/dashboard/dashboard.html',
-		controller : 'dashboard'
-	}).when('/users', {
-		templateUrl : 'js/user/userList.html',
-		controller : 'userslist as usersCtrl'
-	}).when('/items', {
-		templateUrl : 'js/item/itemList.html',
-		controller : 'itemslist as itemsCtrl'
-	}).when('/boms', {
-		templateUrl : 'js/item/bomList.html',
-		controller : 'bomslist as bomsCtrl'
-	}).when('/login', {
-		templateUrl : 'js/common/login.html',
-		controller : 'login as login'
-	}).otherwise({
-		redirectTo: '/'
-	});
-
-	 */
 
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
@@ -110,6 +91,8 @@ materialAdmin
 	self.authService = authService;
 
 	console.log('materialAdmin.run start');
+	
+	$rootScope.redirect = $location.path(); 
 	
 	if (false)
 	$rootScope.$on('$routeChangeStart', function (event, next, current) {

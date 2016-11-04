@@ -5,7 +5,7 @@ var bomApp = angular.module('boms', ['translationService','toolbox', 'checklist-
 
 itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
-	console.log('boms config starting');
+	//console.log('boms config starting');
 
 	$stateProvider
 
@@ -20,16 +20,7 @@ itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 		controller : 'bomedit as bomCtrl'
 	});
 
-	/*
-	$routeProvider.when('/boms/edit/:id', {
-		templateUrl : 'js/item/bomEdit.html',
-		controller : 'bomedit as bomCtrl'
-	}).when('/boms/wizard', {
-		templateUrl : 'js/item/bomWizzard.html',
-		controller : 'bomedit as bomCtrl'
-	});*/
-
-	console.log('boms config ending');
+	//console.log('boms config ending');
 }]);
 
 itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService',  'dialogFactory', function bomsController($scope, $http, translator, bomService, dialogFactory ) {
@@ -110,7 +101,25 @@ itemApp.controller( 'bomedit', ['$scope', '$http', 'translator', 'bomService',  
 	}, function(){
 		console.log('get items for select - fail');
 	})
-
+	
+	self.createOrUpdateBom = function(){
+		
+		var b = {
+				id : 0,
+				forItem : self.bom.item.id,
+				requiredQuantity : self.bom.quantity
+		}
+		console.log('bom::',b);
+		
+		self.service.createOrUpdate(b)
+		.then( function(response){
+			//console.log('create item::',response);
+			//self.itemId = response;
+			$location.path('/boms');
+		},	function(errResponse){
+			console.error('Error while creating/saving bom');
+		});
+	}
 
 	console.log('bomedit ctrl ending');
 

@@ -1,5 +1,31 @@
 'use strict';
- 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* author St.Antoniak
+* 
+* this service is designed for one entity (like Products)
+* we must provide one url for collection (via setRestServiceOne method) 
+* and one for single item operations (via setRestServiceAll method)
+* 
+* 
+* Collection rest must accept extra parameters for 
+*  pagination /{pageNumber}/{pageSize}
+*  sorting ....
+*  filtering ...
+* 
+* Also url for collection count must be supported.
+* Count requests are created by appending 'count' after base url.
+* Extra parameters for filtering must be supported accordingly.
+*  
+* Base single item operations are executed using relevant HTTP requests:
+*  get for getting data (with parameter entity id) - with appended {id} after base url
+*  delete for deleting (with parameter entity id) - with appended {id} after base url
+*  post for creating (with parameter entity object) - with entity object in request body
+*  put for updating (with parameter entity object) - with appended {id} after base url and entity object in request body
+* 
+* keep in mind that object must have id property for entity id
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*/
+
 angular.
 module('generic-restservice',[]).
 factory('restservice', ['$http', '$q', function($http, $q){
@@ -11,9 +37,24 @@ factory('restservice', ['$http', '$q', function($http, $q){
         this.setRestServiceAll = function(u){ this.REST_SERVICE_ALL = u; };  
     }
     
+    Service.prototype.count = function(x){ return this.fetchAnyData( this.REST_SERVICE_ALL + 'count');  }
+    
     Service.prototype.fetch = function(id){ return this.fetchAnyData( this.REST_SERVICE_ONE + id);  }
    
-    Service.prototype.fetchAll = function(){ return this.fetchAnyData( this.REST_SERVICE_ALL ); }
+    Service.prototype.fetchAll = function(pageNo, pageSize, sortBy){ 
+    	
+    	//pagination path params to append to url
+    	var params = '';
+    	if (pageNo != null && pageSize != null){
+    		params += '/'+pageNo + '/' + pageSize;
+    	}    	
+    	
+    	if (sortBy != null){
+    		params += '/' +sortBy;
+    	}
+    	
+    	return this.fetchAnyData( this.REST_SERVICE_ALL + params); 
+    }
     
     Service.prototype.fetchAnyData = function( url ) {
         var deferred = $q.defer();
