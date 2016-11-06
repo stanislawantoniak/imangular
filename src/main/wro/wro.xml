@@ -24,7 +24,12 @@
 		 -->
 	</group>
 	<group name="skin">
-		<!-- <js>/css/theme/app.min.1.css</js> <js>/css/theme/app.min.2.css</js> -->
+		<!-- Vendor CSS -->
+		<css>/vendors/bower_components/animate.css/animate.min.css</css>
+		<css>/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css</css>
+		<css>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css</css>
+		<css>/vendors/bower_components/angular-loading-bar/src/loading-bar.css</css>
+		<css>/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css</css>
 
 		<!-- Angular Modules -->
 		<js>/vendors/bower_components/angular-ui-router/release/angular-ui-router.min.js
