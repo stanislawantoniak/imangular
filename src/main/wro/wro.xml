@@ -70,7 +70,7 @@
 		<js>/css/xeditable/js/xeditable.min.js</js>
 		
 		<!-- theme modules -->
-
+		<js>/js/app-config.theme.js</js>
 		
 	</group>
 </groups>
