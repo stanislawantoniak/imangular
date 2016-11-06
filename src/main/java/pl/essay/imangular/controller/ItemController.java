@@ -139,6 +139,9 @@ public class ItemController extends BaseController {
 			}
 		}
 		
+		//memory cleanup
+		importer = null;
+		icList = null;
 		System.gc();
 		
 		this.itemService.addItemComponentFastNotSecure(icList);
