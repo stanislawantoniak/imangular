@@ -81,7 +81,7 @@ toolbox
 			growlOnCancelText : '@',
 		},
 		link: function(scope, element, attrs) {
-
+			
 			function notify(typeParam, titleParam, msgParam){
 				//console.log('in notify',typeParam,titleParam, msgParam);
 				
@@ -109,8 +109,8 @@ toolbox
 					url_target: '_blank',
 					mouse_over: false,
 					animate: {
-						enter: scope.growlAnimationIn,
-						exit: scope.growlAnimationOut
+						enter: typeof scope.growlAnimationIn === 'undefined' ? 'animated rotateIn' : scope.growlAnimationIn,
+						exit: typeof scope.growlAnimationOut === 'undefined' ? 'animated fadeOutUp' : scope.growlAnimationOut,
 					},
 					icon_type: 'class',
 					template: '<div data-growl="container" class="alert" role="alert">' +

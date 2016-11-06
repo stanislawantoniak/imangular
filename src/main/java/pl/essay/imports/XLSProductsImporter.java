@@ -47,7 +47,7 @@ public class XLSProductsImporter {
 					product.isBuilding = ("T".equals(this.getCellAtIndexAsString(3, row)) ? true : false);
 					product.whereManufactured = this.getCellAtIndexAsString(4, row);
 					product.otherSources = ("T".equals(this.getCellAtIndexAsString(5, row)) ? true : false);
-					product.otherSourceName = this.getCellAtIndexAsString(5, row)+"::"+this.getCellAtIndexAsString(6, row);
+					product.otherSourceName = this.getCellAtIndexAsString(6, row);
 
 					//System.out.print(product);
 

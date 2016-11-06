@@ -9,8 +9,8 @@ userApp.config(function mainController( ) {
 	//console.log('users config ending');
 });
 
-userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userService', 'dialogFactory', 
-                                  function( $q,   $http,   $scope,   translator,    userService,  dialogFactory ) {
+userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userService', 'dialogFactory', 'ngTableParams',
+                         function( $q,   $http,   $scope,   translator,   userService,   dialogFactory,   ngTableParams ) {
 
 	var self = this;
 	self.service = userService;
@@ -24,12 +24,41 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 		//console.log('starting fetching users');
 		self.service.fetchAll().then(function(response) {
 			//console.log('users fetched '+response.length);
-			self.users = response;
+			console.log(response);
+			self.users = response.collection;
 		}, function(){
 			console.log('get users from service - fail');
 		})
 	};
+	
+	self.fetchAllUsers();
+	
+	//table for items
+	this.userTable = new ngTableParams({
+		page: 1,            // show first page
+		count: 25,
+		sorting: {
+			username: 'asc'     // initial sorting
+		}
 
+	}, {
+		total: 0, 
+		getData: function($defer, params) {
+
+			//console.log('get data 1');
+			console.log(params.orderBy());
+			console.log(params);
+			self
+			.service
+			.fetchAll(params.page(), params.count(), params.orderBy())
+			.then( function(response){
+				console.log("response::",response);
+				params.total(response.totalRows);
+				$defer.resolve(response.collection);
+			} );
+		}
+	})
+	
 	self.deleteUserPromise = function(obj){ 
 
 		var res = $q.defer();
@@ -100,7 +129,6 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 		console.log('all roles',self.allRoles);
 	});
 
-	self.fetchAllUsers();
 
 	//console.log('userslist controller - ending');
 }]);

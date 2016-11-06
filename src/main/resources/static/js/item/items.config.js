@@ -5,27 +5,10 @@ var itemApp = angular.module('items', ['translationService','toolbox', 'checklis
 
 itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
-	console.log('items config starting');
+	//console.log('items config starting');
 
-	$stateProvider
+	//console.log('items config ending');
 
-	.state ('root.itemEdit', {
-		url: 'items/edit/:id',
-		templateUrl : 'js/item/itemEdit.html',
-		controller : 'itemEdit as itemCtrl'
-	})
-	.state ('root.itemDetails', {
-		url: 'items/itemdetails/:id',
-		templateUrl : 'js/item/itemEdit.html',
-		controller : 'itemEdit as itemCtrl'
-	})
-	.state ('root.itemAdd', {
-		url: 'items/add/:id',
-		templateUrl : 'js/item/itemEdit.html',
-		controller : 'itemEdit as itemCtrl'
-	});
-
-	console.log('items config ending');
 }]);
 
 itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemService','dialogFactory', 'ngTableParams',
@@ -37,33 +20,31 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 
 	console.log('itemslist controller starting');
 
-	//Filtering
+	//table for items
 	this.itemTable = new ngTableParams({
 		page: 1,            // show first page
 		count: 25,
-        sorting: {
-            name: 'asc'     // initial sorting
-        }
+		sorting: {
+			name: 'asc'     // initial sorting
+		}
 
 	}, {
 		total: 0, 
 		getData: function($defer, params) {
 
 			//console.log('get data 1');
+			console.log(params.orderBy());
+			console.log(params);
+			console.log('fiter::',params.filter());
+
 			self
 			.service
-			.count()   //get total count
+			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
 			.then( function(response){
-				params.total(response);  //and set data setsize 
-				console.log(params.orderBy());
-				self
-				.service
-				.fetchAll(params.page(), params.count(), params.orderBy())
-				.then( function(response){
-					$defer.resolve(response);
-				} );
-			}
-			);
+				console.log("response::",response);
+				params.total(response.totalRows);
+				$defer.resolve(response.collection);
+			} );
 		}
 	})
 
@@ -89,8 +70,8 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 	console.log('itemslist controller - ending');
 }]);
 
-itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory',
-                                 function itemsController(  $q,  $stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory ) {
+itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory', 'authService',
+                                 function itemsController(  $q,  $stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory, authService ) {
 	console.log('itemEdit controller starting');
 
 	var self = this;
@@ -109,12 +90,27 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 
 	//fetch item - when adding item get empty item but populated predefined fields
 	self.fetchItem = function(){
-		self.service.fetch(self.itemId).then(function(response) {
-			self.item = response;
-			console.log('item::',self.item);
-		}, function(){
-			console.log('get item from service - fail');
-		})
+		self.service
+		.fetch(self.itemId)
+		.then(
+				function(response) {
+					self.item = response;
+					if (self.itemId != 0 && ( self.item.isUsed || self.item.isComposed) ){
+						self.service
+						.fetchAnyData('/itemrest/associations/'+self.itemId)
+						.then( 
+								function(response){
+									self.item.components = response.components;
+									self.item.usedIn = response.usedIn;
+								},
+								function(){
+									console.log('get item from service - fail');
+								}
+						)
+					}
+					console.log('item::',self.item);
+				}
+		)
 	};
 
 	self.fetchItem();
@@ -130,20 +126,22 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 		});
 	}
 
-	//get items for select in item component edit form
-	self.service.fetchAnyData('/items/forselect/'+self.itemId).then(function(response){
-		var items = response;
-		self.itemsForSelect = [];
-		angular.forEach(items, function(row) { 
-			self.itemsForSelect.push({value: row.id, text: row.name});
-		});
-		console.log('items for select',self.itemsForSelect);
-	}, function(){
-		console.log('get items for select - fail');
-	})
+//	get items for select in item component edit form
+	if (authService.session.isSupervisor){
+		self.service.fetchAnyData('/items/forselect/'+self.itemId).then(function(response){
+			var items = response;
+			self.itemsForSelect = [];
+			angular.forEach(items, function(row) { 
+				self.itemsForSelect.push({value: row.id, text: row.name});
+			});
+			//console.log('items for select',self.itemsForSelect);
+		}, function(){
+			console.log('get items for select - fail');
+		})
+	}
 
 	self.setEditRowContext = function(){
-		self.editContext = true;
+		self.editRowContext = true;
 	}
 
 	self.cancelEditRow = function(formScope){
@@ -152,8 +150,20 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 	}
 
 	self.unsetEditRowContext = function(){
-		self.editContext = false;
+		self.editRowContext = false;
 	}
+	
+	self.unsetEditRowContext();
+	
+	self.setEditItemContext = function(){
+		self.editItemContext = true;
+	}
+
+	self.unsetEditItemContext = function(){
+		self.editItemContext = false;
+	}
+	
+	self.unsetEditItemContext();
 
 	self.createOrUpdateItemComponent = function(component, source){
 
@@ -230,7 +240,7 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 	}
 
 
-	//return value is input for ng-show form button
+//	return value is input for ng-show form button
 	self.editNameIfEmpty = function(formScope){
 		if (formScope['nameBtnForm'].$visible){
 			return false; 

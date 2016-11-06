@@ -1,13 +1,15 @@
 package pl.essay.imangular.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import pl.essay.generic.dao.ListingParamsHolder;
+import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.model.IdNameIsComposedQueryResult;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
@@ -37,35 +39,35 @@ public class ItemServiceImpl implements ItemService{
 		this.itemComponentDao.create(ic);
 		return ic.getId();
 	}
-	
+
+	//method for fast import
 	@Override
 	public void addItemComponentFastNotSecure(Iterable<ItemComponent> ic){
 		this.itemComponentDao.create(ic);
 	}
+
 	
-	
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
-	public List<Item> listItems(){
+	public SetWithCountHolder<Item> listItems(){
 		return this.itemDao.getAll();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
-	public List<Item> listItemsPaginated(int pageNo, int pageSize,  String sortBy, String dir){
-		return this.itemDao.getWithPagination(pageNo, pageSize, sortBy, dir);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public long getCount(){
-		return this.itemDao.count();
+	public SetWithCountHolder<Item>  listItemsPaginated(ListingParamsHolder params){
+		return this.itemDao.getAll(params);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Item getItemById(int id){
 		Item item = this.itemDao.get(id);
+		//get associated sets while session is open
+		item.getComponents().size();
+		item.getUsedIn().size();
 		return item;
 	}
 	
@@ -79,7 +81,7 @@ public class ItemServiceImpl implements ItemService{
 	public void removeItemComponent(int componentId){
 		ItemComponent ic = this.itemComponentDao.load(componentId);
 		Item item = ic.getParent();
-		item.getComponents().remove(ic);
+		item.removeComponent(ic);
 		this.itemDao.update(item);
 	}
 
@@ -126,7 +128,5 @@ public class ItemServiceImpl implements ItemService{
 	public List<IdNameIsComposedQueryResult> getAllItemsInShort(){
 		return itemDao.getAllItemsInShort();
 	}
-	
-	
 	
 }

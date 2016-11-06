@@ -59,7 +59,7 @@ public class UserControllerAllGetsTests {
 
 	@Test
 	public void testGetUserList() throws Exception{
-
+/*
 		//assertEquals("0==0", 0,1);
 
 		//this.userServiceMock = mock(UserService.class);
@@ -90,7 +90,7 @@ public class UserControllerAllGetsTests {
 		.andExpect(jsonPath("$[?(@.password=='b123456')]", hasSize(1) ));
 		
 		//assertEquals("",1,2);
-
+*/
 	}
 	
 	@Test
@@ -167,7 +167,7 @@ public class UserControllerAllGetsTests {
 				req
 				)
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("$..*", hasSize(2)))
+		.andExpect(jsonPath("$..*", hasSize(3)))
 		.andExpect(jsonPath("$[?(@.ROLE_ADMIN)]", hasSize(1)))
 		.andExpect(jsonPath("$[?(@.ROLE_USER)]", hasSize(1))); 
 		

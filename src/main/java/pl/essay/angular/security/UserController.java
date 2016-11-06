@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.controller.BaseController;
 
 @RestController
@@ -37,8 +38,9 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "/userslistrest", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
-	public List<UserForm> listUsers() {
-		List<UserForm> theList = (List<UserForm>) this.userService.listUsers();
+	public SetWithCountHolder<UserForm> listUsers() {
+		
+		SetWithCountHolder<UserForm> theList = this.userService.listUsers();
 		//logger.info("list size: "+theList.size());
 
 		return theList;

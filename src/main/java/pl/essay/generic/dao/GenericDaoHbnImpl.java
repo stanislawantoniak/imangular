@@ -3,24 +3,22 @@ package pl.essay.generic.dao;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
-import java.net.URLDecoder;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 import javax.persistence.EntityManagerFactory;
 
-import org.apache.poi.ss.usermodel.Row;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.util.StringUtils;
 
 //from Spring in Practice::Joshua White,Willie Wheeler
 
@@ -123,64 +121,56 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		return (T) getSession().load(getDomainClass(), id);
 	}
 
-	private Query getSimpleQuery(){
-		return getSession()
-				.createQuery("from " + getDomainClassName());
-	}
-
-	private Criteria getCriteria(String sortColumn, String sortDirection){
+	private CriteriaBuilder<T> getCriteriaBuilder(){
 		CriteriaBuilder<T> criteriaBuilder = new CriteriaBuilder<T>(this.getSession(),this.getDomainClass());
-		return criteriaBuilder
-				.addSortOrder(sortColumn, sortDirection);
+		return criteriaBuilder;
 	}
 
+
+	/*
+	 * get set with total rows : finalCriteriaWithoutPagination
+	 * and paginated list : finalCriteria
+	 */
 	@SuppressWarnings("unchecked")
-	public List<T> getAll() {
-
-		String defaultSortColumn = this.getDefaultSortColumn();
-
-		if (!"".equals(defaultSortColumn))
-			return this
-					.getAll(defaultSortColumn, "asc");
-		else
-			return this
-					.getSimpleQuery()
-					.list();
+	private SetWithCountHolder<T> getSetWithCountHolder(Criteria finalCriteria, long count){
+		return new SetWithCountHolder<T>( 
+				finalCriteria
+				.list(),
+				count
+				);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<T> getAll(String sortColumn, String sortDirection) {
-		return this
-				.getCriteria(sortColumn, sortDirection)
-				.list();
+	private long getTotalRowsOnCriteria(Criteria criteria){
+		return (long) criteria
+				.setProjection(Projections.rowCount())
+				.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<T> getWithPagination(int pageNo, int pageSize) {
-
-		String defaultSortColumn = this.getDefaultSortColumn();
-
-		System.out.println("default order:: "+defaultSortColumn);
-		if (!"".equals(defaultSortColumn))
-			return this
-					.getWithPagination(pageNo, pageSize, defaultSortColumn, "asc");
-		else
-			return this
-					.getSimpleQuery()
-					.setFirstResult((pageNo - 1) * pageSize)
-					.setMaxResults(pageSize)
-					.list();
+	public SetWithCountHolder<T> getAll() {
+		
+		long totalRows = this.getTotalRowsOnCriteria(this.getCriteriaBuilder().get());
+		
+		return this.getSetWithCountHolder(this.getCriteriaBuilder().get(), totalRows);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<T> getWithPagination(int pageNo, int pageSize, String sortColumn, String sortDirection) {
 
-		System.out.println("getWithPagination params:: "+ pageNo +" : "+pageSize+" : "+sortColumn+" : "+sortDirection);
-			return this
-					.getCriteria(sortColumn, sortDirection)
-					.setFirstResult((pageNo - 1) * pageSize)
-					.setMaxResults(pageSize)
-					.list();
+	public SetWithCountHolder<T> getAll(ListingParamsHolder params) {
+
+		Criteria criteriaForCount = this
+				.getCriteriaBuilder()
+				.addFilters(params.filterFields)
+				.get();
+
+		long totalRows = this.getTotalRowsOnCriteria(criteriaForCount);
+		
+		Criteria finalCriteria = this
+				.getCriteriaBuilder()
+				.addFilters(params.filterFields)
+				.addSortOrder(params.sortOrderFields)
+				.addPagination(params.pageNo, params.pageSize)
+				.get();
+
+		return this.getSetWithCountHolder(finalCriteria, totalRows);
 	}
 
 	public void update(T t) { 
@@ -206,12 +196,6 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		getSession()
 		.createQuery("delete " + getDomainClassName())
 		.executeUpdate();
-	}
-
-	public long count() {
-		return (Long) getSession()
-				.createQuery("select count(*) from " + getDomainClassName())
-				.uniqueResult();
 	}
 
 	public boolean exists(Serializable id) { return (get(id) != null); }

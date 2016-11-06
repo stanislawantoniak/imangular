@@ -21,6 +21,7 @@ public class ItemComponentDaoImpl extends GenericDaoHbnImpl<ItemComponent> imple
 		return ic;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Set<ItemComponent> getItemComponentsByParent(int id) {
 		System.out.println("getItemComponentsByParent");
 		return new HashSet<ItemComponent>(

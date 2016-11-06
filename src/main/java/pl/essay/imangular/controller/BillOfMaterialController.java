@@ -1,6 +1,5 @@
 package pl.essay.imangular.controller;
 
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialInStock;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.service.BillOfMaterialService;
 import pl.essay.imangular.service.ItemService;
-
 
 @RestController
 public class BillOfMaterialController extends BaseController {
@@ -33,16 +31,17 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value = "/kick/", method = RequestMethod.GET)
 	public ResponseEntity<Void>  kick() {
 		//this.kickCreate();
-		List<BillOfMaterial> boms = this.bomService.listBoms();
-		for(BillOfMaterial bom : boms){
+		SetWithCountHolder<BillOfMaterial> boms = this.bomService.listBoms();
+		for(BillOfMaterial bom : boms.getCollection()){
 			this.bomService.calculateBom(bom);
 		}
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
+	//for testing- creates boms for all items
 	private void kickCreate() {
-		List<Item> items = this.itemService.listItems();
-		for (Item item : items){
+		SetWithCountHolder<Item> items = this.itemService.listItems();
+		for (Item item : items.getCollection()){
 			if (item.getIsComposed()){
 				BillOfMaterial bom = new BillOfMaterial();
 				bom.setForItem(item);
@@ -53,7 +52,7 @@ public class BillOfMaterialController extends BaseController {
 	}
 
 	@RequestMapping(value = "/boms", method = RequestMethod.GET)
-	public List<BillOfMaterial> listBoms() {
+	public SetWithCountHolder<BillOfMaterial> listBoms() {
 		return this.bomService.listBoms();
 	}
 

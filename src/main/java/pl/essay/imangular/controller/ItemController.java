@@ -1,13 +1,10 @@
 package pl.essay.imangular.controller;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +21,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.essay.angular.security.UserForm;
+import pl.essay.generic.dao.ListingParamsHolder;
+import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.model.IdNameIsComposedQueryResult;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
 import pl.essay.imangular.service.ItemService;
 import pl.essay.imports.Product;
 import pl.essay.imports.XLSProductsImporter;
-import pl.essay.imports.Product.Component;
 
 @RestController
 public class ItemController extends BaseController {
@@ -39,36 +37,39 @@ public class ItemController extends BaseController {
 
 	@Autowired private ItemService itemService;
 
-
 	@InitBinder
 	public void registerCustomEditors(WebDataBinder binder) {
 		binder.registerCustomEditor(Item.class, null, new ItemMakerPropertyEditor(this.itemService));
 	}
 
-	@RequestMapping(value = "/items", method = RequestMethod.GET)
-	public List<Item> listItems() {
+	@RequestMapping(value = "/itemsxx", method = RequestMethod.GET)
+	public SetWithCountHolder<Item> listItems() {
 		return this.itemService.listItems();
 	}
 	
-	@RequestMapping(value = "/items/{pageNo}/{pageSize}/{sortBy}", method = RequestMethod.GET)
-	public List<Item> listItems( @PathVariable("pageNo") int pageNo, @PathVariable("pageSize") int pageSize
-			, @PathVariable("sortBy") String sortBy) {
-	
-		String direction = ( "+".equals( StringUtils.substring(sortBy,0, 1) ) ? "asc" : "desc" );
-		sortBy = StringUtils.substring(sortBy, 1);
+	@RequestMapping(value= "/items", method = {RequestMethod.POST})
+	public ResponseEntity<SetWithCountHolder<Item>> listItemsWithParams(@RequestBody ListingParamsHolder filter){
 		
-		return this.itemService.listItemsPaginated(pageNo, pageSize, sortBy, direction);
+		SetWithCountHolder<Item> holder = this.itemService.listItemsPaginated(filter);
+		
+		return new ResponseEntity<SetWithCountHolder<Item>>(holder, HttpStatus.OK);
+		
 	}
 	
-	@RequestMapping(value = "/itemscount", method = RequestMethod.GET)
-	public ResponseEntity<Long> countItems() {
-		Long count = this.itemService.getCount();
-		System.out.println("items count:: " + count);
-		return new ResponseEntity<Long>(count, HttpStatus.OK);
+	@RequestMapping(value= "/itemrest/associations/{itemId}", method = {RequestMethod.GET})
+	public ResponseEntity<Map<String, Set<ItemComponent>>> usedInItem(@PathVariable int itemId){
+		
+		Item item = this.itemService.getItemById(itemId);
+		Map<String, Set<ItemComponent>> map = new HashMap<String, Set<ItemComponent>>();
+		map.put("components", item.getComponents());
+		map.put("usedIn", item.getUsedIn());
+		
+		return new ResponseEntity<Map<String, Set<ItemComponent>>>(map, HttpStatus.OK);
+		
 	}
 	
 	@RequestMapping(value = "/importitems", method = RequestMethod.GET)
-	public ResponseEntity<Void> importItems() {
+	public ResponseEntity<String> importItems() {
 
 		XLSProductsImporter importer = new XLSProductsImporter();
 		importer.importFile("skladniki.xlsx");
@@ -94,7 +95,7 @@ public class ItemController extends BaseController {
 			}
 		}
 		
-		List<ItemComponent> icList = new ArrayList<ItemComponent>();
+		Collection<ItemComponent> icList = new LinkedHashSet<ItemComponent>();
 
 		//add components - fast not secure
 		for (Map.Entry<String,Product> p : importer.getProducts().entrySet()){
@@ -136,16 +137,18 @@ public class ItemController extends BaseController {
 		
 		this.itemService.addItemComponentFastNotSecure(icList);
 		
-		List<Item> list = this.itemService.listItems();
-		for (Item item : list){
-			item.setIsComposed(item.getComponents().size() > 0);
-			this.itemService.updateItem(item);
+		SetWithCountHolder<Item> holder = this.itemService.listItems();
+		for (Item item : holder.getCollection()){
+			Item i  = this.itemService.getItemById(item.getId());
+			i.setIsComposed(!i.getComponents().isEmpty());
+			i.setIsUsed(!i.getUsedIn().isEmpty());
+			this.itemService.updateItem(i);
 		}
 
 		System.out.println("import done!!!!!!!!!!!!!!!");
 		System.out.println(s);
 		
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 
 	//update or add component
@@ -245,15 +248,15 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<IdNameIsComposedQueryResult>> itemsForSelect(@PathVariable("id") int id) {
-		return new ResponseEntity<List<IdNameIsComposedQueryResult>>(this.getItemListForSelect(id),  HttpStatus.OK);
+	public ResponseEntity<Collection<IdNameIsComposedQueryResult>> itemsForSelect(@PathVariable("id") int id) {
+		return new ResponseEntity<Collection<IdNameIsComposedQueryResult>>(this.getItemListForSelect(id),  HttpStatus.OK);
 	}
 
 	//#todo
 	//check for any circular reference in item components
 	//a is composed of b, b is composed of a
-	protected List<IdNameIsComposedQueryResult> getItemListForSelect(int id) {
-		List<IdNameIsComposedQueryResult> allItems = new LinkedList<IdNameIsComposedQueryResult>();
+	protected Collection<IdNameIsComposedQueryResult> getItemListForSelect(int id) {
+		Collection<IdNameIsComposedQueryResult> allItems = new LinkedHashSet<IdNameIsComposedQueryResult>();
 		for (IdNameIsComposedQueryResult i : this.itemService.getAllItemsInShort())
 			if (i.id != id ) 
 				allItems.add(i);//put in linked map to save order

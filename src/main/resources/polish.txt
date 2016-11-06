@@ -36,6 +36,11 @@ itemslist;translations
 "itemslistitemstableheadingid","Kod"
 "itemslistitemstableheadingname","Nazwa"
 "itemslistitemstableheadingiscomposed","Złożony"
+"itemslistitemstableheadingisbuilding","Czy to budynek"
+"itemslistitemstableheadingwheremanufactured","Gdzie produkowany"
+"itemslistitemstableheadingisavailableinothersources","Czy dostępny w innych źródłach"
+"itemslistitemstableheadingothersources","Inne źródła"
+
 "itemslistitemstableheadingactions",""
 "itemslistitemstableeditbutton","Edytuj"
 "itemslistitemstableshowbutton","Szczegóły"
@@ -63,6 +68,7 @@ edit form;sss
 "edititemheadercomponentquantity","Ilość"
 "edititemheadingactions",""
 "componentslistdeletewarning","Na pewno chcesz usunąć składnik z produktu:"
+"itemdetailheading","Szczegółowy opis produktu"
 
 
 component,editform

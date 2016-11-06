@@ -24,7 +24,7 @@ materialAdmin
 .config(                ['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', 
  function mainController( $stateProvider,   $httpProvider,   $urlRouterProvider,   $locationProvider ) {
 
-	console.log('imangular starting');
+	//console.log('imangular starting');
 
 	//$locationProvider.hashPrefix('!');
 	//$locationProvider.html5Mode(true);
@@ -54,16 +54,28 @@ materialAdmin
 		controller : 'userslist as usersCtrl'
 	})
 	.state('root.useradd', {
-		url: 'users/add/:id',
+		url: '/users/add/:id',
 		templateUrl : 'js/user/userEdit.html',
 		controller : 'useredit',
 		controllerAs : 'userCtrl'
 	})
+	
 	.state ('root.items', {
 		url: '/items',
 		templateUrl : 'js/item/itemList.html',
 		controller : 'itemslist as itemsCtrl'
 	})
+	.state ('root.itemDetails', {
+		url: '/items/itemdetails/:id',
+		templateUrl : 'js/item/itemEdit.html',
+		controller : 'itemEdit as itemCtrl'
+	})
+	.state ('root.itemAdd', {
+		url: '/items/additem/:id',
+		templateUrl : 'js/item/itemEdit.html',
+		controller : 'itemEdit as itemCtrl'
+	})
+	
 	.state ('root.boms', {
 		url: '/boms',
 		templateUrl : 'js/item/bomList.html',
@@ -79,7 +91,7 @@ materialAdmin
 
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
-	console.log('imangular ending');
+	//console.log('imangular ending');
 }]);
 
 materialAdmin

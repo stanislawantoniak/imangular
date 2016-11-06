@@ -29,6 +29,7 @@ public class ItemDaoImpl extends GenericDaoHbnImpl<Item> implements ItemDao {
 		return item;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<IdNameIsComposedQueryResult> getAllItemsInShort(){
 		return (List<IdNameIsComposedQueryResult>) getSession()

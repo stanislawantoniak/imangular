@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" ng-controller="navigation as nav">
 	<div class="block-header">
 		<h2>{{translator.label.itemslistheading}}</h2>
 	</div>
@@ -26,112 +26,55 @@
 				<div class="card-body">
 					<div class="table-responsive">
 						<table ng-table="itemsCtrl.itemTable"
-							class="table table-striped table-vmiddle">
+							class="table table-striped table-vmiddle" show-filter="true">
 							<tr ng-repeat="item in $data">
 								<td data-title="translator.label.itemslistitemstableheadingid">{{item.id}}</td>
 								<td data-title="translator.label.itemslistitemstableheadingname"
-									sortable="'name'">{{item.name}}</td>
-								<td data-title="'is Composed'">{{item.isComposed}}</td>
-								<td data-title="'is Building'">{{item.isBuilding}}</td>
-								<td data-title="'where Manufactured'"
-									sortable="'whereManufactured'">{{item.whereManufactured}}</td>
-								<td data-title="'is Available In Other Sources'">{{item.isAvailableInOtherSources}}</td>
-								<td data-title="'other Sources'" sortable="'otherSources'">
-									{{item.otherSources}}</td>
+									sortable="'name'" filter="{ 'name': 'text' }">{{item.name}}</td>
+								<td data-title="'is Composed'"><div class="text-center"
+										style="font-size: 150%;">
+										<i ng-show="item.isComposed"
+											class="zmdi zmdi-check zmdi-hc-fw"></i> <i
+											ng-hide="item.isComposed" class="zmdi zmdi-minus zmdi-hc-fw"></i>
+									</div></td>
+								<td data-title="translator.label.itemslistitemstableheadingisbuilding"><div class="text-center"
+										style="font-size: 150%;">
+										<i ng-show="item.isBuilding"
+											class="zmdi zmdi-check zmdi-hc-fw"></i> <i
+											ng-hide="item.isBuilding" class="zmdi zmdi-minus zmdi-hc-fw"></i>
+									</div></td>
+								<td data-title="translator.label.itemslistitemstableheadingwheremanufactured"
+									sortable="'whereManufactured'"
+									filter="{ 'whereManufactured': 'text' }">{{item.whereManufactured}}</td>
+								<td data-title="translator.label.itemslistitemstableheadingisavailableinothersources"><div
+										class="text-center" style="font-size: 150%;">
+										<i ng-show="item.isAvailableInOtherSources"
+											class="zmdi zmdi-check zmdi-hc-fw"></i> <i
+											ng-hide="item.isAvailableInOtherSources"
+											class="zmdi zmdi-minus zmdi-hc-fw"></i>
+									</div></td>
+								<td data-title="translator.label.itemslistitemstableheadingothersources" sortable="'otherSources'"
+									filter="{ 'otherSources': 'text' }">{{item.otherSources}}</td>
+								<td>
+									<button class="btn btn-default btn-sm waves-effect"
+										ui-sref="root.itemDetails({id: item.id})">{{translator.label.itemslistitemstableshowbutton}}</button>
+
+									<button class="btn btn-default btn-sm waves-effect"
+										ng-show="nav.authService.session.isSupervisor && !item.isUsed" swal-exec
+										swal-object="item"
+										swal-dialog-title="{{translator.label.itemslistdeleteheading +' '+item.name}}?"
+										swal-main-text="{{translator.label.itemslistdeletewarning}}"
+										swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
+										swal-cancel-button="{{translator.label.edititembuttoncancel}}"
+										swal-exec-fn-on-confirm="itemsCtrl.deleteItemPromise"
+										growl-on-confirm-success-title="{{translator.label.itemsdeletesuccessheading}}"
+										growl-on-confirm-failure-title="{{translator.label.itemsdeletefailureheading}}"
+										growl-on-cancel-text="{{translator.label.itemdeleteoncancelinfo}}">{{translator.label.itemslistitemstabledeletebutton}}</button>
+								</td>
 							</tr>
 						</table>
 					</div>
 				</div>
-
-				<div class="card-body" ng-if="false">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th width="5">{{translator.label.itemslistitemstableheadingid}}</th>
-									<th width="25">{{translator.label.itemslistitemstableheadingname}}</th>
-									<th width="5">is Composed</th>
-									<th width="5">is Building</th>
-									<th width="15">where Manufactured</th>
-									<th width="5">is Available In Other Sources</th>
-									<th width="15">other Sources</th>
-
-									<th width="25">{{translator.label.itemslistitemstableheadingcomponents}}</th>
-									<th width="10">{{translator.label.itemslistitemstableheadingactions}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="item in itemsCtrl.items">
-									<td>{{item.id}}</td>
-									<td>{{item.name}}</td>
-									<td>{{item.isComposed}}</td>
-									<td>{{item.isBuilding}}</td>
-									<td>{{item.whereManufactured}}</td>
-									<td>{{item.isAvailableInOtherSources}}</td>
-									<td>{{item.otherSources}}</td>
-
-									<td>
-										<div ng-show="item.isComposed" class="panel panel-default">
-											<div class="panel-body list-group">
-												<div class="list-group-item"
-													ng-repeat="itemComponent in item.components">
-													<span class="label label-success">{{itemComponent.quantity}}
-														{{translator.label.pcs}}</span> {{itemComponent.componentName}}
-													<div ng-show="itemComponent.remarks"
-														class="list-group-item">
-														<span class="fa fa-comments"> </span>
-														{{itemComponent.remarks}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</td>
-
-									<td><button class="btn btn-default btn-sm waves-effect"
-											ui-sref="root.itemEdit({id: item.id})"
-											ng-show="nav.authService.session.isSupervisor">{{translator.label.itemslistitemstableeditbutton}}</button>
-										<button class="btn btn-default btn-sm waves-effect"
-											ui-sref="root.itemDetails({id: item.id})"
-											ng-hide="nav.authService.session.isSupervisor">{{translator.label.itemslistitemstableshowbutton}}</button>
-										<button ng-show="item.usedIn.length==0"
-											class="btn btn-default btn-sm waves-effect"
-											ng-show="nav.authService.session.isSupervisor" swal-exec
-											swal-object="item"
-											swal-dialog-title="{{translator.label.itemslistdeleteheading +' '+item.name}}?"
-											swal-main-text="{{translator.label.itemslistdeletewarning}}"
-											swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
-											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
-											swal-exec-fn-on-confirm="itemsCtrl.deleteItemPromise"
-											growl-animation-in="animated flipInX"
-											growl-animation-Out="animated flipOutX"
-											growl-on-confirm-success-title="{{translator.label.itemsdeletesuccessheading}}"
-											growl-on-confirm-failure-title="{{translator.label.itemsdeletefailureheading}}"
-											growl-on-cancel-text="{{translator.label.itemdeleteoncancelinfo}}">{{translator.label.itemslistitemstabledeletebutton}}</button></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- delete dialog-->
-<div ng-if="false" class="message-box animated fadeIn"
-	id="message-box-default" ng-class="itemsCtrl.deleteDialog.getClass()">
-	<div class="mb-container">
-		<div class="mb-middle">
-			<div class="mb-title">
-				<span class="fa fa-scissors"></span>{{translator.label.itemslistdeletewarning}}
-				{{itemsCtrl.deleteDialog.object.name}}?
-			</div>
-			<div class="mb-content"></div>
-			<div class="mb-footer">
-				<button class="btn btn-default btn-lg"
-					ng-click="itemsCtrl.deleteDialog.close()">{{translator.label.edititembuttoncancel}}</button>
-				<button class="btn btn-default btn-lg pull-right"
-					ng-click="itemsCtrl.deleteItem()">{{translator.label.userslistuserstablebuttondelete}}</button>
 			</div>
 		</div>
 	</div>

@@ -7,7 +7,7 @@ navi.controller( 'navigation', ['$rootScope', '$http', '$location', '$scope', 't
 
 	var self = this;
 	
-	console.log('navigation controller starting');
+	//console.log('navigation controller starting');
 	
 	self.authService = authService;
 	//console.log('navigation::authservice: ',self.authService);
@@ -21,7 +21,7 @@ navi.controller( 'navigation', ['$rootScope', '$http', '$location', '$scope', 't
 		self.authService.selectLanguage(language, self.translatorHandler.refresh);//on callback refresh translations
 	}
 
-	console.log('navigation controller - ending');
+	//console.log('navigation controller - ending');
 
 }]);
 

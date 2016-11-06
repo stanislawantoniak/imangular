@@ -23,7 +23,7 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DynamicInsert
@@ -56,12 +56,17 @@ public class Item {
 	@Column @Type(type="yes_no")
 	private Boolean isComposed = false;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "parent", cascade={CascadeType.ALL})
-	@JsonManagedReference(value="component")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "parent", cascade={CascadeType.ALL})
+	//@JsonManagedReference(value="component")
+	@JsonIgnore
 	private Set<ItemComponent> components = new HashSet<ItemComponent>();
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "component")
-	@JsonManagedReference(value="usedIn")
+	@Column @Type(type="yes_no")
+	private Boolean isUsed = false;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "component")
+	//@JsonManagedReference(value="usedIn")
+	@JsonIgnore 
 	private Set<ItemComponent> usedIn = new HashSet<ItemComponent>();
 
 	@Column @Type(type="yes_no")
@@ -101,6 +106,14 @@ public class Item {
 	public boolean getIsComposed(){
 		return this.isComposed;
 	}
+	
+	public void setIsUsed(Boolean used_TF){
+		this.isUsed = used_TF;
+	}
+	public boolean getIsUsed(){
+		return this.isUsed;
+	}
+
 	public int getId(){
 		return this.id;
 	}
@@ -116,9 +129,17 @@ public class Item {
 		this.components.remove(ic);			
 		this.components.add(ic);
 		this.isComposed = true;
+		ic.getComponent().setIsUsed(true);
 		ic.setParent(this);
 	}
 
+	public void removeComponent(ItemComponent ic){
+		this.components.remove(ic);			
+		this.isComposed = (this.components.size() == 0 ? false : true );
+		ic.getComponent().setIsUsed( (ic.getComponent().getUsedIn().size() == 0 ? false : true ) );
+		ic.setParent(this);
+	}
+	
 	public void setComponents(Set<ItemComponent> ic) {
 		this.components = ic;
 	}

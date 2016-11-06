@@ -98,8 +98,9 @@ public class UserFormTests {
 		//check if all roles are present
 		roles = uf.getAllRoles();
 		assertTrue("admin role not found",roles.containsValue("ROLE_ADMIN"));
+		assertTrue("super role not found",roles.containsValue("ROLE_SUPERVISOR"));
 		assertTrue("user role not found",roles.containsValue("ROLE_USER"));
-		assertEquals("all roles", 2, uf.getAllRoles().size());
+		assertEquals("all roles", 3, uf.getAllRoles().size());
 	
 		//assertEquals("0==0", 0,1);
 	}

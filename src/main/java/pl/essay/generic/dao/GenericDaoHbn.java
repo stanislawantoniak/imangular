@@ -1,22 +1,19 @@
 package pl.essay.generic.dao;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 public interface GenericDaoHbn<T extends Object> {
 	void create(T t);
 	void create(Iterable<T> t);
-	T get(Serializable id);
-	T load(Serializable id);
-	List<T> getAll();
-	public List<T> getAll(String sortColumn, String sortDirection);
-	public List<T> getWithPagination(int pageNo, int pageSize);
-	public List<T> getWithPagination(int pageNo, int pageSize, String sortColumn, String sortDirection);
+	public T get(Serializable id);
+	public T load(Serializable id);
+	public SetWithCountHolder getAll();
+	public SetWithCountHolder<T> getAll(ListingParamsHolder params) ;
 	void update(T t);
 	void delete(T t);
 	void deleteById(Serializable id);
 	void deleteAll();
-	long count();
 	boolean exists(Serializable id);
 }
 

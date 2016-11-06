@@ -1,15 +1,14 @@
 package pl.essay.imangular.service;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialDao;
 import pl.essay.imangular.model.BillOfMaterialFlatListLine;
@@ -39,7 +38,7 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	}
 
 	@Override
-	public List<BillOfMaterial> listBoms() {
+	public SetWithCountHolder<BillOfMaterial> listBoms() {
 		return this.bomDao.getAll();
 	}
 
