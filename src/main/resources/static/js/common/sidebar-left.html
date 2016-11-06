@@ -9,7 +9,7 @@
 
 	</div>
 
-	<ul class="main-menu">
+	<ul class="main-menu" ng-controller="navigation as nav">
 
 		<li data-ui-sref-active="active"><a data-ui-sref="root.boms"
 			data-ng-click="mactrl.sidebarStat($event)"><i
@@ -22,14 +22,14 @@
 				{{translator.label.leftpanelmenumanageitems}}</a></li>
 				
 				
-		<li data-ui-sref-active="active"><a data-ui-sref="root.users"
+		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a data-ui-sref="root.users"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-accounts-alt"></i>
 				{{translator.label.leftpanelmenumanageUsers}}</a></li>
 
-		<li data-ui-sref-active="active"><a 
+		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a 
 			data-ng-click="mactrl.sidebarStat($event)"><i
-				class="zmdi zmdi-home"></i> Home</a></li>
+				class="zmdi zmdi-home"></i> debug</a></li>
 
 	</ul>
 </div>

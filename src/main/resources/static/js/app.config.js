@@ -11,7 +11,7 @@ var materialAdmin = angular
 		 //'oc.lazyLoad',
 		 //'nouislider',
 		 'ngTable',
-		 
+
 		 'navigation', 
 		 'dashboard', 
 		 'users', 
@@ -21,17 +21,17 @@ var materialAdmin = angular
 		 'authenticationService' ] );
 
 materialAdmin
-.config(                ['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', 
- function mainController( $stateProvider,   $httpProvider,   $urlRouterProvider,   $locationProvider ) {
+.config(  				['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', 
+          				 function mainController( $stateProvider,   $httpProvider,   $urlRouterProvider,   $locationProvider ) {
 
 	//console.log('imangular starting');
 
 	//$locationProvider.hashPrefix('!');
 	//$locationProvider.html5Mode(true);
 
-	
+
 	$urlRouterProvider.when('','/');
-	
+
 	$stateProvider
 
 	.state('parent', {url: '/home', abstract: true, template: '<ui-view/>'} )
@@ -59,7 +59,7 @@ materialAdmin
 		controller : 'useredit',
 		controllerAs : 'userCtrl'
 	})
-	
+
 	.state ('root.items', {
 		url: '/items',
 		templateUrl : 'js/item/itemList.html',
@@ -75,7 +75,7 @@ materialAdmin
 		templateUrl : 'js/item/itemEdit.html',
 		controller : 'itemEdit as itemCtrl'
 	})
-	
+
 	.state ('root.boms', {
 		url: '/boms',
 		templateUrl : 'js/item/bomList.html',
@@ -103,39 +103,39 @@ materialAdmin
 	self.authService = authService;
 
 	console.log('materialAdmin.run start');
-	
+
 	$rootScope.redirect = $location.path(); 
-	
+
 	if (false)
-	$rootScope.$on('$routeChangeStart', function (event, next, current) {
-		//just for checking if route change is fired
-		//console.log('$rootScope.$on::$routeChangeStart start');
-		if (!$rootScope.authenticated) {
+		$rootScope.$on('$routeChangeStart', function (event, next, current) {
+			//just for checking if route change is fired
+			//console.log('$rootScope.$on::$routeChangeStart start');
+			if (!$rootScope.authenticated) {
 
-			//basically you will never be authenticated when ths runs first time on page reload
-			//because authentication service runs asynchroniously 
-			//so only save required path for future redirect
-			//redirect will be performed on authentication success
+				//basically you will never be authenticated when ths runs first time on page reload
+				//because authentication service runs asynchroniously 
+				//so only save required path for future redirect
+				//redirect will be performed on authentication success
 
-			if ($location.path() != '/login') //if required path is login do not save it 
-				$rootScope.redirect = $location.path(); //get required path for redirect - when authenticated will be redirected to this path
-			if ($location.path().startsWith('/users' ) ){ //users must be authorized
-				console.log('Authentication:: Deny - not authenticated');
-				event.preventDefault();
-				$location.path('/login');
-			}
-		}else { 
-			if ($location.path() == '/login'){
-				console.log('Authentication:: already authenticated');
-				event.preventDefault();
-				$location.path('/');
-			}
-			$rootScope.redirect = $location.path();
-			//console.log("redirect saved::",$rootScope.redirect);
-			authService.manageRedirectsOnAuthentication();
-		} 
-		//console.log('$rootScope.$on::$routeChangeStart ending');
-	});
+				if ($location.path() != '/login') //if required path is login do not save it 
+					$rootScope.redirect = $location.path(); //get required path for redirect - when authenticated will be redirected to this path
+				if ($location.path().startsWith('/users' ) ){ //users must be authorized
+					console.log('Authentication:: Deny - not authenticated');
+					event.preventDefault();
+					$location.path('/login');
+				}
+			}else { 
+				if ($location.path() == '/login'){
+					console.log('Authentication:: already authenticated');
+					event.preventDefault();
+					$location.path('/');
+				}
+				$rootScope.redirect = $location.path();
+				//console.log("redirect saved::",$rootScope.redirect);
+				authService.manageRedirectsOnAuthentication();
+			} 
+			//console.log('$rootScope.$on::$routeChangeStart ending');
+		});
 	console.log('materialAdmin run end');
 
 }]);
@@ -317,6 +317,154 @@ materialAdmin
 		}
 	}
 
+})
+
+// =========================================================================
+// LAYOUT
+// =========================================================================
+
+.directive('changeLayout', function(){
+
+	return {
+		restrict: 'A',
+		scope: {
+			changeLayout: '='
+		},
+
+		link: function(scope, element, attr) {
+
+			//Default State
+			if(scope.changeLayout === '1') {
+				element.prop('checked', true);
+			}
+
+			//Change State
+			element.on('change', function(){
+				if(element.is(':checked')) {
+					localStorage.setItem('ma-layout-status', 1);
+					scope.$apply(function(){
+						scope.changeLayout = '1';
+					})
+				}
+				else {
+					localStorage.setItem('ma-layout-status', 0);
+					scope.$apply(function(){
+						scope.changeLayout = '0';
+					})
+				}
+			})
+		}
+	}
+})
+
+// =========================================================================
+// MAINMENU COLLAPSE
+// =========================================================================
+
+.directive('toggleSidebar', function(){
+
+	return {
+		restrict: 'A',
+		scope: {
+			modelLeft: '=',
+			modelRight: '='
+		},
+
+		link: function(scope, element, attr) {
+			element.on('click', function(){
+
+				if (element.data('target') === 'mainmenu') {
+					if (scope.modelLeft === false) {
+						scope.$apply(function(){
+							scope.modelLeft = true;
+						})
+					}
+					else {
+						scope.$apply(function(){
+							scope.modelLeft = false;
+						})
+					}
+				}
+
+				if (element.data('target') === 'chat') {
+					if (scope.modelRight === false) {
+						scope.$apply(function(){
+							scope.modelRight = true;
+						})
+					}
+					else {
+						scope.$apply(function(){
+							scope.modelRight = false;
+						})
+					}
+
+				}
+			})
+		}
+	}
+
+})
+
+
+
+// =========================================================================
+// SUBMENU TOGGLE
+// =========================================================================
+
+.directive('toggleSubmenu', function(){
+
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			element.click(function(){
+				element.next().slideToggle(200);
+				element.parent().toggleClass('toggled');
+			});
+		}
+	}
+})
+
+
+// =========================================================================
+// STOP PROPAGATION
+// =========================================================================
+
+.directive('stopPropagate', function(){
+	return {
+		restrict: 'C',
+		link: function(scope, element) {
+			element.on('click', function(event){
+				event.stopPropagation();
+			});
+		}
+	}
+})
+
+.directive('aPrevent', function(){
+	return {
+		restrict: 'C',
+		link: function(scope, element) {
+			element.on('click', function(event){
+				event.preventDefault();
+			});
+		}
+	}
+})
+
+
+// =========================================================================
+// PRINT
+// =========================================================================
+
+.directive('print', function(){
+	return {
+		restrict: 'A',
+		link: function(scope, element){
+			element.click(function(){
+				window.print();
+			})   
+		}
+	}
 });
 
 

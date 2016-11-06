@@ -30,16 +30,25 @@
 		<css>/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css</css>
 		 -->
 		<css>webjar:material-design-iconic-font/2.2.0/dist/css/material-design-iconic-font.min.css</css>
-		<css>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css</css>
-		<css>/vendors/bower_components/angular-loading-bar/src/loading-bar.css</css>
+		<css>webjar:ssweetalert/1.0.1/dist/sweetalert.css</css>
+		<css>webjar:angular-loading-bar/0.8.0/loading-bar.css</css>
+		<css>webjar:malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css</css>
+		<!-- 
+			<css>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css</css>
+				<css>/vendors/bower_components/angular-loading-bar/src/loading-bar.css</css>
 		<css>/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css</css>
-
+ -->
+ 
 		<!-- Angular Modules -->
 		<js>/vendors/bower_components/angular-ui-router/release/angular-ui-router.min.js
 		</js>
+		<!-- 
 		<js>/vendors/bower_components/angular-loading-bar/src/loading-bar.js
 		</js>
-		
+		 -->
+		 
+		<js>webjar:angular-loading-bar/0.8.0/loading-bar.min.js</js>
+				
 		<js>webjar:waves/0.7.5/dist/waves.min.js</js>
 		<js>webjar:oclazyload/1.0.9/ocLazyLoad.min.js</js>
 		<!--<js>/vendors/bower_components/Waves/dist/waves.min.js</js>
@@ -49,12 +58,19 @@
 		<js>/vendors/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js
 		</js>
 
+	 	<!-- Common Vendors -->
+		<js>webjar:malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></js>
+
+
 		<js>webjar:ng-table/0.8.3/dist/ng-table.min.js</js>
-		
 
 		<js>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js
 		</js>
 		<js>/vendors/bootstrap-growl/bootstrap-growl.js</js>
 		<js>/css/xeditable/js/xeditable.min.js</js>
+		
+		<!-- theme modules -->
+
+		
 	</group>
 </groups>

@@ -1,4 +1,5 @@
 <ul class="header-inner clearfix" ng-controller="navigation as nav">
+
 	<li id="menu-trigger" data-target="mainmenu" data-toggle-sidebar
 		data-model-left="mactrl.sidebarToggle.left"
 		data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
@@ -9,7 +10,7 @@
 		</div>
 	</li>
 
-	<li class="logo hidden-xs"><a data-ui-sref="home"
+	<li class="logo hidden-xs"><a data-ui-sref="root.dashboard"
 		data-ng-click="mactrl.sidebarStat($event)">{{translator.label.appname}}</a>
 	</li>
 
