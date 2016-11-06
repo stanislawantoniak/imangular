@@ -18,7 +18,10 @@
 
 	</group>
 	<group name="jquery">
+		<js>webjar:jquery/2.1.4/jquery.min.js</js>
+	<!-- 
 		<js>/vendors/bower_components/jquery/dist/jquery.min.js</js>
+		 -->
 	</group>
 	<group name="skin">
 		<!-- <js>/css/theme/app.min.1.css</js> <js>/css/theme/app.min.2.css</js> -->
