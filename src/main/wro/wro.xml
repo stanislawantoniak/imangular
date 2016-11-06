@@ -40,7 +40,11 @@
 		<js>/vendors/bower_components/oclazyload/dist/ocLazyLoad.min.js</js>
 		<js>/vendors/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js
 		</js>
+		<!-- 
 		<js>/vendors/bower_components/ng-table/dist/ng-table.min.js</js>
+		 -->
+		<js>webjar:ng-table/0.8.3/dist/ng-table.min.js</js>
+		
 
 		<js>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js
 		</js>

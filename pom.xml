@@ -252,6 +252,13 @@
 						<artifactId>jquery</artifactId>
 						<version>${jquery.version}</version>
 					</dependency>
+					<!-- https://mvnrepository.com/artifact/org.webjars.bower/ng-table -->
+					<dependency>
+						<groupId>org.webjars.bower</groupId>
+						<artifactId>ng-table</artifactId>
+						<version>0.8.3</version>
+					</dependency>
+
 					<dependency>
 						<groupId>org.webjars</groupId>
 						<artifactId>angularjs</artifactId>
