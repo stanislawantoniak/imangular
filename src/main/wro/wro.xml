@@ -26,7 +26,10 @@
 	<group name="skin">
 		<!-- Vendor CSS -->
 		<css>/vendors/bower_components/animate.css/animate.min.css</css>
+		<!-- 
 		<css>/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css</css>
+		 -->
+		<css>webjar:material-design-iconic-font/2.2.0/dist/css/material-design-iconic-font.min.css</css>
 		<css>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css</css>
 		<css>/vendors/bower_components/angular-loading-bar/src/loading-bar.css</css>
 		<css>/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css</css>
@@ -36,13 +39,16 @@
 		</js>
 		<js>/vendors/bower_components/angular-loading-bar/src/loading-bar.js
 		</js>
-		<js>/vendors/bower_components/Waves/dist/waves.min.js</js>
+		
+		<js>webjar:waves/0.7.5/dist/waves.min.js</js>
+		<js>webjar:oclazyload/1.0.9/ocLazyLoad.min.js</js>
+		<!--<js>/vendors/bower_components/Waves/dist/waves.min.js</js>
 		<js>/vendors/bower_components/oclazyload/dist/ocLazyLoad.min.js</js>
+		-->
+
 		<js>/vendors/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js
 		</js>
-		<!-- 
-		<js>/vendors/bower_components/ng-table/dist/ng-table.min.js</js>
-		 -->
+
 		<js>webjar:ng-table/0.8.3/dist/ng-table.min.js</js>
 		
 
