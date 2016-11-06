@@ -93,7 +93,10 @@ public class ItemController extends BaseController {
 				product.itemId = item.getId();
 				s += "product exists: "+product.id+"\n";
 			}
+			System.gc();
 		}
+		
+		System.gc();
 		
 		Collection<ItemComponent> icList = new LinkedHashSet<ItemComponent>();
 
@@ -132,8 +135,11 @@ public class ItemController extends BaseController {
 					}
 				} else 
 					s+= "item for product not found "+product+"\n";
+				System.gc();
 			}
 		}
+		
+		System.gc();
 		
 		this.itemService.addItemComponentFastNotSecure(icList);
 		
@@ -143,6 +149,8 @@ public class ItemController extends BaseController {
 			i.setIsComposed(!i.getComponents().isEmpty());
 			i.setIsUsed(!i.getUsedIn().isEmpty());
 			this.itemService.updateItem(i);
+			System.gc();
+
 		}
 
 		System.out.println("import done!!!!!!!!!!!!!!!");
