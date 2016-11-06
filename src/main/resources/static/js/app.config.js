@@ -1,25 +1,5 @@
 'use strict';
 
-var materialAdmin = angular
-.module('imangular', 
-		[ 
-		 'ngAnimate',
-		 'ngResource',
-		 'ui.router',
-		 'ui.bootstrap',
-		 //'angular-loading-bar',
-		 //'oc.lazyLoad',
-		 //'nouislider',
-		 'ngTable',
-
-		 'navigation', 
-		 'dashboard', 
-		 'users', 
-		 'items',
-		 'boms',
-		 'toolbox',
-		 'authenticationService' ] );
-
 materialAdmin
 .config(  				['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', 
           				 function mainController( $stateProvider,   $httpProvider,   $urlRouterProvider,   $locationProvider ) {
