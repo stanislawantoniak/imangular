@@ -82,8 +82,6 @@ materialAdmin
 
 	self.authService = authService;
 
-	console.log('materialAdmin.run start');
-
 	$rootScope.redirect = $location.path(); 
 
 	if (false)
@@ -116,6 +114,6 @@ materialAdmin
 			} 
 			//console.log('$rootScope.$on::$routeChangeStart ending');
 		});
-	console.log('materialAdmin run end');
+
 
 }]);

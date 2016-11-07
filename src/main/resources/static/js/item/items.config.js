@@ -18,8 +18,6 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 	self.service = itemService;
 	self.deleteDialog = dialogFactory.getService();
 
-	console.log('itemslist controller starting');
-
 	//table for items
 	this.itemTable = new ngTableParams({
 		page: 1,            // show first page
@@ -33,15 +31,15 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 		getData: function($defer, params) {
 
 			//console.log('get data 1');
-			console.log(params.orderBy());
-			console.log(params);
-			console.log('fiter::',params.filter());
+			//console.log(params.orderBy());
+			//console.log(params);
+			//console.log('fiter::',params.filter());
 
 			self
 			.service
 			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
 			.then( function(response){
-				console.log("response::",response);
+				//console.log("response::",response);
 				params.total(response.totalRows);
 				$defer.resolve(response.collection);
 			} );
@@ -67,7 +65,6 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 
 	}
 
-	console.log('itemslist controller - ending');
 }]);
 
 itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory', 'authService',
