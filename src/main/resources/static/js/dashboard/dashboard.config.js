@@ -5,10 +5,10 @@ angular.
 module('dashboard', ['translationService']).
 controller( 'dashboard', ['$scope', 'translator', function DashboardController($scope, translator) {
 	
-	console.log('from dashboard controller - start');
+	//console.log('from dashboard controller - start');
 
-	$scope.translator = translator;
+	//$scope.translator = translator;
 
-	console.log('from dashboard controller - end');
+	//console.log('from dashboard controller - end');
 
 }]);

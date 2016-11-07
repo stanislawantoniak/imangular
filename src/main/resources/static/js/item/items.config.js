@@ -117,7 +117,8 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 		.then( function(response){
 			//console.log('create item::',response);
 			//self.itemId = response;
-			$location.path('/items/edit/'+response);
+			self.unsetEditItemContext();
+			self.fetchItem();
 		},	function(errResponse){
 			console.error('Error while creating/saving item');
 		});
@@ -201,8 +202,7 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 		self.unsetAddComponentCtx();
 	}
 
-	self.deleteItemComponent = function(ic){
-
+	self.deleteItemComponentPromise = function(ic){
 		var res = $q.defer();
 
 		self
@@ -210,55 +210,15 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 		.deleteEntity(ic.id).
 		then( function(response){
 			self.fetchItem();
-			res.resolve(translator.label.itemsdeletesuccessinfo);
+			res.resolve(translator.label.itemsdeletecomponentsuccessinfo);
 		},
 		function(errResponse){
 			console.error('Error while deleting component');
-			res.reject(translator.label.itemsdeletefailureinfo);
+			res.reject(translator.label.itemsdeletecomponentfailureinfo);
 		});
+		
 		return res.promise;
-	}
 
-	self.deleteItemPromise = function(item){
-		var res = $q.defer();
-
-		self
-		.service
-		.deleteEntity(item.id).
-		then( function(response){
-			self.fetchAllItems();
-			res.resolve(translator.label.itemsdeletesuccessinfo);
-		},
-		function(errResponse){
-			console.error('Error while deleting item');
-			res.reject(translator.label.itemsdeletefailureinfo);
-		});
-
-	}
-
-
-//	return value is input for ng-show form button
-	self.editNameIfEmpty = function(formScope){
-		if (formScope['nameBtnForm'].$visible){
-			return false; 
-		}
-
-		if ( self.nameEditShow ) { //edit name mode when new item
-			formScope['nameBtnForm'].$show();
-			self.nameEditShow = false;
-			return false;
-		}
-
-		return !self.addItemCtx;
-	}
-
-
-
-	if (self.itemId == 0){ //if new item - set edit name flag 
-		// will be used in editNameIfEmpty
-		self.nameEditShow = true;
-	} else {
-		self.nameEditShow = false;
 	}
 
 	console.log('itemEdit controller - ending');

@@ -37,6 +37,12 @@ itemslist;translations
 "itemslistitemstableheadingname","Name"
 "itemslistitemstableheadingiscomposed","Is composed"
 "itemslistitemstableheadingcomponents","Components"
+"itemslistitemstableheadingisbuilding","Is it building"
+"itemslistitemstableheadingwheremanufactured","Where manufactured"
+"itemslistitemstableheadingisavailableinothersources","Is available in other sources"
+"itemslistitemstableheadingothersources","Other sources"
+"itemslistitemstableheadingisused","Is component of other items"
+
 "itemslistitemstableheadingactions","Actions"
 "itemslistitemstableeditbutton","Edit"
 "itemslistitemstableshowbutton","Show Details"
@@ -53,17 +59,25 @@ delete; dialogs
 "itemdeleteoncancelinfo","Item was not deleted"
 
 edit form, item
-"edititemheadingadditem","Add Item"
-"edititemheadingedititem","Edit Item"
+"edititemheadingitemcard","Product card"
 "edititemlabelitemname","Name"
 "edititembuttonsave","Save"
 "edititembuttoncancel","Cancel"
 "editcomponentsbuttonadd","Add Component"
+"editcomponentsformheading","Adding component to item"
 "edititemheadercomponentname","Component name"
 "edititemheadercomponentremarks","Remarks"
 "edititemheadercomponentquantity","Quantity"
 "edititemheadingactions","Actions"
-"componentslistdeletewarning","Are you sure to delete component from item:"
+
+"itemslistdeletecomponentheading","Are you sure to delete component:"
+"itemslistdeletecomponentwarning","The action cannot be undone."
+"itemsdeletecomponentsuccessheading","Successful operation."
+"itemsdeletecomponentsuccessinfo","Component has been deleted."
+"itemsdeletecomponentfailureheading","Something went wrong."
+"itemsdeletecomponentfailureinfo","Our Admin has been. He's on a jet coming to rescue!"
+"itemdeleteoncomponentcancelinfo","Component was not deleted"
+
 
 component;editform
 "componenteditformbuttoncancel","Cancel"

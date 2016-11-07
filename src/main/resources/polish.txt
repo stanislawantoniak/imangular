@@ -40,6 +40,8 @@ itemslist;translations
 "itemslistitemstableheadingwheremanufactured","Gdzie produkowany"
 "itemslistitemstableheadingisavailableinothersources","Czy dostępny w innych źródłach"
 "itemslistitemstableheadingothersources","Inne źródła"
+"itemslistitemstableheadingisused","Jest składnikiem innych produktów"
+
 
 "itemslistitemstableheadingactions",""
 "itemslistitemstableeditbutton","Edytuj"
@@ -57,19 +59,26 @@ items; delete
 
 
 edit form;sss
-"edititemheadingadditem","Dodawanie produktu"
-"edititemheadingedititem","Edycja produktu"
+"edititemheadingitemcard","Karta produktu"
 "edititemlabelitemname","Nazwa"
 "edititembuttonsave","Zapisz"
 "edititembuttoncancel","Anuluj"
 "editcomponentsbuttonadd","Dodaj składnik"
+"editcomponentsformheading","Dodawanie składnika do produktu"
 "edititemheadercomponentname","Nazwa składnika"
 "edititemheadercomponentremarks","Uwagi"
 "edititemheadercomponentquantity","Ilość"
 "edititemheadingactions",""
 "componentslistdeletewarning","Na pewno chcesz usunąć składnik z produktu:"
 "itemdetailheading","Szczegółowy opis produktu"
-
+"itemcomponentsheading","Składniki produktu"
+"itemslistdeletecomponentheading","Na pewno chcesz usunąć składnik:"
+"itemslistdeletecomponentwarning","Tej operacji nie mozna cofnąć."
+"itemsdeletecomponentsuccessheading","Operacja powiodła się."
+"itemsdeletecomponentsuccessinfo","Składnik został usunięty."
+"itemsdeletecomponentfailureheading","Coś poszło nie tak."
+"itemsdeletecomponentfailureinfo","Administrator został powiadomiony. Właśnie przerywa wakacje żeby się tym zając."
+"itemdeletecomponentoncancelinfo","Składnik nie będzie skasowany"
 
 component,editform
 "componenteditformbuttoncancel","Anuluj"

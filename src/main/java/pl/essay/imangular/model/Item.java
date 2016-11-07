@@ -184,6 +184,7 @@ public class Item {
 		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.isComposed;
 	}
 
+	@JsonIgnore
 	public String getDafaulSortColumn(){
 		return "name";
 	}

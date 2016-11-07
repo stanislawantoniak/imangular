@@ -1,0 +1,12 @@
+.dl-horizontal dt {
+	width: 260px !important;
+}
+
+.dl-horizontal dd {
+    margin-left: 280px;
+}
+
+textarea.form-control {
+	height: 80px !important;
+}
+

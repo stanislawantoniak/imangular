@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <!--[if IE 9 ]><html class="ie9" data-ng-app="imangular" data-ng-controller="imangularCtrl as mactrl"><![endif]-->
 <![if IE 9 ]>
-<html data-ng-app="imangular" data-ng-controller="imangularCtrl as mactrl">
+<html data-ng-app="imangular"
+	data-ng-controller="imangularCtrl as mactrl">
 <![endif]>
 
 <head>
@@ -16,13 +17,15 @@
 
 <link href="css/skin.css" rel="stylesheet">
 
+<link href="css/im-app.css" rel="stylesheet">
+
 </head>
 
 <body data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1'}"
 	ng-controller="translation">
-
-	<data data-ui-view></data>
-
+	<div ng-controller="navigation as nav">
+		<data data-ui-view></data>
+	</div>
 	<!-- Older IE warning message -->
 	<!--[if lt IE 9]>
             <div class="ie-warning">
@@ -72,7 +75,6 @@
 	<script src="js/skin.js"></script>
 	<script src="js/im-app-1.1.0.js"></script>
 
-<!-- 
 	<script src="js/app.config.js"></script>
 	<script src="js/common/toolbox.js"></script>
 	<script src="js/common/generic-restservice.js"></script>
@@ -83,8 +85,7 @@
 	<script src="js/item/itemservice.js"></script>
 	<script src="js/item/boms.config.js"></script>
 	<script src="js/item/bomservice.js"></script>
- -->
- 
+
 </body>
 </html>
 

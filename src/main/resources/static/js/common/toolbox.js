@@ -132,7 +132,7 @@ toolbox
 
 				e.preventDefault();
 
-				//console.log('obj :: ',scope);
+				console.log('obj :: ',scope);
 
 				swal(
 						{ 	title: scope.swalDialogTitle,   
