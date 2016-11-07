@@ -72,9 +72,7 @@ materialAdmin
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
 	//console.log('imangular ending');
-}]);
-
-materialAdmin
+}])
 
 .run(['$rootScope', '$location', 'editableOptions', 'authService', function ($rootScope, $location, editableOptions, authService ) {
 

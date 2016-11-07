@@ -1,9 +1,11 @@
 'use strict';
 
 //Register `navigation` component, along with its associated controller and template
-var navi = angular.module('navigation', ['translationService','authenticationService']);
+var navi = angular
 
-navi.controller( 'navigation', ['$rootScope', '$http', '$location', '$scope', 'translator', 'authService', function($rootScope, $http, $location, $scope,  translator, authService) {
+.module('navigation', ['translationService','authenticationService'])
+
+.controller( 'navigation', ['$rootScope', '$http', '$location', '$scope', 'translator', 'authService', function($rootScope, $http, $location, $scope,  translator, authService) {
 
 	var self = this;
 	
@@ -23,9 +25,9 @@ navi.controller( 'navigation', ['$rootScope', '$http', '$location', '$scope', 't
 
 	//console.log('navigation controller - ending');
 
-}]);
+}])
 
-navi.controller( 'login', [ 'authService', function( authService) {
+.controller( 'login', [ 'authService', function( authService) {
 
 	var self = this;
 	
