@@ -1,7 +1,9 @@
 package pl.essay.imangular.model;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -106,7 +108,7 @@ public class Item {
 	public boolean getIsComposed(){
 		return this.isComposed;
 	}
-	
+
 	public void setIsUsed(Boolean used_TF){
 		this.isUsed = used_TF;
 	}
@@ -120,9 +122,40 @@ public class Item {
 	public String getName(){
 		return this.name;
 	}
-
+	/*
+	 * return components organized in a TreeSet to force sorting
+	 * there will be few components so sorting in this layer will be efficient
+	 * 
+	 * sorting is by remarks (first non empty asc, then empty) and then by name asc 
+	 */
 	public Set<ItemComponent> getComponents() {
-		return this.components;
+		Set<ItemComponent> sortedComponents = new TreeSet<ItemComponent>(
+				new Comparator<ItemComponent>(){
+					@Override 
+					public int compare(ItemComponent i1, ItemComponent i2){
+
+						//convert nulls in remarks to ""
+						String remarks1 = (i1.getRemarks() == null ? "" :i1.getRemarks().toLowerCase() );
+						String remarks2 = (i2.getRemarks() == null ? "" :i2.getRemarks().toLowerCase() );
+						
+						if (remarks1.equals(remarks2)){
+							
+							return i1.getComponentName().toLowerCase().compareTo(i2.getComponentName().toLowerCase());
+						
+						} else {
+							
+							if (!"".equals(remarks1) && "".equals(remarks2))
+								return -1;
+							if ("".equals(remarks1) && !"".equals(remarks2))
+								return 1;
+							else 
+								return remarks1.compareTo(remarks2);
+						
+						}
+					}
+				});
+		sortedComponents.addAll(this.components);
+		return sortedComponents;
 	}
 
 	public void addComponent(ItemComponent ic){
@@ -139,7 +172,7 @@ public class Item {
 		ic.getComponent().setIsUsed( (ic.getComponent().getUsedIn().size() == 0 ? false : true ) );
 		ic.setParent(this);
 	}
-	
+
 	public void setComponents(Set<ItemComponent> ic) {
 		this.components = ic;
 	}
@@ -188,7 +221,7 @@ public class Item {
 	public String getDafaulSortColumn(){
 		return "name";
 	}
-	
+
 	@Override
 	public boolean equals(Object other) {
 		if (this == other) return true;

@@ -4,7 +4,7 @@
 		<!-- <js>/vendors/bower_components/jquery/dist/jquery.min.js</js>	 -->
 	</group>
 	<group name="angular-bootstrap">
-		<css>webjar:bootstrap/3.3.5/less/bootstrap.less</css>
+		<css>webjar:bootstrap/3.3.5/css/bootstrap.css</css>
 
 		<!-- Angular -->
 		<js>webjar:angularjs/1.4.7/angular.min.js</js> 

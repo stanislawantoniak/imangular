@@ -2,7 +2,9 @@ package pl.essay.imangular.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,10 +125,31 @@ public class ItemServiceImpl implements ItemService{
 		return itemDao.getItemByName(name);
 	}
 	
+	/*
+	 * method for preparing select list for add/edit component
+	 * must not contain the item for which we prepare the list
+	 * and components that are in the item
+	 * 
+	 * (to be done later: and any components that contain theitem in descendants)
+	 * 
+	 * term - to be done later - for fetching narrowed by name select list (for ui-select)
+	 * 
+	 */
 	@Override
 	@Transactional(readOnly = true)
-	public List<IdNameIsComposedQueryResult> getAllItemsInShort(){
-		return itemDao.getAllItemsInShort();
+	public Map<String,IdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term){
+		Map<String,IdNameIsComposedQueryResult> theMap = new TreeMap<String,IdNameIsComposedQueryResult>();
+		//copy all the result to map
+		Item item = this.itemDao.get(itemId);
+		for (IdNameIsComposedQueryResult i : itemDao.getAllItemsInShort()){
+			theMap.put(i.name, i);
+		}
+		//remove from map the item for which we build select list
+		theMap.remove(item.getName()); // name is safeas we have primary key on name
+		for (ItemComponent ic : item.getComponents()){
+			theMap.remove(ic.getComponentName());
+		}
+		return theMap;
 	}
 	
 }

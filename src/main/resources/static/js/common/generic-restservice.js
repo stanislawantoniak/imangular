@@ -118,6 +118,8 @@ factory('restservice', ['$http', '$q', function($http, $q){
 		$http.post(this.REST_SERVICE_ONE,  entity)
 		.then(
 				function (response) {
+					//in create rest service we get entity id in response
+					//it is important to get it back
 					deferred.resolve(response.data);
 				},
 				function(errResponse){

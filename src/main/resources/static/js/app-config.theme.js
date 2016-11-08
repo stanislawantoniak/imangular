@@ -11,6 +11,8 @@ var materialAdmin = angular
 		 //'oc.lazyLoad',
 		 //'nouislider',
 		 'ngTable',
+		 
+		 'ui.select',
 
 		 'navigation', 
 		 'dashboard', 

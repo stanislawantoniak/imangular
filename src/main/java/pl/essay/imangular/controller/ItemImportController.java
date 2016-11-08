@@ -27,7 +27,7 @@ import pl.essay.imports.XLSProductsImporter;
 
 @RestController
 public class ItemImportController {
-	
+
 	@Autowired
 	public ItemService itemService;
 
@@ -58,9 +58,9 @@ public class ItemImportController {
 			}
 			System.gc();
 		}
-		
+
 		System.gc();
-		
+
 		Collection<ItemComponent> icList = new LinkedHashSet<ItemComponent>();
 
 		//add components - fast not secure
@@ -84,7 +84,20 @@ public class ItemImportController {
 								ic.setParent(parent);
 								ic.setComponent(componentItem);
 								ic.setQuantity(component.quantity);
-								ic.setRemarks(component.desc);
+
+								String remarks = component.desc;
+
+								//if in remarks there is a number then convert string to "1 Etap", "2 Etap" etc
+								try { 
+
+									Integer.parseInt(remarks);
+									remarks += " Etap"; //this will run only if the remarksholds a number
+
+								} catch( Exception e){
+									//just ignore
+								}
+
+								ic.setRemarks(remarks);
 
 								if (ic.getParent() != null 
 										&& ic.getComponent()!= null
@@ -103,12 +116,12 @@ public class ItemImportController {
 		}
 
 		this.itemService.addItemComponentFastNotSecure(icList);
-	
+
 		//memory cleanup
 		importer = null;
 		icList = null;
 		System.gc();
-		
+
 		SetWithCountHolder<Item> holder = this.itemService.listItems();
 		for (Item item : holder.getCollection()){
 			Item i  = this.itemService.getItemById(item.getId());
@@ -121,7 +134,7 @@ public class ItemImportController {
 
 		System.out.println("import done!!!!!!!!!!!!!!!");
 		System.out.println(s);
-		
+
 		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 

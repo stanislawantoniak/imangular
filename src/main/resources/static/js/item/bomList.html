@@ -22,7 +22,7 @@
 							<div class="col-md-9 col-xs-11">
 								<p>
 								<div>{{translator.label.clickto}}</div>
-								<div  class="f-15">{{translator.label.bomslistheadingbuttonaddbom}}</div>
+								<div class="f-15">{{translator.label.bomslistheadingbuttonaddbom}}</div>
 								</p>
 							</div>
 						</div>
@@ -46,8 +46,7 @@
 								<p>
 								<div class="f-15">{{translator.label.bomslistbomstableheadingname}}
 									{{bom.forItem.name}}</div>
-								<div>{{bom.requiredQuantity}} {{translator.label.pcs}}
-									</div>
+								<div>{{bom.requiredQuantity}} {{translator.label.pcs}}</div>
 								</p>
 							</div>
 						</div>
@@ -56,7 +55,12 @@
 		</div>
 	</div>
 
-
+	<div class="card">
+		<div class="card-header">
+		{{bomsCtrl.boms}}
+		
+		</div>
+	</div>
 	<div class="card">
 		<div class="card-header">
 			<a class="btn btn-default" ng-click="bomsCtrl.fetchAllBoms()"><i
@@ -124,8 +128,8 @@
 </div>
 
 <!-- delete dialog-->
-<div ng-if="false" class="message-box animated fadeIn" id="message-box-default"
-	ng-class="bomsCtrl.deleteDialog.getClass()">
+<div ng-if="false" class="message-box animated fadeIn"
+	id="message-box-default" ng-class="bomsCtrl.deleteDialog.getClass()">
 	<div class="mb-container">
 		<div class="mb-middle">
 			<div class="mb-title">

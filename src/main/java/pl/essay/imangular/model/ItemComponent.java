@@ -60,7 +60,7 @@ public class ItemComponent {
 	private int quantity;
 
 	@Column
-	private String remarks;
+	private String remarks = "";
 
 
 	public ItemComponent(){

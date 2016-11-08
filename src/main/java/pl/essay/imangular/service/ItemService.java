@@ -1,6 +1,7 @@
 package pl.essay.imangular.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import pl.essay.generic.dao.ListingParamsHolder;
@@ -26,5 +27,5 @@ public interface ItemService {
 	public boolean existsItem(String name);
 	public Item getItemByName(String name);
 	
-	public List<IdNameIsComposedQueryResult> getAllItemsInShort();
+	public Map<String,IdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term);
 }

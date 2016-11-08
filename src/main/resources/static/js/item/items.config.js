@@ -67,23 +67,35 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 
 }]);
 
-itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory', 'authService',
-                                 function itemsController(  $q,  $stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory, authService ) {
+itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory', 'authService',
+                                 function itemsController(  $q, $state,  $stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory, authService ) {
 	console.log('itemEdit controller starting');
 
 	var self = this;
 	self.service = itemService;
 	self.componentService = itemComponentService;
 
-	self.deleteDialog = dialogFactory.getService();
-	console.log('self.deleteDialog',self.deleteDialog);
-	console.log('openedDialog',self.deleteDialog.openedDialog);
-
 	self.addItemCtx = false;
 
 	self.translator = translator;
 
-	self.itemId = $stateParams.id;
+	self.itemId = parseInt($stateParams.id);
+	console.log('itemId param::',self.itemId);
+	
+	self.setEditItemContext = function(){
+		self.editItemContext = true;
+	}
+
+	self.unsetEditItemContext = function(){
+		self.editItemContext = false;
+	}
+	
+	//resolve if it is add item or browse details 
+	if (self.itemId == 0){
+		self.setEditItemContext();
+	} else {
+		self.unsetEditItemContext();
+	}
 
 	//fetch item - when adding item get empty item but populated predefined fields
 	self.fetchItem = function(){
@@ -115,9 +127,14 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 	self.createOrUpdateItem = function(){
 		self.service.createOrUpdate(self.item)
 		.then( function(response){
-			//console.log('create item::',response);
-			//self.itemId = response;
 			self.unsetEditItemContext();
+			if (self.itemId == 0){
+				//console.log('create item::',response);
+				//we are in add item context
+				//need to route to item details page after succesful adding
+				//restservice returns item id !
+				$state.go('^.itemDetails',{id:response});
+			}
 			self.fetchItem();
 		},	function(errResponse){
 			console.error('Error while creating/saving item');
@@ -127,12 +144,12 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 //	get items for select in item component edit form
 	if (authService.session.isSupervisor){
 		self.service.fetchAnyData('/items/forselect/'+self.itemId).then(function(response){
-			var items = response;
-			self.itemsForSelect = [];
-			angular.forEach(items, function(row) { 
+			self.itemsForSelect = response;//[];
+			/*angular.forEach(response, function(row) { 
 				self.itemsForSelect.push({value: row.id, text: row.name});
-			});
-			//console.log('items for select',self.itemsForSelect);
+			})
+			*/;
+			console.log('items for select',self.itemsForSelect);
 		}, function(){
 			console.log('get items for select - fail');
 		})
@@ -153,26 +170,14 @@ itemApp.controller( 'itemEdit', ['$q','$stateParams','$scope', '$http', '$locati
 	
 	self.unsetEditRowContext();
 	
-	self.setEditItemContext = function(){
-		self.editItemContext = true;
-	}
-
-	self.unsetEditItemContext = function(){
-		self.editItemContext = false;
-	}
-	
-	self.unsetEditItemContext();
-
-	self.createOrUpdateItemComponent = function(component, source){
-
-		if (source.$$hashKey){ //item is from edit not from add
-			component.id = source.id;
-			component.$$hashKey = source.$$hashKey;
-		} else {
-			component.component = component.component.value; //make it flat from ng-selectstructure "component":{"value":4,"text":"bbbbbbbbbbbbbbbbbbbbbbbbbb (#4)"}
-		}
-		component.parent = this.item.id;
-		console.log('component ::',component,source)
+	self.createOrUpdateItemComponent = function(component){
+		
+		//update parent for new components
+		component.parent = self.itemId;
+		//convert quantity to int type
+		component.quantity = parseInt(component.quantity);
+		
+		console.log('component ::',component);
 		self.componentService.createOrUpdate(component)
 		.then( function(response){
 			self.fetchItem();

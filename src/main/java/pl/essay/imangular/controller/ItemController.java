@@ -1,8 +1,6 @@
 package pl.essay.imangular.controller;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -36,7 +34,7 @@ public class ItemController extends BaseController {
 
 	@Autowired
 	public ItemService itemService;
-	
+
 	@InitBinder
 	public void registerCustomEditors(WebDataBinder binder) {
 		binder.registerCustomEditor(Item.class, null, new ItemMakerPropertyEditor(this.itemService));
@@ -46,28 +44,28 @@ public class ItemController extends BaseController {
 	public SetWithCountHolder<Item> listItems() {
 		return this.itemService.listItems();
 	}
-	
+
 	@RequestMapping(value= "/items", method = {RequestMethod.POST})
 	public ResponseEntity<SetWithCountHolder<Item>> listItemsWithParams(@RequestBody ListingParamsHolder filter){
-		
+
 		SetWithCountHolder<Item> holder = this.itemService.listItemsPaginated(filter);
-		
+
 		return new ResponseEntity<SetWithCountHolder<Item>>(holder, HttpStatus.OK);
-		
+
 	}
-	
+
 	@RequestMapping(value= "/itemrest/associations/{itemId}", method = {RequestMethod.GET})
 	public ResponseEntity<Map<String, Set<ItemComponent>>> usedInItem(@PathVariable int itemId){
-		
+
 		Item item = this.itemService.getItemById(itemId);
 		Map<String, Set<ItemComponent>> map = new HashMap<String, Set<ItemComponent>>();
 		map.put("components", item.getComponents());
 		map.put("usedIn", item.getUsedIn());
-		
+
 		return new ResponseEntity<Map<String, Set<ItemComponent>>>(map, HttpStatus.OK);
-		
+
 	}
-	
+
 
 	//update or add component
 	@RequestMapping(value= "/componentrest", method = {RequestMethod.POST})
@@ -166,19 +164,13 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Collection<IdNameIsComposedQueryResult>> itemsForSelect(@PathVariable("id") int id) {
-		return new ResponseEntity<Collection<IdNameIsComposedQueryResult>>(this.getItemListForSelect(id),  HttpStatus.OK);
-	}
+	public ResponseEntity<Map<String,IdNameIsComposedQueryResult> > itemsForSelect(@PathVariable("id") int id) {
+		
+		return new ResponseEntity<Map<String,IdNameIsComposedQueryResult>>(
+				this.itemService.getAllItemsInShort(id, "term"),  
+				HttpStatus.OK
+				);
 
-	//#todo
-	//check for any circular reference in item components
-	//a is composed of b, b is composed of a
-	protected Collection<IdNameIsComposedQueryResult> getItemListForSelect(int id) {
-		Collection<IdNameIsComposedQueryResult> allItems = new LinkedHashSet<IdNameIsComposedQueryResult>();
-		for (IdNameIsComposedQueryResult i : this.itemService.getAllItemsInShort())
-			if (i.id != id ) 
-				allItems.add(i);//put in linked map to save order
-		return allItems;
 	}
 
 }

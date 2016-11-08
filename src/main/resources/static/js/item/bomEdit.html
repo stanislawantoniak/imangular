@@ -55,7 +55,7 @@
 								<div class="input-group">
 									<select class="form-control" name="component"
 										ng-model="itemCtrl.inserted.component"
-										ng-options="item.text for item in itemCtrl.itemsForSelect track by item.value"
+										ng-options="item.name for item in itemCtrl.itemsForSelect"
 										required>
 										<option value="">------</option>
 									</select> <span ng-show="addIC.component.$error.itemFromSelect">Select!!!!</span>
