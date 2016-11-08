@@ -1,9 +1,12 @@
 package pl.essay.imangular.service;
 
 
+import java.util.List;
+
 import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialInStock;
+import pl.essay.imangular.model.BomRequirementsQueryResult;
 
 public interface BillOfMaterialService {
 
@@ -17,8 +20,6 @@ public interface BillOfMaterialService {
 	public void updateStockInBom(BillOfMaterialInStock stock);
 	public void createStockInBom(BillOfMaterialInStock stock);
 	
-	public void calculateBom(BillOfMaterial bom);
-
-
-	
+	public BillOfMaterial calculateBom(BillOfMaterial bom);
+	public List<BomRequirementsQueryResult>  getBomRequirements(long id);
 }

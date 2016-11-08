@@ -29,13 +29,13 @@ public class ItemServiceImpl implements ItemService{
 	public void updateItem(Item i){
 		this.itemDao.update(i);
 	}
-	
+
 	@Override
 	public int addItem(Item i){
 		this.itemDao.create(i);
 		return i.getId();
 	}
-	
+
 	@Override
 	public int addItemComponentFastNotSecure(ItemComponent ic){
 		this.itemComponentDao.create(ic);
@@ -48,21 +48,21 @@ public class ItemServiceImpl implements ItemService{
 		this.itemComponentDao.create(ic);
 	}
 
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public SetWithCountHolder<Item> listItems(){
 		return this.itemDao.getAll();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public SetWithCountHolder<Item>  listItemsPaginated(ListingParamsHolder params){
 		return this.itemDao.getAll(params);
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public Item getItemById(int id){
@@ -72,7 +72,7 @@ public class ItemServiceImpl implements ItemService{
 		item.getUsedIn().size();
 		return item;
 	}
-	
+
 	@Override
 	public void removeItem(int id){
 		Item item = this.itemDao.load(id);
@@ -107,26 +107,33 @@ public class ItemServiceImpl implements ItemService{
 
 		return component.getId();
 	}
-	
+
 	@Override
 	public Set<ItemComponent> getItemComponentsByParent(int id) {
 		return this.itemComponentDao.getItemComponentsByParent(id);
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public boolean existsItem(String name){
 		return itemDao.existsItemByName(name);
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public Item getItemByName(String name){
 		return itemDao.getItemByName(name);
 	}
-	
+
 	/*
-	 * method for preparing select list for add/edit component
+	 * method for preparing select list for 
+	 *  - add/edit component
+	 *  - create bom (that why isComposed is needed)
+	 *  
+	 * assumptions:
+	 *  when id != 0 then it is list for add/edit component (need to exclude some items according to parent items)
+	 *  when id == 0 then it is list for create bom - need to exclude not composed items
+	 *  
 	 * must not contain the item for which we prepare the list
 	 * and components that are in the item
 	 * 
@@ -140,16 +147,20 @@ public class ItemServiceImpl implements ItemService{
 	public Map<String,IdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term){
 		Map<String,IdNameIsComposedQueryResult> theMap = new TreeMap<String,IdNameIsComposedQueryResult>();
 		//copy all the result to map
-		Item item = this.itemDao.get(itemId);
 		for (IdNameIsComposedQueryResult i : itemDao.getAllItemsInShort()){
+			if (itemId !=  0  || i.isComposed == true)  //add to list all when id is not 0 (then it is select for add bom and need to check if isComposed)
 			theMap.put(i.name, i);
 		}
 		//remove from map the item for which we build select list
-		theMap.remove(item.getName()); // name is safeas we have primary key on name
-		for (ItemComponent ic : item.getComponents()){
-			theMap.remove(ic.getComponentName());
+		//if id == 0 then itos select for create bom
+		if (itemId != 0){
+			Item item = this.itemDao.get(itemId);
+			theMap.remove(item.getName()); // name is safeas we have primary key on name
+			for (ItemComponent ic : item.getComponents()){
+				theMap.remove(ic.getComponentName());
+			}
 		}
 		return theMap;
 	}
-	
+
 }

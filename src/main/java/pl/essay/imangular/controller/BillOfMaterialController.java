@@ -1,5 +1,10 @@
 package pl.essay.imangular.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialInStock;
+import pl.essay.imangular.model.BomRequirementsQueryResult;
 import pl.essay.imangular.model.Item;
+import pl.essay.imangular.model.ItemComponent;
 import pl.essay.imangular.service.BillOfMaterialService;
 import pl.essay.imangular.service.ItemService;
 
@@ -33,7 +40,9 @@ public class BillOfMaterialController extends BaseController {
 		//this.kickCreate();
 		SetWithCountHolder<BillOfMaterial> boms = this.bomService.listBoms();
 		for(BillOfMaterial bom : boms.getCollection()){
-			this.bomService.calculateBom(bom);
+			BillOfMaterial b = this.bomService.getBomById(bom.getId());
+			b.setRequiredQuantity(2);
+			this.bomService.updateBom(bom);
 		}
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -55,15 +64,23 @@ public class BillOfMaterialController extends BaseController {
 	public SetWithCountHolder<BillOfMaterial> listBoms() {
 		return this.bomService.listBoms();
 	}
+	
+	@RequestMapping(value= "/bomrest/requirements/{bomId}", method = {RequestMethod.GET})
+	public ResponseEntity<List<BomRequirementsQueryResult>> usedInItem(@PathVariable long bomId){
 
-	@RequestMapping(value = "/bomsrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		return new ResponseEntity<List<BomRequirementsQueryResult>>(this.bomService.getBomRequirements(bomId), HttpStatus.OK);
+
+	}
+
+
+	@RequestMapping(value = "/bomrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BillOfMaterial> getBom(@PathVariable("id") long id) {
 		System.out.println("Fetching Bom with id " + id);
 		BillOfMaterial bom = (id != 0 ? this.bomService.getBomById(id) : new BillOfMaterial());//init bom or get from db 
 		return new ResponseEntity<BillOfMaterial>(bom, HttpStatus.OK);
 	}
 
-	@RequestMapping(value= "/bomsrest/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value= "/bomrest/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateBillOfMaterial(@PathVariable long id, @RequestBody BillOfMaterial bom){
 
 		logger.trace("before update bom data: "+bom);

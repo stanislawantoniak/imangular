@@ -38,27 +38,33 @@ public class BillOfMaterialFlatListLine {
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	@JsonBackReference(value="requirementsList")
 	private BillOfMaterial bom;
-	
+
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Item forItem;
-	
+
 	@Column
-	@NotNull
+	//@NotNull
 	@DecimalMin("1")
-	private int effectiveRequiredQuantity;
-	
+	private Integer requiredQuantity;
+
+	@Column
+	//@NotNull
+	@DecimalMin("0")
+	private Integer effectiveRequiredQuantity;
+
+
 	public BillOfMaterialFlatListLine(){};
-	
+
 	public long getId(){
 		return this.id;
 	}
-	
+
 	public void setId(long id){
 		this.id = id;
 	}
-	
+
 	public BillOfMaterial getBom(){
 		return this.bom;
 	}
@@ -70,41 +76,48 @@ public class BillOfMaterialFlatListLine {
 	public Item getForItem(){
 		return this.forItem;
 	}
-	
+
 	public void setForItem(Item item){
 		this.forItem = item;
 	}
-		
-	public int getEffectiveRequiredQuantity(){
+
+	public Integer getRequiredQuantity(){
+		return this.requiredQuantity;
+	}
+
+	public void setRequiredQuantity(Integer q){
+		this.requiredQuantity = q;
+	}		
+	public Integer getEffectiveRequiredQuantity(){
 		return this.effectiveRequiredQuantity;
 	}
-	
-	public void setEffectiveRequiredQuantity(int q){
+
+	public void setEffectiveRequiredQuantity(Integer q){
 		this.effectiveRequiredQuantity = q;
 	}
-	
-	 public boolean equals(Object other) {
-	        if (this == other) return true;
-	        
-	        if ( !(other instanceof BillOfMaterialFlatListLine) ) return false;
 
-	        final BillOfMaterialFlatListLine b2 = (BillOfMaterialFlatListLine) other;
+	public boolean equals(Object other) {
+		if (this == other) return true;
 
-			EqualsBuilder eb = new EqualsBuilder();
-			
-			eb.append(b2.getForItem(), this.getForItem());
-			eb.append(b2.getBom(), this.getBom());
+		if ( !(other instanceof BillOfMaterialFlatListLine) ) return false;
 
-			return eb.isEquals();
+		final BillOfMaterialFlatListLine b2 = (BillOfMaterialFlatListLine) other;
 
-	    }
-	 
-		@Override
-		public int hashCode() { //todo - add extra fields like user/session when it is time
-			HashCodeBuilder hcb = new HashCodeBuilder();
-			hcb.append(this.getBom().hashCode());
-			hcb.append(this.getForItem().hashCode());
-			return hcb.toHashCode();
-		}
-	
+		EqualsBuilder eb = new EqualsBuilder();
+
+		eb.append(b2.getForItem(), this.getForItem());
+		eb.append(b2.getBom(), this.getBom());
+
+		return eb.isEquals();
+
+	}
+
+	@Override
+	public int hashCode() { //todo - add extra fields like user/session when it is time
+		HashCodeBuilder hcb = new HashCodeBuilder();
+		hcb.append(this.getBom().hashCode());
+		hcb.append(this.getForItem().hashCode());
+		return hcb.toHashCode();
+	}
+
 }

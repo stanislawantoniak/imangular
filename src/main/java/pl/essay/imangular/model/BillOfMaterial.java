@@ -51,7 +51,7 @@ public class BillOfMaterial {
 	@Column
 	@NotNull
 	@DecimalMin("1")
-	private int requiredQuantity;
+	private Integer requiredQuantity;
 
 	public BillOfMaterial(){};
 	

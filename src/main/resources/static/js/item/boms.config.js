@@ -9,15 +9,15 @@ itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
 	$stateProvider
 
-	.state ('root.bomEdit', {
-		url: 'boms/edit/:id',
+	.state ('root.bomDetails', {
+		url: '/boms/details/:id',
 		templateUrl : 'js/item/bomEdit.html',
-		controller : 'bomedit as bomCtrl'
+		controller : 'bomEdit as bomCtrl'
 	})
 	.state('root.bomWizard', {
-		url: 'boms/wizard',
+		url: '/boms/wizard',
 		templateUrl : 'js/item/bomWizzard.html',
-		controller : 'bomedit as bomCtrl'
+		controller : 'bomWizard as bomCtrl'
 	});
 
 	//console.log('boms config ending');
@@ -32,8 +32,7 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 	self.fetchAllBoms = function(){
 		//console.log('starting fetching boms');
 		self.service.fetchAll().then(function(response) {
-			self.boms = response;
-			console.log('boms fetched '+response.length);
+			self.boms = response.collection;
 			console.log('boms::',self.boms);
 		}, function(){
 			console.log('get boms from service - fail');
@@ -64,15 +63,13 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 
 }]);
 
-itemApp.controller( 'bomedit', ['$scope', '$http', 'translator', 'bomService',  'dialogFactory', function bomsController($scope, $http, translator, bomService, dialogFactory ) {
+itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bomService',  'dialogFactory', 
+                                  function bomsController($scope, $state, $http, translator, bomService, dialogFactory ) {
 
-
-	console.log('bomedit ctrl starting');
-
+	console.log('bomWizard ctrl starting');
 	var self = this;
 	self.service = bomService;
 	self.translator = translator;
-	self.deleteDialog = dialogFactory.getService();
 
 	self.bom = {
 			item : null,
@@ -90,37 +87,87 @@ itemApp.controller( 'bomedit', ['$scope', '$http', 'translator', 'bomService',  
 
 	//get items for select in add bom
 	self.service.fetchAnyData('/items/forselect/0').then(function(response){
-		var items = response;
-		self.itemsForSelect = [];
-		angular.forEach(items, function(row) { 
-			if (row.isComposed){
-				self.itemsForSelect.push(row);
-			}
-		});
+
+		self.itemsForSelect = response;
+
 		console.log('items for select',self.itemsForSelect);
 	}, function(){
 		console.log('get items for select - fail');
 	})
-	
+
 	self.createOrUpdateBom = function(){
-		
+
 		var b = {
 				id : 0,
 				forItem : self.bom.item.id,
 				requiredQuantity : self.bom.quantity
 		}
 		console.log('bom::',b);
-		
+
 		self.service.createOrUpdate(b)
 		.then( function(response){
-			//console.log('create item::',response);
-			//self.itemId = response;
-			$location.path('/boms');
+			console.log('create item::',response);
+			$state.go('^.bomDetails',{id:response});
 		},	function(errResponse){
 			console.error('Error while creating/saving bom');
 		});
 	}
 
-	console.log('bomedit ctrl ending');
+	console.log('bomWizard ctrl ending');
 
 }]);
+
+itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', 'translator', 'bomService',  'dialogFactory', 
+                                function bomsController($scope, $state, $stateParams, $http, translator, bomService, dialogFactory ) {
+
+	console.log('bomEdit ctrl starting');
+
+	var self = this;
+	self.service = bomService;
+	self.translator = translator;
+
+	self.bomId = parseInt($stateParams.id);
+
+	self.createOrUpdateBomQuantity = function(){
+
+		console.log('bom::',b);
+
+		self.service.createOrUpdate(b)
+		.then( function(response){
+			console.log('create item::',response);
+			$state.go('^.bomDetails',{id:response});
+		},	function(errResponse){
+			console.error('Error while creating/saving bom');
+		});
+	};
+
+	self.fetchBom = function(){
+		bomService
+		.fetch(self.bomId)
+		.then(
+				function(response) {
+					self.bom = response;
+					console.log('bom::',self.bom);
+				}
+		)
+	};
+
+	self.fetchRequirements = function(){
+		bomService
+		.fetchAnyData('/bomrest/requirements/'+self.bomId)
+		.then( 
+				function(response){
+					self.requirements = response;
+					console.log('requirements::', self.requirements);
+				}
+		)
+	};
+
+
+	self.fetchBom();
+	self.fetchRequirements();
+
+	console.log('bomEdit ctrl ending');
+
+}]);
+

@@ -48,15 +48,19 @@ public class BillOfMaterialInStock {
 	@Column
 	@NotNull
 	@DecimalMin("0")
-	private int inStockQuantity;
+	private Integer inStockQuantity;
 
 	@Column
 	@NotNull
 	@DecimalMin("0")
-	private int consumedStockQuantity;
+	private Integer consumedStockQuantity;
 
 	public BillOfMaterialInStock(){};
 
+	public BillOfMaterialInStock(long id){
+		this.id = id;
+	};
+	
 	public long getId(){
 		return this.id;
 	}

@@ -2,6 +2,7 @@ package pl.essay.imangular.service;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialDao;
 import pl.essay.imangular.model.BillOfMaterialFlatListLine;
 import pl.essay.imangular.model.BillOfMaterialInStock;
+import pl.essay.imangular.model.BomRequirementsQueryResult;
+import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
 import pl.essay.imangular.model.ItemDao;
 
@@ -29,11 +32,13 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	@Override
 	public long addBom(BillOfMaterial bom) {
 		this.bomDao.create(bom);
+		this.bomDao.update(this.calculateBom(bom));
 		return bom.getId();
 	}
 
 	@Override
 	public void updateBom(BillOfMaterial bom) {
+		//to fix shoul be recalculated
 		this.bomDao.update(bom);
 	}
 
@@ -45,6 +50,11 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	@Override
 	public BillOfMaterial getBomById(long id) {
 		BillOfMaterial bom = this.bomDao.get(id);
+		
+		//load lazy loaded list while in transaction
+		bom.getRequirementsList().size(); 
+		bom.getStocks().size();
+		
 		return bom;
 	}
 
@@ -54,8 +64,8 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	}
 
 	@Override
-	public void calculateBom(BillOfMaterial b){
-		BillOfMaterial bom = this.bomDao.get(b.getId());
+	public BillOfMaterial calculateBom(BillOfMaterial bom){
+		//BillOfMaterial bom = this.bomDao.get(b.getId());
 
 		//copy stocks entered by user to handy map
 		Map<Long, BillOfMaterialInStock> stocksMap = new HashMap<Long, BillOfMaterialInStock>();
@@ -67,7 +77,8 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		//create empty map fornew requirements list, it will be keyed by item id
 		Map<Long, BillOfMaterialFlatListLine> bomMap = new HashMap<Long, BillOfMaterialFlatListLine>();
 
-		System.out.println("calculate bom:: "+b.getForItem().getName());
+		System.out.println("calculate bom:: "+bom.getForItem().getName());
+		
 		for (ItemComponent ic: bom.getForItem().getComponents()){
 			this.calculateRecursive(ic, bom, 1, stocksMap,  bomMap); //1 as required from parent because it is zero level - it is always multipliet by bom quantity anyway
 		}
@@ -79,12 +90,14 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 			bom.getRequirementsList().add(line.getValue());
 		}
 		
-		this.bomDao.update(bom);
+		return bom;
 	}
 
 	private void calculateRecursive(ItemComponent ic, BillOfMaterial bom, int requiredFromParent, Map<Long, BillOfMaterialInStock>  stocks, Map<Long, BillOfMaterialFlatListLine> lines){
 		
 		Long itemId = (long) ic.getComponent().getId(); 
+		Item item = this.itemDao.get(ic.getComponent().getId());
+		
 		BillOfMaterialFlatListLine line;
 		
 		if (lines.containsKey( itemId ))
@@ -123,12 +136,12 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 			stock.setConsumedStockQuantity(stock.getInStockQuantity() - stockToConsume);
 		}
 		
-		System.out.println("    component:: "+ic.getComponentName()+" | requiredEffective:: "+requiredEffective+" | stockToConsume:: "+stockToConsume);
+		System.out.println("    component:: "+item.getName()+" | requiredEffective:: "+requiredEffective+" | stockToConsume:: "+stockToConsume);
 
 		line.setEffectiveRequiredQuantity( line.getEffectiveRequiredQuantity() + requiredEffective);
-		
-		if (ic.getComponent().getIsComposed()){
-			for (ItemComponent component: ic.getComponent().getComponents()){
+
+		if (item.getIsComposed()){
+			for (ItemComponent component: item.getComponents()){
 				this.calculateRecursive(component, bom, ic.getQuantity(), stocks,  lines);
 			}
 		} else { //just add requirement to lines
@@ -140,30 +153,24 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		BillOfMaterial bom = this.bomDao.get(idbom);
 		
 		BillOfMaterialInStock stockToDelete = null;
-		for (BillOfMaterialInStock s: bom.getStocks()){
-			if (s.getForItem().getId() == idstock){
-				stockToDelete = s;
-				break;
-			}
-		}
 		bom.getStocks().remove(stockToDelete);
 		
-		this.bomDao.update(bom);
+		this.bomDao.update(this.calculateBom(bom));
 		
 	}
 
 	@Override
 	public void updateStockInBom(BillOfMaterialInStock stock) {
 		BillOfMaterial bom = this.bomDao.get(stock.getBom().getId());
-		
-		BillOfMaterialInStock stockToUpdate = null;
+
 		for (BillOfMaterialInStock s: bom.getStocks()){
 			if (s.getForItem().getId() == stock.getForItem().getId()){
 				s.setInStockQuantity(stock.getInStockQuantity()); //update quantity - that isthe onlu thing that can change
 				break;
 			}
 		}
-		this.bomDao.update(bom);
+		
+		this.bomDao.update(this.calculateBom(bom));
 	}
 
 	@Override
@@ -174,8 +181,12 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		stock.setForItem(itemDao.get(stock.getId()));
 		bom.getStocks().add(stock);
 		
-		this.bomDao.update(bom);
+		this.bomDao.update(this.calculateBom(bom));
 		
+	}
+	@Override
+	public List<BomRequirementsQueryResult>  getBomRequirements(long id){
+		return this.bomDao.getRequirementsOfBom(id);
 	}
 
 }
