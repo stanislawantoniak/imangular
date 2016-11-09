@@ -1,5 +1,5 @@
 generic;translations
-"leftpanelmenumanageBoms", "Fabryka"
+"leftpanelmenumanageBoms", "Moje zadania"
 "leftpanelmenumanageitems","Produkty"
 "leftpanelmenumanageUsers", "Użytkownicy"
 "navbarmenuactionlogin","Zaloguj się"
@@ -148,6 +148,18 @@ bom;wizard
 "bomWizardItemNameLabel","Wybrano produkt: "
 "bomWizardChangeItemButton","Zmień produkt"
 "bomWizardItemQuantityLabel","Ilość do wyproduktowania: "
+
+bom;edit
+"bomEditRecipeHeader","Twoje zadanie"
+"bomEditRecipeLabel1","Wyprodukować "
+"bomEditRecipeLabel2"," produktu "
+"bomEditComponentLabel","Składnik"
+"bomEditIsComposed","Czy złożony"
+"bomEditRequiredQuantityLabel","Potrzebna ilość wg. receptury"
+"bomEditRequiredEffectiveQuantityLabel","Potrzebna ilość po uwzględnieniu mojego zapasu"
+"bomEditInStockQuantityLabel","Ilość którą już mam"
+"bomEditStockRemarksLabel","Moje uwagi"
+
 
 
 

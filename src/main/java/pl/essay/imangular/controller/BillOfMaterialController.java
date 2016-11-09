@@ -124,7 +124,7 @@ public class BillOfMaterialController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value= "/bomrest/stock/{idbom}/{idstock}", method = RequestMethod.DELETE)
+	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStockFromBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock){
 
 		BillOfMaterial bom = this.bomService.getBomById(idbom);
@@ -140,7 +140,7 @@ public class BillOfMaterialController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value= "/bomrest/stock/{idbom}/{idstock}", method = RequestMethod.PUT)
+	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateStockInBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock, @RequestBody BillOfMaterialInStock stock){
 
 		BillOfMaterial bom = this.bomService.getBomById(idbom);
@@ -156,7 +156,7 @@ public class BillOfMaterialController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value= "/bomrest/stock/{idbom}/{idstock}", method = RequestMethod.POST)
+	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.POST)
 	public ResponseEntity<Void> createStockInBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock, @RequestBody BillOfMaterialInStock stock){
 
 		BillOfMaterial bom = this.bomService.getBomById(idbom);

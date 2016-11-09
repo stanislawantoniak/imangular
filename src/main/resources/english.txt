@@ -1,7 +1,7 @@
 generic;translations
 "appname","Item Maker 1.1"
 "leftpanelcaption","Navigation"
-"leftpanelmenumanageBoms", "Item Factory"
+"leftpanelmenumanageBoms", "Assignments"
 "leftpanelmenumanageitems","Manage Items"
 "leftpanelmenumanageUsers", "Manage Users"
 "navbarmenuactionlogin","Sign in"
@@ -148,5 +148,11 @@ bom;wizard
 "bomWizardChangeItemButton","Change product"
 "bomWizardItemQuantityLabel","Quantity to make: "
 
-
+bom;edit
+"bomEditComponentLabel","Component"
+"bomEditIsComposed","Is composed"
+"bomEditRequiredQuantityLabel","Required qty according to recipe"
+"bomEditRequiredEffectiveQuantityLabel","Required quantity"
+"bomEditInStockQuantityLabel","In stock"
+"bomEditStockRemarksLabel","My remarks"
 

@@ -117,8 +117,8 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 
 }]);
 
-itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', 'translator', 'bomService',  'dialogFactory', 
-                                function bomsController($scope, $state, $stateParams, $http, translator, bomService, dialogFactory ) {
+itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', 'translator', 'bomStockService', 'bomService', 'dialogFactory', 
+                                function bomsController($scope, $state, $stateParams, $http, translator, bomStockService, bomService, dialogFactory ) {
 
 	console.log('bomEdit ctrl starting');
 
@@ -155,6 +155,25 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', 'tr
 	self.fetchRequirements = function(){
 		bomService
 		.fetchAnyData('/bomrest/requirements/'+self.bomId)
+		.then( 
+				function(response){
+					self.requirements = response;
+					console.log('requirements::', self.requirements);
+				}
+		)
+	};
+
+	self.saveStock = function(req){
+		var stock = {
+				bom : { id : self.bomId },
+				forItem : { id : req.forItemId },
+				inStockQuantity : req.inStockQuantity,
+				remarks : req.stockRemarks
+		}
+		console.log('stock :: ',stock);
+		
+		bomStockService
+		.createOrUpdate('/bomrest/requirements/'+self.bomId)
 		.then( 
 				function(response){
 					self.requirements = response;

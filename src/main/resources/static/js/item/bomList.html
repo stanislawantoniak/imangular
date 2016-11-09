@@ -57,7 +57,7 @@
 
 	<div class="card">
 		<div class="card-header">
-		{{bomsCtrl.boms}}
+		{{bomsCtrl.boms_}}
 		
 		</div>
 	</div>
@@ -82,9 +82,9 @@
 						<tr>
 							<th width="5">{{translator.label.bomslistbomstableheadingid}}</th>
 							<th width="20">{{translator.label.bomslistbomstableheadingname}}</th>
-							<th width="55">components</th>
+							<th ng-if="false" width="55">components</th>
 							<th width="5">{{translator.label.bomslistbomstableheadingqty}}</th>
-							<th width="55">requirements</th>
+							<th ng-if="false" width="55">requirements</th>
 							<th width="15">{{translator.label.bomslistbomstableheadingactions}}</th>
 						</tr>
 					</thead>
@@ -92,12 +92,12 @@
 						<tr ng-repeat="bom in bomsCtrl.boms">
 							<td>{{bom.id}}</td>
 							<td>{{bom.forItem.name}}</td>
-							<td>
+							<td ng-if="false">
 								<div class="panel-body list-group">
 									<div class="list-group-item"
-										ng-repeat="itemComponent in bom.forItem.components">
+										ng-repeat="itemComponent in bom.forItem.components_">
 										<span class="label label-success">{{itemComponent.quantity}}
-											pcs</span> {{itemComponent.componentName}} <a
+											pcs</span> {{itemComponent.componentName}}<a
 											href="#!/items/edit/{{itemComponent.componentId}}"><span
 											class="fa fa-external-link"></span></a>
 									</div>
@@ -105,10 +105,10 @@
 							</td>
 
 							<td>{{bom.requiredQuantity}}</td>
-							<td>
+							<td ng-if="false"> 
 								<div class="panel-body list-group">
 									<div class="list-group-item"
-										ng-repeat="requirement in bom.requirementsList">
+										ng-repeat="requirement in bom.requirementsList__">
 										<span class="label label-success">{{requirement.effectiveRequiredQuantity}}
 											pcs</span> {{requirement.forItem.name}}
 									</div>

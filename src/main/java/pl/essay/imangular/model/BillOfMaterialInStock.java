@@ -55,6 +55,9 @@ public class BillOfMaterialInStock {
 	@DecimalMin("0")
 	private Integer consumedStockQuantity;
 
+	@Column
+	private String remarks;
+	
 	public BillOfMaterialInStock(){};
 
 	public BillOfMaterialInStock(long id){
@@ -98,6 +101,13 @@ public class BillOfMaterialInStock {
 	public void setConsumedStockQuantity(int q){
 		this.consumedStockQuantity = q;
 	}
+	
+	public String getRemarks(){
+		return this.remarks;
+	};
+	public void setRemarks(String w){
+		this.remarks = w;
+	};
 
 	public boolean equals(Object other) {
 		if (this == other) return true;
