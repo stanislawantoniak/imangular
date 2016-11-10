@@ -13,17 +13,13 @@
 					<div class="card-body card-padding bgm-teal c-white z-depth-4">
 						<div class="row">
 							<div class="col-md-3 col-xs-1">
-								<p>
 								<div class="text-center" style="font-size: 300%;">
-									<i class="zmdi zmdi-sun"></i>
+									<i class="zmdi zmdi-star-outline"></i>
 								</div>
-								</p>
 							</div>
-							<div class="col-md-9 col-xs-11">
-								<p>
+							<div class="col-md-9 col-xs-11 tile">
 								<div>{{translator.label.clickto}}</div>
 								<div class="f-15">{{translator.label.bomslistheadingbuttonaddbom}}</div>
-								</p>
 							</div>
 						</div>
 					</div>
@@ -33,22 +29,27 @@
 		<div class="col-md-4" ng-repeat="bom in bomsCtrl.boms">
 			<a href ui-sref="root.bomDetails({id:bom.id})">
 				<div class="card">
-					<div class="card-body card-padding bgm-lime c-white z-depth-4">
+					<div class="card-body card-padding bgm-lime c-white z-depth-4"
+					ng-class="{'bg-lime': !bom.forItem.isBuilding, 'bgm-gray':bom.forItem.isBuilding}">
 						<div class="row">
 							<div class="col-md-3 col-xs-1">
-								<p>
 								<div class="text-center" style="font-size: 300%;">
-									<i class="zmdi zmdi-format-color-fill"></i>
+									<i ng-show="bom.forItem.isBuilding"
+										class="zmdi zmdi-balance zmdi-hc-fw"></i> <i
+										ng-show="!bom.forItem.isBuilding"
+										class="zmdi zmdi-format-color-fill"></i>
 								</div>
-								</p>
 							</div>
-							<div class="col-md-9 col-xs-11">
-								<p>
-								<div class="f-15">{{translator.label.bomslistbomstableheadingname}}
+							<div class="col-md-9 col-xs-11 tile">
+
+								<div class="m-t-10">{{translator.label.bomslistbomstableheadingname}}
 									{{bom.forItem.name}}</div>
-								<div>{{bom.requiredQuantity}} {{translator.label.pcs}}</div>
-								</p>
+								<i class="tmn-counts bgm-white"
+								ng-class="{'c-lime': !bom.forItem.isBuilding, 'c-gray':bom.forItem.isBuilding}">{{bom.requiredQuantity}}
+									{{translator.label.pcs}}</i>
+
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -56,10 +57,7 @@
 	</div>
 
 	<div class="card">
-		<div class="card-header">
-		{{bomsCtrl.boms_}}
-		
-		</div>
+		<div class="card-header">{{bomsCtrl.boms_}}</div>
 	</div>
 	<div class="card">
 		<div class="card-header">
@@ -105,7 +103,7 @@
 							</td>
 
 							<td>{{bom.requiredQuantity}}</td>
-							<td ng-if="false"> 
+							<td ng-if="false">
 								<div class="panel-body list-group">
 									<div class="list-group-item"
 										ng-repeat="requirement in bom.requirementsList__">

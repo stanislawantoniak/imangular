@@ -36,18 +36,17 @@ public class BillOfMaterialDaoImpl extends GenericDaoHbnImpl<BillOfMaterial> imp
 				.createQuery(
 							"select "+
 								"new pl.essay.imangular.model.BomRequirementsQueryResult("+
-									"forItem.id, forItem.name, forItem.isComposed, "+
-									"forItem.whereManufactured, forItem.otherSources, "+
+									"line.forItem.id, line.forItem.name, line.forItem.isComposed, "+
+									"line.forItem.whereManufactured, line.forItem.otherSources, "+
 									"line.requiredQuantity, line.effectiveRequiredQuantity,"+
 									"stock.inStockQuantity, stock.id, "+
 									"stock.remarks )"+
 							"from BillOfMaterialFlatListLine line "+
-							"inner join line.forItem forItem "+
 							"left outer join line.bom.stocks stock "+
-							"where line.bom.id=:id and "+
-								"( stock is null or stock.forItem.id = forItem.id) "+
+							"where line.bom.id=:id "+
+								" and ( stock is null or stock.forItem.id = line.forItem.id) "+
 							"order by "+
-								"forItem.isComposed desc, "+
+								"line.forItem.isComposed desc, "+
 								"line.forItem.name") 
 				.setParameter("id", id)
 				.list();

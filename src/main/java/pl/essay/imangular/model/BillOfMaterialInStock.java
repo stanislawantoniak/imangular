@@ -57,13 +57,13 @@ public class BillOfMaterialInStock {
 
 	@Column
 	private String remarks;
-	
+
 	public BillOfMaterialInStock(){};
 
 	public BillOfMaterialInStock(long id){
 		this.id = id;
 	};
-	
+
 	public long getId(){
 		return this.id;
 	}
@@ -101,13 +101,22 @@ public class BillOfMaterialInStock {
 	public void setConsumedStockQuantity(int q){
 		this.consumedStockQuantity = q;
 	}
-	
+
 	public String getRemarks(){
 		return this.remarks;
 	};
 	public void setRemarks(String w){
 		this.remarks = w;
 	};
+
+	@Override
+	public String toString(){
+		return "stock :: "+this.getId()+
+				", stock.bom :: "+ this.bom.getId()+
+				( this.getForItem() != null ? ", stock.forItem :: "+ this.getForItem() : "" )+
+				( this.inStockQuantity != null ? ", stock.qty :: "+ this.inStockQuantity : "" )+
+				( this.remarks != null ? ", stock.remarks :: "+ this.remarks : "" );
+	}
 
 	public boolean equals(Object other) {
 		if (this == other) return true;

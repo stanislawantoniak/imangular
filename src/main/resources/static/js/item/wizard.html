@@ -1,5 +1,5 @@
 <div class="card">
-	<div class="card-header">
+	<div class="card-header clearfix">
 		<ul class="steps-indicator steps-{{getEnabledSteps().length}}"
 			ng-if="!hideIndicators">
 			<li
@@ -9,6 +9,8 @@
 				<p ng-show="step.selected">{{step.description}}</p></li>
 		</ul>
 	</div>
+	
+	
 	<div class="card-body">
 		<div class="steps" ng-transclude></div>
 	</div>

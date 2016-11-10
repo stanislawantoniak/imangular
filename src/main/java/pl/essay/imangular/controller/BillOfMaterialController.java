@@ -127,47 +127,29 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStockFromBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock){
 
-		BillOfMaterial bom = this.bomService.getBomById(idbom);
-		if (bom == null){			 
-			logger.trace("BillOfMaterial " +idbom+ " does not exist but requested delete stock from it");
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		}
-
-		logger.trace("before delete bom: "+bom);
-		this.bomService.removeStockFromBom(idbom, idstock);
-		logger.trace("after delete bom: "+bom);
+		logger.trace("before delete stock: "+idstock);
+		this.bomService.removeStockFromBom(idstock);
+		logger.trace("after delete stock: "+idstock);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> updateStockInBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock, @RequestBody BillOfMaterialInStock stock){
+	public ResponseEntity<Void> updateStockInBillOfMaterial(@PathVariable long idstock, @RequestBody BillOfMaterialInStock stock){
 
-		BillOfMaterial bom = this.bomService.getBomById(idbom);
-		if (bom == null){			 
-			logger.trace("BillOfMaterial " +idbom+ " does not exist but requested update stock in it");
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		}
-
-		logger.trace("before update bom: "+bom);
+		logger.trace("before update stock: "+stock);
 		this.bomService.updateStockInBom(stock);
-		logger.trace("after update bom: "+bom);
+		logger.trace("after update stock: "+stock);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.POST)
-	public ResponseEntity<Void> createStockInBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock, @RequestBody BillOfMaterialInStock stock){
+	@RequestMapping(value= "/bomstockrest/", method = RequestMethod.POST)
+	public ResponseEntity<Void> createStockInBillOfMaterial(@RequestBody BillOfMaterialInStock stock){
 
-		BillOfMaterial bom = this.bomService.getBomById(idbom);
-		if (bom == null){			 
-			logger.trace("BillOfMaterial " +idbom+ " does not exist but requested update stock in it");
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		}
-
-		logger.trace("before create bom: "+bom);
+		logger.trace("before create stock: "+stock);
 		this.bomService.createStockInBom(stock);
-		logger.trace("after create bom: "+bom);
+		logger.trace("after create stock: "+stock);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

@@ -112,13 +112,15 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 			console.error('Error while creating/saving bom');
 		});
 	}
+	
+
 
 	console.log('bomWizard ctrl ending');
 
 }]);
 
-itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', 'translator', 'bomStockService', 'bomService', 'dialogFactory', 
-                                function bomsController($scope, $state, $stateParams, $http, translator, bomStockService, bomService, dialogFactory ) {
+itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q', 'translator', 'bomStockService', 'bomService', 'dialogFactory', 
+                                function bomsController($scope, $state, $stateParams, $http, $q, translator, bomStockService, bomService, dialogFactory ) {
 
 	console.log('bomEdit ctrl starting');
 
@@ -164,7 +166,9 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', 'tr
 	};
 
 	self.saveStock = function(req){
+		console.log("req, line::",req);
 		var stock = {
+				//id : typeof( req.stockId ) == "undefined" ? 0 : req.stockId,
 				bom : { id : self.bomId },
 				forItem : { id : req.forItemId },
 				inStockQuantity : req.inStockQuantity,
@@ -173,14 +177,33 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', 'tr
 		console.log('stock :: ',stock);
 		
 		bomStockService
-		.createOrUpdate('/bomrest/requirements/'+self.bomId)
+		.update(stock,0)
 		.then( 
 				function(response){
-					self.requirements = response;
+					self.fetchRequirements();
 					console.log('requirements::', self.requirements);
 				}
 		)
 	};
+	
+	self.deleteBomPromise = function(){
+		var res = $q.defer();
+
+		self
+		.service
+		.deleteEntity(self.bom.id).
+		then( function(response){
+			$state.go('root.boms');
+			res.resolve(': '+self.bom.forItem.name);
+		},
+		function(errResponse){
+			console.error('Error while deleting item');
+			res.reject(translator.label.bomEditDeleteFailureHeading);
+		});
+
+		return res.promise;
+
+	}
 
 
 	self.fetchBom();

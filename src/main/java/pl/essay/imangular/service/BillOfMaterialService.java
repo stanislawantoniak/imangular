@@ -16,7 +16,7 @@ public interface BillOfMaterialService {
 	public BillOfMaterial getBomById(long id);
 	public void removeBom(long id);
 	
-	public void removeStockFromBom(long idbom, long idstock);
+	public void removeStockFromBom( long idstock);
 	public void updateStockInBom(BillOfMaterialInStock stock);
 	public void createStockInBom(BillOfMaterialInStock stock);
 	

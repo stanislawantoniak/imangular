@@ -15,7 +15,7 @@
 						<ul class="actions"
 							data-ng-if="!itemCtrl.editItemContext && nav.authService.session.isSupervisor">
 							<li class="dropdown" uib-dropdown><a href=""
-								uib-dropdown-toggle> <i class="zmdi zmdi-more-vert"></i>
+								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li><a ng-click="itemCtrl.setEditItemContext()"><i
@@ -234,7 +234,7 @@
 						<ul class="actions"
 							ng-if="!itemCtrl.editRowContext && nav.authService.session.isSupervisor">
 							<li class="dropdown" uib-dropdown><a href=""
-								uib-dropdown-toggle> <i class="zmdi zmdi-more-vert"></i>
+								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li ng-if="itemCtrl.item.isComposed"><a

@@ -121,8 +121,6 @@ users; useredit
 "edituserbuttoncancel","Anuluj"
 "edituserinvalidforminfo","Proszę wprowadzić poprawne dane"
 
-
-
 boms; boms
 "bomslistheadingbuttonaddbom","Dodać nowe zadanie"
 "bomslistheading","Fabryka"
@@ -137,19 +135,21 @@ boms; boms
 "bomslistdeletewarning","Czy napewno chcesz usunać zadanie:"
 
 bom;wizard
-"bomWizardHeader","Tworzenie nowej receptury"
+"bomWizardHeader","Tworzenie nowego zadania"
+"bomWizardFormHeader","Uzupełnij dane potrzebne do założenia nowego zadania"
 "bomWizardStep1","Wybierz produkt"
-"bomWizardStep1Desc","Musisz wybrać produkt z listy klikając na niego. Potem kliknij dalej."
+"bomWizardStep1Desc","Musisz wybrać produkt z listy klikając na niego."
 "bomWizardStep2","Wprowadź ilość"
-"bomWizardStep2Desc","Ilośc mozna takze zmienić później."
+"bomWizardStep2Desc","Ilość można także zmienić później."
 "bomWizardNext","Dalej"
 "bomWizardPrev","Poprzedni krok"
-"bomWizardFinish","Załóż recepturę"
+"bomWizardFinish","Załóż zadanie"
 "bomWizardItemNameLabel","Wybrano produkt: "
 "bomWizardChangeItemButton","Zmień produkt"
 "bomWizardItemQuantityLabel","Ilość do wyproduktowania: "
 
 bom;edit
+"bomEditRecipePageHeader","Zarządzanie zadaniem"
 "bomEditRecipeHeader","Twoje zadanie"
 "bomEditRecipeLabel1","Wyprodukować "
 "bomEditRecipeLabel2"," produktu "
@@ -159,6 +159,12 @@ bom;edit
 "bomEditRequiredEffectiveQuantityLabel","Potrzebna ilość po uwzględnieniu mojego zapasu"
 "bomEditInStockQuantityLabel","Ilość którą już mam"
 "bomEditStockRemarksLabel","Moje uwagi"
+"bomEditStockDeleteRecipeButton","Usuń zadanie"
+
+"bomEditdeleteheading","Na pewno chcesz usunąć zadanie "
+"bomEditDeleteSuccessHeading", "Zadanie zostało skasowane"
+"bomEditDeleteFailureHeading","Coś poszło nie tak"
+"bomEditDeleteOnCancelInfo", "Zadanie nie będzie skasowane"
 
 
 

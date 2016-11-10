@@ -95,6 +95,12 @@ public class BillOfMaterial {
 	public void setRequiredQuantity(int q){
 		this.requiredQuantity = q;
 	}
+	
+	@Override
+	public String toString(){
+		return "bom :: "+this.getId()+
+				", bom.forItem :: "+ this.forItem.getId();
+	}
 
 	@Override
 	public boolean equals(Object other) {

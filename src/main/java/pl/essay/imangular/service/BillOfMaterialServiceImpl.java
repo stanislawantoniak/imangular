@@ -14,6 +14,7 @@ import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialDao;
 import pl.essay.imangular.model.BillOfMaterialFlatListLine;
 import pl.essay.imangular.model.BillOfMaterialInStock;
+import pl.essay.imangular.model.BillOfMaterialInStockDao;
 import pl.essay.imangular.model.BomRequirementsQueryResult;
 import pl.essay.imangular.model.Item;
 import pl.essay.imangular.model.ItemComponent;
@@ -25,6 +26,9 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 
 	@Autowired 
 	private BillOfMaterialDao bomDao;
+	
+	@Autowired 
+	private BillOfMaterialInStockDao bomStockDao;
 	
 	@Autowired 
 	private ItemDao itemDao;
@@ -84,9 +88,12 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		}
 		
 		//old requirements will be removed
-		bom.getRequirementsList().removeAll(bom.getRequirementsList());
+		bom.getRequirementsList().clear();
+		
 		//and replaced by new list from map just calculated
+		System.out.println("req count::"+bomMap.size());
 		for (Map.Entry<Long, BillOfMaterialFlatListLine> line : bomMap.entrySet()){
+			System.out.println("requirement generated :: "+line.getValue());
 			bom.getRequirementsList().add(line.getValue());
 		}
 		
@@ -149,36 +156,52 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	}
 
 	@Override
-	public void removeStockFromBom(long idbom, long idstock) {
-		BillOfMaterial bom = this.bomDao.get(idbom);
+	public void removeStockFromBom(long idstock) {
 		
-		BillOfMaterialInStock stockToDelete = null;
+		//get stock from db
+		BillOfMaterialInStock stockToDelete = this.bomStockDao.get(idstock);
+		
+		BillOfMaterial bom = stockToDelete.getBom();
+		
+		//remove from associated
 		bom.getStocks().remove(stockToDelete);
 		
+		//finally recalculate and update bom 
 		this.bomDao.update(this.calculateBom(bom));
 		
 	}
 
 	@Override
 	public void updateStockInBom(BillOfMaterialInStock stock) {
-		BillOfMaterial bom = this.bomDao.get(stock.getBom().getId());
-
-		for (BillOfMaterialInStock s: bom.getStocks()){
-			if (s.getForItem().getId() == stock.getForItem().getId()){
-				s.setInStockQuantity(stock.getInStockQuantity()); //update quantity - that isthe onlu thing that can change
-				break;
-			}
-		}
 		
-		this.bomDao.update(this.calculateBom(bom));
+		BillOfMaterial bom = this.bomDao.get(stock.getBom().getId());
+		
+		stock.setBom(bom);
+		stock.setForItem(this.itemDao.get(stock.getForItem().getId()));
+
+		//remove stock from bom if exists and add new one
+		bom.getStocks().remove(stock);
+		bom.getStocks().add(stock);
+			
+		//finally recalculate and update bom 
+		System.out.println("req size 1::"+bom.getRequirementsList().size());
+		
+		BillOfMaterial bom2 = this.calculateBom(bom);
+		
+		System.out.println("req size 2::"+bom2.getRequirementsList().size());
+		
+		this.bomDao.update( bom2 );
 	}
 
 	@Override
 	public void createStockInBom(BillOfMaterialInStock stock) {
+		
 		BillOfMaterial bom = this.bomDao.get(stock.getBom().getId());
 		
+		//set bom and forItem properties - stock comes from rest
+		//so we do not have initialized object - only ids
 		stock.setBom(bom);
-		stock.setForItem(itemDao.get(stock.getId()));
+		stock.setForItem(itemDao.get(stock.getForItem().getId()));
 		bom.getStocks().add(stock);
 		
 		this.bomDao.update(this.calculateBom(bom));

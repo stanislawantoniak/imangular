@@ -122,7 +122,7 @@ users; useredit
 "edituserinvalidforminfo","Please enter correct data"
 
 boms; boms
-"bomslistheadingbuttonaddbom","Add new recipe"
+"bomslistheadingbuttonaddbom","Add new assignment"
 "bomslistheading","Factory jobs"
 "bomslistheadingbuttonadditem","Add Item"
 "bomslistheadingbuttonrefresh","Refresh"
@@ -136,9 +136,10 @@ boms; boms
 "bomslistdeletewarning","Are you sure to delete recipe:"
 
 bom;wizard
-"bomWizardHeader","Create recipe"
+"bomWizardHeader","Create assignment"
+"bomWizardFormHeader","Please fill in required information on your new assignment"
 "bomWizardStep1","Choose product"
-"bomWizardStep1Desc","You can select product on list, just click on it.<br>Then hit next."
+"bomWizardStep1Desc","You can select product on list, just click on it."
 "bomWizardStep2","Enter required quantity"
 "bomWizardStep2Desc","Enter quantity. You can change it later if you want."
 "bomWizardNext","Next step"
@@ -149,10 +150,12 @@ bom;wizard
 "bomWizardItemQuantityLabel","Quantity to make: "
 
 bom;edit
+"bomEditRecipePageHeader","Manage your assignment"
+"bomEditRecipeLabel1","You will produce "
+"bomEditRecipeLabel2"," of "
 "bomEditComponentLabel","Component"
 "bomEditIsComposed","Is composed"
 "bomEditRequiredQuantityLabel","Required qty according to recipe"
 "bomEditRequiredEffectiveQuantityLabel","Required quantity"
 "bomEditInStockQuantityLabel","In stock"
 "bomEditStockRemarksLabel","My remarks"
-

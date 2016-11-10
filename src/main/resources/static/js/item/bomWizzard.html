@@ -7,101 +7,52 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-8">
-
-			<wizard on-finish="finishedWizard()" indicators-position="top"
-				template="/js/item/wizard.html"> <wz-step
-				wz-title="{{translator.label.bomWizardStep1}}"
-				description="{{translator.label.bomWizardStep1Desc}}"
-				canexit="bomCtrl.itemSelected">
-
-			<div class="card">
-				<div class="card-body"
-					ng-hide="bomCtrl.itemSelected()">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th width="5">{{translator.label.itemslistitemstableheadingid}}</th>
-									<th width="25">{{translator.label.itemslistitemstableheadingname}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="item in bomCtrl.itemsForSelect"
-									ng-click="bomCtrl.selectItem(item)">
-									<td>{{item.id}}</td>
-									<td>{{item.name}}</td>
-								</tr>
-							</tbody>
-						</table>
+		<div class="card">
+			<div id="profile-main" class="pm-body clearfix">
+				<div class="pmb-block">
+					<div class="pmbb-header">
+						<h2>
+							<i class="zmdi zmdi-assignment zmdi-hc-fw"></i>{{
+							translator.label.bomWizardFormHeader }}
+						</h2>
 					</div>
-				</div>
-
-
-				<div class="card-body" ng-show="bomCtrl.itemSelected()">
-					<h4>
-						<div class="col-md-6 col-xs-12">
-							<div class="col-md-8 col-xs-12" style="text-align: center">
-								<span>{{translator.label.bomWizardItemNameLabel}}</span>
-								{{bomCtrl.bom.item.name}}
-							</div>
-							<div class="col-md-4 col-xs-12">
-								<a class="btn btn-default btn-sm btn-rounded"
-									ng-click="bomCtrl.selectItem(null)" ng-mouseover="test"><span
-									class="fa fa-pencil"></span>
-									{{translator.label.bomWizardChangeItemButton}} </a>
-							</div>
-						</div>
-						<div class="col-md-6 col-xs-12"></div>
-					</h4>
-				</div>
-
-			</div>
-
-			<div class="card">
-				<div class="card-body">
-					<input uib-tooltip="test" tooltip-enable="!bomCtrl.itemSelected()"
-						ng-disabled="!bomCtrl.itemSelected()"
-						class="btn btn-primary pull-right" type="submit" wz-next
-						value="{{translator.label.bomWizardNext}}" />
-				</div>
-			</div>
-
-			</wz-step> <wz-step wz-title="{{translator.label.bomWizardStep2}}"
-				description="{{translator.label.bomWizardStep2Desc}}">
-			<div class="card">
-
-				<div class="card-body">
-					<div class="col-md-6 col-xs-12"></div>
-					<div class="col-md-6 col-xs-12">
-						<form role="form" class="form-horizontal">
+					<div class="pmbb-body  p-l-30 m-t-20">
+						<form name="addIC" role="form" class="form-horizontal"
+							ng-submit="bomCtrl.createOrUpdateBom()">
 							<div class="form-group">
-								<label path="quantity" for="quantity"
-									class="col-md-6 col-xs-12 control-label">
-									{{translator.label.bomWizardItemQuantityLabel}}</label>
-								<div class="col-md-6 col-xs-12">
-									<div class="input-group">
-										<span class="input-group-addon"><span
-											class="fa fa-pencil"></span></span><input class="form-control"
-											name="quantity" ng-model="bomCtrl.bom.quantity" only-digits />
-									</div>
-								</div>
-							</div>
+
+								<dl class="dl-horizontal">
+									<dt class="p-t-10">{{translator.label.bomWizardStep1}}</dt>
+									<dd>
+										<select class="form-control" name="component"
+											ng-model="bomCtrl.bom.item"
+											ng-options="item.name for item in bomCtrl.itemsForSelect"
+											required>
+											<option value="">--------</option>
+										</select> <small ng-show="bomCtrl.bom.item === null">{{ translator.label.bomWizardStep1Desc }}</small>
+									</dd>
+								</dl>
+								<dl class="dl-horizontal">
+									<dt class="p-t-10">{{translator.label.bomWizardStep2}}</dt>
+									<dd>
+										<input class="form-control" name="quantity"
+											ng-model="bomCtrl.bom.quantity" only-digits required/> <small>{{
+											translator.label.bomWizardStep2Desc }}</small>
+									</dd>
+								</dl>
+
+							<button class="btn btn-primary pull-right" type="submit">
+									<i class="fa fa-save"></i> {{translator.label.bomWizardFinish}}
+								</button>
+								<a ui-sref="root.boms"
+									class="btn btn-default"> <i class="fa fa-undo"></i>
+									{{translator.label.componenteditformbuttoncancel}}
+								</a>
 						</form>
+
 					</div>
 				</div>
 			</div>
-			<div class="card">
-				<div class="card-body">
-					<input class="btn btn-default pull-left waves-effect" type="submit" wz-previous
-						value="{{translator.label.bomWizardPrev}}" /> <input
-						class="btn btn-primary pull-right waves-effect" type="submit" wz-finish
-						ng-click="bomCtrl.createOrUpdateBom()"
-						value="{{translator.label.bomWizardFinish}}" />
-				</div>
-			</div>
-			</wz-step> </wizard>
-
 		</div>
 	</div>
 </div>

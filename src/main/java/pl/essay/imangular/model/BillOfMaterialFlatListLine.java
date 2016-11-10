@@ -95,6 +95,13 @@ public class BillOfMaterialFlatListLine {
 	public void setEffectiveRequiredQuantity(Integer q){
 		this.effectiveRequiredQuantity = q;
 	}
+	
+	@Override
+	public String toString(){
+		return "requirement :: ("+this.getId()+", qtyRequired = "+this.requiredQuantity+")"+
+				", bom :: ("+ this.bom +")"+
+				", forItem :: ("+ this.forItem +")";
+	}
 
 	public boolean equals(Object other) {
 		if (this == other) return true;

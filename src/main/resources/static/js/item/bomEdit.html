@@ -1,7 +1,7 @@
 
 <div class="container">
 	<div class="block-header">
-		<h2>{{translator.label.edititemheadingitemcard}}</h2>
+		<h2>{{translator.label.bomEditRecipePageHeader}}</h2>
 	</div>
 	<div class="card">
 		<div id="profile-main" class="pm-body clearfix">
@@ -12,18 +12,23 @@
 						{{translator.label.bomEditRecipeHeader}}
 						</h3>
 
-						<ul class="actions"
-							data-ng-if="!itemCtrl.editItemContext && nav.authService.session.isSupervisor">
+						<ul class="actions">
 							<li class="dropdown" uib-dropdown><a href=""
-								uib-dropdown-toggle> <i class="zmdi zmdi-more-vert"></i>
+								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a ng-click="itemCtrl.setEditItemContext()"><i
-											class="zmdi zmdi-edit m-r-10"></i>{{translator.label.itemslistitemstableeditbutton}}</a></li>
-									<li><a
-										ng-if="!itemCtrl.item.isComposed && !itemCtrl.addItemCtx"
-										ng-click="itemCtrl.addItemComponent()"><i
-											class="zmdi zmdi-plus m-r-10"></i>{{translator.label.editcomponentsbuttonadd}}</a></li>
+									<li><a swal-exec
+										swal-object="item"
+										swal-dialog-title="{{translator.label.itemslistdeleteheading +' '+bomCtrl.bom.forItem.name}}?"
+										swal-main-text="{{translator.label.itemslistdeletewarning}}"
+										swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
+										swal-cancel-button="{{translator.label.edititembuttoncancel}}"
+										swal-exec-fn-on-confirm="bomCtrl.deleteBomPromise"
+										growl-on-confirm-success-title="{{translator.label.bomEditDeleteSuccessHeading}}"
+										growl-on-confirm-failure-title="{{translator.label.bomEditDeleteFailureHeading}}"
+										growl-on-cancel-text="{{translator.label.bomEditDeleteOnCancelInfo}}"><i
+										class="zmdi zmdi-close m-r-10"></i>{{translator.label.bomEditStockDeleteRecipeButton}}</a></li>
+
 								</ul></li>
 						</ul>
 				</div>
@@ -32,21 +37,19 @@
 						{{translator.label.bomEditRecipeLabel1}}
 						{{bomCtrl.bom.requiredQuantity}}&nbsp;{{translator.label.pcs}}
 						{{translator.label.bomEditRecipeLabel2}}
-						{{bomCtrl.bom.forItem.name }}
-						
-					</div>
+						{{bomCtrl.bom.forItem.name }}</div>
 				</div>
 			</div>
 
-			<div id="component-list" class="pmb-block">
+			<div id="requirements-list" class="pmb-block">
 				<div class="pmbb-header">
 					<h2>
 						<i class="zmdi zmdi-assignment zmdi-hc-fw"></i>
 						{{translator.label.itemcomponentsheading}}
 						</h3>
-						<ul class="actions">
+						<ul class="actions" ng-if="false">
 							<li class="dropdown" uib-dropdown><a href=""
-								uib-dropdown-toggle> <i class="zmdi zmdi-more-vert"></i>
+								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li ng-if="itemCtrl.item.isComposed"><a
@@ -59,16 +62,15 @@
 						</ul>
 				</div>
 				<div class="pmbb-body">
-					<table class="table ng-table"
-						ng-class="{'table-hover' : !itemCtrl.editRowContext}">
+					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
 								<th width="5%" ng-if="!itemCtrl.editRowContext"></th>
 								<th width="15%">{{translator.label.bomEditComponentLabel}}</th>
-								<th width="15%">{{translator.label.bomEditIsComposed}}</th>
+								<th width="5%" class="text-center">{{translator.label.bomEditIsComposed}}</th>
 								<th width="10%">{{translator.label.bomEditRequiredQuantityLabel}}</th>
 								<th width="10%">{{translator.label.bomEditRequiredEffectiveQuantityLabel}}</th>
-								<th width="10%">{{translator.label.bomEditInStockQuantityLabel}}</th>
+								<th width="10%" class="text-center">{{translator.label.bomEditInStockQuantityLabel}}</th>
 								<th width="15%">{{translator.label.bomEditStockRemarksLabel}}</th>
 							</tr>
 						</thead>
@@ -84,63 +86,41 @@
 
 								<td>{{ req.forItemName }}</td>
 
-								<td><i ng-show="req.forItemIsComposed"
+								<td class="text-center"><i ng-show="req.forItemIsComposed"
 									class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
 									ng-hide="req.forItemIsComposed"
 									class="zmdi zmdi-minus zmdi-hc-fw"></i></td>
 
-								<td>{{ req.requiredQuantity }}</td>
+								<td class="text-center">{{ req.requiredQuantity }}</td>
 
-								<td>{{ req.effectiveRequiredQuantity }}</td>
+								<td class="text-center">{{ req.effectiveRequiredQuantity }}</td>
 
-								<td><a href="#" editable-text="req.inStockQuantity"
+								<td class="text-center"><a
+									editable-text="req.inStockQuantity"
 									onaftersave="bomCtrl.saveStock(req)" e-only-digits> {{
-										req.inStockQuantity }}<i
-										ng-show="req.inStockQuantity === null"
-										class="zmdi zmdi-edit zmdi-hc-fw"></i>
+										req.inStockQuantity }} <i
+										class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i>
+
 								</a></td>
 
-								<td><a href="#" editable-textarea="req.stockRemarks"
+								<td><a editable-textarea="req.stockRemarks"
 									onaftersave="bomCtrl.saveStock(req)">{{ req.stockRemarks }}<i
-										ng-show="req.stockRemarks === null"
-										class="zmdi zmdi-edit zmdi-hc-fw"></i></td>
+										class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i></td>
 
-								<td ng-show="nav.authService.session.isSupervisor">
-									<form editable-form name="rowform"
-										onshow="itemCtrl.setEditRowContext()"
-										onaftersave="itemCtrl.setEditRowContext()"
-										onbeforesave="itemCtrl.createOrUpdateItemComponent($data)"
-										ng-show="rowform.$visible" class="form-buttons form-inline">
-
-										<button type="submit" ng-disabled="rowform.$waiting"
-											class="btn btn-success">
-											<i class="zmdi zmdi-check"></i>
-										</button>
-
-										<button type="button" ng-disabled="rowform.$waiting"
-											ng-click="itemCtrl.cancelEditRow(this)"
-											class="btn btn-default">
-											<i class="zmdi zmdi-close"></i>
-										</button>
-
-									</form>
-									<div ng-show="!rowform.$visible && !itemCtrl.editRowContext">
-										<button class="btn btn-default" ng-click="rowform.$show()">
-											<i class="zmdi zmdi-edit"></i>
-										</button>
-										<button class="btn btn-default"
-											ng-click="itemCtrl.deleteDialog.open(itemComponent)"
-											swal-exec swal-object="itemComponent"
-											swal-dialog-title="{{translator.label.itemslistdeletecomponentheading +' '+itemComponent.componentName}}?"
-											swal-main-text="{{translator.label.itemslistdeletecomponentwarning}}"
-											swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
-											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
-											swal-exec-fn-on-confirm="itemCtrl.deleteItemComponentPromise"
-											growl-on-confirm-success-title="{{translator.label.itemsdeletecomponentsuccessheading}}"
-											growl-on-confirm-failure-title="{{translator.label.itemsdeletecomponentfailureheading}}"
-											growl-on-cancel-text="{{translator.label.itemdeletecomponentoncancelinfo}}">
-											<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
-										</button>
+								<td ng-show="false">
+									<button class="btn btn-default"
+										ng-click="itemCtrl.deleteDialog.open(itemComponent)" swal-exec
+										swal-object="itemComponent"
+										swal-dialog-title="{{translator.label.itemslistdeletecomponentheading +' '+itemComponent.componentName}}?"
+										swal-main-text="{{translator.label.itemslistdeletecomponentwarning}}"
+										swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
+										swal-cancel-button="{{translator.label.edititembuttoncancel}}"
+										swal-exec-fn-on-confirm="itemCtrl.deleteItemComponentPromise"
+										growl-on-confirm-success-title="{{translator.label.itemsdeletecomponentsuccessheading}}"
+										growl-on-confirm-failure-title="{{translator.label.itemsdeletecomponentfailureheading}}"
+										growl-on-cancel-text="{{translator.label.itemdeletecomponentoncancelinfo}}">
+										<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
+									</button>
 								</td>
 							</tr>
 						</tbody>

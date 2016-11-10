@@ -1,6 +1,31 @@
 body {
-  font-family: latoregular !important;
-  font-size: 16px;
+	font-family: latoregular !important;
+	font-size: 16px;
+}
+
+.form-control, .btn, .dropdown-menu {
+	font-size: inherit;
+}
+
+.small, small {
+	font-size: 14px;
+}
+
+.tile {
+	font-size: 22px;
+}
+
+.tile>.tmn-counts {
+	position: absolute;
+	font-family:roboto !important;
+	font-weight: 500 !important;
+	font-style:bold;
+	padding: 5px 10px 5px 10px;
+	border-radius: 2px;
+	right: -5px;
+	top: -18px;
+	font-size: 16px;
+	line-height: 15px;
 }
 
 .dl-horizontal dt {
@@ -8,10 +33,9 @@ body {
 }
 
 .dl-horizontal dd {
-    margin-left: 280px;
+	margin-left: 280px;
 }
 
 textarea.form-control {
 	height: 80px !important;
 }
-

@@ -74,7 +74,8 @@ materialAdmin
 	//console.log('imangular ending');
 }])
 
-.run(['$rootScope', '$location', 'editableOptions', 'authService', function ($rootScope, $location, editableOptions, authService ) {
+.run(['$rootScope', '$location', 'editableOptions', 'editableThemes', 'authService', 
+      function ($rootScope, $location, editableOptions, editableThemes, authService ) {
 
 	editableOptions.theme = 'bs3';//xeditable config - use bootstrap 3
 
@@ -113,5 +114,10 @@ materialAdmin
 			//console.log('$rootScope.$on::$routeChangeStart ending');
 		});
 
+
+	//xeditable settings (inline edit)
+	editableOptions.theme = 'bs3';
+	editableThemes.bs3.buttonsClass = 'btn btn-default waves-effect';
+	editableThemes['bs3'].submitTpl = '<button type="submit"> <i class="zmdi zmdi-check zmdi-hc-fw"> </i> </button>';
 
 }]);
