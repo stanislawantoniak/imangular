@@ -3,6 +3,7 @@ package pl.essay.imangular.service;
 
 import java.util.List;
 
+import pl.essay.angular.security.UserT;
 import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialInStock;
@@ -22,4 +23,8 @@ public interface BillOfMaterialService {
 	
 	public BillOfMaterial calculateBom(BillOfMaterial bom);
 	public List<BomRequirementsQueryResult>  getBomRequirements(long id);
+	
+	public SetWithCountHolder<BillOfMaterial> listBomsByAnonymousUser(String user);
+	public SetWithCountHolder<BillOfMaterial> listBomsByUser(UserT user);
+	public void moveBomsFromAnonymousToUser(String anonymous, UserT user);
 }

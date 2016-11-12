@@ -1,5 +1,7 @@
 package pl.essay.imangular.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,10 +43,13 @@ public class ItemComponent {
 	@Column
 	private int id;
 
+	@Column
+	private Date dateCreated;
+
 	@ManyToOne//(fetch = FetchType.EAGER)
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	@JsonBackReference(value="component")
+	//@JsonBackReference(value="component")
 	private Item parent;
 
 	@ManyToOne//(fetch = FetchType.EAGER)
@@ -61,7 +66,6 @@ public class ItemComponent {
 
 	@Column
 	private String remarks = "";
-
 
 	public ItemComponent(){
 	}
@@ -102,6 +106,15 @@ public class ItemComponent {
 	public Item getComponent(){
 		return this.component;
 	}
+	
+	public Date getDateCreated(){
+		return this.dateCreated;
+	}
+	
+	public void setDateCreated(Date d){
+		this.dateCreated = d;
+	}
+	
 	public String getComponentName(){
 		return (this.component != null ? this.component.getName() : "");
 	}

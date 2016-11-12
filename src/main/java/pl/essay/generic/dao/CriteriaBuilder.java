@@ -14,7 +14,7 @@ public class CriteriaBuilder<T extends Object> {
 
 	private Criteria criteria; 
 	public Criteria get(){
-		
+
 		return this.criteria;
 	}
 
@@ -64,7 +64,7 @@ public class CriteriaBuilder<T extends Object> {
 	 * filtersstring fields only adding like %querystring% for each field
 	 * 
 	 */
-	public CriteriaBuilder<T> addFilters(Map<String,String> filters) { 
+	public CriteriaBuilder<T> addAndLikeFilters(Map<String,String> filters) { 
 
 		for (Map.Entry<String, String> pair: filters.entrySet()){
 
@@ -72,12 +72,32 @@ public class CriteriaBuilder<T extends Object> {
 					.like(pair.getKey(), "%"+pair.getValue()+"%")
 					.ignoreCase();
 
-			System.out.println("adding sort order :: "+pair.getKey()+" / "+pair.getValue());
+			System.out.println("adding addAndLikeFilters :: "+pair.getKey()+" / "+pair.getValue());
 			this.criteria
 			.add(restriction); 
 		} 
 		return this;
 	} 
+
+	/*
+	 * add a filter for strict matching
+	 * field - domain property to filter
+	 * match - string to be filtered by
+	 * 
+	 */
+	public CriteriaBuilder<T> addStrictMatchingFilter(String field, Object match) { 
+
+
+		Criterion restriction = Restrictions
+				.eq(field, match);
+
+		System.out.println("adding addStrictMatchingFilter order :: "+field+" / "+match);
+		this.criteria
+		.add(restriction); 
+
+		return this;
+	} 
+
 
 	public CriteriaBuilder<T> addPagination(int pageNo, int pageSize) { 
 

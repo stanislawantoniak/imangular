@@ -36,11 +36,13 @@ itemslist;translations
 "itemslistitemstableheadingid","Kod"
 "itemslistitemstableheadingname","Nazwa"
 "itemslistitemstableheadingiscomposed","Złożony"
-"itemslistitemstableheadingisbuilding","Czy to budynek"
+"itemslistitemstableheadingCanBeSplit","Czy można rozbić"
 "itemslistitemstableheadingwheremanufactured","Gdzie produkowany"
 "itemslistitemstableheadingisavailableinothersources","Czy dostępny w innych źródłach"
 "itemslistitemstableheadingothersources","Inne źródła"
 "itemslistitemstableheadingisused","Jest składnikiem innych produktów"
+"edititemheaderusedinname","Można odzyskać z"
+"edititemheaderusedinquantity","Ilość sztuk"
 
 
 "itemslistitemstableheadingactions",""
@@ -79,6 +81,8 @@ edit form;sss
 "itemsdeletecomponentfailureheading","Coś poszło nie tak."
 "itemsdeletecomponentfailureinfo","Administrator został powiadomiony. Właśnie przerywa wakacje żeby się tym zając."
 "itemdeletecomponentoncancelinfo","Składnik nie będzie skasowany"
+"itemusedinsheading","Ten produkt da się odzyskać z następujących produktów"
+
 
 component,editform
 "componenteditformbuttoncancel","Anuluj"

@@ -1,5 +1,7 @@
 package pl.essay.imangular.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +35,9 @@ public class BillOfMaterialInStock {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
 	@Column
 	private long id;
+	
+	@Column
+	private Date dateCreated;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
@@ -44,7 +49,11 @@ public class BillOfMaterialInStock {
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Item forItem;
-
+	
+	@Column
+	//@NotNull
+	private Boolean ignoreRequirement = false;
+	
 	@Column
 	@NotNull
 	@DecimalMin("0")
@@ -71,6 +80,14 @@ public class BillOfMaterialInStock {
 	public void setId(long id){
 		this.id = id;
 	}
+	
+	public Date getDateCreated(){
+		return this.dateCreated;
+	}
+	
+	public void setDateCreated(Date d){
+		this.dateCreated = d;
+	}
 	public BillOfMaterial getBom(){
 		return this.bom;
 	}
@@ -85,6 +102,14 @@ public class BillOfMaterialInStock {
 
 	public void setForItem(Item item){
 		this.forItem = item;
+	}
+	
+	public Boolean getIgnoreRequirement(){
+		return this.ignoreRequirement;
+	}
+	
+	public void setIgnoreRequirement(Boolean i){
+		this.ignoreRequirement = i;
 	}
 
 	public int getInStockQuantity(){

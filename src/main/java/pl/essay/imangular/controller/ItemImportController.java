@@ -21,7 +21,7 @@ import pl.essay.imports.XLSProductsImporter;
 /*
  * controller used for import items 
  * 
- * uses non secure data inser methods (insert associated components not updating items)
+ * uses non secure data insert methods (insert associated components not updating items)
  */
 
 
@@ -45,7 +45,7 @@ public class ItemImportController {
 			if (! this.itemService.existsItem(product.name)){
 				Item item = new Item();
 				item.setName(product.name);
-				item.setIsBuilding( product.isBuilding);
+				item.setCanBeSplit( ! product.isBuilding );
 				item.setIsAvailableInOtherSources(product.otherSources);
 				item.setOtherSources(product.otherSourceName);
 				item.setWhereManufactured(product.whereManufactured);
@@ -126,7 +126,14 @@ public class ItemImportController {
 		for (Item item : holder.getCollection()){
 			Item i  = this.itemService.getItemById(item.getId());
 			i.setIsComposed(!i.getComponents().isEmpty());
-			i.setIsUsed(!i.getUsedIn().isEmpty());
+			for (ItemComponent ic : i.getUsedIn()){
+				if (ic.getParent().getCanBeSplit()){
+					i.setIsUsed(true);
+					break;
+				}
+			}
+			if (!i.getIsComposed())
+				i.setCanBeSplit(false);
 			this.itemService.updateItem(i);
 			System.gc();
 

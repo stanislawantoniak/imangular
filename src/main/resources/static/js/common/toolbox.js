@@ -37,7 +37,56 @@ toolbox
 
 }]);
 
+
+/*
+ * filter for ng-repeat checking if boolean value in row is equal to required
+ * 
+ * can be used for simple properties like isActive
+ * or nested properties like parent.isActive
+ * 
+ * nesting can be 1 level deep, should be enough for most cases
+ * 
+ */
 toolbox
+.filter('booleanValueFilter', [function () {
+	return function (input, column, trueOrFalse) {
+
+		//console.log('input::',input);
+		//console.log('column::',column);
+		//console.log('trueOrFalse::',trueOrFalse);
+
+		var ret = [];
+
+		//if required value is not passed assume true
+		if (!angular.isDefined(trueOrFalse)) {
+			trueOrFalse = true;
+		}
+
+		//check is property name is a simple or nested field
+		var columns = column.split('.');
+		//console.log('columns::',columns);
+		angular.forEach(input, function (v) {
+			if (columns.length == 1){
+				//if simple field just check if exists and check id equal to required
+				//console.log('1 v-column::',v[column]);
+				if (angular.isDefined(v[column]) && v[column] === trueOrFalse) {
+					ret.push(v);
+				}
+			} else
+				if (columns.length == 2){
+					//if nested - check if exists using parts of name as columns
+					//and check if value equal to required
+					//console.log('2 v-column::',v[columns[0]][columns[1]]);
+					if (angular.isDefined(v[columns[0]][columns[1]]) && v[columns[0]][columns[1]] === trueOrFalse) {
+						ret.push(v);
+					}
+				}
+		});
+
+		//console.log('ret::',ret);
+		return ret;
+	};
+}])
 .directive('onlyDigits', function () {
 	return {
 		restrict: 'A',
@@ -81,10 +130,10 @@ toolbox
 			growlOnCancelText : '@',
 		},
 		link: function(scope, element, attrs) {
-			
+
 			function notify(typeParam, titleParam, msgParam){
 				//console.log('in notify',typeParam,titleParam, msgParam);
-				
+
 				$.growl({
 					icon: scope.growlIcon,
 					title: titleParam,
@@ -110,7 +159,7 @@ toolbox
 					mouse_over: false,
 					animate: {
 						enter: typeof scope.growlAnimationIn === 'undefined' ? 'animated rotateIn' : scope.growlAnimationIn,
-						exit: typeof scope.growlAnimationOut === 'undefined' ? 'animated fadeOutUp' : scope.growlAnimationOut,
+								exit: typeof scope.growlAnimationOut === 'undefined' ? 'animated fadeOutUp' : scope.growlAnimationOut,
 					},
 					icon_type: 'class',
 					template: '<div data-growl="container" class="alert" role="alert">' +

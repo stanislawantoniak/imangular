@@ -17,7 +17,10 @@ import pl.essay.languages.*;
 @Component
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserSession implements Serializable{
-	private String cookie;
+	
+	@Autowired
+	UserService userService;
+	
 	@Autowired(required=true)
 	@Qualifier(value="polish")
 	private Language languageSelected;
@@ -27,31 +30,45 @@ public class UserSession implements Serializable{
 	private Languages languages;
 
 	private String name  = "Guest";
+	
+	private String anonymousSessionId;
 
 	private boolean authenticated = false;
+	
 	private boolean isAdmin = false;
 	private boolean isUser = false;
 	private boolean isSupervisor = false;
+	
+	private UserT user;
+	
 	public UserSession(){
 	}
 
-	public void setCookie(String c){
-		this.cookie = c;
-	}
-	public String getCookie(){
-		return this.cookie;
-	}
 	public void setLanguageSelected(String c){
 		this.languageSelected = this.languages.getLanguage(c);
 	}
+	
 	public Language getLanguageSelected(){
 		return this.languageSelected;
+	}
+	
+	public UserT getUser(){
+		return this.user;
+	}
+	public void setUser(UserT u){
+		this.user = u;
+	}
+	public void setAuthenticated(boolean u){
+		this.authenticated = u;
+	}
+	public boolean getAuthenticated(){
+		return this.authenticated;
 	}
 
 	public void updateOnAuthentication() {
 
 		if (!this.authenticated){
-
+			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 			if (auth != null){
@@ -64,6 +81,9 @@ public class UserSession implements Serializable{
 
 					if (principal instanceof UserDetails) {
 						username = ((UserDetails) principal).getUsername();
+						if (principal instanceof UserT){
+							this.user = (UserT) principal;
+						}
 					} else {
 						username = principal.toString();
 					}
@@ -82,11 +102,18 @@ public class UserSession implements Serializable{
 			}
 		}
 	}
+	
+	public void setAnonymousSessionId(String id){
+		if (this.anonymousSessionId == null)
+			this.anonymousSessionId = id;
+	}
+	
+	public String getAnonymousSessionId(){
+		return this.anonymousSessionId;
+	}
 
 	public String toJson(){
 
-		this.updateOnAuthentication();
-		
 		return
 				"{\n"+
 				"\"name\":\""+this.name+"\",\n"+

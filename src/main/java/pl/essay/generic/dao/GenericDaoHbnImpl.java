@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
 
+import pl.essay.imangular.model.BillOfMaterial;
+
 //from Spring in Practice::Joshua White,Willie Wheeler
 
 @Transactional
@@ -121,26 +123,26 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		return (T) getSession().load(getDomainClass(), id);
 	}
 
-	private CriteriaBuilder<T> getCriteriaBuilder(){
+	protected CriteriaBuilder<T> getCriteriaBuilder(){
 		CriteriaBuilder<T> criteriaBuilder = new CriteriaBuilder<T>(this.getSession(),this.getDomainClass());
 		return criteriaBuilder;
 	}
 
 
 	/*
-	 * get set with total rows : finalCriteriaWithoutPagination
-	 * and paginated list : finalCriteria
+	 * get set with list and total count
 	 */
 	@SuppressWarnings("unchecked")
-	private SetWithCountHolder<T> getSetWithCountHolder(Criteria finalCriteria, long count){
+	protected SetWithCountHolder<T> getSetWithCountHolder(Criteria finalCriteria, long count){
 		return new SetWithCountHolder<T>( 
 				finalCriteria
 				.list(),
 				count
 				);
 	}
+	
 
-	private long getTotalRowsOnCriteria(Criteria criteria){
+	protected long getTotalRowsOnCriteria(Criteria criteria){
 		return (long) criteria
 				.setProjection(Projections.rowCount())
 				.uniqueResult();
@@ -158,19 +160,36 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 
 		Criteria criteriaForCount = this
 				.getCriteriaBuilder()
-				.addFilters(params.filterFields)
+				.addAndLikeFilters(params.filterFields)
 				.get();
 
 		long totalRows = this.getTotalRowsOnCriteria(criteriaForCount);
 		
 		Criteria finalCriteria = this
 				.getCriteriaBuilder()
-				.addFilters(params.filterFields)
+				.addAndLikeFilters(params.filterFields)
 				.addSortOrder(params.sortOrderFields)
 				.addPagination(params.pageNo, params.pageSize)
 				.get();
 
 		return this.getSetWithCountHolder(finalCriteria, totalRows);
+	}
+	
+	public SetWithCountHolder<T> getListByStrictPropertyMatch(String field, Object match){
+
+		return this.getSetWithCountHolder(
+						
+						this.getCriteriaBuilder()
+						.addStrictMatchingFilter(field, match)
+						.get(), 
+
+						this.getTotalRowsOnCriteria(
+								this.getCriteriaBuilder()
+								.addStrictMatchingFilter(field, match)
+								.get()
+								)
+						);
+
 	}
 
 	public void update(T t) { 

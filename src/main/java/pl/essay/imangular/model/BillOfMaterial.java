@@ -1,5 +1,6 @@
 package pl.essay.imangular.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
@@ -24,7 +26,10 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import pl.essay.angular.security.UserT;
 
 @Entity
 @DynamicInsert
@@ -34,6 +39,14 @@ public class BillOfMaterial {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
 	@Column
 	private long id;
+	
+	@Column
+	private String anonymousOwner;
+	
+	@OneToOne( cascade = {CascadeType.ALL} )
+	@JoinColumn(referencedColumnName = "id", nullable = true)
+	@JsonIgnore //never ever serialize userdetails - there is pass in in!
+	UserT userOwner;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
@@ -52,6 +65,9 @@ public class BillOfMaterial {
 	@NotNull
 	@DecimalMin("1")
 	private Integer requiredQuantity;
+	
+	@Column
+	private Date dateCreated;
 
 	public BillOfMaterial(){};
 	
@@ -63,6 +79,20 @@ public class BillOfMaterial {
 
 	public void setId(long id){
 		this.id = id;
+	}
+	
+	public String getAnonymousUser(){
+		return this.anonymousOwner;
+	}
+	public void setAnonymousUser(String u){
+		this.anonymousOwner = u;
+	}
+	public UserT getUserOwner(){
+		return this.userOwner;
+	}
+	
+	public void setUserOwner(UserT u){
+		this.userOwner = u;
 	}
 
 	public Item getForItem(){
@@ -94,6 +124,14 @@ public class BillOfMaterial {
 
 	public void setRequiredQuantity(int q){
 		this.requiredQuantity = q;
+	}
+	
+	public Date getDateCreated(){
+		return this.dateCreated;
+	}
+	
+	public void setDateCreated(Date d){
+		this.dateCreated = d;
 	}
 	
 	@Override

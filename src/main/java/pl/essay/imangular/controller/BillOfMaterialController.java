@@ -34,7 +34,6 @@ public class BillOfMaterialController extends BaseController {
 	@Autowired private BillOfMaterialService bomService;
 	@Autowired private ItemService itemService;
 
-
 	@RequestMapping(value = "/kick/", method = RequestMethod.GET)
 	public ResponseEntity<Void>  kick() {
 		//this.kickCreate();
@@ -62,9 +61,13 @@ public class BillOfMaterialController extends BaseController {
 
 	@RequestMapping(value = "/boms", method = RequestMethod.GET)
 	public SetWithCountHolder<BillOfMaterial> listBoms() {
-		return this.bomService.listBoms();
+		if (this.userSession.getUser() != null){
+			return this.bomService.listBomsByUser(userSession.getUser());
+		} else {
+			return this.bomService.listBomsByAnonymousUser(userSession.getAnonymousSessionId());
+		}
 	}
-	
+
 	@RequestMapping(value= "/bomrest/requirements/{bomId}", method = {RequestMethod.GET})
 	public ResponseEntity<List<BomRequirementsQueryResult>> usedInItem(@PathVariable long bomId){
 
@@ -123,7 +126,7 @@ public class BillOfMaterialController extends BaseController {
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStockFromBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock){
 
@@ -143,7 +146,7 @@ public class BillOfMaterialController extends BaseController {
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value= "/bomstockrest/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createStockInBillOfMaterial(@RequestBody BillOfMaterialInStock stock){
 

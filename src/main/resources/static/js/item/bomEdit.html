@@ -76,11 +76,11 @@
 						</thead>
 
 						<tbody>
-							<tr ng-repeat="req in bomCtrl.requirements"
+							<tr ng-repeat="req in bomCtrl.requirements | orderBy : ['-forItemIsComposed','+forItemName']"
 								ng-class="{'active' : rowform.$visible}">
 								<td ng-if="!itemCtrl.editRowContext"><button
 										class="btn btn-default btn-sm"
-										ui-sref="root.itemDetails({id:itemComponent.componentId})">
+										ui-sref="root.itemDetails({id:req.forItemId})">
 										<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
 									</button></td>
 
@@ -131,7 +131,7 @@
 		</div>
 
 	</div>
-	<div class="row m-b-20" ng-if="true">
+	<div class="row m-b-20" ng-if="false">
 		<div class="col-sm-12">
 			nav.authService.session::{{nav.authService.session}} <br>item::bomCtrl.bom
 

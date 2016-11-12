@@ -63,7 +63,8 @@ public class Item {
 	@JsonIgnore
 	private Set<ItemComponent> components = new HashSet<ItemComponent>();
 
-	@Column @Type(type="yes_no")
+	@Column 
+	@Type(type="yes_no")
 	private Boolean isUsed = false;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "component")
@@ -72,7 +73,7 @@ public class Item {
 	private Set<ItemComponent> usedIn = new HashSet<ItemComponent>();
 
 	@Column @Type(type="yes_no")
-	private Boolean isBuilding;
+	private Boolean canBeSplit;
 
 	@Column 
 	private String whereManufactured;
@@ -137,20 +138,20 @@ public class Item {
 						//convert nulls in remarks to ""
 						String remarks1 = (i1.getRemarks() == null ? "" :i1.getRemarks().toLowerCase() );
 						String remarks2 = (i2.getRemarks() == null ? "" :i2.getRemarks().toLowerCase() );
-						
+
 						if (remarks1.equals(remarks2)){
-							
+
 							return i1.getComponentName().toLowerCase().compareTo(i2.getComponentName().toLowerCase());
-						
+
 						} else {
-							
+
 							if (!"".equals(remarks1) && "".equals(remarks2))
 								return -1;
 							if ("".equals(remarks1) && !"".equals(remarks2))
 								return 1;
 							else 
 								return remarks1.compareTo(remarks2);
-						
+
 						}
 					}
 				});
@@ -158,19 +159,41 @@ public class Item {
 		return sortedComponents;
 	}
 
+	/*
+	 * adds component and 
+	 * - sets isComposed attribute in parent item
+	 * - sets isUsed in component only if the parent can be decomposed
+	 * 
+	 */
 	public void addComponent(ItemComponent ic){
 		this.components.remove(ic);			
 		this.components.add(ic);
 		this.isComposed = true;
-		ic.getComponent().setIsUsed(true);
+		//set isUsed in compoent only of the parent can be decomposed
+		if (this.canBeSplit)
+			ic.getComponent().setIsUsed(true);
 		ic.setParent(this);
 	}
 
 	public void removeComponent(ItemComponent ic){
 		this.components.remove(ic);			
 		this.isComposed = (this.components.size() == 0 ? false : true );
-		ic.getComponent().setIsUsed( (ic.getComponent().getUsedIn().size() == 0 ? false : true ) );
-		ic.setParent(this);
+		//do something with isUsed in component only if can be decomposed
+		if (!this.canBeSplit){
+			Set<ItemComponent> usedIn = ic.getComponent().getUsedIn();
+			for (ItemComponent icUsedIn : usedIn){
+				//if component is used in a parent that is a building and it is not component just removed
+				if ( icUsedIn.getParent().canBeSplit && !ic.equals(icUsedIn)){
+					// set isUsed to true
+					ic.getComponent().setIsUsed(true);
+					break; //and break iteration
+				} 
+				//set to false on every iteration - if no decomposable parent is found
+				ic.getComponent().setIsUsed(false);
+			}
+
+			ic.setParent(null); //break relationship on the other side
+		}
 	}
 
 	public void setComponents(Set<ItemComponent> ic) {
@@ -185,11 +208,11 @@ public class Item {
 		this.usedIn = ic;
 	}
 
-	public Boolean getIsBuilding(){
-		return this.isBuilding;
+	public Boolean getCanBeSplit(){
+		return this.canBeSplit;
 	}
-	public void setIsBuilding(Boolean b){
-		this.isBuilding = b;
+	public void setCanBeSplit(Boolean b){
+		this.canBeSplit = b;
 	}
 
 	public String getWhereManufactured(){

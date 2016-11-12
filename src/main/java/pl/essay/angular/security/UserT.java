@@ -16,6 +16,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.NamedQueries;
@@ -23,6 +25,8 @@ import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import pl.essay.imangular.model.Item;
 
 @Entity
 @DynamicInsert
@@ -183,18 +187,26 @@ public class UserT implements UserDetails{
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof UserT))
-			return false;
-		UserT other = (UserT) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public boolean equals(Object other) {
+		if (this == other) return true;
+
+		if ( !(other instanceof UserT) ) return false;
+
+		final UserT b2 = (UserT) other;
+
+		EqualsBuilder eb = new EqualsBuilder();
+		eb.append(b2.username, this.username);
+
+		return eb.isEquals();
 	}
+
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hcb = new HashCodeBuilder();
+		hcb.append(this.username);
+		return hcb.toHashCode();
+	}
+
 
 	@Override 
 	public String toString(){

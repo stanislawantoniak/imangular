@@ -1,5 +1,7 @@
 package pl.essay.imangular.model;
 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.DecimalMin;
@@ -43,6 +46,10 @@ public class BillOfMaterialFlatListLine {
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Item forItem;
+	
+	@OneToOne( cascade = {CascadeType.ALL} )
+	@JoinColumn(referencedColumnName = "id", nullable = true)
+	private BillOfMaterialInStock stock;
 
 	@Column
 	//@NotNull
@@ -94,6 +101,14 @@ public class BillOfMaterialFlatListLine {
 
 	public void setEffectiveRequiredQuantity(Integer q){
 		this.effectiveRequiredQuantity = q;
+	}
+	
+	public BillOfMaterialInStock getStock(){
+		return this.stock;
+	}
+	
+	public void setStock(BillOfMaterialInStock s){
+		this.stock = s;
 	}
 	
 	@Override

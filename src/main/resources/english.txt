@@ -37,11 +37,13 @@ itemslist;translations
 "itemslistitemstableheadingname","Name"
 "itemslistitemstableheadingiscomposed","Is composed"
 "itemslistitemstableheadingcomponents","Components"
-"itemslistitemstableheadingisbuilding","Is it building"
+"itemslistitemstableheadingCanBeSplit","Can be split"
 "itemslistitemstableheadingwheremanufactured","Where manufactured"
 "itemslistitemstableheadingisavailableinothersources","Is available in other sources"
 "itemslistitemstableheadingothersources","Other sources"
 "itemslistitemstableheadingisused","Is component of other items"
+"edititemheaderusedinname","Can be recovered from"
+"edititemheaderusedinquantity","Quantity"
 
 "itemslistitemstableheadingactions","Actions"
 "itemslistitemstableeditbutton","Edit"
@@ -55,7 +57,7 @@ delete; dialogs
 "itemsdeletesuccessheading","Successful operation."
 "itemsdeletesuccessinfo","Item has been deleted."
 "itemsdeletefailureheading","Something went wrong."
-"itemsdeletefailureinfo","Our Admin has been. He's on a jet coming to rescue!"
+"itemsdeletefailureinfo","Our Admin has been notified. He's on a jet coming to rescue!"
 "itemdeleteoncancelinfo","Item was not deleted"
 
 edit form, item

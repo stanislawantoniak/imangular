@@ -6,7 +6,7 @@
 
 	</div>
 
-	<div class="row">
+	<div id="bom-tiles" class="row">
 		<div class="col-md-4">
 			<a href data-ui-sref="root.bomWizard">
 				<div class="card">
@@ -30,13 +30,13 @@
 			<a href ui-sref="root.bomDetails({id:bom.id})">
 				<div class="card">
 					<div class="card-body card-padding bgm-lime c-white z-depth-4"
-					ng-class="{'bg-lime': !bom.forItem.isBuilding, 'bgm-gray':bom.forItem.isBuilding}">
+					ng-class="{'bg-lime': bom.forItem.canBeSplit, 'bgm-gray':!bom.forItem.canBeSplit}">
 						<div class="row">
 							<div class="col-md-3 col-xs-1">
 								<div class="text-center" style="font-size: 300%;">
-									<i ng-show="bom.forItem.isBuilding"
+									<i ng-show="bom.forItem.canBeSplit"
 										class="zmdi zmdi-balance zmdi-hc-fw"></i> <i
-										ng-show="!bom.forItem.isBuilding"
+										ng-show="!bom.forItem.canBeSplit"
 										class="zmdi zmdi-format-color-fill"></i>
 								</div>
 							</div>
@@ -45,7 +45,7 @@
 								<div class="m-t-10">{{translator.label.bomslistbomstableheadingname}}
 									{{bom.forItem.name}}</div>
 								<i class="tmn-counts bgm-white"
-								ng-class="{'c-lime': !bom.forItem.isBuilding, 'c-gray':bom.forItem.isBuilding}">{{bom.requiredQuantity}}
+								ng-class="{'c-lime': bom.forItem.canBeSplit, 'c-gray':!bom.forItem.canBeSplit}">{{bom.requiredQuantity}}
 									{{translator.label.pcs}}</i>
 
 							</div>
@@ -56,10 +56,7 @@
 		</div>
 	</div>
 
-	<div class="card">
-		<div class="card-header">{{bomsCtrl.boms_}}</div>
-	</div>
-	<div class="card">
+	<div id="boms-table" class="card" ng-if="false">
 		<div class="card-header">
 			<a class="btn btn-default" ng-click="bomsCtrl.fetchAllBoms()"><i
 				class="fa fa-refresh"></i>

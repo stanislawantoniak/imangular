@@ -39,19 +39,19 @@
 							<dl class="dl-horizontal">
 								<dt>{{translator.label.itemslistitemstableheadingiscomposed}}</dt>
 								<dd style="font-size: 150%;">
-									<i ng-show="itemCtrl.item.isComposed"
+									<i ng-if="itemCtrl.item.isComposed"
 										class="zmdi zmdi-check zmdi-hc-fw"></i> <i
-										ng-hide="itemCtrl.item.isComposed"
+										ng-if="!itemCtrl.item.isComposed"
 										class="zmdi zmdi-minus zmdi-hc-fw"></i>
 								</dd>
 							</dl>
 
 							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingisbuilding}}</dt>
+								<dt>{{translator.label.itemslistitemstableheadingCanBeSplit}}</dt>
 								<dd style="font-size: 150%;">
-									<i ng-show="itemCtrl.item.isBuilding"
+									<i ng-if="itemCtrl.item.canBeSplit"
 										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
-										ng-hide="itemCtrl.item.isBuilding"
+										ng-if="!itemCtrl.item.canBeSplit"
 										class="zmdi zmdi-minus zmdi-hc-fw"></i>
 								</dd>
 							</dl>
@@ -62,9 +62,9 @@
 							<dl class="dl-horizontal">
 								<dt>{{translator.label.itemslistitemstableheadingisavailableinothersources}}</dt>
 								<dd style="font-size: 150%">
-									<i ng-show="itemCtrl.item.isAvailableInOtherSources"
+									<i ng-if="itemCtrl.item.isAvailableInOtherSources"
 										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
-										ng-hide="itemCtrl.item.isAvailableInOtherSources"
+										ng-if="!itemCtrl.item.isAvailableInOtherSources"
 										class="zmdi zmdi-minus zmdi-hc-fw"></i>
 								</dd>
 							</dl>
@@ -75,9 +75,9 @@
 							<dl class="dl-horizontal">
 								<dt>{{translator.label.itemslistitemstableheadingisused}}</dt>
 								<dd style="font-size: 150%">
-									<i ng-show="itemCtrl.item.isUsed"
+									<i ng-if="itemCtrl.item.isUsed"
 										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
-										ng-hide="itemCtrl.item.isUsed"
+										ng-if="!itemCtrl.item.isUsed"
 										class="zmdi zmdi-minus zmdi-hc-fw"></i>
 								</dd>
 							</dl>
@@ -101,12 +101,12 @@
 						</dl>
 
 						<dl class="dl-horizontal">
-							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingisbuilding}}</dt>
+							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingCanBeSplit}}</dt>
 							<dd>
 								<div class="fg-line toggle-switch m-t-10" data-ts-color="green">
-									<input ng-model="itemCtrl.item.isBuilding" id="isBuilding"
+									<input ng-model="itemCtrl.item.canBeSplit" id="canBeSplit"
 										type="checkbox" hidden="hidden"> <label
-										class="ts-helper" for="isBuilding"></label>
+										class="ts-helper" for="canBeSplit"></label>
 								</div>
 							</dd>
 						</dl>
@@ -228,23 +228,23 @@
 				ng-if="itemCtrl.item.isComposed">
 				<div class="pmbb-header">
 					<h2>
-						<i class="zmdi zmdi-assignment zmdi-hc-fw"></i>
+						<i class="zmdi zmdi-view-list-alt zmdi-hc-fw"></i>
 						{{translator.label.itemcomponentsheading}}
-						</h3>
-						<ul class="actions"
-							ng-if="!itemCtrl.editRowContext && nav.authService.session.isSupervisor">
-							<li class="dropdown" uib-dropdown><a href=""
-								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li ng-if="itemCtrl.item.isComposed"><a
-										ng-click="itemCtrl.fetchItem()"><i
-											class="zmdi zmdi-refresh m-r-10"></i>{{translator.label.userslistheadingbuttonrefresh}}</a></li>
-									<li><a ng-if="nav.authService.session.isSupervisor"
-										ng-click="itemCtrl.addItemComponent()"><i
-											class="zmdi zmdi-plus m-r-10"></i>{{translator.label.editcomponentsbuttonadd}}</a></li>
-								</ul></li>
-						</ul>
+					</h2>
+					<ul class="actions"
+						ng-if="!itemCtrl.editRowContext && nav.authService.session.isSupervisor">
+						<li class="dropdown" uib-dropdown><a href=""
+							uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
+						</a>
+							<ul class="dropdown-menu dropdown-menu-right">
+								<li ng-if="itemCtrl.item.isComposed"><a
+									ng-click="itemCtrl.fetchItem()"><i
+										class="zmdi zmdi-refresh m-r-10"></i>{{translator.label.userslistheadingbuttonrefresh}}</a></li>
+								<li><a ng-if="nav.authService.session.isSupervisor"
+									ng-click="itemCtrl.addItemComponent()"><i
+										class="zmdi zmdi-plus m-r-10"></i>{{translator.label.editcomponentsbuttonadd}}</a></li>
+							</ul></li>
+					</ul>
 				</div>
 				<div class="pmbb-body p-l-30">
 					<table class="table m-t-20 m-b-20 ng-table"
@@ -263,7 +263,8 @@
 						</thead>
 
 						<tbody>
-							<tr ng-repeat="itemComponent in itemCtrl.item.components"
+							<tr
+								ng-repeat="itemComponent in itemCtrl.item.components  | orderBy : ['+remarks','+componentName']"
 								ng-class="{'active' : rowform.$visible}">
 								<td ng-if="!itemCtrl.editRowContext"><button
 										class="btn btn-default btn-sm"
@@ -289,18 +290,15 @@
 								<td><span editable-text="itemComponent.quantity"
 									e-name=quantity "
 								e-form="rowform" e-only-digits>
-										{{ itemComponent.quantity }} </span> </td>
+										{{ itemComponent.quantity }} </span></td>
 
 								<td><span editable-textarea="itemComponent.remarks"
 									e-rows="2" e-cols="60" e-name="remarks" e-form="rowform">
-										{{ itemComponent.remarks }} </span>
-										
-										<span
+										{{ itemComponent.remarks }} </span> <span
 									editable-text="itemComponent.$$hashKey" e-name="$$hashKey"
-									e-form="rowform" e-class="hidden">
-									<span
-									editable-text="itemComponent.id" e-name="id"
-									e-form="rowform" e-class="hidden"></span></td>
+									e-form="rowform" e-class="hidden"> <span
+										editable-text="itemComponent.id" e-name="id" e-form="rowform"
+										e-class="hidden"></span></td>
 
 								<td ng-show="nav.authService.session.isSupervisor">
 									<form editable-form name="rowform"
@@ -345,6 +343,43 @@
 				</div>
 			</div>
 
+			<div id="used-in-list" class="pmb-block" ng-if="itemCtrl.item.isUsed">
+				<div class="pmbb-header">
+					<h2>
+						<i class="zmdi zmdi-star-outline zmdi-hc-fw"></i>
+						{{translator.label.itemusedinsheading}}
+					</h2>
+				</div>
+				<div class="pmbb-body p-l-30">
+					<div class="row">
+						<div class=" col-sm-6 col-xs-12">
+							<table class="table table-striped m-t-10 m-b-20">
+								<thead>
+									<tr>
+										<th width="10%"></th>
+										<th width="65%">{{translator.label.edititemheaderusedinname}}</th>
+										<th width="25%">{{translator.label.edititemheaderusedinquantity}}</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr
+										ng-repeat="parentItem in itemCtrl.item.usedIn | booleanValueFilter : 'parent.canBeSplit' : true | orderBy : ['+parent.name']">
+										<td><button class="btn btn-default btn-sm"
+												ui-sref="root.itemDetails({id : parentItem.parent.id})">
+												<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
+											</button></td>
+
+										<td>{{ parentItem.parent.name }} </td>
+										<td>{{ parentItem.quantity }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
 
 		</div>
 
