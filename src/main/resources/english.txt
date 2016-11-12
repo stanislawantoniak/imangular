@@ -128,14 +128,14 @@ boms; boms
 "bomslistheading","Factory jobs"
 "bomslistheadingbuttonadditem","Add Item"
 "bomslistheadingbuttonrefresh","Refresh"
-"bomslistbomstableheading","Recipe List"
-"bomslistbomstableheadingid","Recipe ID"
+"bomslistbomstableheading","Assignments "
+"bomslistbomstableheadingid","Assignement id"
 "bomslistbomstableheadingname","Recipe for item"
 "bomslistbomstableheadingqty","Qty regired"
 "bomslistbomstableheadingactions","Actions"
 "bomslistbomstableeditbutton","Edit"
 "bomslistbomstabledeletebutton","Delete"
-"bomslistdeletewarning","Are you sure to delete recipe:"
+"bomslistdeletewarning","Are you sure to delete assignement: "
 
 bom;wizard
 "bomWizardHeader","Create assignment"

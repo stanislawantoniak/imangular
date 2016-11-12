@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +24,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -43,9 +41,9 @@ public class BillOfMaterial {
 	@Column
 	private String anonymousOwner;
 	
-	@OneToOne( cascade = {CascadeType.ALL} )
+	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = true)
-	@JsonIgnore //never ever serialize userdetails - there is pass in in!
+	@JsonIgnore //never ever serialize userdetails - there is pass in it!
 	UserT userOwner;
 
 	@ManyToOne

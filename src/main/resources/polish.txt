@@ -131,7 +131,7 @@ boms; boms
 "bomslistheadingbuttonrefresh","Odswiez"
 "bomslistbomstableheading","Lista składników"
 "bomslistbomstableheadingid","Id zadania"
-"bomslistbomstableheadingname","Receptura na produkt"
+"bomslistbomstableheadingname","Zadanie "
 "bomslistbomstableheadingqty","Wymgana ilość"
 "bomslistbomstableheadingactions",""
 "bomslistbomstableeditbutton","Edytuj"
