@@ -1,7 +1,7 @@
 generic;translations
 "leftpanelmenumanageBoms", "Moje zadania"
 "leftpanelmenumanageitems","Produkty"
-"leftpanelmenubrowseitems',"Przeglądaj produkty"
+"leftpanelmenubrowseitems","Przeglądaj produkty"
 "leftpanelmenumanageUsers", "Użytkownicy"
 "navbarmenuactionlogin","Zaloguj się"
 "navbarmenuactionlogout","Wyloguj"
