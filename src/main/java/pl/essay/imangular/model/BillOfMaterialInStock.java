@@ -140,6 +140,7 @@ public class BillOfMaterialInStock {
 				", stock.bom :: "+ this.bom.getId()+
 				( this.getForItem() != null ? ", stock.forItem :: "+ this.getForItem() : "" )+
 				( this.inStockQuantity != null ? ", stock.qty :: "+ this.inStockQuantity : "" )+
+				( this.consumedStockQuantity!= null ? ", consumedStock.qty :: "+ this.consumedStockQuantity : "" )+
 				( this.remarks != null ? ", stock.remarks :: "+ this.remarks : "" );
 	}
 

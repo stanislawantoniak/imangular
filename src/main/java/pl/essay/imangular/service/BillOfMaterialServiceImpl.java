@@ -103,8 +103,9 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		//copy stocks entered by user to a handy map
 		Map<Long, BillOfMaterialInStock> stocksMap = new HashMap<Long, BillOfMaterialInStock>();
 		for (BillOfMaterialInStock stock: bom.getStocks()){
+			System.out.println("stock put"+stock);
 			stock.setConsumedStockQuantity(0); //reset consumed stock - it will be recalculated from scratch
-			stocksMap.put((long) stock.getForItem().getId(),stock);
+			stocksMap.put((long) stock.getForItem().getId(), stock);
 		}
 
 		//create empty map fornew requirements list, it will be keyed by item id
@@ -132,7 +133,7 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	private void calculateRecursive(ItemComponent ic, BillOfMaterial bom, int requiredFromParent, Map<Long, BillOfMaterialInStock>  stocks, Map<Long, BillOfMaterialFlatListLine> requirementLines){
 
 		Long itemId = (long) ic.getComponent().getId(); 
-		Item item = this.itemDao.get(ic.getComponent().getId());
+		Item item = this.itemDao.get(  ic.getComponent().getId() );
 
 		BillOfMaterialFlatListLine requirementLine;
 
@@ -154,6 +155,7 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		BillOfMaterialInStock stock = null;
 		if (stocks.containsKey(itemId)){
 			stock = stocks.get(itemId);
+			System.out.println("stock found"+stock);
 			requirementLine.setStock(stock);
 			stockToConsume = stock.getInStockQuantity() - stock.getConsumedStockQuantity();
 		}
@@ -174,16 +176,19 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 			stock.setConsumedStockQuantity(stock.getInStockQuantity() - stockToConsume);
 		}
 
-		//System.out.println("    component:: "+item.getName()+" | requiredEffective:: "+requiredEffective+" | stockToConsume:: "+stockToConsume);
+		System.out.println("    component:: "+item.getName()+" | requiredEffective:: "+requiredEffective+" | stockToConsume:: "+stockToConsume);
 
 		//add required quantities from current component
 		requirementLine.setEffectiveRequiredQuantity( requirementLine.getEffectiveRequiredQuantity() + requiredEffective); 
 		requirementLine.setRequiredQuantity(requirementLine.getRequiredQuantity()+required);
 
+		System.out.println("requirement final::"+requirementLine);
+		System.out.println("stock final::"+stock);
+		
 		if (stock == null ? true : !stock.getIgnoreRequirement())
-			if (item.getIsComposed() ){
+			if (item.getIsComposed() && requirementLine.getEffectiveRequiredQuantity() > 0){
 				for (ItemComponent component: item.getComponents()){
-					this.calculateRecursive(component, bom, ic.getQuantity(), stocks,  requirementLines);
+					this.calculateRecursive(component, bom, requirementLine.getEffectiveRequiredQuantity(), stocks,  requirementLines);
 				}
 			} 
 	}
