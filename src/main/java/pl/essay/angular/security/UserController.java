@@ -111,9 +111,11 @@ public class UserController extends BaseController {
 		UserT user = new UserT();
 		user = userForm.updateUserT(user);
 		
-		//logger.info("before create user data: "+user);
+		logger.info("before create user data: "+user);
 		long id = this.userService.addUser( user );
-		//logger.info("after create user data: "+user);
+		logger.info("after create user data: "+user);
+		
+		System.out.println("id:: "+id);
 		
 		return new ResponseEntity<Long>( id, HttpStatus.OK);
 	}
