@@ -7,7 +7,7 @@
 		<css>webjar:bootstrap/3.3.5/css/bootstrap.css</css>
 
 		<!-- Angular -->
-		<js>webjar:angularjs/1.4.7/angular.min.js</js> 
+		<js>webjar:angularjs/1.4.7/angular.js</js> 
 		<js>webjar:angular-animate/1.4.8/angular-animate.min.js</js> 
 		<js>webjar:angular-resource/1.4.8/angular-resource.min.js</js> 
 
@@ -15,13 +15,8 @@
 
 	<group name="skin">
 	
-		<!-- Vendor CSS -->
-		<css>webjar:animate.css/3.3.0/animate.min.css</css>
-		<css>webjar:material-design-iconic-font/2.2.0/dist/css/material-design-iconic-font.min.css</css>
-		<!-- 
-		<css>webjar:<css>/vendors/bower_components/animate.css/animate.min.css</css>
-		<css>/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css</css>
-		 -->
+		<group-ref>min-pack-skin</group-ref>
+		
 		<css>webjar:angular-loading-bar/0.8.0/loading-bar.css</css>
 		<css>webjar:malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css</css>
 		<!-- 
@@ -58,17 +53,11 @@
 		 -->
 
 		<js>webjar:bootstrap-growl/2.0.1/bootstrap-growl.min.js</js>
-		<js>webjar:angular-xeditable/0.4.0/dist/js/xeditable.min.js</js>
-		<css>webjar:angular-xeditable/0.4.0/dist/css/xeditable.min.css</css>
-<!-- 		<js>/css/xeditable/js/xeditable.min.js</js> -->
-
-		<!--  latest version od angular-wizard not available in webjar -->
 		<js>/js/libs/angular-wizard.min.js</js>
 		<css>/js/libs/angular-wizard.min.css</css>
 		<js>webjar:angular-ui-select/0.19.6/select.min.js</js>
 		<css>webjar:angular-ui-select/0.19.6/select.min.css</css>
 		
-		<js>/js/libs/checklist-model.config.js</js>
 <!-- 
 		<script type="text/javascript" 	src="https://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.js"></script>
 		<link rel="stylesheet" type="text/css"	href="https://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.css">
@@ -80,13 +69,12 @@
 	<group name="im-app-1.1.0">
 		<!-- app modules --> 
 		<js>/js/app-config.theme.js</js>
-		<js>/js/common/translator.config.js</js>
-		<js>/js/common/authenticator.config.js</js>
 		<js>/js/common/navigation.config.js</js>
+		<group-ref>min-pack-im</group-ref>
+	
 <!-- 
 		<js>/js/app.config.js</js>
 		<js>/js/common/toolbox.js</js>
-		<js>/js/common/generic-restservice.js</js>
 		<js>/js/dashboard/dashboard.config.js</js>
 		<js>/js/user/users.config.js</js>
 		<js>/js/user/userservice.js</js>
@@ -96,5 +84,29 @@
 		<js>/js/item/bomservice.js</js>
  -->
 	</group>
+	<group name="min-pack-skin">
+		<!-- Vendor CSS -->
+		<css>webjar:animate.css/3.3.0/animate.min.css</css>
+		<css>webjar:material-design-iconic-font/2.2.0/dist/css/material-design-iconic-font.min.css</css>
+		<!-- 
+		<css>webjar:<css>/vendors/bower_components/animate.css/animate.min.css</css>
+		<css>/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css</css>
+		 -->
+		<js>/js/libs/checklist-model.config.js</js>
+		
+		<js>webjar:angular-xeditable/0.4.0/dist/js/xeditable.min.js</js>
+		<css>webjar:angular-xeditable/0.4.0/dist/css/xeditable.min.css</css>
+		<!-- 		<js>/css/xeditable/js/xeditable.min.js</js> -->
+
+		<!--  latest version od angular-wizard not available in webjar -->
+		
+		 
+	</group>
+	<group name="min-pack-im">
+		<js>/js/common/translator.config.js</js>
+		<js>/js/common/authenticator__.config.js</js>
+		<js>/js/common/generic-restservice.js</js>
+	</group>
+	
 	
 </groups>

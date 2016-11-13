@@ -19,8 +19,7 @@
 		<li data-ui-sref-active="active"><a data-ui-sref="root.items"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-view-list-alt "></i>
-				{{translator.label.leftpanelmenumanageitems}}</a></li>
-				
+				{{ authenticated ? translator.label.leftpanelmenumanageitems : translator.label.leftpanelmenubrowseitems}}</a></li>
 				
 		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a data-ui-sref="root.users"
 			data-ng-click="mactrl.sidebarStat($event)"><i

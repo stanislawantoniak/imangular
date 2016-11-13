@@ -3,6 +3,14 @@
 	<div class="block-header">
 		<h2>{{translator.label.bomEditRecipePageHeader}}</h2>
 	</div>
+	<div class="card" ng-if="!authenticated">
+		<div class="alert alert-warning c-black" role="alert">
+			<h4>
+				{{translator.label.notLoggedInTeaser}} <a href="/login"><i
+					class="tm-icon zmdi zmdi-sign-in"></i></a>
+			</h4>
+		</div>
+	</div>
 	<div class="card">
 		<div id="profile-main" class="pm-body clearfix">
 			<div class="pmb-block">
@@ -17,8 +25,7 @@
 								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
 							</a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a swal-exec
-										swal-object="item"
+									<li><a swal-exec swal-object="item"
 										swal-dialog-title="{{translator.label.itemslistdeleteheading +' '+bomCtrl.bom.forItem.name}}?"
 										swal-main-text="{{translator.label.itemslistdeletewarning}}"
 										swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
@@ -27,7 +34,7 @@
 										growl-on-confirm-success-title="{{translator.label.bomEditDeleteSuccessHeading}}"
 										growl-on-confirm-failure-title="{{translator.label.bomEditDeleteFailureHeading}}"
 										growl-on-cancel-text="{{translator.label.bomEditDeleteOnCancelInfo}}"><i
-										class="zmdi zmdi-close m-r-10"></i>{{translator.label.bomEditStockDeleteRecipeButton}}</a></li>
+											class="zmdi zmdi-close m-r-10"></i>{{translator.label.bomEditStockDeleteRecipeButton}}</a></li>
 
 								</ul></li>
 						</ul>
@@ -76,7 +83,8 @@
 						</thead>
 
 						<tbody>
-							<tr ng-repeat="req in bomCtrl.requirements | orderBy : ['-forItemIsComposed','+forItemName']"
+							<tr
+								ng-repeat="req in bomCtrl.requirements | orderBy : ['-forItemIsComposed','+forItemName']"
 								ng-class="{'active' : rowform.$visible}">
 								<td ng-if="!itemCtrl.editRowContext"><button
 										class="btn btn-default btn-sm"

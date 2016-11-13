@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,7 +70,9 @@ public class UserController extends BaseController {
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<UserForm> getUser(@PathVariable("id") int id) {
 		//logger.info("Fetching User with id " + id);
-		UserForm user = new UserForm( (id != 0 ? this.userService.getUserById(id) : new UserT()) );//init user for with new user or get from db 
+		// init user with new user when requested id = 0, ie we need a form with some predefined data
+		// or get from db
+		UserForm user = new UserForm( (id != 0 ? this.userService.getUserById(id) : new UserT()) );
 		return new ResponseEntity<UserForm>(user, HttpStatus.OK);
 	}
 
@@ -109,6 +114,40 @@ public class UserController extends BaseController {
 		//logger.info("before create user data: "+user);
 		long id = this.userService.addUser( user );
 		//logger.info("after create user data: "+user);
+		
+		return new ResponseEntity<Long>( id, HttpStatus.OK);
+	}
+	
+	/*
+	 * method to be used for users to register
+	 * only name and password is required
+	 * 
+	 * on succesful register it sets user as logged in 
+	 */
+
+	@RequestMapping(value= "/register", method = RequestMethod.POST)
+	public ResponseEntity<Long> createUser(@RequestBody Map<String,String> userForm){
+		
+		String username = userForm.get("username");
+		String password = userForm.get("password");
+		
+		if ( this.userService.existsUser( username ) ){
+			logger.info("User with name " + username + " already exist and requested create");
+	            return new ResponseEntity<Long>(0L, HttpStatus.CONFLICT);
+		}
+			
+		UserT user = new UserT();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setEnabled(true);
+		user.setRoles(	UserForm.roleUser );
+		
+		long id = this.userService.addUser( user );
+		
+		Authentication auth = 
+				  new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+
+		SecurityContextHolder.getContext().setAuthentication(auth);
 		
 		return new ResponseEntity<Long>( id, HttpStatus.OK);
 	}

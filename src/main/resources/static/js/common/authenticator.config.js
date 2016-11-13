@@ -2,7 +2,7 @@
 
 var auth = angular.module('authenticationService',[]);
 
-auth.factory('authService', ['$http', '$rootScope', '$location', function($http, $rootScope, $location){
+auth.factory('authService', ['$http', '$rootScope', '$location', '$window', function($http, $rootScope, $location, $window){
 
 	var AuthService = {
 
@@ -12,19 +12,18 @@ auth.factory('authService', ['$http', '$rootScope', '$location', function($http,
 
 			authenticate : function(callback) {
 
-				//console.log('authenticate credentials: ', AuthService.credentials);
+				console.log('authenticate credentials: ', AuthService.credentials);
 
 				var headers = AuthService.credentials.username ? {authorization : "Basic "
 					+ btoa(AuthService.credentials.username + ":" + AuthService.credentials.password)
 				} : {};
 
-				//console.log('authenticate headers: ', headers);
+				console.log('authenticate headers: ', headers);
 
 				$http.get('userDetails', {headers : headers}).then( function(response) {
 					if (response.data.name) {
 						$rootScope.authenticated = true;
 						AuthService.setSession(response);
-						AuthService.manageRedirectsOnAuthentication();
 					} else {
 						$rootScope.authenticated = false;
 					}
@@ -39,32 +38,11 @@ auth.factory('authService', ['$http', '$rootScope', '$location', function($http,
 				AuthService.authenticate( function() {
 					if ($rootScope.authenticated) {
 						AuthService.error = false;
-						//AuthService.manageRedirectsOnAuthentication();
+						$window.location.href = '/'
 					} else {
 						AuthService.error = true;
 					}
 				});
-			},
-
-			manageRedirectsOnAuthentication : function(){
-				//authenticated - check rights and manage redirects if not authorized
-				//only users and item paths are restricted
-				//console.log("session::",AuthService.session);
-				if ($rootScope.redirect){ //redirect to target page if there was a redirect to login  
-					if ($rootScope.redirect.startsWith('/users' )){
-						if (AuthService.session.isAdmin)
-							$location.path($rootScope.redirect);
-						else {
-							$location.path('/');
-							console.log("/users** not authorized");
-						}
-					} else {
-						$location.path($rootScope.redirect);
-					}
-					$rootScope.redirect = null;
-				} else {
-					$location.path('/');
-				}
 			},
 
 			logout : function() {
@@ -101,6 +79,10 @@ auth.factory('authService', ['$http', '$rootScope', '$location', function($http,
 					AuthService.getSession();
 					callback && callback(); //callback for refreshing translator
 				});
+			},
+			
+			resetError : function(){
+				AuthService.error = false;
 			}
 	}
 

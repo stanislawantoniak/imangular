@@ -3,6 +3,7 @@ generic;translations
 "leftpanelcaption","Navigation"
 "leftpanelmenumanageBoms", "Assignments"
 "leftpanelmenumanageitems","Manage Items"
+"leftpanelmenubrowseitems","Browse Items"
 "leftpanelmenumanageUsers", "Manage Users"
 "navbarmenuactionlogin","Sign in"
 "navbarmenuactionlogout","Sign out"
@@ -17,15 +18,13 @@ generic;translations
 "clicktoedit","Click on text to edit."
 "clickto","Click Here To"
 
+"notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
+
+
 sahsboard;translations
 "dashboardcontent","Dashboard"
 
-"logintitle","Login Page"
-"loginpleasesignin","Welcome, you can log in with your email and password"
-"loginusernamelabel","Enter Name"
-"loginpasslabel","Enter password"
-"loginbuttonlogin","Log In"
-"loginerrormessage","Invalid username or password"
+
 
 itemslist;translations
 "itemslisttitle","Items"
@@ -71,6 +70,9 @@ edit form, item
 "edititemheadercomponentremarks","Remarks"
 "edititemheadercomponentquantity","Quantity"
 "edititemheadingactions","Actions"
+"componentslistdeletewarning","Are you sure to delete component from item:"
+"itemdetailheading","Item details"
+"itemcomponentsheading","Item components"
 
 "itemslistdeletecomponentheading","Are you sure to delete component:"
 "itemslistdeletecomponentwarning","The action cannot be undone."
@@ -153,6 +155,7 @@ bom;wizard
 
 bom;edit
 "bomEditRecipePageHeader","Manage your assignment"
+"bomEditRecipeHeader","Your assignement"
 "bomEditRecipeLabel1","You will produce "
 "bomEditRecipeLabel2"," of "
 "bomEditComponentLabel","Component"
@@ -161,3 +164,19 @@ bom;edit
 "bomEditRequiredEffectiveQuantityLabel","Required quantity"
 "bomEditInStockQuantityLabel","In stock"
 "bomEditStockRemarksLabel","My remarks"
+"bomEditStockDeleteRecipeButton","Remove assignement"
+
+"logintitle","Login Page"
+"loginpleasesignin","Welcome, you can log in with your email and password"
+"loginusernamelabel","Enter name. Remember? We use email as user name."
+"loginForgotPaswordLabel","Reset password"
+"loginRegisterLabel","Register"
+"loginLoginLabel","Sign In"
+"loginForgotPaswordText","Enter your email and hit arrow. You will receive an email with a link. Please click it and follow instructions."
+"loginRegisterTitle","Register as a user"
+"loginpasslabel","Enter password"
+"loginbuttonlogin","Log In"
+"loginerrormessage","Invalid username or password"
+"loginErrorMessage","You submitted wrong email or password as login credentials. Please fix it and try again. You can try to reset password if you want."
+"loginRegisterErrorMessage","Please enter valid email and password at least 6 characters long"
+"loginRegisterErrorUserExists","Such a user is already registered. Maybe try to reset password?"

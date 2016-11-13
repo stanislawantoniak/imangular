@@ -2,10 +2,19 @@
 <div class="container">
 	<div class="block-header">
 
-		<h2>{{translator.label.bomslistheading}}</h2>
+		<h2>{{translator.label.bomslistheading}} {{authenticated}}</h2>
 
 	</div>
-
+	<div class="row" ng-if="!authenticated && bomsCtrl.boms.length > 0">
+		<div class="card">
+			<div class="alert alert-warning c-black" role="alert">
+				<h4>
+					{{translator.label.notLoggedInTeaser}} <a href="/login"><i
+						class="tm-icon zmdi zmdi-sign-in"></i></a>
+				</h4>
+			</div>
+		</div>
+	</div>
 	<div id="bom-tiles" class="row">
 		<div class="col-md-4">
 			<a href data-ui-sref="root.bomWizard">
@@ -30,7 +39,7 @@
 			<a href ui-sref="root.bomDetails({id:bom.id})">
 				<div class="card">
 					<div class="card-body card-padding bgm-lime c-white z-depth-4"
-					ng-class="{'bg-lime': bom.forItem.canBeSplit, 'bgm-gray':!bom.forItem.canBeSplit}">
+						ng-class="{'bg-lime': bom.forItem.canBeSplit, 'bgm-gray':!bom.forItem.canBeSplit}">
 						<div class="row">
 							<div class="col-md-3 col-xs-1">
 								<div class="text-center" style="font-size: 300%;">
@@ -45,7 +54,7 @@
 								<div class="m-t-10">{{translator.label.bomslistbomstableheadingname}}
 									{{bom.forItem.name}}</div>
 								<i class="tmn-counts bgm-white"
-								ng-class="{'c-lime': bom.forItem.canBeSplit, 'c-gray':!bom.forItem.canBeSplit}">{{bom.requiredQuantity}}
+									ng-class="{'c-lime': bom.forItem.canBeSplit, 'c-gray':!bom.forItem.canBeSplit}">{{bom.requiredQuantity}}
 									{{translator.label.pcs}}</i>
 
 							</div>

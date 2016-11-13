@@ -9,14 +9,12 @@ userApp.config(function mainController( ) {
 	//console.log('users config ending');
 });
 
-userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userService', 'dialogFactory', 'ngTableParams',
-                         function( $q,   $http,   $scope,   translator,   userService,   dialogFactory,   ngTableParams ) {
+userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userService',  'ngTableParams',
+                         function( $q,   $http,   $scope,   translator,   userService,    ngTableParams ) {
 
 	var self = this;
 	self.service = userService;
 	self.editUserContext = false;
-
-	self.deleteDialog = dialogFactory.getService();
 
 	//console.log('userslist controller starting');
 
@@ -132,8 +130,6 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 
 	//console.log('userslist controller - ending');
 }]);
-
-userApp
 
 userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userService',   function($http, $stateParams,$location, userService ) {
 	var self = this;

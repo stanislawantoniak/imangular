@@ -26,20 +26,4 @@ var navi = angular
 	//console.log('navigation controller - ending');
 
 }])
-
-.controller( 'login', [ 'authService', function( authService) {
-
-	var self = this;
-	
-	self.loginActive = 1;
-	self.registerActive = 0;
-	self.forgotActive = 0;
-	
-	console.log('login controller starting');
-	
-	self.authService = authService;
-	//console.log('login::authservice: ',self.authService);
-
-	console.log('login controller - ending');
-
-}]);
+;

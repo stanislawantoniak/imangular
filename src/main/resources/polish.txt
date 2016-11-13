@@ -1,6 +1,7 @@
 generic;translations
 "leftpanelmenumanageBoms", "Moje zadania"
 "leftpanelmenumanageitems","Produkty"
+"leftpanelmenubrowseitems',"Przeglądaj produkty"
 "leftpanelmenumanageUsers", "Użytkownicy"
 "navbarmenuactionlogin","Zaloguj się"
 "navbarmenuactionlogout","Wyloguj"
@@ -15,17 +16,10 @@ generic;translations
 "clicktoedit","Kliknij żeby wyedytować."
 "clickto","Kliknij tutaj aby"
 
+"notLoggedInTeaser","Uwaga: nie jesteś zalogowany i zadania, które założysz znikną jak opuścisz portal. Lepiej idz do strony logowania i czym prędzej załóż konto."
+
 dahsboard;translations
 "dashboardcontent","Panel"
-
-
-"logintitle","Strona logowania"
-"loginpleasesignin","Witam, tutaj możesz zalogować się swoim emailem i hasłem"
-"loginusernamelabel","Nazwa użytkownika"
-"loginpasslabel","Hasło"
-"loginbuttonlogin","Zaloguj"
-"loginerrormessage","Niepoprawna nazwa lub hasło użytkownika"
-
 
 itemslist;translations
 "itemslisttitle","Produkty"
@@ -127,7 +121,7 @@ users; useredit
 
 boms; boms
 "bomslistheadingbuttonaddbom","Dodać nowe zadanie"
-"bomslistheading","Fabryka"
+"bomslistheading","Moje zadania"
 "bomslistheadingbuttonrefresh","Odswiez"
 "bomslistbomstableheading","Lista składników"
 "bomslistbomstableheadingid","Id zadania"
@@ -170,6 +164,20 @@ bom;edit
 "bomEditDeleteFailureHeading","Coś poszło nie tak"
 "bomEditDeleteOnCancelInfo", "Zadanie nie będzie skasowane"
 
-
+login;"and related"
+"loginErrorMessage","Wprowadziłeś niepoprawny adres email lub hasło do logowania. Popraw i spróbuj ponownie. Możesz także skorzystać z resetowania hasła. "
+"logintitle","Strona logowania"
+"loginForgotPaswordLabel","Reset hasła"
+"loginRegisterLabel","Zarejestruj się"
+"loginLoginLabel","Zaloguj się"
+"loginForgotPaswordText","Wprowadź swój email i kliknij strzałkę. Za chwilę otrzymasz link do resetowania hasła. Kliknij go i postępuj wg wskazówek"
+"loginRegisterTitle","Zarejestruj się"
+"loginpleasesignin","Witam, tutaj możesz zalogować się swoim emailem i hasłem"
+"loginusernamelabel","Nazwa użytkownika. Pamiętaj, że używamy email jako nazwy"
+"loginpasslabel","Hasło"
+"loginbuttonlogin","Zaloguj"
+"loginerrormessage","Niepoprawna nazwa lub hasło użytkownika"
+"loginRegisterErrorMessage","Wprowadź poprawny adres email i hasło o długości minimum 6 znaków."
+"loginRegisterErrorUserExists","Użytkownik o takim adresie email jest już zarejestrowany. Może spróbuj zresetować hasło?"
 
 
