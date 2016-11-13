@@ -50,7 +50,7 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 			.service
 			.fetchAll(params.page(), params.count(), params.orderBy())
 			.then( function(response){
-				console.log("response::",response);
+				//console.log("response::",response);
 				params.total(response.totalRows);
 				$defer.resolve(response.collection);
 			} );
@@ -124,7 +124,7 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 		angular.forEach(roles, function(value, key) { 
 			self.allRoles.push({value: value, text: key});
 		});
-		console.log('all roles',self.allRoles);
+		//console.log('all roles',self.allRoles);
 	});
 
 
@@ -147,8 +147,8 @@ userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userServ
 		angular.forEach(self.user.allRoles, function(row) { 
 			self.rolesForToggle.push({role: row, enabled : self.user.rolesSelected[row] != null});
 		});
-		console.log("toggle",self.rolesForToggle);
-		console.log(self.user);
+		//console.log("toggle",self.rolesForToggle);
+		//console.log(self.user);
 	}, function(){
 		console.log('get user from service - fail');
 	});
@@ -173,7 +173,7 @@ userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userServ
 					angular.forEach(self.rolesForToggle, function(row) { 
 						if (row.enabled) theUser.rolesSelected.push(row.role);
 					});
-					console.log(theUser);
+					//console.log(theUser);
 					self.service.createOrUpdate(theUser)
 					.then( function(response){
 						$location.path('/users')

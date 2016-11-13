@@ -69,7 +69,7 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 
 itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory', 'authService',
                                  function itemsController(  $q, $state,  $stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory, authService ) {
-	console.log('itemEdit controller starting');
+	//console.log('itemEdit controller starting');
 
 	var self = this;
 	self.service = itemService;
@@ -80,7 +80,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 	self.translator = translator;
 
 	self.itemId = parseInt($stateParams.id);
-	console.log('itemId param::',self.itemId);
+	//console.log('itemId param::',self.itemId);
 	
 	self.setEditItemContext = function(){
 		self.editItemContext = true;
@@ -117,7 +117,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 								}
 						)
 					}
-					console.log('item::',self.item);
+					//console.log('item::',self.item);
 				}
 		)
 	};
@@ -149,7 +149,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 				self.itemsForSelect.push({value: row.id, text: row.name});
 			})
 			*/;
-			console.log('items for select',self.itemsForSelect);
+			//console.log('items for select',self.itemsForSelect);
 		}, function(){
 			console.log('get items for select - fail');
 		})
@@ -226,7 +226,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 
 	}
 
-	console.log('itemEdit controller - ending');
+	//console.log('itemEdit controller - ending');
 }]);
 
 

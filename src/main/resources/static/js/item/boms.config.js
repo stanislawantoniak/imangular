@@ -33,7 +33,7 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 		//console.log('starting fetching boms');
 		self.service.fetchAll().then(function(response) {
 			self.boms = response.collection;
-			console.log('boms::',self.boms);
+			//console.log('boms::',self.boms);
 		}, function(){
 			console.log('get boms from service - fail');
 		})
@@ -54,7 +54,6 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 		self.service.deleteEntity(self.deleteDialog.object.id).
 		then( function(response){
 			self.fetchAllBoms();
-			self.deleteDialog.close();
 		},
 		function(errResponse){
 			console.error('Error while deleting item');
@@ -66,7 +65,6 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bomService',  'dialogFactory', 
                                   function bomsController($scope, $state, $http, translator, bomService, dialogFactory ) {
 
-	console.log('bomWizard ctrl starting');
 	var self = this;
 	self.service = bomService;
 	self.translator = translator;
@@ -77,7 +75,7 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 	};
 
 	self.selectItem = function(i){
-		console.log('sel');
+		//console.log('sel');
 		self.bom.item = i;
 	}
 
@@ -90,7 +88,7 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 
 		self.itemsForSelect = response;
 
-		console.log('items for select',self.itemsForSelect);
+		//console.log('items for select',self.itemsForSelect);
 	}, function(){
 		console.log('get items for select - fail');
 	})
@@ -102,27 +100,23 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 				forItem : self.bom.item.id,
 				requiredQuantity : self.bom.quantity
 		}
-		console.log('bom::',b);
+		//console.log('bom::',b);
 
 		self.service.createOrUpdate(b)
 		.then( function(response){
-			console.log('create item::',response);
+			//console.log('create item::',response);
 			$state.go('^.bomDetails',{id:response});
 		},	function(errResponse){
 			console.error('Error while creating/saving bom');
 		});
 	}
-	
-
-
-	console.log('bomWizard ctrl ending');
 
 }]);
 
 itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q', 'translator', 'bomStockService', 'bomService', 'dialogFactory', 
                                 function bomsController($scope, $state, $stateParams, $http, $q, translator, bomStockService, bomService, dialogFactory ) {
 
-	console.log('bomEdit ctrl starting');
+	//console.log('bomEdit ctrl starting');
 
 	var self = this;
 	self.service = bomService;
@@ -132,11 +126,11 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 
 	self.createOrUpdateBomQuantity = function(){
 
-		console.log('bom::',b);
+		//console.log('bom::',b);
 
 		self.service.createOrUpdate(b)
 		.then( function(response){
-			console.log('create item::',response);
+			//console.log('create item::',response);
 			$state.go('^.bomDetails',{id:response});
 		},	function(errResponse){
 			console.error('Error while creating/saving bom');
@@ -149,7 +143,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 		.then(
 				function(response) {
 					self.bom = response;
-					console.log('bom::',self.bom);
+					//console.log('bom::',self.bom);
 				}
 		)
 	};
@@ -160,13 +154,13 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 		.then( 
 				function(response){
 					self.requirements = response;
-					console.log('requirements::', self.requirements);
+					//console.log('requirements::', self.requirements);
 				}
 		)
 	};
 
 	self.saveStock = function(req){
-		console.log("req, line::",req);
+		//console.log("req, line::",req);
 		var stock = {
 				//id : typeof( req.stockId ) == "undefined" ? 0 : req.stockId,
 				bom : { id : self.bomId },
@@ -174,14 +168,14 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 				inStockQuantity : req.inStockQuantity,
 				remarks : req.stockRemarks
 		}
-		console.log('stock :: ',stock);
+		//console.log('stock :: ',stock);
 		
 		bomStockService
 		.update(stock,0)
 		.then( 
 				function(response){
 					self.fetchRequirements();
-					console.log('requirements::', self.requirements);
+					//console.log('requirements::', self.requirements);
 				}
 		)
 	};
@@ -209,7 +203,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 	self.fetchBom();
 	self.fetchRequirements();
 
-	console.log('bomEdit ctrl ending');
+	//console.log('bomEdit ctrl ending');
 
 }]);
 

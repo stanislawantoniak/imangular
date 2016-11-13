@@ -12,13 +12,13 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$window', func
 
 			authenticate : function(callback) {
 
-				console.log('authenticate credentials: ', AuthService.credentials);
+				//console.log('authenticate credentials: ', AuthService.credentials);
 
 				var headers = AuthService.credentials.username ? {authorization : "Basic "
 					+ btoa(AuthService.credentials.username + ":" + AuthService.credentials.password)
 				} : {};
 
-				console.log('authenticate headers: ', headers);
+				//console.log('authenticate headers: ', headers);
 
 				$http.get('userDetails', {headers : headers}).then( function(response) {
 					if (response.data.name) {
