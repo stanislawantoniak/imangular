@@ -126,7 +126,7 @@ public class UserControllerCreateUserTests {
 		
 		ArgumentCaptor<UserT> userCaptured = ArgumentCaptor.forClass(UserT.class);
 		verify(userServiceMock).addUser( userCaptured.capture() );
-		assertEquals("password changed", userCaptured.getValue().getPassword());
+		assertEquals("changed", userCaptured.getValue().getPassword());
 		assertEquals("bolko@wp.pl", userCaptured.getValue().getUsername());
 	}
 	
