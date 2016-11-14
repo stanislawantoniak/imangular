@@ -12,5 +12,8 @@ public interface UserService extends UserDetailsService{
 		public UserT getUserById(int id);
 		public void removeUser(int id);
 		public boolean existsUser(String username);
+		
+		public String getForgotPasswordHashForUser(String userName);
+		public UserT getUserByForgotPasswordHash(String hash);
 
 }

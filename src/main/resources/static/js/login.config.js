@@ -3,14 +3,14 @@
 var login = angular
 .module('imlogin', 
 		[ 
-//		 'ngAnimate',
-		 'authenticationService',
-		 'users'
-		 ] );
+//'ngAnimate',
+'authenticationService',
+'users'
+] );
 
 login
 .config(						['$httpProvider', 
-      	 function mainController(  $httpProvider ) {
+        						 function mainController(  $httpProvider ) {
 
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
@@ -18,32 +18,45 @@ login
 
 login
 .controller( 'login', [ 'authService', '$http', 'translator', '$window', function( authService, $http, translator, $window ) {
-	
+
 	var self = this;
 
 	self.authService = authService;
 	self.translator = translator;
-	
+
 	self.loginActive = 1;
 	self.registerActive = 0;
 	self.forgotActive = 0;
-	
+
 	self.registerErrorSet = function(error){
 		console.log('error set');
 		self.registerErrorTxt = error;
 		self.registerError = true;
 	}
-	
+
 	self.registerErrorUnset = function(){
 		console.log('error unset');
 		self.registerErrorTxt = '';
 		self.registerError = false;
 	}
-	
+
+	self.sendHash = function(){
+		$http
+		.put('/forgotpass',authService.credentials.username)
+		.then( 
+				function(){
+					console.log("hash sent");
+				},
+				function(){
+					console.log("user does not exist");
+				})
+
+	}
+
 	self.postUser = function(){
 		//unset error in UI
 		self.registerErrorUnset();
-				
+
 		//first check for errors
 		console.log('in postUser() credentials:: ',authService.credentials);
 		if (typeof(authService.credentials.username) == 'undefined' 
@@ -60,7 +73,7 @@ login
 				},
 
 				function(){
-					
+
 					var theUser = {};
 					theUser.username = authService.credentials.username;
 					theUser.password = authService.credentials.password;
@@ -75,6 +88,5 @@ login
 					});
 				}
 		)
-
 	}
 }]);

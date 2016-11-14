@@ -26,6 +26,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import pl.essay.toolbox.EmailSender;
+
 @SpringBootApplication
 @ComponentScan({
 	"pl.essay.imangular",
@@ -62,9 +64,8 @@ public class ImAngularApplication {
 			.antMatchers(
 					"/fonts/**","/img/**","/vendors/**",
 					"/login", "/","/logout","/common/**",
-					"/register","/userexists",
+					"/register","/userexists","/forgotpass",
 					"/boms/**","/bomrest/**","/bomstockrest/**",
-					
 					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			
 			and()
@@ -76,6 +77,12 @@ public class ImAngularApplication {
 	@Bean
 	public HibernateJpaSessionFactoryBean sessionFactory() {
 		return new HibernateJpaSessionFactoryBean();
+	}
+	
+	@Bean
+	public EmailSender emailSender(){
+		//tofix - move setup to props
+		return new EmailSender("itemmaker@wp.pl");
 	}
 
 	//from:

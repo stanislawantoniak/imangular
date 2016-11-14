@@ -2,20 +2,25 @@ package pl.essay.imangular.model;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import pl.essay.angular.security.UserT;
 import pl.essay.generic.dao.CriteriaBuilder;
 import pl.essay.generic.dao.GenericDaoHbnImpl;
 import pl.essay.generic.dao.SetWithCountHolder;
+import pl.essay.imangular.controller.BillOfMaterialController;
 
 
 @Repository
 public class BillOfMaterialDaoImpl extends GenericDaoHbnImpl<BillOfMaterial> implements BillOfMaterialDao{
 
+	protected static final Logger logger = LoggerFactory.getLogger(BillOfMaterialDaoImpl.class);
+	
 	public void moveBomsFromAnonymousToUser(String anonymous, UserT user){
 
-		System.out.println("user::"+user);
+		logger.debug("user::"+user);
 
 		this.getSession()
 		.createQuery(

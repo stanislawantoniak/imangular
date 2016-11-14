@@ -126,12 +126,14 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 
 	self.createOrUpdateBomQuantity = function(){
 
-		//console.log('bom::',b);
+		var bomRequest = {};
+		bomRequest.id = self.bom.id;
+		bomRequest.requiredQuantity = self.bom.requiredQuantity;
 
-		self.service.createOrUpdate(b)
+		//console.log('bomRequest::',bomRequest);
+		self.service.createOrUpdate(bomRequest)
 		.then( function(response){
-			//console.log('create item::',response);
-			$state.go('^.bomDetails',{id:response});
+			self.fetchBom();
 		},	function(errResponse){
 			console.error('Error while creating/saving bom');
 		});
@@ -164,9 +166,9 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 		var stock = {
 				//id : typeof( req.stockId ) == "undefined" ? 0 : req.stockId,
 				bom : { id : self.bomId },
-				forItem : { id : req.forItemId },
-				inStockQuantity : req.inStockQuantity,
-				remarks : req.stockRemarks
+				forItem : { id : req.forItem.id },
+				inStockQuantity : req.stock.inStockQuantity,
+				remarks : req.stock.remarks
 		}
 		//console.log('stock :: ',stock);
 		
@@ -174,7 +176,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 		.update(stock,0)
 		.then( 
 				function(response){
-					self.fetchRequirements();
+					self.fetchBom();
 					//console.log('requirements::', self.requirements);
 				}
 		)
@@ -201,7 +203,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 
 
 	self.fetchBom();
-	self.fetchRequirements();
+	//self.fetchRequirements();
 
 	//console.log('bomEdit ctrl ending');
 

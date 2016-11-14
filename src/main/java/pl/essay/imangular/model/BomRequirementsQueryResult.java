@@ -1,13 +1,19 @@
 package pl.essay.imangular.model;
 
+/*
+ * not used any more, replaced by refactoring BillOfMaterialFlatListLine - added stock object in properties
+ * 
+ * object for passing requirement in list to edit bom
+ * 
+ */
 public class BomRequirementsQueryResult{
 	public int forItemId;
 	public String forItemName;
 	public Boolean forItemIsComposed;
 	public String forItemWhereManufactured; 
 	public String forItemOtherSources;
-	public Integer requiredQuantity;
-	public Integer effectiveRequiredQuantity;
+	public Long requiredQuantity;
+	public Long effectiveRequiredQuantity;
 	public Integer inStockQuantity;
 	public Long stockId;
 	public String stockRemarks;
@@ -18,8 +24,8 @@ public class BomRequirementsQueryResult{
 			Boolean forItemIsComposed,
 			String forItemWhereManufactured, 
 			String forItemOtherSources, 
-			Integer req,
-			Integer efferq,
+			Long req,
+			Long efferq,
 			Integer stock,
 			Long stockId,
 			String stockRemarks

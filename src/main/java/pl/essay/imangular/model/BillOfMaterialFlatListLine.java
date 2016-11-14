@@ -53,13 +53,13 @@ public class BillOfMaterialFlatListLine {
 
 	@Column
 	//@NotNull
-	@DecimalMin("1")
-	private Integer requiredQuantity;
+	@DecimalMin("0")
+	private Long requiredQuantity;
 
 	@Column
 	//@NotNull
 	@DecimalMin("0")
-	private Integer effectiveRequiredQuantity;
+	private Long effectiveRequiredQuantity;
 
 
 	public BillOfMaterialFlatListLine(){};
@@ -88,18 +88,18 @@ public class BillOfMaterialFlatListLine {
 		this.forItem = item;
 	}
 
-	public Integer getRequiredQuantity(){
+	public Long getRequiredQuantity(){
 		return this.requiredQuantity;
 	}
 
-	public void setRequiredQuantity(Integer q){
+	public void setRequiredQuantity(Long q){
 		this.requiredQuantity = q;
 	}		
-	public Integer getEffectiveRequiredQuantity(){
+	public Long getEffectiveRequiredQuantity(){
 		return this.effectiveRequiredQuantity;
 	}
 
-	public void setEffectiveRequiredQuantity(Integer q){
+	public void setEffectiveRequiredQuantity(Long q){
 		this.effectiveRequiredQuantity = q;
 	}
 	
@@ -113,7 +113,7 @@ public class BillOfMaterialFlatListLine {
 	
 	@Override
 	public String toString(){
-		return "requirement :: ("+this.getId()+", qtyRequired = "+this.requiredQuantity+")"+
+		return "requirement :: ("+this.getId()+", qtyRequired = "+this.requiredQuantity+", effective ="+this.effectiveRequiredQuantity+")"+
 				", bom :: ("+ this.bom +")"+
 				", forItem :: ("+ this.forItem +")";
 	}

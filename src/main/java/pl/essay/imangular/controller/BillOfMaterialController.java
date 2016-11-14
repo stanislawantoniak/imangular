@@ -78,17 +78,18 @@ public class BillOfMaterialController extends BaseController {
 
 	@RequestMapping(value = "/bomrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BillOfMaterial> getBom(@PathVariable("id") long id) {
-		System.out.println("Fetching Bom with id " + id);
+	
 		BillOfMaterial bom = (id != 0 ? this.bomService.getBomById(id) : new BillOfMaterial());//init bom or get from db 
 		return new ResponseEntity<BillOfMaterial>(bom, HttpStatus.OK);
 	}
 
+	/*
+	 * we update only quantity in bom
+	 */
 	@RequestMapping(value= "/bomrest/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateBillOfMaterial(@PathVariable long id, @RequestBody BillOfMaterial bom){
 
-		logger.trace("before update bom data: "+bom);
 		this.bomService.updateBom( bom );
-		logger.trace("after update bom data: "+bom);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -96,7 +97,7 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomrest/", method = RequestMethod.POST)
 	public ResponseEntity<Long> createBillOfMaterial(@RequestBody BillOfMaterial bom){
 
-		logger.trace("create bom for item: "+bom.getForItem().getId());
+		logger.debug("create bom for item: "+bom.getForItem().getId());
 
 		//if ( this.bomService.existsBillOfMaterial( bom.getName() ) ){
 		//	System.out.println("BillOfMaterial with name " + bom.getName() + " already exist and requested create");
@@ -106,7 +107,7 @@ public class BillOfMaterialController extends BaseController {
 		Item forItem = this.itemService.getItemById(bom.getForItem().getId());
 		bom.setForItem(forItem);
 		this.bomService.addBom( bom );
-		logger.trace("after create bom data: "+bom);
+		logger.debug("after create bom data: "+bom);
 
 		return new ResponseEntity<Long>(bom.getId(), HttpStatus.OK);
 	}
@@ -116,13 +117,13 @@ public class BillOfMaterialController extends BaseController {
 
 		BillOfMaterial bom = this.bomService.getBomById(id);
 		if (bom == null){			 
-			System.out.println("BillOfMaterial " +id+ " does not exist but requested delete");
+			logger.debug("BillOfMaterial " +id+ " does not exist but requested delete");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
-		logger.trace("before delete bom: "+bom);
+		logger.debug("before delete bom: "+bom);
 		this.bomService.removeBom(id);
-		logger.trace("after delete bom: "+bom);
+		logger.debug("after delete bom: "+bom);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -130,9 +131,9 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStockFromBillOfMaterial(@PathVariable long idbom,@PathVariable long idstock){
 
-		logger.trace("before delete stock: "+idstock);
+		logger.debug("before delete stock: "+idstock);
 		this.bomService.removeStockFromBom(idstock);
-		logger.trace("after delete stock: "+idstock);
+		logger.debug("after delete stock: "+idstock);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -140,9 +141,9 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomstockrest/{idstock}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateStockInBillOfMaterial(@PathVariable long idstock, @RequestBody BillOfMaterialInStock stock){
 
-		logger.trace("before update stock: "+stock);
+		logger.debug("before update stock: "+stock);
 		this.bomService.updateStockInBom(stock);
-		logger.trace("after update stock: "+stock);
+		logger.debug("after update stock: "+stock);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -150,9 +151,9 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomstockrest/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createStockInBillOfMaterial(@RequestBody BillOfMaterialInStock stock){
 
-		logger.trace("before create stock: "+stock);
+		logger.debug("before create stock: "+stock);
 		this.bomService.createStockInBom(stock);
-		logger.trace("after create stock: "+stock);
+		logger.debug("after create stock: "+stock);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

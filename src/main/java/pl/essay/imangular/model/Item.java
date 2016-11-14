@@ -73,7 +73,7 @@ public class Item {
 	private Set<ItemComponent> usedIn = new HashSet<ItemComponent>();
 
 	@Column @Type(type="yes_no")
-	private Boolean canBeSplit;
+	private Boolean canBeSplit = false;
 
 	@Column 
 	private String whereManufactured;
@@ -166,6 +166,7 @@ public class Item {
 	 * 
 	 */
 	public void addComponent(ItemComponent ic){
+		ic.setParent(this);
 		this.components.remove(ic);			
 		this.components.add(ic);
 		this.isComposed = true;

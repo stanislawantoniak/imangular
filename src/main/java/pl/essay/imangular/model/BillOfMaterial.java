@@ -52,6 +52,7 @@ public class BillOfMaterial {
 	private Item forItem;	
 
 	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade={CascadeType.ALL})
+	@JsonIgnore
 	@JsonManagedReference(value="stocks")
 	private Set<BillOfMaterialInStock> stocks = new HashSet<BillOfMaterialInStock>();
 

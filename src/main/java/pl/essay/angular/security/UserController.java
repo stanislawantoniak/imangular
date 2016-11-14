@@ -171,4 +171,14 @@ public class UserController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value= "/forgotpass", method = RequestMethod.PUT)
+	public ResponseEntity<Void> sendHash(@RequestBody String username){
+		String hash = this.userService.getForgotPasswordHashForUser(username);
+		logger.debug("hash generated");
+		if (hash == null)
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<Void>(HttpStatus.OK);
+			
+	}
 }

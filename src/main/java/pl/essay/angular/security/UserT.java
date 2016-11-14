@@ -62,6 +62,9 @@ public class UserT implements UserDetails{
 	@Column(nullable = false) 
 	private String roles = ""; //roles serialized with , as separator
 
+	@Column(nullable = true) 
+	private String forgotPasswordHash; 
+	
 	public UserT(){}
 
 	public UserT(String name, String pass, String r, boolean e){
@@ -89,6 +92,12 @@ public class UserT implements UserDetails{
 	}
 	public String getPassword(){
 		return this.password;
+	}
+	public void setForgotPasswordHash(String h){
+		this.forgotPasswordHash = h;
+	}
+	public String getForgotPasswordHash(){
+		return this.forgotPasswordHash;
 	}
 	public String getRoles(){
 		return this.roles;
