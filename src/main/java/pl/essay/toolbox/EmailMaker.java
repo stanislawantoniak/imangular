@@ -25,7 +25,14 @@ public class EmailMaker {
 
 		try {
 			InputStream is = getClass().getClassLoader().getResourceAsStream(file);
-			this.template = IOUtils.toString(is,"UTF-8");
+
+			if (is == null){
+				this.template = "null";
+				logger.error("Problem getting email template form resource file "+file);
+				
+			} else 
+
+				this.template = IOUtils.toString(is,"UTF-8");
 		} catch (IOException e) {
 			logger.error("Problem getting email template form classpath file "+file, e);
 		}

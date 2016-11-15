@@ -13,5 +13,18 @@ public class MainController extends BaseController {
 	public String dashboard(Model model) {
 		return "index.html";
 	}
-
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginPage() {
+		return "/js/login/login.html";
+	}
+	
+	@RequestMapping(value = "/changepass/{hash}", method = RequestMethod.GET)
+	public String changePass() {
+		
+		//tofix check if hash valid
+		
+		return "/js/login/changepass.html";
+	}
+	
 }
