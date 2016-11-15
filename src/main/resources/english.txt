@@ -1,5 +1,5 @@
 generic;translations
-"appname","Item Maker 1.1"
+"appname","eliczile"
 "leftpanelcaption","Navigation"
 "leftpanelmenumanageBoms", "Assignments"
 "leftpanelmenumanageitems","Manage Items"

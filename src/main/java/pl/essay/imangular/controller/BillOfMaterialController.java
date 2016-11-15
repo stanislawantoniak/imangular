@@ -1,9 +1,6 @@
 package pl.essay.imangular.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +19,6 @@ import pl.essay.imangular.model.BillOfMaterial;
 import pl.essay.imangular.model.BillOfMaterialInStock;
 import pl.essay.imangular.model.BomRequirementsQueryResult;
 import pl.essay.imangular.model.Item;
-import pl.essay.imangular.model.ItemComponent;
 import pl.essay.imangular.service.BillOfMaterialService;
 import pl.essay.imangular.service.ItemService;
 

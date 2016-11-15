@@ -3,7 +3,6 @@ package pl.essay.imangular.model;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -11,22 +10,14 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.web.servlet.MockMvc;
 
 import pl.essay.angular.security.UserSession;
 import pl.essay.imangular.service.BillOfMaterialServiceImpl;
 
 import org.mockito.runners.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.hamcrest.collection.IsArrayWithSize.*;
-import static org.hamcrest.collection.IsCollectionWithSize.*;
-import static org.hamcrest.core.IsEqual.*;
-import static org.hamcrest.core.Is.*;
 
 
 @RunWith(MockitoJUnitRunner.class)

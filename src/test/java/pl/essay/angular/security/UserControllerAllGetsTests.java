@@ -1,14 +1,11 @@
 package pl.essay.angular.security;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
 
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -20,18 +17,14 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import pl.essay.angular.security.UserController;
-import pl.essay.angular.security.UserForm;
 import pl.essay.angular.security.UserService;
 
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import org.mockito.runners.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.hamcrest.collection.IsArrayWithSize.*;
 import static org.hamcrest.collection.IsCollectionWithSize.*;
-import static org.hamcrest.core.IsEqual.*;
 import static org.hamcrest.core.Is.*;
 
 

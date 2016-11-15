@@ -1,31 +1,33 @@
 package pl.essay;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import pl.essay.toolbox.EmailMaker;
 import pl.essay.toolbox.EmailSender;
 
 @SpringBootApplication
@@ -43,6 +45,8 @@ import pl.essay.toolbox.EmailSender;
 })
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class ImAngularApplication {
+	
+	protected static final Logger logger = LoggerFactory.getLogger(ImAngularApplication.class);
 
 	@Configuration
 	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -64,7 +68,7 @@ public class ImAngularApplication {
 			.antMatchers(
 					"/fonts/**","/img/**","/vendors/**",
 					"/login", "/","/logout","/common/**",
-					"/register","/userexists","/forgotpass",
+					"/register","/userexists","/forgotpass","/changepass/**",
 					"/boms/**","/bomrest/**","/bomstockrest/**",
 					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			
@@ -82,9 +86,14 @@ public class ImAngularApplication {
 	@Bean
 	public EmailSender emailSender(){
 		//tofix - move setup to props
-		return new EmailSender("itemmaker@wp.pl");
+		return new EmailSender("ItemMaker <bommaker1.1@gmail.com>");
 	}
-
+	
+	@Bean
+	public EmailMaker forgetPasswordEmailMaker(){
+		return new EmailMaker("forgotPassEmailTemplate.html");
+	}
+	
 	//from:
 	//http://www.programcreek.com/java-api-examples/index.php?source_dir=categolj2-backend-master/backend-api/src/main/java/am/ik/categolj2/config/InfraConfig.java
 	@Configuration 

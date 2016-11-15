@@ -36,7 +36,9 @@ public class EmailSender {
 			String subject,
 			String body
 			){
-
+		
+		//System.out.println("EmailSender starting::"+to);
+		
 		MimeMessage message = javaMailSender.createMimeMessage();
 
 		try {
@@ -44,7 +46,7 @@ public class EmailSender {
 			message.setReplyTo( new InternetAddress[]{ this.from });
 			
 			message.addRecipient(RecipientType.TO, new InternetAddress(to) );
-			message.setText(body);
+			message.setContent(body, "text/html; charset=utf-8");
 			message.setSubject(subject);
 			
 		} catch (MessagingException e) {
@@ -53,6 +55,7 @@ public class EmailSender {
 		} 
 
 		javaMailSender.send( message );
+		//System.out.println("mail sent::"+to);
 
 		return true;
 	}

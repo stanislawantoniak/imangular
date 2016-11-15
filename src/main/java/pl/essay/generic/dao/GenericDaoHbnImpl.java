@@ -3,24 +3,19 @@ package pl.essay.generic.dao;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 
 import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
-
-import pl.essay.imangular.model.BillOfMaterial;
 
 //from Spring in Practice::Joshua White,Willie Wheeler
 

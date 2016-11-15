@@ -1,7 +1,5 @@
 package pl.essay.imangular.service;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -48,15 +46,12 @@ public class ItemServiceImpl implements ItemService{
 		this.itemComponentDao.create(ic);
 	}
 
-
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public SetWithCountHolder<Item> listItems(){
 		return this.itemDao.getAll();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public SetWithCountHolder<Item>  listItemsPaginated(ListingParamsHolder params){

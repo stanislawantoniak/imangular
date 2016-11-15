@@ -1,20 +1,23 @@
 package pl.essay.angular.security;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.essay.generic.dao.SetWithCountHolder;
+import pl.essay.toolbox.EmailMaker;
 import pl.essay.toolbox.EmailSender;
 
 @Service
@@ -27,6 +30,10 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired private EmailSender senderService;
 	
+	@Autowired
+	@Qualifier("forgetPasswordEmailMaker")
+	private EmailMaker forgetPassTemplateService;
+		
 	@Override
 	public void updateUser(UserT i){
 		this.userDao.update(i);
@@ -87,14 +94,20 @@ public class UserServiceImpl implements UserService {
 	public String getForgotPasswordHashForUser(String userName){
 		if (this.userDao.existsUserByName(userName)){
 
-			UUID id = UUID.randomUUID();
+			UUID hash = UUID.randomUUID();
 			UserT user = this.userDao.getUserByName(userName);
-			user.setForgotPasswordHash(id.toString());
+			user.setForgotPasswordHash(hash.toString());
 			this.userDao.update(user);
 
 			logger.debug("hash generated::"+user.getForgotPasswordHash()+" for user "+user.getUsername());
 			
-			this.senderService.sendEmail(userName, "hash for user", id.toString());
+			Map<String,String> placeholders = new HashMap<String, String>();
+			placeholders.put("@username@", userName);
+			placeholders.put("@link@", "https://@domain@/changepass/"+hash.toString());
+			
+			String emailBody = this.forgetPassTemplateService.getMail(placeholders);
+			
+			this.senderService.sendEmail(userName, "hash for user", emailBody);
 
 			return user.getForgotPasswordHash();
 		}

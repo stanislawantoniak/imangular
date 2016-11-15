@@ -20,7 +20,7 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$window', func
 
 				//console.log('authenticate headers: ', headers);
 
-				$http.get('userDetails', {headers : headers}).then( function(response) {
+				$http.get('/userDetails', {headers : headers}).then( function(response) {
 					if (response.data.name) {
 						$rootScope.authenticated = true;
 						AuthService.setSession(response);
@@ -54,7 +54,7 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$window', func
 			},
 
 			getSession : function(){
-				$http.get('common/userSession').then( 
+				$http.get('/common/userSession').then( 
 						AuthService.setSession, 
 						function(){
 							console.log('userSession from service - fail');
@@ -66,7 +66,7 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$window', func
 			languages : {},
 
 			getLanguages : function(){ 
-				$http.get('common/languages').then(function(response) {
+				$http.get('/common/languages').then(function(response) {
 					AuthService.languages = response.data;
 				}, function(){
 					console.log('languages from service - fail');
@@ -74,7 +74,7 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$window', func
 			},
 
 			selectLanguage : function(language, callback) {
-				$http.get('common/selectLanguage/'+language).
+				$http.get('/common/selectLanguage/'+language).
 				then( function(response) {
 					AuthService.getSession();
 					callback && callback(); //callback for refreshing translator

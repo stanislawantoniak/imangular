@@ -3,6 +3,25 @@ body {
 	font-size: 16px;
 }
 
+#header .logo a {
+    padding-left: 7px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.logo a {
+	text-transform: none;
+	font-size:22px;
+	font-family: roboto;
+}
+
+.logo img{
+	height: 28px;
+	margin-left: 0px;
+	margin-right: 10px;
+}
+
 .form-control, .btn, .dropdown-menu {
 	font-size: inherit;
 }

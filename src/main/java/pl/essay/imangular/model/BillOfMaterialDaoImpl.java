@@ -7,11 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import pl.essay.angular.security.UserT;
-import pl.essay.generic.dao.CriteriaBuilder;
 import pl.essay.generic.dao.GenericDaoHbnImpl;
-import pl.essay.generic.dao.SetWithCountHolder;
-import pl.essay.imangular.controller.BillOfMaterialController;
-
 
 @Repository
 public class BillOfMaterialDaoImpl extends GenericDaoHbnImpl<BillOfMaterial> implements BillOfMaterialDao{

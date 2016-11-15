@@ -53,6 +53,10 @@ login
 
 	}
 
+	self.changePass = function(){
+		console.log("change pass");
+	}
+
 	self.postUser = function(){
 		//unset error in UI
 		self.registerErrorUnset();

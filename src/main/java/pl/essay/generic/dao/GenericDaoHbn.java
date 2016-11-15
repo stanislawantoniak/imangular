@@ -1,7 +1,6 @@
 package pl.essay.generic.dao;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 public interface GenericDaoHbn<T extends Object> {
 	void create(T t);
