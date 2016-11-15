@@ -7,7 +7,7 @@
 		<css>webjar:bootstrap/3.3.5/css/bootstrap.css</css>
 
 		<!-- Angular -->
-		<js>webjar:angularjs/1.4.7/angular.js</js> 
+		<js>webjar:angularjs/1.4.7/angular.min.js</js> 
 		<js>webjar:angular-animate/1.4.8/angular-animate.min.js</js> 
 		<js>webjar:angular-resource/1.4.8/angular-resource.min.js</js> 
 
