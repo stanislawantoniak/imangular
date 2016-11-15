@@ -15,10 +15,10 @@ public class EmailMaker {
 
 	private String template;
 	
-	@Value("${eliczile.domain}")
+	//@Value("${eliczile.domain}")
 	private String domain;
 
-	@Value("${eliczile.appname}")
+	//@Value("${eliczile.appname}")
 	private String appname;
 	
 	public EmailMaker(String file){
