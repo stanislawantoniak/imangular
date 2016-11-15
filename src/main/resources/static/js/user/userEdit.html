@@ -16,7 +16,7 @@
 				ng-submit="userCtrl.createOrUpdateUser(userCtrl.user)">
 				<div class="form-group"
 					ng-class="{ 'has-error' : uform.name.$invalid && !uform.name.$pristine || userCtrl.userExists }">
-					<div class="fg-line">
+					<div class="fg-line" ng-class="{'has-warning':userCtrl.userExists}">
 						<label path="username" class="control-label" for="name">
 							{{translator.label.edituserlabelname}} </label> <input id="name"
 							class="form-control" ng-model="userCtrl.user.username"

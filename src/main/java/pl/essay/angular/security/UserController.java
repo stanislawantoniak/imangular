@@ -172,4 +172,17 @@ public class UserController extends BaseController {
 			return new ResponseEntity<Void>(HttpStatus.OK);
 			
 	}
+	
+	@RequestMapping(value= "/getusername/{hash}", method = RequestMethod.GET)
+	public ResponseEntity<String> getUserName(@RequestBody String hash){
+
+		UserT user = this.userService.getUserByForgotPasswordHash(hash);
+		
+		if (user == null)
+			return new ResponseEntity<String>("not found", HttpStatus.NOT_FOUND );
+		else
+			return new ResponseEntity<String>( user.getUsername(), HttpStatus.OK );
+			
+	}
+	
 }

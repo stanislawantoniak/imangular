@@ -52,7 +52,8 @@ items; delete
 "itemsdeletefailureheading","Coś poszło nie tak."
 "itemsdeletefailureinfo","Administrator został powiadomiony. Właśnie przerywa wakacje żeby się tym zajac."
 "itemdeleteoncancelinfo","Produkt nie będzie jednak skasowany"
-
+"itemNameAtLeast3Chars","nazwa musi mieć przynajmniej 3 znaki"
+"itemNameExistsError","już istnieje w bazie danych. Wprowadź inną nazwę."
 
 edit form;sss
 "edititemheadingitemcard","Karta produktu"

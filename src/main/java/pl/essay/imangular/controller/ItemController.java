@@ -44,8 +44,19 @@ public class ItemController extends BaseController {
 	public SetWithCountHolder<Item> listItems() {
 		return this.itemService.listItems();
 	}
+	
+	@RequestMapping(value = "/itemexists", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
+	public ResponseEntity<Void> userExists(@RequestBody String itemname) {
+
+		if (this.itemService.existsItem(itemname))
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		else
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);	
+	}
 
 	@RequestMapping(value= "/items", method = {RequestMethod.POST})
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<SetWithCountHolder<Item>> listItemsWithParams(@RequestBody ListingParamsHolder filter){
 
 		SetWithCountHolder<Item> holder = this.itemService.listItemsPaginated(filter);
@@ -102,7 +113,7 @@ public class ItemController extends BaseController {
 
 	@RequestMapping(value = "/itemrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Item> getItem(@PathVariable("id") int id) {
-		System.out.println("Fetching Item with id " + id);
+		logger.trace("Fetching Item with id " + id);
 		Item item = (id != 0 ? this.itemService.getItemById(id) : new Item());//init item or get from db 
 		return new ResponseEntity<Item>(item, HttpStatus.OK);
 	}
@@ -115,14 +126,12 @@ public class ItemController extends BaseController {
 
 		Item itemFromDB = this.itemService.getItemById(id);
 		if (itemFromDB == null){
-			System.out.println("Item "+id+" does not exist, update failed");
+			logger.trace("Item "+id+" does not exist, update failed");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-
-		itemFromDB.setName(item.getName());
-
+		
 		logger.trace("before update item data: "+itemFromDB);
-		this.itemService.updateItem( itemFromDB );
+		this.itemService.updateItem( item );
 		logger.trace("after update item data: "+itemFromDB);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
@@ -152,7 +161,7 @@ public class ItemController extends BaseController {
 
 		Item item = this.itemService.getItemById(id);
 		if (item == null){			 
-			System.out.println("Item " +id+ " does not exist but requested delete");
+			logger.trace("Item " +id+ " does not exist but requested delete");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 

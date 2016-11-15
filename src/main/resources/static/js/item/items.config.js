@@ -81,7 +81,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 
 	self.itemId = parseInt($stateParams.id);
 	//console.log('itemId param::',self.itemId);
-	
+
 	self.setEditItemContext = function(){
 		self.editItemContext = true;
 	}
@@ -89,7 +89,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 	self.unsetEditItemContext = function(){
 		self.editItemContext = false;
 	}
-	
+
 	//resolve if it is add item or browse details 
 	if (self.itemId == 0){
 		self.setEditItemContext();
@@ -124,21 +124,34 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 
 	self.fetchItem();
 
+	self.itemExists = false;
+
 	self.createOrUpdateItem = function(){
-		self.service.createOrUpdate(self.item)
-		.then( function(response){
-			self.unsetEditItemContext();
-			if (self.itemId == 0){
-				//console.log('create item::',response);
-				//we are in add item context
-				//need to route to item details page after succesful adding
-				//restservice returns item id !
-				$state.go('^.itemDetails',{id:response});
-			}
-			self.fetchItem();
-		},	function(errResponse){
-			console.error('Error while creating/saving item');
-		});
+		$http
+		.put('/itemexists',self.item.name)
+		.then( 
+				function(){
+					self.itemExists = true, 	
+					self.itemChecked = self.item.name;
+				},
+				function(){
+					self.service.createOrUpdate(self.item)
+					.then( 
+							function(response){
+								self.unsetEditItemContext();
+								if (self.itemId == 0){
+									//console.log('create item::',response);
+									//we are in add item context
+									//need to route to item details page after succesful adding
+									//restservice returns item id !
+									$state.go('^.itemDetails',{id:response});
+								}
+								self.fetchItem();
+							},	
+							function(errResponse){
+								console.error('Error while creating/saving item');
+							});
+				})
 	}
 
 //	get items for select in item component edit form
@@ -148,8 +161,8 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 			/*angular.forEach(response, function(row) { 
 				self.itemsForSelect.push({value: row.id, text: row.name});
 			})
-			*/;
-			//console.log('items for select',self.itemsForSelect);
+			 */;
+			 //console.log('items for select',self.itemsForSelect);
 		}, function(){
 			console.log('get items for select - fail');
 		})
@@ -167,16 +180,16 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 	self.unsetEditRowContext = function(){
 		self.editRowContext = false;
 	}
-	
+
 	self.unsetEditRowContext();
-	
+
 	self.createOrUpdateItemComponent = function(component){
-		
+
 		//update parent for new components
 		component.parent = self.itemId;
 		//convert quantity to int type
 		component.quantity = parseInt(component.quantity);
-		
+
 		console.log('component ::',component);
 		self.componentService.createOrUpdate(component)
 		.then( function(response){
@@ -221,7 +234,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 			console.error('Error while deleting component');
 			res.reject(translator.label.itemsdeletecomponentfailureinfo);
 		});
-		
+
 		return res.promise;
 
 	}

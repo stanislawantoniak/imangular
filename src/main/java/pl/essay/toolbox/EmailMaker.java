@@ -22,12 +22,14 @@ public class EmailMaker {
 	private String appname;
 	
 	public EmailMaker(String file){
+		/*
 		InputStream is = getClass().getClassLoader().getResourceAsStream(file);
 		try {
 			this.template = IOUtils.toString(is,"UTF-8");
 		} catch (IOException e) {
 			logger.error("Problem getting email template form classpath file "+file, e);
 		}
+		*/
 	}
 	
 	public String getMail(Map<String,String> placeholderMap){

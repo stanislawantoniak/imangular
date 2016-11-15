@@ -73,6 +73,8 @@ edit form, item
 "componentslistdeletewarning","Are you sure to delete component from item:"
 "itemdetailheading","Item details"
 "itemcomponentsheading","Item components"
+"itemNameAtLeast3Chars","the name should be at least 3 characters long"
+"itemNameExistsError","already exists in database"
 
 "itemslistdeletecomponentheading","Are you sure to delete component:"
 "itemslistdeletecomponentwarning","The action cannot be undone."
