@@ -15,6 +15,7 @@ generic;translations
 "pcs","szt"
 "clicktoedit","Kliknij żeby wyedytować."
 "clickto","Kliknij tutaj aby"
+"ToggleFullscreen","Pełny ekran"
 
 "notLoggedInTeaser","Uwaga: nie jesteś zalogowany i zadania, które założysz znikną jak opuścisz portal. Lepiej idz do strony logowania i czym prędzej załóż konto."
 
@@ -182,6 +183,7 @@ login;"and related"
 "loginerrormessage","Niepoprawna nazwa lub hasło użytkownika"
 "loginRegisterErrorMessage","Wprowadź poprawny adres email i hasło o długości minimum 6 znaków."
 "loginRegisterErrorUserExists","Użytkownik o takim adresie email jest już zarejestrowany. Może spróbuj zresetować hasło?"
+changepass;page
 "loginchangepasstitle","Zmiana hasła"
 "loginchangepasstext","Wprowadź nowe hasło i kliknij strzałkę. Po chwili zostaniesz przekierowany do serwisu i będziesz od razu zalogowany."
 "loginchangepassforuser","Zmieniasz hasło dla użytkownika "

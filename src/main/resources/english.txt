@@ -17,6 +17,7 @@ generic;translations
 "pcs","pcs"
 "clicktoedit","Click on text to edit."
 "clickto","Click Here To"
+"ToggleFullscreen","Toggle Fullscreen"
 
 "notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
 
