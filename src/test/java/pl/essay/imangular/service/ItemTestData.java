@@ -1,7 +1,11 @@
-package pl.essay.imangular.model;
+package pl.essay.imangular.service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import pl.essay.imangular.model.BillOfMaterial;
+import pl.essay.imangular.model.Item;
+import pl.essay.imangular.model.ItemComponent;
 
 
 /*

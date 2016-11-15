@@ -1,4 +1,4 @@
-package pl.essay.imangular.model;
+package pl.essay.imangular.service;
 
 /*
  * makes id for entity objects

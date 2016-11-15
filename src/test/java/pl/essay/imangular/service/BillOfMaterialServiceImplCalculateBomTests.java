@@ -1,4 +1,4 @@
-package pl.essay.imangular.model;
+package pl.essay.imangular.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +12,11 @@ import static org.mockito.Mockito.*;
 import org.springframework.test.context.TestPropertySource;
 
 import pl.essay.angular.security.UserSession;
+import pl.essay.imangular.model.BillOfMaterial;
+import pl.essay.imangular.model.BillOfMaterialFlatListLine;
+import pl.essay.imangular.model.BillOfMaterialInStock;
+import pl.essay.imangular.model.BillOfMaterialInStockDao;
+import pl.essay.imangular.model.ItemDao;
 import pl.essay.imangular.service.BillOfMaterialServiceImpl;
 
 import org.mockito.runners.*;
@@ -267,7 +272,7 @@ public class BillOfMaterialServiceImplCalculateBomTests {
 	
 	void printReq( BillOfMaterial  bom){
 		for(BillOfMaterialFlatListLine line : bom.getRequirementsList())
-			System.out.println(line.getForItem().getName()+" * "+line.getEffectiveRequiredQuantity());
+			System.out.println(line.getForItem().getName()+" = "+line.getEffectiveRequiredQuantity());
 
 	}
 	
