@@ -72,12 +72,12 @@
 		<js>/js/common/navigation.config.js</js>
 		<group-ref>min-pack-im</group-ref>
 		<js>/js/common/toolbox.js</js>
-	
-<!-- 
-		<js>/js/app.config.js</js>
 		<js>/js/dashboard/dashboard.config.js</js>
 		<js>/js/user/users.config.js</js>
 		<js>/js/user/userservice.js</js>
+	
+<!-- 
+		<js>/js/app.config.js</js>
 		<js>/js/item/items.config.js</js>
 		<js>/js/item/itemservice.js</js>
 		<js>/js/item/boms.config.js</js>
@@ -106,6 +106,8 @@
 		<js>/js/common/translator.config.js</js>
 		<js>/js/common/authenticator.config.js</js>
 		<js>/js/common/generic-restservice.js</js>
+
+		
 	</group>
 	
 	
