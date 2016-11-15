@@ -9,15 +9,15 @@ public class LoginPageController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
-		return "/js/common/login.html";
+		return "/js/login/login.html";
 	}
 	
 	@RequestMapping(value = "/changepass/{hash}", method = RequestMethod.GET)
 	public String changePass() {
 		
-		//check if hash valid
+		//tofix check if hash valid
 		
-		return "/js/common/changepass.html";
+		return "/js/login/changepass.html";
 	}
 	
 }

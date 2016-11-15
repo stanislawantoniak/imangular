@@ -161,7 +161,7 @@ userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userServ
 		var theUser = user;
 
 		$http
-		.put('/userexists',theUser.username)
+		.put('/userexists/'+theUser.id, theUser.username)
 		.then( 
 				function(){
 					self.userExists = true, 	

@@ -370,7 +370,7 @@
 
 								<tbody>
 									<tr
-										ng-repeat="parentItem in itemCtrl.item.usedIn | booleanValueFilter : 'parent.canBeSplit' : true | orderBy : ['+parent.name']">
+										ng-repeat="parentItem in itemCtrl.item.usedIn | booleanValueFilter : 'parent.canBeSplit' : true | orderBy : ['-quantity','+parent.name']">
 										<td><button class="btn btn-default btn-sm"
 												ui-sref="root.itemDetails({id : parentItem.parent.id})">
 												<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>

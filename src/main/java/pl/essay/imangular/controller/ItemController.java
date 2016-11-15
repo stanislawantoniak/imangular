@@ -44,19 +44,33 @@ public class ItemController extends BaseController {
 	public SetWithCountHolder<Item> listItems() {
 		return this.itemService.listItems();
 	}
-	
-	@RequestMapping(value = "/itemexists", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+
+	/*
+	 * this service is called on validate edit entity form
+	 * - id => id of edited added item (0 for new entity)
+	 * - itemname -> name entered by user
+	 * 
+	 * service returns ok if entity is found and its id is different than supplied in request
+	 * otherwise it returns http_notfound
+	 * 
+	 */
+	@RequestMapping(value = "/itemexists/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<Void> userExists(@RequestBody String itemname) {
+	public ResponseEntity<Void> userExists(@RequestBody String itemname, @PathVariable int id) {
+
+		ResponseEntity<Void> notFound = new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		ResponseEntity<Void> found = new ResponseEntity<Void>(HttpStatus.OK);
 
 		if (this.itemService.existsItem(itemname))
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			if (this.itemService.getItemByName(itemname).getId() != id)
+				return found;
+			else
+				return notFound;
 		else
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);	
+			return notFound;	
 	}
 
 	@RequestMapping(value= "/items", method = {RequestMethod.POST})
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<SetWithCountHolder<Item>> listItemsWithParams(@RequestBody ListingParamsHolder filter){
 
 		SetWithCountHolder<Item> holder = this.itemService.listItemsPaginated(filter);
@@ -64,6 +78,7 @@ public class ItemController extends BaseController {
 		return new ResponseEntity<SetWithCountHolder<Item>>(holder, HttpStatus.OK);
 
 	}
+
 
 	@RequestMapping(value= "/itemrest/associations/{itemId}", method = {RequestMethod.GET})
 	public ResponseEntity<Map<String, Set<ItemComponent>>> usedInItem(@PathVariable int itemId){
@@ -76,8 +91,7 @@ public class ItemController extends BaseController {
 		return new ResponseEntity<Map<String, Set<ItemComponent>>>(map, HttpStatus.OK);
 
 	}
-
-
+	
 	//update or add component
 	@RequestMapping(value= "/componentrest", method = {RequestMethod.POST})
 	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
@@ -129,7 +143,7 @@ public class ItemController extends BaseController {
 			logger.trace("Item "+id+" does not exist, update failed");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		
+
 		logger.trace("before update item data: "+itemFromDB);
 		this.itemService.updateItem( item );
 		logger.trace("after update item data: "+itemFromDB);
@@ -174,7 +188,7 @@ public class ItemController extends BaseController {
 
 	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String,IdNameIsComposedQueryResult> > itemsForSelect(@PathVariable("id") int id) {
-		
+
 		return new ResponseEntity<Map<String,IdNameIsComposedQueryResult>>(
 				this.itemService.getAllItemsInShort(id, "term"),  
 				HttpStatus.OK

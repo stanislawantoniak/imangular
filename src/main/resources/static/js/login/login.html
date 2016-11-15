@@ -9,9 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>eliczile</title>
 
-<link rel="icon"
-              type="image/x-icon"
-              href="/img/favicon.ico">
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 
 <link href="css/min-pack-skin.css" rel="stylesheet">
 
@@ -25,6 +23,12 @@
 
 <body class="login-content" data-ng-controller="login as loginCtrl">
 
+	<div id="login-header" class="logo">
+		<div class="pull-left">
+			<a href="/"><img src="/img/tally-marks-white-200.png"
+				title="eliczile logo" />{{translator.label.appname}}</a>
+		</div>
+	</div>
 	<!-- Login -->
 	<div class="lc-block" id="l-login"
 		data-ng-class="{ 'toggled': loginCtrl.loginActive === 1 }"
@@ -65,11 +69,11 @@
 			class="zmdi zmdi-arrow-forward"></i></a>
 
 
-		<ul class="login-navigation">
-			<li data-block="#l-register" class="bgm-red"
+		<ul class="login-navi">
+			<li data-block="#l-register" class="c-red"
 				data-ng-click="loginCtrl.loginActive = 0; loginCtrl.registerActive = 1">{{
 				translator.label.loginRegisterLabel }}</li>
-			<li data-block="#l-forget-password" class="bgm-orange"
+			<li data-block="#l-forget-password" class="c-orange"
 				data-ng-click="loginCtrl.loginActive = 0; loginCtrl.forgotActive = 1">{{
 				translator.label.loginForgotPaswordLabel }}</li>
 		</ul>
@@ -102,7 +106,7 @@
 				<div class="fg-line">
 					<input type="email" class="form-control" id="username"
 						name="username"
-						placeholder="{{translator.label.loginusernamelabel}}"
+						placeholder="{{translator.label.loginForgetPassLabel}}"
 						ng-model="loginCtrl.authService.credentials.username" required />
 				</div>
 
@@ -131,11 +135,11 @@
 			</button>
 		</form>
 
-		<ul class="login-navigation">
-			<li data-block="#l-login" class="bgm-green"
+		<ul class="login-navi">
+			<li data-block="#l-login" class="c-green"
 				data-ng-click="loginCtrl.registerActive = 0; loginCtrl.loginActive = 1">{{
 				translator.label.loginLoginLabel }}</li>
-			<li data-block="#l-forget-password" class="bgm-orange"
+			<li data-block="#l-forget-password" class="c-orange"
 				data-ng-click="loginCtrl.registerActive = 0; loginCtrl.forgotActive = 1">{{
 				translator.label.loginForgotPaswordLabel }}</li>
 		</ul>
@@ -145,27 +149,29 @@
 	<div class="lc-block" id="l-forget-password"
 		data-ng-class="{ 'toggled': loginCtrl.forgotActive === 1 }"
 		data-ng-if="loginCtrl.forgotActive === 1">
+
+		<h3>{{translator.label.loginRegisterTitle}}</h3>
 		<p class="text-left">{{ translator.label.loginForgotPaswordText }}</p>
+
 		<form ng-submit="loginCtrl.sendHash()">
 			<div class="input-group m-b-20">
 				<span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
 				<div class="fg-line">
-					<input type="email" name="username" class="form-control"
-						required
-						placeholder="{{translator.label.loginusernamelabel}}"
+					<input type="email" name="username" class="form-control" required
+						placeholder="{{translator.label.loginForgetPassLabel}}"
 						ng-model="loginCtrl.authService.credentials.username">
 				</div>
 			</div>
 
 			<button type="submit" class="btn btn-login btn-danger btn-float">
-			<i class="zmdi zmdi-arrow-forward"></i>
+				<i class="zmdi zmdi-arrow-forward"></i>
 			</button>
 		</form>
-		<ul class="login-navigation">
-			<li data-block="#l-login" class="bgm-green"
+		<ul class="login-navi">
+			<li data-block="#l-login" class="c-green"
 				data-ng-click="loginCtrl.forgotActive = 0; loginCtrl.loginActive = 1">{{
 				translator.label.loginLoginLabel }}</li>
-			<li data-block="#l-register" class="bgm-red"
+			<li data-block="#l-register" class="c-red"
 				data-ng-click="loginCtrl.forgotActive = 0; loginCtrl.registerActive = 1">{{
 				translator.label.loginRegisterLabel }}</li>
 		</ul>
@@ -222,7 +228,7 @@
 
 	<script src="js/min-pack-im.js"></script>
 
-	<script src="js/login.config.js"></script>
+	<script src="js/login/login.config.js"></script>
 	<script src="js/user/users.config.js"></script>
 	<script src="js/user/userservice.js"></script>
 

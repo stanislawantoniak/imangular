@@ -117,7 +117,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 								}
 						)
 					}
-					//console.log('item::',self.item);
+					console.log('item::',self.item);
 				}
 		)
 	};
@@ -128,7 +128,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 
 	self.createOrUpdateItem = function(){
 		$http
-		.put('/itemexists',self.item.name)
+		.put('/itemexists/'+self.item.id, self.item.name)
 		.then( 
 				function(){
 					self.itemExists = true, 	

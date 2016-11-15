@@ -40,13 +40,28 @@ public class UserController extends BaseController {
 		return theList;
 	}
 	
-	@RequestMapping(value = "/userexists", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> userExists(@RequestBody String username) {
-		System.out.println(username);
+	/*
+	 * this service is called on validate edit entity form
+	 * - id => id of edited or added user (0 for new entity)
+	 * - username -> name entered by user
+	 * 
+	 * service returns ok if entity is found and its id is different than supplied in request
+	 * otherwise it returns http_notfound
+	 * 
+	 */
+	@RequestMapping(value = "/userexists/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> userExists(@RequestBody String username, @PathVariable int id) {
+		
+		ResponseEntity<Void> notFound = new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		ResponseEntity<Void> found = new ResponseEntity<Void>(HttpStatus.OK);
+
 		if (this.userService.existsUser(username))
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			if ( ((UserT)this.userService.loadUserByUsername(username)).getId() != id)
+				return found;
+			else
+				return notFound;
 		else
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);	
+			return notFound;	
 	}
 
 	

@@ -3,6 +3,8 @@ package pl.essay.languages;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +14,8 @@ import pl.essay.angular.security.UserSession;
 
 @RestController
 public class LanguageController {
+	
+	protected static final Logger logger = LoggerFactory.getLogger(LanguageController.class);
 
 	//with scope session
 	@Autowired
@@ -34,7 +38,7 @@ public class LanguageController {
 
 	protected Map<String,String> getUserTranslations(){
 		Language lSelected = this.userSession.getLanguageSelected();
-		System.out.println("language selected: "+lSelected.getName());
+		logger.trace("language selected: "+lSelected.getName());
 		return lSelected.getTranslator().getTranslations();
 	}
 }
