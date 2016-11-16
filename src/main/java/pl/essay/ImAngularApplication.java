@@ -95,7 +95,7 @@ public class ImAngularApplication {
 	
 	@Bean
 	public EmailMaker forgetPasswordEmailMaker(){
-		return new EmailMaker("forgotPassEmailTemplate.html");
+		return new EmailMaker("forgotPassEmailTemplate.txt");
 	}
 	
 	//from:
