@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html class="login-content" data-ng-app="imlogin"
-	ng-controller="translation">
+<html class="login-content" ng-app="imlogin" ng-controller="translation">
 
 <head>
 <meta charset="utf-8">
@@ -11,11 +10,10 @@
 
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 
-<link href="css/min-pack-skin.css" rel="stylesheet">
+<link href="/css/min-pack-skin.css" rel="stylesheet">
 
 <link href="css/app.min.1.css" rel="stylesheet" id="app-level">
 <link href="css/app.min.2.css" rel="stylesheet">
-
 
 <link href="css/im-app.css" rel="stylesheet">
 
@@ -26,7 +24,7 @@
 	<div id="login-header" class="logo">
 		<div class="pull-left">
 			<a href="/"><img src="/img/tally-marks-white-200.png"
-				title="eliczile logo" />{{translator.label.appname}}</a>
+				title="eliczile logo" />eliczile</a>
 		</div>
 	</div>
 	<!-- Login -->
@@ -57,8 +55,7 @@
 			<div class="fg-line">
 				<input type="password" class="form-control" id="password"
 					placeholder="{{translator.label.loginpasslabel}}" name="password"
-					min="6" required
-					ng-model="loginCtrl.authService.credentials.password" />
+					required ng-model="loginCtrl.authService.credentials.password" />
 			</div>
 		</div>
 
@@ -107,7 +104,9 @@
 					<input type="email" class="form-control" id="username"
 						name="username"
 						placeholder="{{translator.label.loginForgetPassLabel}}"
-						ng-model="loginCtrl.authService.credentials.username" required />
+						ng-model="loginCtrl.authService.credentials.username"
+						pattern=".{6,}" required
+						title="{{ translator.label.loginPassLengthMin6 }}" />
 				</div>
 
 			</div>
@@ -129,8 +128,7 @@
 				</label>
 			</div>
 
-			<button href="" class="btn btn-login btn-danger btn-float"
-				type="submit">
+			<button class="btn btn-login btn-danger btn-float" type="submit">
 				<i class="zmdi zmdi-arrow-forward"></i>
 			</button>
 		</form>
@@ -219,18 +217,11 @@
                 <p>Sorry for the inconvenience!</p>
             </div>
         <![endif]-->
-	</div>
 
 
-	<script src="js/jquery.js"></script>
 	<script src="js/angular-bootstrap.js" type="text/javascript"></script>
-	<script src="js/min-pack-skin.js"></script>
-
 	<script src="js/min-pack-im.js"></script>
-
 	<script src="js/login/login.config.js"></script>
-	<script src="js/user/users.config.js"></script>
-	<script src="js/user/userservice.js"></script>
 
 </body>
 </html>

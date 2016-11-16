@@ -3,9 +3,9 @@
 var login = angular
 .module('imlogin', 
 		[ 
-//'ngAnimate',
 'authenticationService',
-'users'
+'translationService'
+
 ] );
 
 login
@@ -48,13 +48,9 @@ login
 					console.log("hash sent");
 				},
 				function(){
-					console.log("user does not exist");
+					console.error("user does not exist");
 				})
 
-	}
-
-	self.changePass = function(){
-		console.log("change pass");
 	}
 
 	self.postUser = function(){
@@ -73,7 +69,7 @@ login
 		.put('/userexists',authService.credentials.username)
 		.then( 
 				function(){
-					self.registerErrorSet( translator.label.loginRegisterErrorUserExists);	
+					self.registerErrorSet( translator.label.loginRegisterErrorUserExists );	
 				},
 
 				function(){
@@ -84,12 +80,14 @@ login
 					console.log('the user::',theUser);
 					$http
 					.post('/register',theUser)
-					.then( function(response){
-						$window.location.href = '/'
-					},	function(errResponse){
-						self.registerErrorSet( translator.label.loginRegisterErrorMessage);
-						console.error('Error while creating/saving User');
-					});
+					.then( 
+							function(response){
+								$window.location.href = '/'
+							},	
+							function(errResponse){
+								self.registerErrorSet( translator.label.loginRegisterErrorMessage);
+								console.error('Error while creating/saving User');
+							});
 				}
 		)
 	}

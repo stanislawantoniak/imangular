@@ -3,6 +3,7 @@ package pl.essay.angular.security;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -41,6 +42,9 @@ public class UserT implements UserDetails{
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="user_seq")
 	@Column
 	private int id;
+	
+	@Column
+	private Date dateCreated;
 
 	@Column
 	@NotNull(message="Name must not be empty")
@@ -60,6 +64,10 @@ public class UserT implements UserDetails{
 
 	@Column(nullable = true) 
 	private String forgotPasswordHash; 
+	
+	@Column(nullable = true) 
+	private Date forgotPasswordHashDate; 
+	
 	
 	public UserT(){}
 
@@ -137,6 +145,24 @@ public class UserT implements UserDetails{
 
 	public boolean isEnabled() {
 		return this.enabled;
+	}
+	
+	
+	public Date getDateCreated(){
+		return this.dateCreated;
+	}
+	
+	public void setDateCreated(Date d){
+		this.dateCreated = d;
+	}
+	
+	
+	public Date getForgotPasswordHashDate(){
+		return this.forgotPasswordHashDate;
+	}
+	
+	public void setForgotPasswordHashDate(Date d){
+		this.forgotPasswordHashDate = d;
 	}
 	
 	public String getDafaulSortColumn(){

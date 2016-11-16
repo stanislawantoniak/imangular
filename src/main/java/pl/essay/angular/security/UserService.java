@@ -15,5 +15,6 @@ public interface UserService extends UserDetailsService{
 		
 		public String getForgotPasswordHashForUser(String userName);
 		public UserT getUserByForgotPasswordHash(String hash);
+		public boolean changePassForHash(String hash, String pass);
 
 }

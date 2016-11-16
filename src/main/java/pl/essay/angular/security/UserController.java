@@ -180,7 +180,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value= "/forgotpass", method = RequestMethod.PUT)
 	public ResponseEntity<Void> sendHash(@RequestBody String username){
 		String hash = this.userService.getForgotPasswordHashForUser(username);
-		logger.debug("hash generated");
+		logger.trace("hash generated for user "+username);
 		if (hash == null)
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		else
@@ -189,14 +189,41 @@ public class UserController extends BaseController {
 	}
 	
 	@RequestMapping(value= "/getusername/{hash}", method = RequestMethod.GET)
-	public ResponseEntity<String> getUserName(@RequestBody String hash){
+	public ResponseEntity<String> getUserName(@PathVariable String hash){
 
 		UserT user = this.userService.getUserByForgotPasswordHash(hash);
 		
 		if (user == null)
-			return new ResponseEntity<String>("not found", HttpStatus.NOT_FOUND );
+			return new ResponseEntity<String>("\"not found\"", HttpStatus.NOT_FOUND );
 		else
-			return new ResponseEntity<String>( user.getUsername(), HttpStatus.OK );
+			return new ResponseEntity<String>( "\""+user.getUsername()+"\"", HttpStatus.OK );
+			
+	}
+	
+	/*
+	 * changes pass for a given hash 
+	 * 
+	 *	if user exists for hash then change pass and autenthicate the user
+	 * 
+	 */
+	@RequestMapping(value= "/changepass/{hash}", method = RequestMethod.PUT)
+	public ResponseEntity<String> changePassForHash(@PathVariable String hash, @RequestBody String password){
+
+		UserT user = this.userService.getUserByForgotPasswordHash(hash); 
+			
+		if (user == null) 
+			return new ResponseEntity<String>("\"not found\"", HttpStatus.NOT_FOUND );
+		else {
+			
+			this.userService.changePassForHash(hash, password);
+				
+			Authentication auth = 
+					  new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+
+			SecurityContextHolder.getContext().setAuthentication(auth);
+		
+			return new ResponseEntity<String>( "\"ok\"", HttpStatus.OK );
+		}
 			
 	}
 	

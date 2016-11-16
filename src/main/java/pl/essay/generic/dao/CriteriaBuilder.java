@@ -7,8 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CriteriaBuilder<T extends Object> {
+	
+	protected static final Logger logger = LoggerFactory.getLogger(CriteriaBuilder.class);
 
 	private Class<T> domainClass;
 
@@ -50,7 +54,7 @@ public class CriteriaBuilder<T extends Object> {
 			this.criteria
 			.addOrder(order); 
 
-			System.out.println("adding sort order :: "+order.getPropertyName()+" / is ascending ::"+order.isAscending());
+			logger.trace("adding sort order :: "+order.getPropertyName()+" / is ascending ::"+order.isAscending());
 		}
 
 		return this;
@@ -72,7 +76,7 @@ public class CriteriaBuilder<T extends Object> {
 					.like(pair.getKey(), "%"+pair.getValue()+"%")
 					.ignoreCase();
 
-			System.out.println("adding addAndLikeFilters :: "+pair.getKey()+" / "+pair.getValue());
+			logger.trace("adding and like filters :: "+pair.getKey()+" / "+pair.getValue());
 			this.criteria
 			.add(restriction); 
 		} 
@@ -91,7 +95,7 @@ public class CriteriaBuilder<T extends Object> {
 		Criterion restriction = Restrictions
 				.eq(field, match);
 
-		System.out.println("adding addStrictMatchingFilter order :: "+field+" / "+match);
+		logger.trace("adding strict matching filter for field :: "+field+" == "+match);
 		this.criteria
 		.add(restriction); 
 

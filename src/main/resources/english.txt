@@ -185,3 +185,6 @@ bom;edit
 "loginErrorMessage","You submitted wrong email or password as login credentials. Please fix it and try again. You can try to reset password if you want."
 "loginRegisterErrorMessage","Please enter valid email and password at least 6 characters long"
 "loginRegisterErrorUserExists","Such a user is already registered. Maybe try to reset password?"
+"loginChangePassforUser","Change password for: "
+"loginNewPassLabel","New password"
+"loginPassLengthMin6","Password must be at least 5 characters long"

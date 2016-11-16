@@ -1,5 +1,7 @@
 package pl.essay.angular.security;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,13 +29,13 @@ public class UserServiceImpl implements UserService {
 	protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired private UserDao userDao;
-	
+
 	@Autowired private EmailSender senderService;
-	
+
 	@Autowired
 	@Qualifier("forgetPasswordEmailMaker")
 	private EmailMaker forgetPassTemplateService;
-		
+
 	@Override
 	public void updateUser(UserT i){
 		this.userDao.update(i);
@@ -97,16 +99,17 @@ public class UserServiceImpl implements UserService {
 			UUID hash = UUID.randomUUID();
 			UserT user = this.userDao.getUserByName(userName);
 			user.setForgotPasswordHash(hash.toString());
+			user.setForgotPasswordHashDate(new Date());
 			this.userDao.update(user);
 
 			logger.debug("hash generated::"+user.getForgotPasswordHash()+" for user "+user.getUsername());
-			
+
 			Map<String,String> placeholders = new HashMap<String, String>();
 			placeholders.put("@username@", userName);
 			placeholders.put("@link@", "https://@domain@/changepass/"+hash.toString());
-			
+
 			String emailBody = this.forgetPassTemplateService.getMail(placeholders);
-			
+
 			this.senderService.sendEmail(userName, "hash for user", emailBody);
 
 			return user.getForgotPasswordHash();
@@ -128,12 +131,53 @@ public class UserServiceImpl implements UserService {
 	public UserT getUserByForgotPasswordHash(String hash){
 
 		UserT user = this.userDao.getUserByForgotPasswordHash(hash);
-		if (user != null)
-			logger.debug("hash found::"+user.getForgotPasswordHash()+" for user "+user.getUsername());
+		if (user != null){
+
+			Calendar c = Calendar.getInstance();
+			c.setTime(user.getForgotPasswordHashDate());
+			c.add(Calendar.DATE, 1);
+			Date expires = new Date( c.getTimeInMillis() );
+
+			Date now = new Date();
+			if (now.compareTo(expires)  < 0)
+				logger.debug("hash found::"+user.getForgotPasswordHash()+" for user "+user.getUsername());
+			else
+				logger.debug("hash found but expired "+user.getForgotPasswordHash()+" for user "+user.getForgotPasswordHashDate());
+		}
 		else
 			logger.debug("hash not found::"+hash);
 
 		return user;
+	}
+
+	/*
+	 * looks up for user by forgotPasswordHash
+	 *  
+	 * if found => change pass and reset hash in user and return true
+	 * 
+	 * otherwise => return false
+	 * 
+	 * tofix = check whether hash not expired
+	 * 
+	 */
+	@Override
+	public boolean changePassForHash(String hash, String pass){
+
+		UserT user = this.userDao.getUserByForgotPasswordHash(hash);
+		if (user != null){
+			user.setPassword(pass);
+			user.setForgotPasswordHash("");
+			Calendar c = Calendar.getInstance();
+			c.set(1990,1,1);
+			user.setForgotPasswordHashDate( new Date(c.getTimeInMillis()));
+			this.userDao.update( user );
+			logger.debug("user found::"+user.getForgotPasswordHash()+" for hash "+user.getUsername()+" password changed");
+			return true;
+		}
+		else {
+			logger.debug("hash not found::"+hash);
+			return false;
+		}
 	}
 
 }

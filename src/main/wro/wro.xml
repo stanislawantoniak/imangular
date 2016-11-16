@@ -1,10 +1,11 @@
 <groups xmlns="http://www.isdc.ro/wro">
 	<group name="jquery">
-		<js>webjar:jquery/2.1.4/jquery.min.js</js>
 		<!-- <js>/vendors/bower_components/jquery/dist/jquery.min.js</js>	 -->
 	</group>
 	<group name="angular-bootstrap">
 		<css>webjar:bootstrap/3.3.5/css/bootstrap.css</css>
+
+		<js>webjar:jquery/2.1.4/jquery.min.js</js>
 
 		<!-- Angular -->
 		<js>webjar:angularjs/1.4.7/angular.min.js</js> 
@@ -97,17 +98,15 @@
 		<js>webjar:angular-xeditable/0.4.0/dist/js/xeditable.min.js</js>
 		<css>webjar:angular-xeditable/0.4.0/dist/css/xeditable.min.css</css>
 		<!-- 		<js>/css/xeditable/js/xeditable.min.js</js> -->
-
-		<!--  latest version od angular-wizard not available in webjar -->
-		
 		 
 	</group>
 	<group name="min-pack-im">
-		<js>/js/common/translator.config.js</js>
+		<group-ref>min-pack-im-cp</group-ref>
 		<js>/js/common/authenticator.config.js</js>
 		<js>/js/common/generic-restservice.js</js>
-
-		
+	</group>
+	<group name="min-pack-im-cp">
+		<js>/js/common/translator.config.js</js>
 	</group>
 	
 	

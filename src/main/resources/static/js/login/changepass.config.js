@@ -1,0 +1,60 @@
+'use strict';
+
+var changepass = angular
+.module('changepass', 
+		[ 
+		 'translationService'
+		 ] );
+
+changepass
+.config(						['$httpProvider', 
+        						 function mainController(  $httpProvider ) {
+
+	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+
+}]);
+
+changepass
+
+.controller( 'changepass', [ '$location', '$http', 'translator', '$window', 
+                             function( $location, $http, translator, $window ) {
+
+	var self = this;
+
+	self.translator = translator;
+
+	var fullPath = $location.absUrl();
+	self.hash = fullPath.substring(fullPath.lastIndexOf('/')+1);
+	console.log('hash extracted:: ', self.hash);
+
+	self.getUsernameForHash = function(){
+		$http
+		.get('/getusername/'+self.hash)
+		.then( 
+				function(response){
+					console.log(response);
+					self.username = response.data;
+					self.password = '' ;
+					console.log("username", self.username);
+				},
+				function(){
+					console.log("user does not exist");
+				})
+
+	}
+
+	self.getUsernameForHash();
+
+	self.changePass = function(){
+		$http
+		.put('/changepass/'+self.hash, self.password)
+		.then( 
+				function(){
+					$window.location.href = '/'
+				},
+				function(){
+					console.log("user does not exist");
+				})
+	}
+
+}]);

@@ -186,5 +186,6 @@ login;"and related"
 changepass;page
 "loginchangepasstitle","Zmiana hasła"
 "loginchangepasstext","Wprowadź nowe hasło i kliknij strzałkę. Po chwili zostaniesz przekierowany do serwisu i będziesz od razu zalogowany."
-"loginchangepassforuser","Zmieniasz hasło dla użytkownika "
-
+"loginChangePassforUser","Zmieniasz hasło dla użytkownika: "
+"loginNewPassLabel","Nowe hasło"
+"loginPassLengthMin6","Hasło musi mieć przynajmniej 6 znaków"

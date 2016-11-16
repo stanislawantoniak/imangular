@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -47,6 +48,9 @@ import pl.essay.toolbox.EmailSender;
 public class ImAngularApplication {
 	
 	protected static final Logger logger = LoggerFactory.getLogger(ImAngularApplication.class);
+	
+	@Value("${eliczile.emailaddress.from}")
+	private String emailAddressFrom;
 
 	@Configuration
 	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -68,7 +72,7 @@ public class ImAngularApplication {
 			.antMatchers(
 					"/fonts/**","/img/**","/vendors/**",
 					"/login", "/","/logout","/common/**",
-					"/register","/userexists","/forgotpass","/changepass/**",
+					"/register","/userexists","/forgotpass","/changepass/**","/getusername/**",
 					"/boms/**","/bomrest/**","/bomstockrest/**",
 					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			
@@ -86,7 +90,7 @@ public class ImAngularApplication {
 	@Bean
 	public EmailSender emailSender(){
 		//tofix - move setup to props
-		return new EmailSender("ItemMaker <bommaker1.1@gmail.com>");
+		return new EmailSender(emailAddressFrom);
 	}
 	
 	@Bean

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import pl.essay.generic.dao.CriteriaBuilder;
 import pl.essay.generic.dao.GenericDaoHbnImpl;
 
 @Repository
@@ -36,7 +37,8 @@ public class UserDaoImpl extends GenericDaoHbnImpl<UserT> implements UserDao {
 
 
 	public UserT getUserByForgotPasswordHash(String hash){
-		return (UserT)
+		
+		/*return (UserT)
 		this.getSession()
 		.createQuery(
 				"from UserT user "+
@@ -44,6 +46,15 @@ public class UserDaoImpl extends GenericDaoHbnImpl<UserT> implements UserDao {
 				)
 		.setParameter("hash", hash)
 		.uniqueResult();
+		*/
+		
+		CriteriaBuilder<UserT> criteriaBuilder = this.getCriteriaBuilder();
+		criteriaBuilder.addStrictMatchingFilter("forgotPasswordHash", hash);
+		
+		return (UserT) 
+				criteriaBuilder
+				.get()
+				.uniqueResult();
 	}
 
 }
