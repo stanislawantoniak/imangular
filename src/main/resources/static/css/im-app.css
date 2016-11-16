@@ -116,7 +116,6 @@ textarea.form-control {
   color: black;
 }
 
-.alert .alert-link {
-  font-size: 24px;
-  
+.alert {
+  font-size: 18px;
 }

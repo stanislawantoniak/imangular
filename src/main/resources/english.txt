@@ -1,5 +1,7 @@
 generic;translations
 "appname","eliczile"
+"domain","eliczile.pl"
+"httpsDomain","https://eliczile.pl"
 "leftpanelcaption","Navigation"
 "leftpanelmenumanageBoms", "Assignments"
 "leftpanelmenumanageitems","Manage Items"
@@ -179,6 +181,11 @@ bom;edit
 "loginForgotPaswordText","Enter your email and hit arrow. You will receive an email with a link. Please click it and follow instructions."
 "loginForgetPassLabel","Your email"
 "loginRegisterTitle","Register as a user"
+"forgotPassUserNotExistErrorTxt","Such user is not registered"
+"HashSentTitle","An email has been sent"
+"HashSentText", "We have sent you an email with a link to reset and change your password. Please go to your mailbox and chack."
+"HashSentGoToSite","Go to site "
+
 "loginpasslabel","Enter password"
 "loginbuttonlogin","Log In"
 "loginerrormessage","Invalid username or password"
@@ -188,3 +195,6 @@ bom;edit
 "loginChangePassforUser","Change password for: "
 "loginNewPassLabel","New password"
 "loginPassLengthMin6","Password must be at least 5 characters long"
+"HashNotFoundTitle","Linki is not valid"
+"HashNotFoundText","Link that you clicked is not valid, maybe it expired? If you want to change your password go to login page and try once again to reset password."
+"HashNotFoundGoToLogin","Go to login page"

@@ -108,7 +108,7 @@ public class LanguageControllerTests {
 				req
 				)
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("$..*", hasSize( 3 ) ))
+		.andExpect(jsonPath("$..*", hasSize( 3 ) ))  
 		.andExpect(jsonPath("$[?(@.key1)]", hasSize(1) ))
 		.andExpect(jsonPath("$[?(@.key1=='value1')]", hasSize(1) ));
 

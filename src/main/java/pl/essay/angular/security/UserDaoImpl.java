@@ -14,10 +14,15 @@ public class UserDaoImpl extends GenericDaoHbnImpl<UserT> implements UserDao {
 	protected static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
 	public UserT getUserByName(String name) {
-		UserT user = (UserT) getSession()
-				.getNamedQuery("getUserByName") 
-				.setParameter("name", name)
+
+		CriteriaBuilder<UserT> criteriaBuilder = this.getCriteriaBuilder();
+		criteriaBuilder.addStrictMatchingFilter("username", name);
+		
+		UserT user = (UserT) 
+				criteriaBuilder
+				.get()
 				.uniqueResult();
+		
 		if (user == null)
 			throw (new UsernameNotFoundException("User "+name+" not found."));
 		else 
@@ -38,16 +43,7 @@ public class UserDaoImpl extends GenericDaoHbnImpl<UserT> implements UserDao {
 
 	public UserT getUserByForgotPasswordHash(String hash){
 		
-		/*return (UserT)
-		this.getSession()
-		.createQuery(
-				"from UserT user "+
-					"where user.forgotPasswordHash = :hash"
-				)
-		.setParameter("hash", hash)
-		.uniqueResult();
-		*/
-		
+			
 		CriteriaBuilder<UserT> criteriaBuilder = this.getCriteriaBuilder();
 		criteriaBuilder.addStrictMatchingFilter("forgotPasswordHash", hash);
 		

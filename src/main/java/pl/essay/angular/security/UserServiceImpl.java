@@ -91,6 +91,8 @@ public class UserServiceImpl implements UserService {
 	 * if not fount => return null
 	 * 
 	 * if found => make a new hash, put it into user, send email and return the hash
+	 * 
+	 * to be done - language version of email 
 	 */
 	@Override
 	public String getForgotPasswordHashForUser(String userName){
@@ -110,7 +112,7 @@ public class UserServiceImpl implements UserService {
 
 			String emailBody = this.forgetPassTemplateService.getMail(placeholders);
 
-			this.senderService.sendEmail(userName, "hash for user", emailBody);
+			this.senderService.sendEmail(userName, "Link do zmiany hasła", emailBody);
 
 			return user.getForgotPasswordHash();
 		}

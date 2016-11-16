@@ -22,6 +22,9 @@ changepass
 	var self = this;
 
 	self.translator = translator;
+	
+	self.hashNotFound = true;
+	self.username = '';
 
 	var fullPath = $location.absUrl();
 	self.hash = fullPath.substring(fullPath.lastIndexOf('/')+1);
@@ -35,9 +38,11 @@ changepass
 					console.log(response);
 					self.username = response.data;
 					self.password = '' ;
+					self.hashNotFound = false;
 					console.log("username", self.username);
 				},
 				function(){
+					self.hashNotFound = true;
 					console.log("user does not exist");
 				})
 

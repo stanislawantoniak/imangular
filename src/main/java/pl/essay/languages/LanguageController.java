@@ -6,6 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,11 +25,25 @@ public class LanguageController {
 	@Autowired
 	protected Languages languages; 
 	
+	@Value("${eliczile.domain}")
+	private String domain;
+	/*
+	 * returns translations for the user selected language
+	 * 
+	 * language is stored in userSession
+	 * 
+	 * adds domain name to be used in angular
+	 * 
+	 */
 	@RequestMapping(value = "/common/labels", method = RequestMethod.GET )
 	public Map<String,String> getLabels() {
-		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		//System.out.println("labels caller pricipal: "+auth.getPrincipal());
-		return this.getUserTranslations();
+		
+		Language lSelected = this.userSession.getLanguageSelected();
+		logger.trace("language selected: "+lSelected.getName());
+		
+		Map<String,String> translations = lSelected.getTranslator().getTranslations();
+		
+		return translations;
 	}
 	
 	@RequestMapping(value = "/common/languages", method = RequestMethod.GET)
@@ -36,9 +51,4 @@ public class LanguageController {
 		return this.languages.getLanguages();
 	}
 
-	protected Map<String,String> getUserTranslations(){
-		Language lSelected = this.userSession.getLanguageSelected();
-		logger.trace("language selected: "+lSelected.getName());
-		return lSelected.getTranslator().getTranslations();
-	}
 }

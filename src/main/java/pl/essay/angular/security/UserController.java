@@ -55,13 +55,23 @@ public class UserController extends BaseController {
 		ResponseEntity<Void> notFound = new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		ResponseEntity<Void> found = new ResponseEntity<Void>(HttpStatus.OK);
 
-		if (this.userService.existsUser(username))
-			if ( ((UserT)this.userService.loadUserByUsername(username)).getId() != id)
+		if (this.userService.existsUser(username)){
+			
+			UserT user = (UserT) this.userService.loadUserByUsername(username);
+			
+			if ( user.getId() != id ){
+				logger.trace("user exists "+user);	
 				return found;
-			else
+			}
+			else {
+				logger.trace("user exists "+username+" but withe the same id as in request" );
 				return notFound;
-		else
-			return notFound;	
+			}
+		}
+		else {
+			logger.trace("user does no exists "+username);
+			return notFound;
+		}
 	}
 
 	

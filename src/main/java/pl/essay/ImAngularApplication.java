@@ -72,7 +72,7 @@ public class ImAngularApplication {
 			.antMatchers(
 					"/fonts/**","/img/**","/vendors/**",
 					"/login", "/","/logout","/common/**",
-					"/register","/userexists","/forgotpass","/changepass/**","/getusername/**",
+					"/register","/userexists/**","/forgotpass","/changepass/**","/getusername/**",
 					"/boms/**","/bomrest/**","/bomstockrest/**",
 					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			

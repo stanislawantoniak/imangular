@@ -40,15 +40,36 @@ login
 		self.registerError = false;
 	}
 
+	self.resetPassErrorSet = function(username){
+		console.log('resetPassErrorSet');
+		self.resetPassError = true;
+		self.userSent = username;
+	}
+
+	self.resetPassErrorUnset = function(){
+		console.log('resetPassErrorUnset');
+		self.resetPassError = false;
+	}
+
+	self.isResetPassError = function(){
+		var result = self.resetPassError  //there was error returned
+					&&	self.userSent == authService.credentials.username ; //and username was not changed since then
+		return result;
+	}
+
 	self.sendHash = function(){
 		$http
 		.put('/forgotpass',authService.credentials.username)
 		.then( 
 				function(){
 					console.log("hash sent");
+					self.forgotActive = 0
+					self.hashSent = true;
 				},
 				function(){
-					console.error("user does not exist");
+					self.resetPassErrorSet(authService.credentials.username);
+
+					//console.log("user does not exist");
 				})
 
 	}
@@ -66,7 +87,7 @@ login
 		}
 
 		$http
-		.put('/userexists',authService.credentials.username)
+		.put('/userexists/0',authService.credentials.username)
 		.then( 
 				function(){
 					self.registerErrorSet( translator.label.loginRegisterErrorUserExists );	

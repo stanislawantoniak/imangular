@@ -20,23 +20,22 @@
 
 </head>
 
-<body class="login-content" ng-controller="changepass as cpCtrl">
+<body class="login-content" ng-controller="changepass as cpCtrl" ng-cloak>
 	<div id="login-header" class="logo">
 		<div class="pull-left">
-			<a href="/"><img src="/img/tally-marks-white-200.png"
+			<a href="{{ translator.label.httpsDomain }}"><img src="/img/tally-marks-white-200.png"
 				title="eliczile logo" />eliczile</a>
 		</div>
 	</div>
 
-	<div class="lc-block toggled" id="change-pass">
+	<div class="lc-block toggled" id="change-pass" ng-if="cpCtrl.username != ''">
 		<h3>{{translator.label.loginchangepasstitle}}</h3>
 
-		<p class="text-left m-b-0">
-			{{ translator.label.loginChangePassforUser }} <div class="text-left m-l-30"><strong>{{
-				cpCtrl.username }}</strong>
-	</div>
-
-
+		<p class="text-left m-b-0">{{
+			translator.label.loginChangePassforUser }}
+		<div class="text-left m-l-30">
+			<strong>{{ cpCtrl.username }}</strong>
+		</div>
 		</p>
 		<p class="text-left">{{ translator.label.loginchangepasstext }}</p>
 
@@ -60,7 +59,16 @@
 			</button>
 		</form>
 	</div>
+		
+	<div class="lc-block toggled" id="hash-not-found" ng-if="cpCtrl.hashNotFound">
+		<h3>{{translator.label.HashNotFoundTitle}}</h3>
+	
+		<p class="text-left">{{ translator.label.HashNotFoundText }}</p>
+		
+		<a href="{{ translator.label.httpsDomain }}">{{ translator.label.HashNotFoundGoToLogin }}</a>
 
+	</div>
+	
 	<!-- Older IE warning message -->
 	<!--[if lt IE 9]>
             <div class="ie-warning">
@@ -110,6 +118,5 @@
 	<script src="/js/min-pack-im.js"></script>
 
 	<script src="/js/login/changepass.config.js"></script>
-
 </body>
 </html>
