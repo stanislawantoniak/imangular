@@ -22,6 +22,9 @@ body {
 	margin-right: 10px;
 }
 
+.profile-menu > a {
+    background: rgba(0, 0, 0, 0) url("../img/swiat-marzen-sidebar.jpg") no-repeat scroll left top / 100% auto !important;
+}
 .form-control, .btn, .dropdown-menu {
 	font-size: inherit;
 }
