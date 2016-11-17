@@ -73,10 +73,8 @@ materialAdmin
 	//console.log('imangular ending');
 }])
 
-.run(['$rootScope', '$location', 'editableOptions', 'editableThemes', 'authService', 
-      function ($rootScope, $location, editableOptions, editableThemes, authService ) {
-
-	editableOptions.theme = 'bs3';//xeditable config - use bootstrap 3
+.run(['$window','$rootScope', '$location', 'editableOptions', 'editableThemes', 'authService', 
+      function ($window, $rootScope, $location, editableOptions, editableThemes, authService ) {
 
 	self.authService = authService;
 
