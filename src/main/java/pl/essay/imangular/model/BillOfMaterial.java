@@ -136,7 +136,7 @@ public class BillOfMaterial {
 	@Override
 	public String toString(){
 		return "bom :: "+this.getId()+
-				", bom.forItem :: "+ this.forItem.getId();
+				( this.forItem != null ? "  bom.forItem :: "+ this.forItem.getId() : "");
 	}
 
 	@Override

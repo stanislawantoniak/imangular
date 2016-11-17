@@ -1,7 +1,19 @@
 <groups xmlns="http://www.isdc.ro/wro">
-	<group name="jquery">
-		<!-- <js>/vendors/bower_components/jquery/dist/jquery.min.js</js>	 -->
+	
+	<!-- with new app version 
+	- change names to these 3 groups 
+	- change js and css urls in html files: loginpage, index and changepasspage
+	-->
+	<group name="min-pack-im-1.1.0">
+		<group-ref>min-pack-im</group-ref>
 	</group>
+	<group name="min-pack-im-cp-1.1.0">
+		<group-ref>min-pack-im-cp</group-ref>
+	</group>
+	<group name="im-app-1.1.0">
+		<group-ref>im-app</group-ref>
+	</group>
+	
 	<group name="angular-bootstrap">
 		<css>webjar:bootstrap/3.3.5/css/bootstrap.css</css>
 
@@ -20,10 +32,6 @@
 		
 		<css>webjar:angular-loading-bar/0.8.0/loading-bar.css</css>
 		<css>webjar:malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css</css>
-		<!-- 
-		<css>/vendors/bower_components/angular-loading-bar/src/loading-bar.css</css>
-		<css>/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css</css>
- 		-->
  
 		<!-- Angular Modules -->
 		<js>webjar:angular-ui-router/0.2.18/angular-ui-router.min.js</js>
@@ -32,13 +40,6 @@
 		<js>webjar:oclazyload/1.0.9/ocLazyLoad.min.js</js>
 		<js>webjar:angular-bootstrap/0.14.3/ui-bootstrap-tpls.min.js</js>
 		
-		<!--
-		<js>/vendors/bower_components/angular-ui-router/release/angular-ui-router.min.js/js>
-	 	<js>/vendors/bower_components/angular-loading-bar/src/loading-bar.js	</js>
-		<js>/vendors/bower_components/Waves/dist/waves.min.js</js>
-		<js>/vendors/bower_components/oclazyload/dist/ocLazyLoad.min.js</js>
-		<js>/vendors/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js</js>
-			-->	
 
 	 	<!-- Common Vendors -->
 		<js>webjar:malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></js>
@@ -47,67 +48,51 @@
 		<js>webjar:bootstrap-sweetalert/0.4.3/lib/sweet-alert.min.js</js>
 		<css>webjar:bootstrap-sweetalert/0.4.3/lib/sweet-alert.css</css>
 		
-		<!-- sweetalert v 0.4.2 not available in webjar
-		<js>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js</js>
-		<css>/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css</css>
-		<js>/vendors/bootstrap-growl/bootstrap-growl.js</js>
-		 -->
-
 		<js>webjar:bootstrap-growl/2.0.1/bootstrap-growl.min.js</js>
 		<js>/js/libs/angular-wizard.min.js</js>
 		<css>/js/libs/angular-wizard.min.css</css>
 		<js>webjar:angular-ui-select/0.19.6/select.min.js</js>
 		<css>webjar:angular-ui-select/0.19.6/select.min.css</css>
+
+	</group>
+	<group name="min-pack-skin">
+		<!-- Vendor CSS -->
+		<css>webjar:animate.css/3.3.0/animate.min.css</css>
+		<css>webjar:material-design-iconic-font/2.2.0/dist/css/material-design-iconic-font.min.css</css>
+
+		<js>/js/libs/checklist-model.config.js</js>
 		
-<!-- 
-		<script type="text/javascript" 	src="https://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.js"></script>
-		<link rel="stylesheet" type="text/css"	href="https://cdn.jsdelivr.net/angular.wizard/latest/angular-wizard.min.css">
-	 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.js"></script>
-		<link	href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.css" rel="stylesheet" media="screen">
-		<script src="js/common/checklist-model.config.js"></script>
-	 -->
-		</group>
-	<group name="im-app-1.1.0">
+		<js>webjar:angular-xeditable/0.4.0/dist/js/xeditable.min.js</js>
+		<css>webjar:angular-xeditable/0.4.0/dist/css/xeditable.min.css</css>
+	</group>
+	<group name="im-app">
+		<!-- app css -->
+		<css>/css/im-app.css</css>
+	
 		<!-- app modules --> 
 		<js>/js/app-config.theme.js</js>
+ 		<js>/js/app.config.js</js>
 		<js>/js/common/navigation.config.js</js>
 		<group-ref>min-pack-im</group-ref>
 		<js>/js/common/toolbox.js</js>
 		<js>/js/dashboard/dashboard.config.js</js>
 		<js>/js/user/users.config.js</js>
 		<js>/js/user/userservice.js</js>
-	
-<!-- 
-		<js>/js/app.config.js</js>
 		<js>/js/item/items.config.js</js>
 		<js>/js/item/itemservice.js</js>
 		<js>/js/item/boms.config.js</js>
 		<js>/js/item/bomservice.js</js>
- -->
 	</group>
-	<group name="min-pack-skin">
-		<!-- Vendor CSS -->
-		<css>webjar:animate.css/3.3.0/animate.min.css</css>
-		<css>webjar:material-design-iconic-font/2.2.0/dist/css/material-design-iconic-font.min.css</css>
-		<!-- 
-		<css>webjar:<css>/vendors/bower_components/animate.css/animate.min.css</css>
-		<css>/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css</css>
-		 -->
-		<js>/js/libs/checklist-model.config.js</js>
-		
-		<js>webjar:angular-xeditable/0.4.0/dist/js/xeditable.min.js</js>
-		<css>webjar:angular-xeditable/0.4.0/dist/css/xeditable.min.css</css>
-		<!-- 		<js>/css/xeditable/js/xeditable.min.js</js> -->
-		 
-	</group>
+
 	<group name="min-pack-im">
 		<group-ref>min-pack-im-cp</group-ref>
 		<js>/js/common/authenticator.config.js</js>
 		<js>/js/common/generic-restservice.js</js>
+		<js>/js/login/login.config.js</js>
 	</group>
 	<group name="min-pack-im-cp">
 		<js>/js/common/translator.config.js</js>
+		<js>/js/login/changepass.config.js</js>
 	</group>
-	
 	
 </groups>

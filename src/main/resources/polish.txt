@@ -1,4 +1,5 @@
 generic;translations
+"leftpanelmenuMainPage","Strona główna"
 "leftpanelmenumanageBoms", "Moje zadania"
 "leftpanelmenumanageitems","Produkty"
 "leftpanelmenubrowseitems","Przeglądaj produkty"
@@ -14,13 +15,13 @@ generic;translations
 "booleanno","nie"
 "pcs","szt"
 "clicktoedit","Kliknij żeby wyedytować."
-"clickto","Kliknij tutaj aby"
+"clickto","Kliknij tutaj aby dodać nowe zadanie"
 "ToggleFullscreen","Pełny ekran"
 
 "notLoggedInTeaser","Uwaga: nie jesteś zalogowany i zadania, które założysz znikną jak opuścisz portal. Lepiej idz do strony logowania i czym prędzej załóż konto."
 
 dahsboard;translations
-"dashboardcontent","Panel"
+"dashboardcontent","Strona główna"
 
 itemslist;translations
 "itemslisttitle","Produkty"
@@ -127,7 +128,7 @@ boms; boms
 "bomslistheadingbuttonrefresh","Odswiez"
 "bomslistbomstableheading","Lista składników"
 "bomslistbomstableheadingid","Id zadania"
-"bomslistbomstableheadingname","Zadanie "
+"bomslistbomstableheadingname","Zadanie: zbudować "
 "bomslistbomstableheadingqty","Wymgana ilość"
 "bomslistbomstableheadingactions",""
 "bomslistbomstableeditbutton","Edytuj"

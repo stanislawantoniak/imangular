@@ -3,6 +3,8 @@ package pl.essay;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -27,7 +29,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-
 import pl.essay.toolbox.EmailMaker;
 import pl.essay.toolbox.EmailSender;
 
@@ -81,7 +82,7 @@ public class ImAngularApplication {
 
 		}
 	}
-
+	
 	@Bean
 	public HibernateJpaSessionFactoryBean sessionFactory() {
 		return new HibernateJpaSessionFactoryBean();
@@ -93,6 +94,12 @@ public class ImAngularApplication {
 		return new EmailSender(emailAddressFrom);
 	}
 	
+	/*
+	 * template to be sent as forgot password
+	 * 
+	 * must contain placeholders for link 
+	 * and can contain placeholder for username
+	 */
 	@Bean
 	public EmailMaker forgetPasswordEmailMaker(){
 		return new EmailMaker("forgotPassEmailTemplate.txt");

@@ -50,22 +50,19 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 
 		self
 		.service
-		.deleteEntity(item.id).
-		then( function(response){
-			self.fetchAllItems();
-			console.log('itemtable::',self.itemtable);
-			self.itemTable.reload();
-			res.resolve(translator.label.itemsdeletesuccessinfo);
-		},
-		function(errResponse){
-			console.error('Error while deleting item');
-			res.reject(translator.label.itemsdeletefailureinfo);
-		});
+		.deleteEntity(item.id)
+		.then( 
+				function(response){
+					self.itemTable.reload(); //reload grid on succesful delete
+					res.resolve(translator.label.itemsdeletesuccessinfo);
+				},
+				function(errResponse){
+					console.error('Error while deleting item');
+					res.reject(translator.label.itemsdeletefailureinfo);
+				});
 
 		return res.promise;
-
 	}
-
 }]);
 
 itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory', 'authService',
@@ -118,7 +115,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 								}
 						)
 					}
-					console.log('item::',self.item);
+					//console.log('item::',self.item);
 				}
 		)
 	};

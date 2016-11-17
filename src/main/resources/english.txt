@@ -3,6 +3,7 @@ generic;translations
 "domain","eliczile.pl"
 "httpsDomain","https://eliczile.pl"
 "leftpanelcaption","Navigation"
+"leftpanelmenuMainPage","Main Page"
 "leftpanelmenumanageBoms", "Assignments"
 "leftpanelmenumanageitems","Manage Items"
 "leftpanelmenubrowseitems","Browse Items"
@@ -18,16 +19,14 @@ generic;translations
 "booleanno","No"
 "pcs","pcs"
 "clicktoedit","Click on text to edit."
-"clickto","Click Here To"
+"clickto","Click Here To Add New Assignment"
 "ToggleFullscreen","Toggle Fullscreen"
 
 "notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
 
 
 sahsboard;translations
-"dashboardcontent","Dashboard"
-
-
+"dashboardcontent","Home Page"
 
 itemslist;translations
 "itemslisttitle","Items"
@@ -45,7 +44,8 @@ itemslist;translations
 "itemslistitemstableheadingothersources","Other sources"
 "itemslistitemstableheadingisused","Is component of other items"
 "edititemheaderusedinname","Can be recovered from"
-"edititemheaderusedinquantity","Quantity"
+"edititemheaderusedinquantity","Quantity to recover"
+"itemusedinsheading","This item can be recovered by disassembling the following products"
 
 "itemslistitemstableheadingactions","Actions"
 "itemslistitemstableeditbutton","Edit"
@@ -132,17 +132,17 @@ users; useredit
 
 boms; boms
 "bomslistheadingbuttonaddbom","Add new assignment"
-"bomslistheading","Factory jobs"
+"bomslistheading","Your assignments"
 "bomslistheadingbuttonadditem","Add Item"
 "bomslistheadingbuttonrefresh","Refresh"
 "bomslistbomstableheading","Assignments "
-"bomslistbomstableheadingid","Assignement id"
-"bomslistbomstableheadingname","Recipe for item"
+"bomslistbomstableheadingid","Assignment id"
+"bomslistbomstableheadingname","Yous assignment is: assemble item "
 "bomslistbomstableheadingqty","Qty regired"
 "bomslistbomstableheadingactions","Actions"
 "bomslistbomstableeditbutton","Edit"
 "bomslistbomstabledeletebutton","Delete"
-"bomslistdeletewarning","Are you sure to delete assignement: "
+"bomslistdeletewarning","Are you sure to delete assignment: "
 
 bom;wizard
 "bomWizardHeader","Create assignment"
@@ -160,16 +160,21 @@ bom;wizard
 
 bom;edit
 "bomEditRecipePageHeader","Manage your assignment"
-"bomEditRecipeHeader","Your assignement"
+"bomEditRecipeHeader","Your assignment"
 "bomEditRecipeLabel1","You will produce "
 "bomEditRecipeLabel2"," of "
 "bomEditComponentLabel","Component"
 "bomEditIsComposed","Is composed"
-"bomEditRequiredQuantityLabel","Required qty according to recipe"
+"bomEditRequiredQuantityLabel"frecipe,"Required qty according to recipe"
 "bomEditRequiredEffectiveQuantityLabel","Required quantity"
 "bomEditInStockQuantityLabel","In stock"
 "bomEditStockRemarksLabel","My remarks"
-"bomEditStockDeleteRecipeButton","Remove assignement"
+"bomEditStockDeleteRecipeButton","Remove assignment"
+
+"bomEditdeleteheading","Are you sure to delte this assignment"
+"bomEditDeleteSuccessHeading", "Assignment has beed deleted"
+"bomEditDeleteFailureHeading","Something went wrong"
+"bomEditDeleteOnCancelInfo", "The assignment will not be deleted"
 
 "logintitle","Login Page"
 "loginpleasesignin","Welcome, you can log in with your email and password"
@@ -183,7 +188,7 @@ bom;edit
 "loginRegisterTitle","Register as a user"
 "forgotPassUserNotExistErrorTxt","Such user is not registered"
 "HashSentTitle","An email has been sent"
-"HashSentText", "We have sent you an email with a link to reset and change your password. Please go to your mailbox and chack."
+"HashSentText", "We have sent you an email with a link to reset and change your password. Please go to your mailbox and check."
 "HashSentGoToSite","Go to site "
 
 "loginpasslabel","Enter password"

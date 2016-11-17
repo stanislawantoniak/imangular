@@ -9,7 +9,6 @@ materialAdmin
 	//$locationProvider.hashPrefix('!');
 	//$locationProvider.html5Mode(true);
 
-
 	$urlRouterProvider.when('','/');
 
 	$stateProvider

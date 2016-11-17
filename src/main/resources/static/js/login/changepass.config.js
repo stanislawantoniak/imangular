@@ -36,11 +36,11 @@ changepass
 		.get('/getusername/'+self.hash)
 		.then( 
 				function(response){
-					console.log(response);
+					//console.log(response);
 					self.username = response.data;
 					self.password = '' ;
 					self.hashNotFound = false;
-					console.log("username", self.username);
+					//console.log("username", self.username);
 				},
 				function(){
 					self.hashNotFound = true;
@@ -56,9 +56,12 @@ changepass
 		.put('/changepass/'+self.hash, self.password)
 		.then( 
 				function(){
+					//on succesful password change redirect to main page
 					$window.location.href = '/'
 				},
 				function(){
+					//to fix
+					//if anything happens 
 					console.log("user does not exist");
 				})
 	}

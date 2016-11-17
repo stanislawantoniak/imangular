@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container col-sm-6 col-xs-12">
 	<div class="block-header">
 		<h2>{{translator.label.bomEditRecipePageHeader}}</h2>
 	</div>
@@ -11,7 +11,7 @@
 			</h4>
 		</div>
 	</div>
-	<div class="card">
+	<div class="card" ng-cloak>
 		<div id="profile-main" class="pm-body clearfix">
 			<div class="pmb-block">
 				<div class="pmbb-header">
@@ -26,7 +26,7 @@
 							</a>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li><a swal-exec swal-object="bom"
-										swal-dialog-title="{{translator.label.itemslistdeleteheading +' '+bomCtrl.bom.forItem.name}}?"
+										swal-dialog-title="{{translator.label.bomslistdeletewarning +' '+bomCtrl.bom.forItem.name}}?"
 										swal-main-text="{{translator.label.itemslistdeletewarning}}"
 										swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
 										swal-cancel-button="{{translator.label.edititembuttoncancel}}"
@@ -44,7 +44,6 @@
 						<h4>
 							{{translator.label.bomEditRecipeLabel1}} <a class="m-l-20"
 								editable-text="bomCtrl.bom.requiredQuantity"
-								e-min="1"
 								e-style="text-align:center; max-width: 55px;" onaftersave="bomCtrl.createOrUpdateBomQuantity()"
 								e-only-digits> {{ bomCtrl.bom.requiredQuantity }}<i
 								class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i>
@@ -56,7 +55,7 @@
 				</div>
 			</div>
 
-			<div id="requirements-list" class="pmb-block">
+			<div id="requirements-list" class="pmb-block" ng-cloak>
 				<div class="pmbb-header">
 					<h2>
 						<i class="zmdi zmdi-format-list-numbered zmdi-hc-fw"></i>
@@ -94,7 +93,7 @@
 							<tr
 								ng-repeat="req in bomCtrl.bom.requirementsList | orderBy : ['-forItem.isComposed','+forItem.name']">
 								<td><button class="btn btn-default btn-sm"
-										ui-sref="root.itemDetails({id:req.forItemId})">
+										ui-sref="root.itemDetails({id:req.forItem.id})">
 										<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
 									</button></td>
 
@@ -111,7 +110,7 @@
 
 								<td class="text-center"><a
 									editable-text="req.stock.inStockQuantity"
-									e-style="text-align:center; max-width: 55px;"
+									e-style="text-align:center; max-width: 35px;"
 									onaftersave="bomCtrl.saveStock(req)" e-only-digits> {{
 										req.stock.inStockQuantity }} <i
 										class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i>
@@ -119,7 +118,7 @@
 								</a></td>
 
 								<td><a editable-textarea="req.stock.remarks"
-								e-style="text-align:center; max-width: 55px;"
+								e-style="text-align:center; min-width: 95px;"
 									onaftersave="bomCtrl.saveStock(req)">{{ req.stock.remarks
 										}}<i class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i></td>
 

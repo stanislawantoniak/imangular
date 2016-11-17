@@ -3,9 +3,9 @@
 <html class="login-content" ng-app="imlogin" ng-controller="translation">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>eliczile</title>
 
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
@@ -15,21 +15,21 @@
 <link href="css/app.min.1.css" rel="stylesheet" id="app-level">
 <link href="css/app.min.2.css" rel="stylesheet">
 
-<link href="css/im-app.css" rel="stylesheet">
+<link href="css/im-app-1.1.0.css" rel="stylesheet">
 
 </head>
 
 <body class="login-content" data-ng-controller="login as loginCtrl"
-	ng-cloak>
+	>
 
-	<div id="login-header" class="logo">
+	<div id="login-header" class="logo" ng-cloak>
 		<div class="pull-left">
 			<a href="{{ domainSSL }}"><img src="/img/tally-marks-white-200.png"
 				title="eliczile logo" />eliczile</a>
 		</div>
 	</div>
 	<!-- Login -->
-	<div class="lc-block" id="l-login"
+	<div class="lc-block" ng-cloak id="l-login"
 		data-ng-class="{ 'toggled': loginCtrl.loginActive === 1 }"
 		data-ng-if="loginCtrl.loginActive === 1">
 		<h3>{{translator.label.logintitle}}</h3>
@@ -78,7 +78,7 @@
 	</div>
 
 	<!-- Register -->
-	<div class="lc-block" id="l-register"
+	<div class="lc-block" ng-cloak id="l-register"
 		data-ng-class="{ 'toggled': loginCtrl.registerActive === 1 }"
 		data-ng-if="loginCtrl.registerActive === 1">
 		<h3>{{translator.label.loginRegisterTitle}}</h3>
@@ -145,7 +145,7 @@
 	</div>
 
 	<!-- Forgot Password -->
-	<div class="lc-block" id="l-forget-password"
+	<div class="lc-block" ng-cloak id="l-forget-password"
 		data-ng-class="{ 'toggled': loginCtrl.forgotActive === 1 }"
 		data-ng-if="loginCtrl.forgotActive === 1">
 
@@ -185,7 +185,7 @@
 		</ul>
 	</div>
 	
-	<div class="lc-block toggled" id="hash-sent" ng-if="cpCtrl.hashSent">
+	<div class="lc-block toggled" ng-cloak id="hash-sent" ng-if="loginCtrl.hashSent">
 		<h3>{{translator.label.HashSentTitle}}</h3>
 	
 		<p class="text-left">{{ translator.label.HashSentText }}</p>
@@ -194,53 +194,8 @@
 
 	</div>
 
-	<!-- Older IE warning message -->
-	<!--[if lt IE 9]>
-            <div class="ie-warning">
-                <h1 class="c-white">Warning!!</h1>
-                <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-                <div class="view-container">
-                    <ul class="view-download">
-                        <li>
-                            <a href="http://www.google.com/chrome/">
-                                <img src="img/browsers/chrome.png" alt="">
-                                <div>Chrome</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.mozilla.org/en-US/firefox/new/">
-                                <img src="img/browsers/firefox.png" alt="">
-                                <div>Firefox</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.opera.com">
-                                <img src="img/browsers/opera.png" alt="">
-                                <div>Opera</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.apple.com/safari/">
-                                <img src="img/browsers/safari.png" alt="">
-                                <div>Safari</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                                <img src="img/browsers/ie.png" alt="">
-                                <div>IE (New)</div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <p>Sorry for the inconvenience!</p>
-            </div>
-        <![endif]-->
-
-
 	<script src="js/angular-bootstrap.js" type="text/javascript"></script>
-	<script src="js/min-pack-im.js"></script>
-	<script src="js/login/login.config.js"></script>
-
+	<script src="js/min-pack-im-1.1.0.js"></script>
+	
 </body>
 </html>

@@ -7,24 +7,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-public class MainController extends BaseController {
+public class MainController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String dashboard(Model model) {
-		return "index.html";
+	public String mainPage() {
+
+		return "/entry-html/index.html";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
-		return "/js/login/login.html";
+
+		return "/entry-html/loginpage.html";
 	}
 	
 	@RequestMapping(value = "/changepass/{hash}", method = RequestMethod.GET)
-	public String changePass() {
+	public String changePassPage() {
 		
-		//tofix check if hash valid
-		
-		return "/js/login/changepass.html";
+		return "/entry-html/changepasspage.html";
 	}
 	
 }

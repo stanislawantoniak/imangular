@@ -63,7 +63,7 @@ login
 		.then( 
 				function(){
 					console.log("hash sent");
-					self.forgotActive = 0
+					self.forgotActive = 0;
 					self.hashSent = true;
 				},
 				function(){
@@ -79,10 +79,10 @@ login
 		self.registerErrorUnset();
 
 		//first check for errors
-		console.log('in postUser() credentials:: ',authService.credentials);
+		//console.log('in postUser() credentials:: ',authService.credentials);
 		if (typeof(authService.credentials.username) == 'undefined' 
 			|| typeof(authService.credentials.password) == 'undefined'){
-			self.registerErrorSet( translator.label.loginRegisterErrorMessage);
+			self.registerErrorSet( translator.label.loginRegisterErrorMessage );
 			return;
 		}
 
@@ -98,7 +98,7 @@ login
 					var theUser = {};
 					theUser.username = authService.credentials.username;
 					theUser.password = authService.credentials.password;
-					console.log('the user::',theUser);
+					//console.log('the user::',theUser);
 					$http
 					.post('/register',theUser)
 					.then( 
