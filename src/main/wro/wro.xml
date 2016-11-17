@@ -93,6 +93,7 @@
 	<group name="min-pack-im-cp">
 		<js>/js/common/translator.config.js</js>
 		<js>/js/login/changepass.config.js</js>
+		<js>/js/common/analytics.config.js</js>
 	</group>
 	
 </groups>

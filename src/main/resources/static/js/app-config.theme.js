@@ -20,7 +20,8 @@ var materialAdmin = angular
 		 'items',
 		 'boms',
 		 'toolbox',
-		 'authenticationService' ] );
+		 'authenticationService',
+		 'analytics'] );
 
 materialAdmin
 //=========================================================================

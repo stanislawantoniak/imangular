@@ -12,25 +12,6 @@ transl.controller( 'translation',['translator', '$scope', function(translator, $
 
 }]);
 
-transl 
-.run(['$window','$rootScope', '$location',  
-      function ($window, $rootScope, $location  ) {
-
-	/*
-	 * google analytics
-	 */
-	$rootScope
-	.$on('$stateChangeSuccess',
-			function(event){
-
-		if (!$window.ga)
-			return;
-
-		$window.ga('send', 'pageview', { page: $location.path() });
-	});
-}]);
-
-
 transl.factory('translator', ['$q','$http', function($q,$http){
 
 	var Translator = {
