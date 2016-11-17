@@ -11,15 +11,14 @@ itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
 }]);
 
-itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemService','dialogFactory', 'ngTableParams',
-                                  function itemsController( $q,  $scope,   $http,  translator,  itemService,  dialogFactory,  ngTableParams ) {
+itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemService', 'ngTableParams',
+                                  function itemsController( $q,  $scope,   $http,  translator,  itemService,  ngTableParams ) {
 
 	var self = this;
 	self.service = itemService;
-	self.deleteDialog = dialogFactory.getService();
 
 	//table for items
-	this.itemTable = new ngTableParams({
+	self.itemTable = new ngTableParams({
 		page: 1,            // show first page
 		count: 25,
 		sorting: {
@@ -54,6 +53,8 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 		.deleteEntity(item.id).
 		then( function(response){
 			self.fetchAllItems();
+			console.log('itemtable::',self.itemtable);
+			self.itemTable.reload();
 			res.resolve(translator.label.itemsdeletesuccessinfo);
 		},
 		function(errResponse){

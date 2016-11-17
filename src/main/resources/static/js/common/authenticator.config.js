@@ -89,6 +89,19 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$window', func
 //	console.log("auth service in factory: ", AuthService);
 
 	$rootScope.authenticated = false;
+	
+	var host = $location.host();
+	var port = $location.port();
+	
+	$rootScope.domainSSL = 
+		//( port == '' ? 'https://' : 'http://' )
+		'https://'
+		+ host;
+		//+ ( port == '' ? '' : ':'+port);
+	
+	console.log('location port',port);
+	console.log('port == \'\'',port == '');
+	
 	AuthService.authenticate();
 	AuthService.getLanguages();
 
