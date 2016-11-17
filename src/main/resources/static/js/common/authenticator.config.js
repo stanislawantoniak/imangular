@@ -94,13 +94,14 @@ auth.factory('authService', ['$http', '$rootScope', '$location', '$window', func
 	var port = $location.port();
 	
 	$rootScope.domainSSL = 
-		//( port == '' ? 'https://' : 'http://' )
-		'https://'
-		+ host;
-		//+ ( port == '' ? '' : ':'+port);
-	
+		( host == 'localhost' ? 'http://' : 'https://' )
+		+ host
+		+ ( host == 'localhost' ? ':'+port : '');
+	/*
+	console.log('location host',host);
 	console.log('location port',port);
-	console.log('port == \'\'',port == '');
+	console.log('domainSSL',$rootScope.domainSSL);
+	*/
 	
 	AuthService.authenticate();
 	AuthService.getLanguages();
