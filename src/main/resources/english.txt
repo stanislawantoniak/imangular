@@ -8,6 +8,7 @@ generic;translations
 "leftpanelmenumanageitems","Manage Items"
 "leftpanelmenubrowseitems","Browse Items"
 "leftpanelmenumanageUsers", "Manage Users"
+"leftpanelmenumanageNews", "Content news"
 "navbarmenuactionlogin","Sign in"
 "navbarmenuactionlogout","Sign out"
 "navbarloginpleaselogin","Please sign in"

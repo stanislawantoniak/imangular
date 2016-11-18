@@ -4,6 +4,7 @@ generic;translations
 "leftpanelmenumanageitems","Produkty"
 "leftpanelmenubrowseitems","Przeglądaj produkty"
 "leftpanelmenumanageUsers", "Użytkownicy"
+"leftpanelmenumanageNews", "Artykuły"
 "navbarmenuactionlogin","Zaloguj się"
 "navbarmenuactionlogout","Wyloguj"
 "navbarloginpleaselogin","Prosimy o zalogowanie"

@@ -1,0 +1,106 @@
+
+<div class="container">
+
+	<div class="block-header">
+		<h2>Edytujesz artykul</h2>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card">
+				<div class="card-body card-padding">
+					<form role="form" name="news"
+						ng-submit="newsCtrl.createOrUpdateNews()">
+
+						<dl class="dl-horizontal">
+							<dt class="p-t-10">Kategoria</dt>
+							<dd>
+								<div class="fg-line">
+									<select data-ng-model="newsCtrl.news.category" type="text"
+										class="form-control">
+										<option>home</option>
+										<option>items</option>
+										<option>itemdetails</option>
+										<option>boms</option>
+										<option>bomdetails</option>
+									</select>
+								</div>
+							</dd>
+						</dl>
+
+						<dl class="dl-horizontal">
+							<dt class="p-t-10">Opublikowane</dt>
+							<dd>
+								<div class="fg-line toggle-switch m-t-10" data-ts-color="green">
+									<input ng-model="newsCtrl.news.isPublisehed" id="isPublisehed"
+										type="checkbox" hidden="hidden"> <label
+										class="ts-helper" for="isPublisehed"></label>
+								</div>
+							</dd>
+						</dl>
+
+						<dl class="dl-horizontal">
+							<dt class="p-t-10">Priorytet</dt>
+							<dd>
+								<div class="fg-line">
+									<input data-ng-model="newsCtrl.news.priority" type="text"
+										class="form-control" only-digits>
+								</div>
+							</dd>
+						</dl>
+
+						<dl class="dl-horizontal">
+							<dt class="p-t-10">Tytul</dt>
+							<dd>
+								<div class="fg-line">
+									<input data-ng-model="newsCtrl.news.title" type="text"
+										class="form-control">
+								</div>
+							</dd>
+						</dl>
+						<br>
+
+						<dl class="dl-horizontal">
+							<div text-angular="text-angular" name="content"
+								ng-model="newsCtrl.news.content" ta-disabled='disabled'></div>
+						</dl>
+						<div class="m-t-30">
+							<div class="pull-right m-t-20"
+								ng-class="{'has-error':uform.$invalid}">
+								<button class="btn btn-primary waves-effect" type="submit">
+									<i class="fa fa-save"></i>
+									{{translator.label.edititembuttonsave}}
+								</button>
+							</div>
+							<a ng-click="newsCtrl.unsetEditItemContext()"
+								class="btn btn-default m-t-20 waves-effect"> <i
+								class="fa fa-undo"></i>
+								{{translator.label.edititembuttoncancel}}
+							</a>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row m-b-20" ng-if="true">
+			<div class="col-lg-6 col-xs-12">
+				<div class="card ">
+					<div class="card-header bgm-lime">
+						<h2>
+							{{ newsCtrl.news.title }} <small>Dodane: {{
+								newsCtrl.news.dateCreated }}</small>
+						</h2>
+
+					</div>
+					<div class="card-body card-padding" dynamic="newsCtrl.news.content"></div>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-lg-6" mg-if="true">
+			nav.authService.session::{{nav.authService.session}} <br> <br>news::
+			{{ newsCtrl.news }}
+		</div>
+	</div>
+</div>

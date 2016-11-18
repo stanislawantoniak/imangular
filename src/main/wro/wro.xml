@@ -15,12 +15,11 @@
 	</group>
 	
 	<group name="angular-bootstrap">
-		<css>webjar:bootstrap/3.3.5/css/bootstrap.css</css>
-
+		
 		<js>webjar:jquery/2.1.4/jquery.min.js</js>
 
 		<!-- Angular -->
-		<js>webjar:angularjs/1.4.7/angular.min.js</js> 
+		<js>webjar:angularjs/1.4.7/angular.js</js> 
 		<js>webjar:angular-animate/1.4.8/angular-animate.min.js</js> 
 		<js>webjar:angular-resource/1.4.8/angular-resource.min.js</js> 
 
@@ -49,11 +48,16 @@
 		<css>webjar:bootstrap-sweetalert/0.4.3/lib/sweet-alert.css</css>
 		
 		<js>webjar:bootstrap-growl/2.0.1/bootstrap-growl.min.js</js>
-		<js>/js/libs/angular-wizard.min.js</js>
-		<css>/js/libs/angular-wizard.min.css</css>
 		<js>webjar:angular-ui-select/0.19.6/select.min.js</js>
 		<css>webjar:angular-ui-select/0.19.6/select.min.css</css>
-
+		
+		<js>/js/libs/text-angular/textAngular-rangy.min.js</js>
+		<js>/js/libs/text-angular/textAngular-sanitize.min.js</js>
+		<js>/js/libs/text-angular/textAngular.min.js</js>
+		<css>/js/libs/text-angular/textAngular.css</css>
+	
+		<css>/css/joli/font-awesome.min.css</css>
+	
 	</group>
 	<group name="min-pack-skin">
 		<!-- Vendor CSS -->
@@ -82,6 +86,8 @@
 		<js>/js/item/itemservice.js</js>
 		<js>/js/item/boms.config.js</js>
 		<js>/js/item/bomservice.js</js>
+		<js>/js/news/news.config.js</js>
+		<js>/js/news/newsservice.js</js>
 	</group>
 
 	<group name="min-pack-im">

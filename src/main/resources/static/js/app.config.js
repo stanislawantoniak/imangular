@@ -64,9 +64,22 @@ materialAdmin
 		url: '/login',
 		templateUrl : 'js/common/login.html',
 		controller : 'login as login'
+	})
+	.state ('root.news', {
+		url: '/news',
+		templateUrl : 'js/news/newsList.html',
+		controller : 'newsList as newsCtrl'
+	})
+	.state ('root.newsDetails', {
+		url: '/news/details/:id',
+		templateUrl : 'js/news/newsEdit.html',
+		controller : 'newsEdit as newsCtrl'
+	})
+	.state ('root.newsAdd', {
+		url: '/news/add/:id',
+		templateUrl : 'js/news/newsEdit.html',
+		controller : 'newsEdit as newsCtrl'
 	});
-
-
 
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 

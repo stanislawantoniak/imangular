@@ -176,7 +176,7 @@ userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userServ
 					//console.log(theUser);
 					self.service.createOrUpdate(theUser)
 					.then( function(response){
-						$location.path('/users')
+						$state.go('root.users');
 					},	function(errResponse){
 						console.error('Error while creating/saving User');
 					});

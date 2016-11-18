@@ -1,7 +1,7 @@
 'use strict';
 
 //Register `boms` component, along with its associated controller and template
-var bomApp = angular.module('boms', ['translationService','toolbox', 'checklist-model','xeditable','ui.select','mgo-angular-wizard']);
+var bomApp = angular.module('boms', ['translationService','toolbox', 'checklist-model','xeditable','ui.select']);
 
 itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 

@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Column;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -96,7 +94,7 @@ public class UserForm {
 		return this.id;
 	}
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:00", timezone="CET")
 	public Date getDateCreated(){
 		return this.dateCreated;
 	}
@@ -110,7 +108,7 @@ public class UserForm {
 		this.lastLoggedIn = d;
 	}
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:00", timezone="CET")
 	public Date getLastLoggedIn(){
 		return this.lastLoggedIn;
 	}

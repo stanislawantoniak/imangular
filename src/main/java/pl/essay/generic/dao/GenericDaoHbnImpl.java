@@ -49,7 +49,7 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		Method method = ReflectionUtils
 				.findMethod(
 						getDomainClass(), 
-						"getDafaulSortColumn"
+						"getDefaultSortColumn"
 						);
 		if (method != null) {
 			try {

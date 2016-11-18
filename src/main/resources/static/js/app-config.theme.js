@@ -19,6 +19,7 @@ var materialAdmin = angular
 		 'users', 
 		 'items',
 		 'boms',
+		 'news',
 		 'toolbox',
 		 'authenticationService',
 		 'analytics'] );

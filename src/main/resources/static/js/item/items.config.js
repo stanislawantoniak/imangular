@@ -65,8 +65,8 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 	}
 }]);
 
-itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'dialogFactory', 'authService',
-                                 function itemsController(  $q, $state,  $stateParams,  $scope,  $http,    $location,    translator,  itemService,   itemComponentService,   dialogFactory, authService ) {
+itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'authService',
+                                 function itemsController(  $q, $state,  $stateParams,  $scope,  $http,    $location, translator, itemService, itemComponentService, authService ) {
 	//console.log('itemEdit controller starting');
 
 	var self = this;
