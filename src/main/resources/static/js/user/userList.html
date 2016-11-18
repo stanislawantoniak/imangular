@@ -32,23 +32,29 @@
 									{{translator.label.userslistuserstableheadingid}}</th>
 								<th width="25%">
 									{{translator.label.userslistuserstableheadingname}}</th>
-								<th width="45%">{{translator.label.edituserlabelroles}}</th>
+								<th width="25%"><i class="zmdi zmdi-calendar zmdi-hc-fw"></i></th>
+
+								<th width="25%">{{translator.label.edituserlabelroles}}</th>
 								<th width="5%">{{translator.label.userslistuserstableheadingenabled}}</th>
 								<th width="25%">{{translator.label.userslistuserstableheadingactions}}</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="user in usersCtrl.users">
+							<tr ng-repeat="user in usersCtrl.users | orderBy : ['+username']">
 								<td>{{user.id == 0 ? '-' : user.id}}</td>
 
 								<td><span editable-text="user.username" e-name="username"
 									onbeforesave="usersCtrl.checkEmail($data)" e-form="rowform"
 									e-required> {{ user.username || 'empty'}} </span></td>
 
+								<td><table><tbody><tr><td>created: </td><td> {{ user.dateCreated }} </td></tr>
+									<tr><td> last logged in:&nbsp;</td><td> {{ user.lastLoggedIn }}</td></tr></tbody></table>
+								</td>
 								<td><span editable-checklist="user.rolesSelected"
 									e-name="rolesSelected"
 									e-ng-options="s.value as s.text for s in ::usersCtrl.allRoles track by s.value"
 									e-form="rowform"> {{ user.rolesSelected.join(', ') }} </span></td>
+
 								<td><span editable-radiolist="user.enabled"
 									e-name="enabled"
 									e-ng-options="o.value as o.text for o in ::translator.yesno track by o.value"
@@ -84,11 +90,10 @@
 											swal-main-text="{{translator.label.userslistdeletewarning}}"
 											swal-confirm-button="{{translator.label.userslistuserstablebuttondelete}}"
 											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
-											swal-exec-fn-on-confirm="usersCtrl.deleteUserPromise" 
+											swal-exec-fn-on-confirm="usersCtrl.deleteUserPromise"
 											growl-on-confirm-success-title="{{translator.label.usersdeletesuccessheading}}"
 											growl-on-confirm-failure-title="{{translator.label.usersdeletefailureheading}}"
-											growl-on-cancel-text="{{translator.label.userdeleteoncancelinfo}}"
-											>
+											growl-on-cancel-text="{{translator.label.userdeleteoncancelinfo}}">
 											{{translator.label.userslistuserstablebuttondelete}}</button>
 									</div>
 								</td>

@@ -116,7 +116,7 @@ public class ImAngularApplication {
 		@Bean 
 		DataSourceBuilder realDataSourceBuilder() throws URISyntaxException { 
 
-			System.out.println("full url from props::"+this.dataSourceProperties.getUrl());
+			logger.trace("full url from props::"+this.dataSourceProperties.getUrl());
 
 			URI uri = new URI(this.dataSourceProperties.getUrl());
 
@@ -124,7 +124,7 @@ public class ImAngularApplication {
 			String username;
 			String password;
 			
-			System.out.println("uri user::"+uri.getUserInfo());
+			logger.trace("uri user::"+uri.getUserInfo());
 			
 			if ( uri.getUserInfo() != null){ //in case we have user and pass in url
 				url = "jdbc:postgresql://" + uri.getHost() + ':' + uri.getPort() + uri.getPath();
@@ -135,9 +135,9 @@ public class ImAngularApplication {
 				username = this.dataSourceProperties.getUsername();
 				password = this.dataSourceProperties.getPassword();		
 			}
-			System.out.println("url from props::"+url);
-			System.out.println("name from props::"+username);
-			System.out.println("pass from props::"+password);
+			logger.trace("url from props::"+url);
+			logger.trace("name from props::"+username);
+			logger.trace("pass from props::"+password);
 
 			DataSourceBuilder factory = DataSourceBuilder 
 					.create(this.dataSourceProperties.getClassLoader()) 

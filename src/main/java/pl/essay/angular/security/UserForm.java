@@ -1,13 +1,21 @@
 package pl.essay.angular.security;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+
+/*
+ * class meant for wrapping user data for security reasons - password, hash is never sent to front
+ */
 public class UserForm {
 	
 	public static final String roleAdmin = "ROLE_ADMIN";
@@ -27,6 +35,9 @@ public class UserForm {
 	
 	private boolean enabled;
 	
+	private Date dateCreated;
+	private Date lastLoggedIn;
+	
 	public UserForm(){}
 	
 	public UserForm(UserT u){
@@ -34,6 +45,10 @@ public class UserForm {
 		this.username = u.getUsername();
 		this.enabled = u.isEnabled();
 		this.rolesSelected = u.getRolesList();
+		this.lastLoggedIn = u.getLastLoggedIn();
+		this.dateCreated = u.getDateCreated();
+
+		//push empty string as pass
 		this.password = "";
 	}
 	
@@ -79,6 +94,25 @@ public class UserForm {
 	}
 	public int getId(){
 		return this.id;
+	}
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	public Date getDateCreated(){
+		return this.dateCreated;
+	}
+	
+	public void setDateCreated(Date d){
+		this.dateCreated = d;
+	}
+	
+	
+	public void setLastLoggedIn(Date d){
+		this.lastLoggedIn = d;
+	}
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	public Date getLastLoggedIn(){
+		return this.lastLoggedIn;
 	}
 		
 	@Override 

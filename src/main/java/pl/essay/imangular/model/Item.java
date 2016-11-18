@@ -1,6 +1,7 @@
 package pl.essay.imangular.model;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -25,6 +26,7 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -83,6 +85,10 @@ public class Item {
 
 	@Column 
 	private String otherSources;
+	
+	@Column
+	private Date dateCreated;
+
 
 	public Item(){
 	}
@@ -123,6 +129,16 @@ public class Item {
 	public String getName(){
 		return this.name;
 	}
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	public Date getDateCreated(){
+		return this.dateCreated;
+	}
+	
+	public void setDateCreated(Date d){
+		this.dateCreated = d;
+	}
+	
 	/*
 	 * return components organized in a TreeSet to force sorting
 	 * there will be few components so sorting in this layer will be efficient

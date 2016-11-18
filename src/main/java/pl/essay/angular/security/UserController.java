@@ -35,7 +35,7 @@ public class UserController extends BaseController {
 	public SetWithCountHolder<UserForm> listUsers() {
 		
 		SetWithCountHolder<UserForm> theList = this.userService.listUsers();
-		//logger.info("list size: "+theList.size());
+		logger.trace("user list size: "+theList.getTotalRows());
 
 		return theList;
 	}
@@ -127,11 +127,10 @@ public class UserController extends BaseController {
 		UserT user = new UserT();
 		user = userForm.updateUserT(user);
 		
-		logger.info("before create user data: "+user);
+		logger.trace("before create user data: "+user);
 		long id = this.userService.addUser( user );
-		logger.info("after create user data: "+user);
 		
-		System.out.println("id:: "+id);
+		logger.trace("user id:: "+id);
 		
 		return new ResponseEntity<Long>( id, HttpStatus.OK);
 	}
@@ -176,14 +175,13 @@ public class UserController extends BaseController {
 	
 		UserT user = this.userService.getUserById(id);
 		if (user == null){			 
-			logger.info("User " +id+ " does not exist but requested delete");
+			logger.trace("User " +id+ " does not exist but requested delete");
 	        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		
-		//logger.info("before delete user: "+user);
+		logger.trace("before delete user: "+user);
 		this.userService.removeUser(id);
-		//logger.info("after delete user: "+user);
-		
+
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	

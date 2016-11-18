@@ -5,6 +5,8 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,8 @@ import pl.essay.imangular.service.BillOfMaterialService;
 
 @RestController
 public class LoginController extends BaseController {
+
+	protected static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired 
 	UserService userService;
@@ -32,6 +36,7 @@ public class LoginController extends BaseController {
 		//on successfull login usersession.authenticated is false 
 		//it will change to true 2 lines below 
 		if (!this.userSession.getAuthenticated()) {// move all boms from anonymous to user (change owner on login)
+			
 			this.userSession.updateOnAuthentication();
 			this.bomService.moveBomsFromAnonymousToUser(this.userSession.getAnonymousSessionId(), this.userSession.getUser());
 		}
@@ -39,23 +44,28 @@ public class LoginController extends BaseController {
 		return this.userSession.toJson();
 	}
 
+	/*
+	 * for debugging only
+	 */
 	void print(HttpSession httpSession){
 
-		System.out.println("httpSession::"+httpSession.toString());
-		System.out.println("\thttpSession id::"+httpSession.getId());
-		//System.out.println("\thttpSession time::"+httpSession.getCreationTime());
-		//System.out.println("\thttpSession last accessed::"+httpSession.getLastAccessedTime());
-		//System.out.println("\thttpSession max inact interv::"+httpSession.getMaxInactiveInterval());
+		logger.trace("httpSession::"+httpSession.toString());
+		logger.trace("\thttpSession id::"+httpSession.getId());
+		//logger.trace("\thttpSession time::"+httpSession.getCreationTime());
+		//logger.trace("\thttpSession last accessed::"+httpSession.getLastAccessedTime());
+		//logger.trace("\thttpSession max inact interv::"+httpSession.getMaxInactiveInterval());
 		Enumeration<String> attribs = httpSession.getAttributeNames();
 		while(attribs.hasMoreElements()){
 			String attrib = attribs.nextElement();
-			System.out.println("\thttpSession attrib:: "+attrib+" = "+httpSession.getAttribute(attrib));
+			logger.trace("\thttpSession attrib:: "+attrib+" = "+httpSession.getAttribute(attrib));
 		}
-		System.out.println("anonymous session::"+this.userSession.getAnonymousSessionId());
+		logger.trace("anonymous session::"+this.userSession.getAnonymousSessionId());
 
 	}
 
-	//this is unprotected resource used for fetching data for guest user
+	/*
+	 * this is unprotected resource used for fetching data stored in usersession for guest user
+	 */
 	@RequestMapping(value = "common/userSession", method = RequestMethod.GET)
 	public String getSession(HttpSession httpSession) {
 
@@ -82,15 +92,15 @@ public class LoginController extends BaseController {
 		String name = "stan@wp.pl";
 		String pass  = "123456";
 
-		System.out.println("user init in progress");
+		logger.trace("user init in progress");
 
 		try {
 			this.userService.loadUserByUsername(name);
 		} catch (UsernameNotFoundException e) {
-			//System.out.println("User "+name+" does not exist in db.");
+			logger.trace("User "+name+" does not exist in db.");
 			UserT user = new UserT(name,pass,UserForm.roleAdmin,true);
 			this.userService.addUser(user);
-			//System.out.println("User : "+user+" added to db");
+			logger.trace("User : "+user+" added to db");
 		} finally {
 
 		}

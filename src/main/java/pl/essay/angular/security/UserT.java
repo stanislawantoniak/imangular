@@ -25,6 +25,8 @@ import org.hibernate.annotations.NamedQuery;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @DynamicInsert
 @DynamicUpdate
@@ -45,6 +47,9 @@ public class UserT implements UserDetails{
 	
 	@Column
 	private Date dateCreated;
+	
+	@Column
+	private Date lastLoggedIn;
 
 	@Column
 	@NotNull(message="Name must not be empty")
@@ -147,7 +152,7 @@ public class UserT implements UserDetails{
 		return this.enabled;
 	}
 	
-	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
 	public Date getDateCreated(){
 		return this.dateCreated;
 	}
@@ -157,6 +162,16 @@ public class UserT implements UserDetails{
 	}
 	
 	
+	public void setLastLoggedIn(Date d){
+		this.lastLoggedIn = d;
+	}
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	public Date getLastLoggedIn(){
+		return this.lastLoggedIn;
+	}
+	
+
 	public Date getForgotPasswordHashDate(){
 		return this.forgotPasswordHashDate;
 	}

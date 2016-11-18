@@ -2,6 +2,8 @@ package pl.essay.angular.security;
 
 import java.io.Serializable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +19,8 @@ import pl.essay.languages.*;
 @Component
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserSession implements Serializable{
+	
+	protected static final Logger logger = LoggerFactory.getLogger(UserSession.class);
 	
 	@Autowired
 	UserService userService;
@@ -83,6 +87,8 @@ public class UserSession implements Serializable{
 						username = ((UserDetails) principal).getUsername();
 						if (principal instanceof UserT){
 							this.user = (UserT) principal;
+							logger.trace("before lastloggedin");
+							this.userService.setDateLastLoggedIn(user);
 						}
 					} else {
 						username = principal.toString();
@@ -98,6 +104,8 @@ public class UserSession implements Serializable{
 						if (a.getAuthority().equals(UserForm.roleUser))
 							this.isUser = true;
 					}
+					
+					
 				}
 			}
 		}

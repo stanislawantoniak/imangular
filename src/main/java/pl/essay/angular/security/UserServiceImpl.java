@@ -181,5 +181,19 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 	}
+	
+	/*
+	 * updates date of login for a given user
+	 */
+	@Override
+	public void setDateLastLoggedIn(UserT u){
+		UserT user = this.userDao.get(u.getId());
+		logger.trace("user::"+user);
+		Date d = new Date();
+		logger.trace("before user.lastLoggeIn::"+user.getLastLoggedIn());
+		user.setLastLoggedIn(d);
+		logger.trace("after user.lastLoggeIn::"+user.getLastLoggedIn());
+		this.userDao.update(user);
+	}
 
 }
