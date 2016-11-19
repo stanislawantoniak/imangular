@@ -1,5 +1,6 @@
 
 <div class="container">
+
 	<div class="block-header">
 
 		<h2>{{translator.label.bomslistheading}}</h2>
@@ -16,17 +17,25 @@
 		</div>
 	</div>
 	<div class="row" id="news">
-		<div class="col-md-4" ng-repeat="news in bomsCtrl.news">
+		<div class="col-lg-4" ng-repeat="news in bomsCtrl.news">
 			<div class="card">
-				<div class="card-body card-padding z-depth-4" ng-class="news.cColor" >
-						<div dynamic="news.content"></div>
+				<div class="card-body card-padding z-depth-4" ng-class="news.cColor">
+					<div dynamic="news.content"></div>
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-4" ng-if="bomsCtrl.news.length < 3">
+			<div class="card">
+				<div class="card-body">
+					<img src="/img/sma-banner.jpg">
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 	<div id="bom-tiles" class="row">
-		<div class="col-md-4">
+		<div class="col-lg-4">
 			<a href data-ui-sref="root.bomWizard">
 				<div class="card">
 					<div class="card-body card-padding bgm-teal c-white z-depth-4">

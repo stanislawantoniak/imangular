@@ -19,6 +19,7 @@ factory('newsService', [ '$q', 'restservice', function( $q, restservice){
 				function(response){
 					var temp = response.collection;
 					var newsList = [];
+					var counter = 0;
 					//filter published only - filters on server side work on string fields only
 					angular.forEach( temp, function(news) {
 						if ( news.isPublished ){
@@ -29,6 +30,8 @@ factory('newsService', [ '$q', 'restservice', function( $q, restservice){
 							cColor[news.bgmColor.replace('bgm-','c-')] = true;
 							news.bgmColor = bgmColor;
 							news.cColor = cColor;
+							news.counter = counter;
+							counter ++;
 							newsList.push(news);
 						}
 					});
