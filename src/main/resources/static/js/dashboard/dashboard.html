@@ -1,15 +1,15 @@
 
-<div class="container" id="news">
+<div class="container-fluid" id="news">
 	<div class="block-header">
 		<h2>{{translator.label.dashboardcontent}}</h2>
 	</div>
 	<div class="row">
-		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
 			ng-repeat-start="news in dashCtrl.news | orderBy : '-priority'">
 			<div class="card ">
 				<div class="card-header" ng-class="news.bgmColor">
 					<h2>
-						{{ news.counter }} {{ news.title }} <small>Dodane: {{ news.dateCreated }}</small>
+						{{ news.title }} <small>Dodane: {{ news.dateCreated }}</small>
 					</h2>
 
 				</div>
@@ -17,26 +17,26 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" 
-			ng-if="news.counter == 2">
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" 
+			ng-if="news.counter == 3">
 			<div class="card">
 				<div class="card-body z-depth-4">
 					<img src="/img/sma-banner.jpg">
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat-end
-			ng-if="news.counter == 3">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat-end
+			ng-if="news.counter == 0">
 			<div class="card">
 				<div class="card-body z-depth-4">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0">
 						<div class="card">
 							<div class="card-body z-depth-4">
 								<img src="/img/swiat-marzen-lead.jpg">
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0 p-l-10">
 						<div class="card">
 							<div class="card-body z-depth-4">
 								<img src="/img/swiat-marzen.jpg">
