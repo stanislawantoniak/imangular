@@ -38,7 +38,6 @@
 		<js>webjar:waves/0.7.5/dist/waves.min.js</js>
 		<js>webjar:oclazyload/1.0.9/ocLazyLoad.min.js</js>
 		<js>webjar:angular-bootstrap/0.14.3/ui-bootstrap-tpls.min.js</js>
-		
 
 	 	<!-- Common Vendors -->
 		<js>webjar:malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></js>
@@ -72,7 +71,6 @@
 	<group name="im-app">
 		<!-- app css -->
 		<css>/css/im-app.css</css>
-	
 		<!-- app modules --> 
 		<js>/js/app-config.theme.js</js>
  		<js>/js/app.config.js</js>
@@ -89,7 +87,6 @@
 		<js>/js/news/news.config.js</js>
 		<js>/js/news/newsservice.js</js>
 	</group>
-
 	<group name="min-pack-im">
 		<group-ref>min-pack-im-cp</group-ref>
 		<js>/js/common/authenticator.config.js</js>

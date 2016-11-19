@@ -17,23 +17,55 @@
 								<div class="fg-line">
 									<select data-ng-model="newsCtrl.news.category" type="text"
 										class="form-control">
-										<option>home</option>
-										<option>items</option>
-										<option>itemdetails</option>
-										<option>boms</option>
-										<option>bomdetails</option>
+										<option class="bgm-">home</option>
+										<option class="bgm-">items</option>
+										<option class="bgm-">itemdetails</option>
+										<option class="bgm-">boms</option>
+										<option class="bgm-">bomdetails</option>
 									</select>
 								</div>
 							</dd>
 						</dl>
-
+						<dl class="dl-horizontal">
+							<dt class="p-t-10">Kolor tla</dt>
+							<dd>
+								<div class="fg-line">
+									<select ng-class="newsCtrl.bgmClass"
+										data-ng-model="newsCtrl.news.bgmColor" type="text"
+										class="form-control">
+										<option class="bgm-pink">bgm-pink</option>
+										<option class="bgm-red">bgm-red</option>
+										<option class="bgm-purple">bgm-purple</option>
+										<option class="bgm-deeppurple">bgm-deeppurple</option>
+										<option class="bgm-indigo">bgm-indigo</option>
+										<option class="bgm-blue">bgm-blue</option>
+										<option class="bgm-lightblue">bgm-lightblue</option>
+										<option class="bgm-cyan">bgm-cyan</option>
+										<option class="bgm-teal">bgm-teal</option>
+										<option class="bgm-green">bgm-green</option>
+										<option class="bgm-lightgreen">bgm-lightgreen</option>
+										<option class="bgm-lime">bgm-lime</option>
+										<option class="bgm-yellow">bgm-yellow</option>
+										<option class="bgm-amber">bgm-amber</option>
+										<option class="bgm-orange">bgm-orange</option>
+										<option class="bgm-deeporange">bgm-deeporange</option>
+										<option class="bgm-brown">bgm-brown</option>
+										<option class="bgm-gray">bgm-gray</option>
+										<option class="bgm-bluegray">bgm-bluegray</option>
+										<option class="bgm-black">bgm-black</option>
+									</select>
+									<a class="btn btn-default pull-right"
+										ng-click="newsCtrl.applyBgmColor()">Zastosuj</a>
+								</div>
+							</dd>
+						</dl>
 						<dl class="dl-horizontal">
 							<dt class="p-t-10">Opublikowane</dt>
 							<dd>
 								<div class="fg-line toggle-switch m-t-10" data-ts-color="green">
-									<input ng-model="newsCtrl.news.isPublisehed" id="isPublisehed"
+									<input ng-model="newsCtrl.news.isPublished" id="isPublished"
 										type="checkbox" hidden="hidden"> <label
-										class="ts-helper" for="isPublisehed"></label>
+										class="ts-helper" for="isPublished"></label>
 								</div>
 							</dd>
 						</dl>
@@ -86,7 +118,7 @@
 		<div class="row m-b-20" ng-if="true">
 			<div class="col-lg-6 col-xs-12">
 				<div class="card ">
-					<div class="card-header bgm-lime">
+					<div class="card-header" ng-class="newsCtrl.bgmClass">
 						<h2>
 							{{ newsCtrl.news.title }} <small>Dodane: {{
 								newsCtrl.news.dateCreated }}</small>
@@ -98,7 +130,7 @@
 			</div>
 
 		</div>
-		<div class="col-lg-6" mg-if="true">
+		<div class="col-lg-6" mg-if="false">
 			nav.authService.session::{{nav.authService.session}} <br> <br>news::
 			{{ newsCtrl.news }}
 		</div>

@@ -25,7 +25,7 @@ materialAdmin
 	.state ('root.dashboard', {
 		url: '/',
 		templateUrl : 'js/dashboard/dashboard.html',
-		controller : 'dashboard'
+		controller : 'dashboard as dashCtrl'
 	})
 	.state ('root.users', {
 		url: '/users',

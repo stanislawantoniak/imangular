@@ -30,13 +30,13 @@ public class NewsItemServiceImpl implements NewsItemService{
 
 	@Override
 	public SetWithCountHolder<NewsItem> listNewsItems() {
-		return this.listNewsItems();
+		return this.newsItemDao.getAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public SetWithCountHolder<NewsItem> listNewsItemsByCategory(String cat) {
-		return this.listNewsItems();
+		return this.newsItemDao.getAll();
 	}
 	
 	@Override

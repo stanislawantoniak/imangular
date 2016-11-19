@@ -1,31 +1,20 @@
 package pl.essay.imangular.model;
 
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.*;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -46,15 +35,15 @@ public class NewsItem {
 	private Boolean isPublished = false;
 
 	@Column
-	@NotNull(message="Name must not be empty")
+	@NotNull(message="Title must not be empty")
 	private String title;
 	
-	@Column 
+	@Column @Type(type="text")
 	private String content;
 
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = true)
-	//@JsonIgnore //never ever serialize userdetails - there is pass in it!
+	//@JsonIgnore //never serialize userdetails - there is pass in it!
 	UserT createdBy;
 	
 	@Column
@@ -62,6 +51,9 @@ public class NewsItem {
 	
 	@Column 
 	private String category;
+	
+	@Column 
+	private String bgmColor;
 
 	@Column 
 	private Integer priority;
@@ -133,6 +125,14 @@ public class NewsItem {
 	
 	public String getCategory(){
 		return this.category;
+	}
+	
+	public void setBgmColor(String c){
+		this.bgmColor = c;
+	}
+	
+	public String getBgmColor(){
+		return this.bgmColor;
 	}
 	
 	@JsonIgnore

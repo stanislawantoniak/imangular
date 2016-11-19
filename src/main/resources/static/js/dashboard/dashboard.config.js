@@ -3,12 +3,27 @@
 //Register `navigation` component, along with its associated controller and template
 angular.
 module('dashboard', ['translationService']).
-controller( 'dashboard', ['$scope', 'translator', function DashboardController($scope, translator) {
-	
-	//console.log('from dashboard controller - start');
+controller( 'dashboard', ['$scope', 'translator', 'newsService', function DashboardController($scope, translator, newsService) {
 
-	//$scope.translator = translator;
+	var self = this;
+	self.service = newsService;
 
-	//console.log('from dashboard controller - end');
+	self
+	.service
+	.fetchAll()
+	.then( 
+			function(response){
+				//console.log("news list::",response);
+				self.temp = response.collection;
+				self.news = [];
+				angular.forEach(self.temp, function(news) {
+					if (news.category == 'home' && news.isPublished){
+						var bgmColor = {};
+						bgmColor[news.bgmColor] = true;
+						news.bgmColor = bgmColor;
+						self.news.push(news);
+					}
+				});
+			} );
 
 }]);
