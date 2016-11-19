@@ -37,6 +37,7 @@ itemslist;translations
 "itemslistitemstableheadingwheremanufactured","Gdzie produkowany"
 "itemslistitemstableheadingisavailableinothersources","Czy dostępny w innych źródłach"
 "itemslistitemstableheadingothersources","Inne źródła"
+"itemslistitemstableheadingBgmColor","Kolor kafelka"
 "itemslistitemstableheadingisused","Jest składnikiem innych produktów"
 "edititemheaderusedinname","Można odzyskać z"
 "edititemheaderusedinquantity","Ilość sztuk"

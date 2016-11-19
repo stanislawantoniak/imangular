@@ -28,7 +28,7 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 	var self = this;
 	self.bomService = bomService;
 	self.newsService = newsService;
-	
+
 	self
 	.newsService
 	.fetchByCategoryPublished('bom')
@@ -38,44 +38,60 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 			});
 
 	self.fetchAllBoms = function(){
-		//console.log('starting fetching boms');
-		self.bomService.fetchAll().then(function(response) {
-			self.boms = response.collection;
-			//console.log('boms::',self.boms);
-		}, function(){
-			console.log('get boms from service - fail');
-		})
+		console.log('starting fetching boms');
+		self.bomService.fetchAll().then(
+				function(response) {
+					self.boms = response.collection;
+					angular.forEach( 
+							self.boms, 
+							function(bom) {
+								//prepare map for ngClass with background color
+								var bgmClass = {};
+								if (bom.forItem.bgmColor= null){
+									bgmClass[bom.forItem.bgmColor] = true;
+								}
+								bgmClass['bg-lime'] = bom.forItem.canBeSplit;
+								bgmClass['bgm-gray'] = !bom.forItem.canBeSplit;
+								bom.bgmClass = bgmClass;
+
+							});
+					console.log('boms::',self.boms);
+				}, function(){
+					console.log('get boms from service - fail');
+				})
 	};
 
 	self.fetchAllBoms();
 
-	self.kick = function(){
-		self.bomService.fetchAnyData('/kick/').then(function(response) {
-			self.fetchAllBoms();
-			//self.boms = response;
-		}, function(){
-			console.log('get boms from service - fail');
-		})
-	}
-
 	self.deleteBom = function(){
 		self.bomService.deleteEntity(self.deleteDialog.object.id).
-		then( function(response){
-			self.fetchAllBoms();
-		},
-		function(errResponse){
-			console.error('Error while deleting item');
-		});
+		then( 
+				function(response){
+					self.fetchAllBoms();
+				},
+				function(errResponse){
+					console.error('Error while deleting item');
+				});
 	}
 
 }]);
 
-itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bomService',  'dialogFactory', 
-                                  function bomsController($scope, $state, $http, translator, bomService, dialogFactory ) {
+itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bomService', 'newsService',
+                                  function bomsController($scope, $state, $http, translator, bomService, newsService ) {
 
 	var self = this;
 	self.bomService = bomService;
 	self.translator = translator;
+
+	self.newsService = newsService;
+
+	self
+	.newsService
+	.fetchByCategoryPublished('bomwizard')
+	.then(
+			function(response){
+				self.news = response;
+			});
 
 	self.bom = {
 			item : null,
@@ -111,12 +127,13 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 		//console.log('bom::',b);
 
 		self.bomService.createOrUpdate(b)
-		.then( function(response){
-			//console.log('create item::',response);
-			$state.go('^.bomDetails',{id:response});
-		},	function(errResponse){
-			console.error('Error while creating/saving bom');
-		});
+		.then( 
+				function(response){
+					//console.log('create item::',response);
+					$state.go('^.bomDetails',{id:response});
+				},	function(errResponse){
+					console.error('Error while creating/saving bom');
+				});
 	}
 
 }]);
@@ -179,7 +196,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 				remarks : req.stock.remarks
 		}
 		//console.log('stock :: ',stock);
-		
+
 		bomStockService
 		.update(stock,0)
 		.then( 
@@ -189,7 +206,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 				}
 		)
 	};
-	
+
 	self.deleteBomPromise = function(){
 		var res = $q.defer();
 

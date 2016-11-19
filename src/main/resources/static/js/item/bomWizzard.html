@@ -5,6 +5,23 @@
 			{{translator.label.bomWizardHeader}}
 		</h2>
 	</div>
+	
+	<div class="row" id="news">
+		<div class="col-md-4" ng-repeat="news in bomCtrl.news">
+			<div class="card">
+				<div class="card-body card-padding z-depth-4" ng-class="news.cColor">
+					<div dynamic="news.content"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 pull-right" ng-if="bomCtrl.news.length < 3">
+			<div class="card">
+				<div class="card-body">
+					<img src="/img/sma-banner.jpg">
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="card">
@@ -29,23 +46,24 @@
 											ng-options="item.name for item in bomCtrl.itemsForSelect"
 											required>
 											<option value="">--------</option>
-										</select> <small ng-show="bomCtrl.bom.item === null">{{ translator.label.bomWizardStep1Desc }}</small>
+										</select> <small ng-show="bomCtrl.bom.item === null">{{
+											translator.label.bomWizardStep1Desc }}</small>
 									</dd>
 								</dl>
 								<dl class="dl-horizontal">
 									<dt class="p-t-10">{{translator.label.bomWizardStep2}}</dt>
 									<dd>
 										<input class="form-control" name="quantity"
-											ng-model="bomCtrl.bom.quantity" only-digits required/> <small>{{
+											ng-model="bomCtrl.bom.quantity" only-digits required /> <small>{{
 											translator.label.bomWizardStep2Desc }}</small>
 									</dd>
 								</dl>
 
-							<button class="btn btn-primary pull-right" type="submit">
+								<button class="btn btn-primary pull-right" type="submit">
 									<i class="fa fa-save"></i> {{translator.label.bomWizardFinish}}
 								</button>
-								<a ui-sref="root.boms"
-									class="btn btn-default"> <i class="fa fa-undo"></i>
+								<a ui-sref="root.boms" class="btn btn-default"> <i
+									class="fa fa-undo"></i>
 									{{translator.label.componenteditformbuttoncancel}}
 								</a>
 						</form>

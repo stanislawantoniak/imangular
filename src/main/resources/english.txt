@@ -43,6 +43,7 @@ itemslist;translations
 "itemslistitemstableheadingwheremanufactured","Where manufactured"
 "itemslistitemstableheadingisavailableinothersources","Is available in other sources"
 "itemslistitemstableheadingothersources","Other sources"
+"itemslistitemstableheadingBgmColor","Tile color"
 "itemslistitemstableheadingisused","Is component of other items"
 "edititemheaderusedinname","Can be recovered from"
 "edititemheaderusedinquantity","Quantity to recover"

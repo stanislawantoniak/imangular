@@ -31,7 +31,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<div id="bom-tiles" class="row">
@@ -57,7 +56,7 @@
 			<a href ui-sref="root.bomDetails({id:bom.id})">
 				<div class="card">
 					<div class="card-body card-padding bgm-lime c-white z-depth-4"
-						ng-class="{'bg-lime': bom.forItem.canBeSplit, 'bgm-gray':!bom.forItem.canBeSplit}">
+						ng-class="bom.bgmClass">
 						<div class="row">
 							<div class="col-md-3 col-xs-1">
 								<div class="text-center" style="font-size: 300%;">

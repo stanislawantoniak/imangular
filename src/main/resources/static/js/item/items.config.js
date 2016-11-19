@@ -29,19 +29,16 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 		total: 0, 
 		getData: function($defer, params) {
 
-			//console.log('get data 1');
-			//console.log(params.orderBy());
-			//console.log(params);
-			console.log('page::',params.page());
-			console.log('count::',params.count());
-			console.log('orderBy::',params.orderBy());
-			console.log('filter::',params.filter());
+			//console.log('page::',params.page());
+			//console.log('count::',params.count());
+			//console.log('orderBy::',params.orderBy());
+			//console.log('filter::',params.filter());
 
 			self
 			.service
 			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
 			.then( function(response){
-				//console.log("response::",response);
+				console.log("response::",response);
 				params.total(response.totalRows);
 				$defer.resolve(response.collection);
 			} );
@@ -106,6 +103,10 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 				function(response) {
 					self.item = response;
 					if (self.itemId != 0 && ( self.item.isUsed || self.item.isComposed) ){
+						var bgmClass = {};
+						bgmClass[self.item.bgmColor] = true;;
+						self.item.bgmClass = bgmClass;
+						
 						self.service
 						.fetchAnyData('/itemrest/associations/'+self.itemId)
 						.then( 

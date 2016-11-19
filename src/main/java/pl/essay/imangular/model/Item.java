@@ -88,7 +88,9 @@ public class Item {
 	
 	@Column
 	private Date dateCreated;
-
+	
+	@Column 
+	private String bgmColor;
 
 	public Item(){
 	}
@@ -253,6 +255,14 @@ public class Item {
 		this.otherSources = o;
 	}
 
+	public void setBgmColor(String c){
+		this.bgmColor = c;
+	}
+	
+	public String getBgmColor(){
+		return this.bgmColor;
+	}
+	
 	public String toString(){
 		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.isComposed;
 	}

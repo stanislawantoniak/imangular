@@ -38,7 +38,7 @@
 							ng-if="!itemCtrl.addItemCtx || itemCtrl.addItemCtx && itemCtrl.item.isComposed">
 							<dl class="dl-horizontal">
 								<dt>{{translator.label.itemslistitemstableheadingiscomposed}}</dt>
-								<dd >
+								<dd>
 									<i ng-if="itemCtrl.item.isComposed"
 										class="zmdi zmdi-check zmdi-hc-fw"></i> <i
 										ng-if="!itemCtrl.item.isComposed"
@@ -48,7 +48,7 @@
 
 							<dl class="dl-horizontal">
 								<dt>{{translator.label.itemslistitemstableheadingCanBeSplit}}</dt>
-								<dd >
+								<dd>
 									<i ng-if="itemCtrl.item.canBeSplit"
 										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
 										ng-if="!itemCtrl.item.canBeSplit"
@@ -61,7 +61,7 @@
 							</dl>
 							<dl class="dl-horizontal">
 								<dt>{{translator.label.itemslistitemstableheadingisavailableinothersources}}</dt>
-								<dd >
+								<dd>
 									<i ng-if="itemCtrl.item.isAvailableInOtherSources"
 										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
 										ng-if="!itemCtrl.item.isAvailableInOtherSources"
@@ -74,12 +74,16 @@
 							</dl>
 							<dl class="dl-horizontal">
 								<dt>{{translator.label.itemslistitemstableheadingisused}}</dt>
-								<dd >
+								<dd>
 									<i ng-if="itemCtrl.item.isUsed"
 										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
 										ng-if="!itemCtrl.item.isUsed"
 										class="zmdi zmdi-minus zmdi-hc-fw"></i>
 								</dd>
+							</dl>
+							<dl class="dl-horizontal">
+								<dt>{{translator.label.itemslistitemstableheadingBgmColor}}</dt>
+								<dd><button ng-if="itemCtrl.item.bgmColor != null" class="btn" ng-class="itemCtrl.item.bgmClass">{{itemCtrl.item.bgmColor}}</button></dd>
 							</dl>
 						</div>
 
@@ -93,13 +97,12 @@
 						<dl class="dl-horizontal">
 							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingname}}</dt>
 							<dd>
-								<div class="fg-line" ng-class="{'has-warning':itemCtrl.itemExists}">
+								<div class="fg-line"
+									ng-class="{'has-warning':itemCtrl.itemExists}">
 									<input data-ng-model="itemCtrl.item.name" type="text"
 										pattern=".{3,}" required
 										title="{{ translator.label.itemNameAtLeast3Chars }}"
-										class="form-control"> 
-										
-										<small class="help-block"
+										class="form-control"> <small class="help-block"
 										ng-if="itemCtrl.itemExists && itemCtrl.itemChecked == itemCtrl.item.name"><strong>{{itemCtrl.itemChecked}}
 									</strong> {{translator.label.itemNameExistsError}} </small>
 								</div>
@@ -147,6 +150,38 @@
 								</div>
 							</dd>
 						</dl>
+
+						<dl class="dl-horizontal">
+							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingBgmColor}}</dt>
+							<dd>
+								<div class="fg-line">
+									<select data-ng-model="itemCtrl.item.bgmColor" type="text"
+										class="form-control">
+										<option class="bgm-pink">bgm-pink</option>
+										<option class="bgm-red">bgm-red</option>
+										<option class="bgm-purple">bgm-purple</option>
+										<option class="bgm-deeppurple">bgm-deeppurple</option>
+										<option class="bgm-indigo">bgm-indigo</option>
+										<option class="bgm-blue">bgm-blue</option>
+										<option class="bgm-lightblue">bgm-lightblue</option>
+										<option class="bgm-cyan">bgm-cyan</option>
+										<option class="bgm-teal">bgm-teal</option>
+										<option class="bgm-green">bgm-green</option>
+										<option class="bgm-lightgreen">bgm-lightgreen</option>
+										<option class="bgm-lime">bgm-lime</option>
+										<option class="bgm-yellow">bgm-yellow</option>
+										<option class="bgm-amber">bgm-amber</option>
+										<option class="bgm-orange">bgm-orange</option>
+										<option class="bgm-deeporange">bgm-deeporange</option>
+										<option class="bgm-brown">bgm-brown</option>
+										<option class="bgm-gray">bgm-gray</option>
+										<option class="bgm-bluegray">bgm-bluegray</option>
+										<option class="bgm-black">bgm-black</option>
+									</select>
+								</div>
+							</dd>
+						</dl>
+
 						<div class="m-t-30">
 							<div class="pull-right m-t-20"
 								ng-class="{'has-error':uform.$invalid}">

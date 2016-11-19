@@ -1,5 +1,6 @@
 package pl.essay.imangular.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public class BillOfMaterialDaoImpl extends GenericDaoHbnImpl<BillOfMaterial> imp
 		.setParameter("userOwner", user)
 		.executeUpdate();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BomRequirementsQueryResult> getRequirementsOfBom(long id){
