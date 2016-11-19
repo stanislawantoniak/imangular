@@ -28,15 +28,26 @@ controller( 'dashboard', ['$scope', 'translator', 'newsService', function Dashbo
 				});
 			} );
 	 */
-	
-	
+
+
 	self
 	.service
 	.fetchByCategoryPublished('home')
 	.then(
 			function(response){
+				/*self.news = {};
+				self.news.colA = [];
+				self.news.colB = [];
+				angular.forEach( 
+						response, 
+						function(news) {
+							if (news.counter % 2 == 0)
+								self.news.colA.push(news);
+							else
+								self.news.colB.push(news);
+						})
+						*/
 				self.news = response;
 			});
-	
-	
+
 }]);

@@ -1,41 +1,50 @@
 
-<div class="container">
+<div class="container" id="news">
 	<div class="block-header">
 		<h2>{{translator.label.dashboardcontent}}</h2>
 	</div>
-	<div id="news" class="col-lg-6 animate-repeat"
-		ng-repeat="news in dashCtrl.news | orderBy : '-priority'">
-		<div class="card ">
-			<div class="card-header" ng-class="news.bgmColor">
-				<h2>
-					{{ news.title }} <small>Dodane: {{ news.dateCreated }}</small>
-				</h2>
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+			ng-repeat-start="news in dashCtrl.news | orderBy : '-priority'">
+			<div class="card ">
+				<div class="card-header" ng-class="news.bgmColor">
+					<h2>
+						{{ news.title }} <small>Dodane: {{ news.dateCreated }}</small>
+					</h2>
 
-			</div>
-			<div class="card-body card-padding z-depth-4" dynamic="news.content">
-			</div>
-		</div>
-		<div class="card" ng-if="news.counter == 1">
-			<div class="card-body z-depth-4">
-				<img src="/img/sma-banner.jpg">
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-6" id="news">
-		<div class="col-lg-6">
-			<div class="card">
-				<div class="card-body z-depth-4">
-					<img src="/img/swiat-marzen-lead.jpg">
+				</div>
+				<div class="card-body card-padding z-depth-4" dynamic="news.content">
 				</div>
 			</div>
 		</div>
-				<div class="col-lg-6">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat-end
+			ng-if="news.counter == 2">
 			<div class="card">
 				<div class="card-body z-depth-4">
-					<img src="/img/swiat-marzen.jpg">
+					<img src="/img/sma-banner.jpg">
 				</div>
 			</div>
 		</div>
-		
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat-end
+			ng-if="news.counter == 3">
+			<div class="card">
+				<div class="card-body z-depth-4">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="card">
+							<div class="card-body z-depth-4">
+								<img src="/img/swiat-marzen-lead.jpg">
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="card">
+							<div class="card-body z-depth-4">
+								<img src="/img/swiat-marzen.jpg">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
