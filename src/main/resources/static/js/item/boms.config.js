@@ -23,15 +23,23 @@ itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
 	//console.log('boms config ending');
 }]);
 
-itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService',  'dialogFactory', function bomsController($scope, $http, translator, bomService, dialogFactory ) {
+itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService',  'newsService', function bomsController($scope, $http, translator, bomService, newsService ) {
 
 	var self = this;
-	self.service = bomService;
-	self.deleteDialog = dialogFactory.getService();
+	self.bomService = bomService;
+	self.newsService = newsService;
+	
+	self
+	.newsService
+	.fetchByCategoryPublished('bom')
+	.then(
+			function(response){
+				self.news = response;
+			});
 
 	self.fetchAllBoms = function(){
 		//console.log('starting fetching boms');
-		self.service.fetchAll().then(function(response) {
+		self.bomService.fetchAll().then(function(response) {
 			self.boms = response.collection;
 			//console.log('boms::',self.boms);
 		}, function(){
@@ -42,7 +50,7 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 	self.fetchAllBoms();
 
 	self.kick = function(){
-		self.service.fetchAnyData('/kick/').then(function(response) {
+		self.bomService.fetchAnyData('/kick/').then(function(response) {
 			self.fetchAllBoms();
 			//self.boms = response;
 		}, function(){
@@ -51,7 +59,7 @@ itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService', 
 	}
 
 	self.deleteBom = function(){
-		self.service.deleteEntity(self.deleteDialog.object.id).
+		self.bomService.deleteEntity(self.deleteDialog.object.id).
 		then( function(response){
 			self.fetchAllBoms();
 		},
@@ -66,7 +74,7 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
                                   function bomsController($scope, $state, $http, translator, bomService, dialogFactory ) {
 
 	var self = this;
-	self.service = bomService;
+	self.bomService = bomService;
 	self.translator = translator;
 
 	self.bom = {
@@ -84,7 +92,7 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 	}
 
 	//get items for select in add bom
-	self.service.fetchAnyData('/items/forselect/0').then(function(response){
+	self.bomService.fetchAnyData('/items/forselect/0').then(function(response){
 
 		self.itemsForSelect = response;
 
@@ -102,7 +110,7 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 		}
 		//console.log('bom::',b);
 
-		self.service.createOrUpdate(b)
+		self.bomService.createOrUpdate(b)
 		.then( function(response){
 			//console.log('create item::',response);
 			$state.go('^.bomDetails',{id:response});
@@ -119,7 +127,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 	//console.log('bomEdit ctrl starting');
 
 	var self = this;
-	self.service = bomService;
+	self.bomService = bomService;
 	self.translator = translator;
 
 	self.bomId = parseInt($stateParams.id);
@@ -131,7 +139,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 		bomRequest.requiredQuantity = self.bom.requiredQuantity;
 
 		//console.log('bomRequest::',bomRequest);
-		self.service.createOrUpdate(bomRequest)
+		self.bomService.createOrUpdate(bomRequest)
 		.then( function(response){
 			self.fetchBom();
 		},	function(errResponse){

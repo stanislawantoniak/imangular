@@ -67,8 +67,10 @@ newsApp.controller( 'newsEdit', ['$q','$state', '$stateParams','$scope', '$http'
 	//console.log('newsId param::',self.newsId);
 	
 	self.bgmClass = {};
+	self.cClass = {};
 	self.applyBgmColor = function(){
 		self.bgmClass[self.news.bgmColor] = true ;
+		self.cClass[self.news.bgmColor.replace('bgm-','c-')] = true ;
 	}
 
 	//fetch news - when adding news get empty news but populated predefined fields id any

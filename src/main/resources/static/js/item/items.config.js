@@ -32,7 +32,10 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 			//console.log('get data 1');
 			//console.log(params.orderBy());
 			//console.log(params);
-			//console.log('fiter::',params.filter());
+			console.log('page::',params.page());
+			console.log('count::',params.count());
+			console.log('orderBy::',params.orderBy());
+			console.log('filter::',params.filter());
 
 			self
 			.service

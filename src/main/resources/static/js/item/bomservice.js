@@ -2,7 +2,7 @@
 
 angular
 .module('boms')
-.factory('bomService', ['$http', '$q', 'restservice', function( $http, $q, restservice){
+.factory('bomService', ['restservice', function( restservice){
 	
 	var BomService = restservice.getService();
 	BomService.setRestServiceOne('bomrest/');
@@ -11,7 +11,7 @@ angular
 	return BomService;
 
 }])
-.factory('bomStockService', ['$http', '$q', 'restservice', function( $http, $q, restservice){
+.factory('bomStockService', ['restservice', function( restservice){
 	
 	var BomStockService = restservice.getService();
 	BomStockService.setRestServiceOne('bomstockrest/');

@@ -8,16 +8,18 @@ controller( 'dashboard', ['$scope', 'translator', 'newsService', function Dashbo
 	var self = this;
 	self.service = newsService;
 
+	/*
 	self
 	.service
-	.fetchAll()
+	.fetchAll(1,1000000,['-priority'],{category:'home'})
 	.then( 
 			function(response){
-				//console.log("news list::",response);
+				console.log("news list::",response);
 				self.temp = response.collection;
 				self.news = [];
 				angular.forEach(self.temp, function(news) {
-					if (news.category == 'home' && news.isPublished){
+					if ( news.isPublished ){
+						//prepare map for ngClass with background color
 						var bgmColor = {};
 						bgmColor[news.bgmColor] = true;
 						news.bgmColor = bgmColor;
@@ -25,5 +27,16 @@ controller( 'dashboard', ['$scope', 'translator', 'newsService', function Dashbo
 					}
 				});
 			} );
-
+	 */
+	
+	
+	self
+	.service
+	.fetchByCategoryPublished('home')
+	.then(
+			function(response){
+				self.news = response;
+			});
+	
+	
 }]);

@@ -2,7 +2,7 @@
 
 angular.
 module('items').
-factory('itemService', ['$http', '$q', 'restservice', function( $http, $q, restservice){
+factory('itemService', ['restservice', function( restservice){
 	
 	var ItemService = restservice.getService();
 	ItemService.setRestServiceOne('itemrest/');
@@ -11,7 +11,7 @@ factory('itemService', ['$http', '$q', 'restservice', function( $http, $q, rests
 	return ItemService;
 
 }]).
-factory('itemComponentService', ['$http', '$q', 'restservice', function( $http, $q, restservice){
+factory('itemComponentService', ['restservice', function(  restservice){
 	
 	var ItemComponentService = restservice.getService();
 	ItemComponentService.setRestServiceOne('componentrest/');

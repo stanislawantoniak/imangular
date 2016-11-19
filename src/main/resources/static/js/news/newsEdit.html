@@ -53,8 +53,7 @@
 										<option class="bgm-gray">bgm-gray</option>
 										<option class="bgm-bluegray">bgm-bluegray</option>
 										<option class="bgm-black">bgm-black</option>
-									</select>
-									<a class="btn btn-default pull-right"
+									</select> <a class="btn btn-default pull-right"
 										ng-click="newsCtrl.applyBgmColor()">Zastosuj</a>
 								</div>
 							</dd>
@@ -85,7 +84,7 @@
 							<dd>
 								<div class="fg-line">
 									<input data-ng-model="newsCtrl.news.title" type="text"
-										class="form-control">
+										class="form-control" required>
 								</div>
 							</dd>
 						</dl>
@@ -115,24 +114,49 @@
 			</div>
 		</div>
 
-		<div class="row m-b-20" ng-if="true">
-			<div class="col-lg-6 col-xs-12">
-				<div class="card ">
-					<div class="card-header" ng-class="newsCtrl.bgmClass">
-						<h2>
-							{{ newsCtrl.news.title }} <small>Dodane: {{
-								newsCtrl.news.dateCreated }}</small>
-						</h2>
-
-					</div>
-					<div class="card-body card-padding" dynamic="newsCtrl.news.content"></div>
+		<div class="col-lg-6 col-xs-12" id="news">
+			<div class="card">
+				<div class="card">
+					<div class="card-body card-padding bgm-black c-white">
+						Podglad boxu ponizej</div>
 				</div>
 			</div>
 
+			<div class="card " ng-if="newsCtrl.news.category === 'home'">
+				<div class="card-header" ng-class="newsCtrl.bgmClass">
+					<h2>
+						{{ newsCtrl.news.title }} <small>Dodane: {{
+							newsCtrl.news.dateCreated }}</small>
+					</h2>
+
+				</div>
+				<div class="card-body card-padding" dynamic="newsCtrl.news.content"></div>
+			</div>
+
+			<div class="card" ng-if="newsCtrl.news.category === 'boms'">
+				<div class="card">
+					<div class="card-body card-padding z-depth-4"
+						ng-class="newsCtrl.cClass">
+						<div dynamic="newsCtrl.news.content"></div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="card ">
+				<div class="card-header bgm-blue">
+					<h2>HTML</h2>
+				</div>
+				<div class="card-body card-padding">{{ newsCtrl.news.content
+					}}</div>
+			</div>
 		</div>
-		<div class="col-lg-6" mg-if="false">
-			nav.authService.session::{{nav.authService.session}} <br> <br>news::
-			{{ newsCtrl.news }}
+
+		<div class="col-lg-6" ng-if="false">
+			<br> <br>news::
+			<pre>{{ newsCtrl | json}}</pre>
+
 		</div>
 	</div>
 </div>
