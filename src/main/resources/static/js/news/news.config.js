@@ -65,15 +65,17 @@ newsApp.controller( 'newsEdit', ['$q','$state', '$stateParams','$scope', '$http'
 
 	self.newsId = parseInt($stateParams.id);
 	//console.log('newsId param::',self.newsId);
-	
+
 	self.bgmClass = {};
 	self.cClass = {};
 	self.applyBgmColor = function(){
-		self.bgmClass[self.news.bgmColor] = true ;
-		self.cClass[self.news.bgmColor.replace('bgm-','c-')] = true ;
+		if (self.news.id != 0){
+			self.bgmClass[self.news.bgmColor] = true ;
+			self.cClass[self.news.bgmColor.replace('bgm-','c-')] = true ;
+		}
 	}
 
-	//fetch news - when adding news get empty news but populated predefined fields id any
+	//	fetch news - when adding news get empty news but populated predefined fields id any
 	self.fetchnews = function(){
 		self.service
 		.fetch(self.newsId)
@@ -98,8 +100,8 @@ newsApp.controller( 'newsEdit', ['$q','$state', '$stateParams','$scope', '$http'
 					console.error('Error while creating/saving news');
 				});
 	}
-	
-	//console.log('newsEdit controller - ending');
+
+//	console.log('newsEdit controller - ending');
 }]);
 
 

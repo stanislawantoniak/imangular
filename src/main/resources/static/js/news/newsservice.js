@@ -32,7 +32,7 @@ factory('newsService', [ '$q', 'restservice', function( $q, restservice){
 							newsList.push(news);
 						}
 					});
-					console.log("news list::",newsList);
+					//console.log("news list::",newsList);
 					deferred.resolve(newsList);
 				} );
 	

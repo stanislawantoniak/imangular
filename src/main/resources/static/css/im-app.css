@@ -123,7 +123,11 @@ textarea.form-control {
   font-size: 18px;
 }
 
-#news p{
+#news p {
 	margin-bottom : 8px;
+}
+
+#news img {
+	width: 100%;
 }
 

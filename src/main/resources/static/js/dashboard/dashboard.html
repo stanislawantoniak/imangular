@@ -3,7 +3,7 @@
 	<div class="block-header">
 		<h2>{{translator.label.dashboardcontent}}</h2>
 	</div> 
-	<div class="col-sm-6 col-xs-12 animate-repeat" ng-repeat="news in dashCtrl.news | orderBy : '-priority'">
+	<div id="news"class="col-sm-6 col-xs-12 animate-repeat" ng-repeat="news in dashCtrl.news | orderBy : '-priority'">
 		<div class="card ">
 			<div class="card-header" ng-class="news.bgmColor">
 				<h2>
