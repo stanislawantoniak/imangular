@@ -1,7 +1,7 @@
 'use strict';
 
 //Register `items` component, along with its associated controller and template
-var itemApp = angular.module('items', ['translationService','toolbox', 'checklist-model','xeditable','ui.select', 'ngTable']);
+var itemApp = angular.module('items', ['translationService','toolbox', 'itemGRs', 'checklist-model','xeditable','ui.select', 'ngTable']);
 
 itemApp.config(['$stateProvider', function( $stateProvider ) {
 
@@ -24,8 +24,8 @@ itemApp.config(['$stateProvider', function( $stateProvider ) {
 
 }]);
 
-itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemService',  'ngTableParams',
-                                  function itemsController( $q,  $scope,   $http,  translator,  itemService, ngTableParams ) {
+itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTableParams',
+                                  function itemsController( $q, translator,  itemService, ngTableParams ) {
 
 	var self = this;
 	self.service = itemService;
@@ -45,13 +45,13 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 			//console.log('page::',params.page());
 			//console.log('count::',params.count());
 			//console.log('orderBy::',params.orderBy());
-			console.log('filter::',params.filter());
+			//console.log('filter::',params.filter());
 
 			self
 			.service
 			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
 			.then( function(response){
-				console.log("response::",response);
+				//console.log("response::",response);
 				params.total(response.totalRows);
 				$defer.resolve(response.collection);
 			} );
@@ -78,8 +78,8 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 	}
 }]);
 
-itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', 'itemGRService', 'translator','itemService', 'itemComponentService', 'authService',
-                                 function itemsController(  $q, $state,  $stateParams,  $scope,  $http,  itemGRService, translator, itemService, itemComponentService, authService ) {
+itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGRService', 'translator','itemService', 'itemComponentService', 'authService',
+                                 function itemsController(  $q, $state,  $stateParams,  $http,  itemGRService, translator, itemService, itemComponentService, authService ) {
 	//console.log('itemEdit controller starting');
 
 	var self = this;
