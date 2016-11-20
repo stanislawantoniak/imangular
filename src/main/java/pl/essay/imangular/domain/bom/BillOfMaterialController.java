@@ -39,19 +39,6 @@ public class BillOfMaterialController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	//for testing- creates boms for all items
-	private void kickCreate() {
-		SetWithCountHolder<Item> items = this.itemService.listItems();
-		for (Item item : items.getCollection()){
-			if (item.getIsComposed()){
-				BillOfMaterial bom = new BillOfMaterial();
-				bom.setForItem(item);
-				bom.setRequiredQuantity(item.getId());
-				this.bomService.addBom(bom);
-			}
-		}
-	}
-
 	@RequestMapping(value = "/boms", method = RequestMethod.GET)
 	public SetWithCountHolder<BillOfMaterial> listBoms() {
 		if (this.userSession.getUser() != null){

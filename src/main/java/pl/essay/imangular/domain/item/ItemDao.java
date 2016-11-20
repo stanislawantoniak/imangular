@@ -9,6 +9,6 @@ public interface ItemDao extends GenericDaoHbn<Item> {
 	public void addComponent(ItemComponent ic);
 	public boolean existsItemByName(String name);
 	public Item getItemByName(String name);
-	public List<IdNameIsComposedQueryResult> getAllItemsInShort();
+	public List<ItemIdNameIsComposedQueryResult> getAllItemsInShort();
 	
 }

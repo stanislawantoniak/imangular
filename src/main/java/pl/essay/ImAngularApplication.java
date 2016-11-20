@@ -1,4 +1,4 @@
-package pl.essay.imangular.app;
+package pl.essay;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,12 +30,19 @@ import pl.essay.toolbox.EmailSender;
 
 @SpringBootApplication
 @ComponentScan({
-	"pl.essay"
+	"pl.essay",
+	"pl.essay.languages",
+	"pl.essay.angular.security",
+	"pl.essay.imangular.domain.item",
+	"pl.essay.imangular.domain.bom",
+	"pl.essay.imangular.domain.news",
+	"pl.essay.imports"
+	
 })
 
 //@Import({ WebSecurityConfig.class })
 @ImportResource({
-	"classpath:/datasource-config.xml",
+	//"classpath:/datasource-config.xml",
 	"classpath:/language-beans.xml"
 })
 @EnableGlobalMethodSecurity(prePostEnabled=true)

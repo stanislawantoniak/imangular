@@ -184,9 +184,9 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String,IdNameIsComposedQueryResult> > itemsForSelect(@PathVariable("id") int id) {
+	public ResponseEntity<Map<String,ItemIdNameIsComposedQueryResult> > itemsForSelect(@PathVariable("id") int id) {
 
-		return new ResponseEntity<Map<String,IdNameIsComposedQueryResult>>(
+		return new ResponseEntity<Map<String,ItemIdNameIsComposedQueryResult>>(
 				this.itemService.getAllItemsInShort(id, "term"),  
 				HttpStatus.OK
 				);

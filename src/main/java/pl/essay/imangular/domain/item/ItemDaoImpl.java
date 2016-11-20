@@ -31,8 +31,8 @@ public class ItemDaoImpl extends GenericDaoHbnImpl<Item> implements ItemDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<IdNameIsComposedQueryResult> getAllItemsInShort(){
-		return (List<IdNameIsComposedQueryResult>) getSession()
+	public List<ItemIdNameIsComposedQueryResult> getAllItemsInShort(){
+		return (List<ItemIdNameIsComposedQueryResult>) getSession()
 				.createQuery(
 						"select new pl.essay.imangular.model.IdNameIsComposedQueryResult("+
 								"i.id, i.name, i.isComposed) "+

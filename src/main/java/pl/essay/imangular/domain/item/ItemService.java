@@ -23,5 +23,5 @@ public interface ItemService {
 	public boolean existsItem(String name);
 	public Item getItemByName(String name);
 	
-	public Map<String,IdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term);
+	public Map<String,ItemIdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term);
 }

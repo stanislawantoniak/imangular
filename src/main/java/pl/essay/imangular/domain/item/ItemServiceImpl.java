@@ -134,10 +134,10 @@ public class ItemServiceImpl implements ItemService{
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public Map<String,IdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term){
-		Map<String,IdNameIsComposedQueryResult> theMap = new TreeMap<String,IdNameIsComposedQueryResult>();
+	public Map<String,ItemIdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term){
+		Map<String,ItemIdNameIsComposedQueryResult> theMap = new TreeMap<String,ItemIdNameIsComposedQueryResult>();
 		//copy all the result to map
-		for (IdNameIsComposedQueryResult i : itemDao.getAllItemsInShort()){
+		for (ItemIdNameIsComposedQueryResult i : itemDao.getAllItemsInShort()){
 			if (itemId !=  0  || i.isComposed == true)  //add to list all when id is not 0 (then it is select for add bom and need to check if isComposed)
 			theMap.put(i.name, i);
 		}
