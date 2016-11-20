@@ -141,23 +141,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- delete dialog-->
-<div ng-if="false" class="message-box animated fadeIn"
-	id="message-box-default" ng-class="bomsCtrl.deleteDialog.getClass()">
-	<div class="mb-container">
-		<div class="mb-middle">
-			<div class="mb-title">
-				<span class="fa fa-scissors"></span>{{translator.label.bomslistdeletewarning}}
-				{{bomsCtrl.deleteDialog.object.forItem.name}}?
-			</div>
-			<div class="mb-content"></div>
-			<div class="mb-footer">
-				<button class="btn btn-default btn-lg"
-					ng-click="bomsCtrl.deleteDialog.close()">{{translator.label.editbombuttoncancel}}</button>
-				<button class="btn btn-default btn-lg pull-right"
-					ng-click="bomsCtrl.deleteBom()">{{translator.label.userslistuserstablebuttondelete}}</button>
-			</div>
-		</div>
-	</div>
-</div>
