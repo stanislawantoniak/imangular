@@ -7,12 +7,12 @@ itemGRApp.config(['$stateProvider', function mainController( $stateProvider ) {
 	$stateProvider
 	.state ('root.itemGRs', {
 		url: '/itemGRs',
-		templateUrl : 'js/itemGR/itemGRList.html',
+		templateUrl : 'js/itemgr/itemGRList.html',
 		controller : 'itemGRslist as itemGRsCtrl'
 	})
 	.state ('root.itemGRadd', {
 		url: '/itemGRs/add',
-		templateUrl : 'js/itemGR/itemGREdit.html',
+		templateUrl : 'js/itemgr/itemGREdit.html',
 		controller : 'itemGRedit as itemGRCtrl'
 	});
 
