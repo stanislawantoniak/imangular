@@ -3,9 +3,9 @@ package pl.essay.imangular.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import pl.essay.imangular.model.BillOfMaterial;
-import pl.essay.imangular.model.Item;
-import pl.essay.imangular.model.ItemComponent;
+import pl.essay.imangular.domain.bom.BillOfMaterial;
+import pl.essay.imangular.domain.item.Item;
+import pl.essay.imangular.domain.item.ItemComponent;
 
 
 /*

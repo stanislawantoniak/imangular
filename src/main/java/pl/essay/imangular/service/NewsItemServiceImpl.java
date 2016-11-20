@@ -6,9 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.essay.generic.dao.ListingParamsHolder;
 import pl.essay.generic.dao.SetWithCountHolder;
-import pl.essay.imangular.model.Item;
-import pl.essay.imangular.model.NewsItem;
-import pl.essay.imangular.model.NewsItemDao;
+import pl.essay.imangular.domain.news.NewsItem;
+import pl.essay.imangular.domain.news.NewsItemDao;
 
 @Service
 @Transactional

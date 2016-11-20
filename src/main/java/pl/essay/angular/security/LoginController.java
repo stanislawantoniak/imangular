@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.essay.imangular.controller.BaseController;
-import pl.essay.imangular.service.BillOfMaterialService;
+import pl.essay.generic.controller.BaseController;
+import pl.essay.imangular.domain.bom.BillOfMaterialService;
 
 @RestController
 public class LoginController extends BaseController {

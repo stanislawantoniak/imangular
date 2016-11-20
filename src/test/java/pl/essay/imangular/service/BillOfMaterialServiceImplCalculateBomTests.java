@@ -12,12 +12,12 @@ import static org.mockito.Mockito.*;
 import org.springframework.test.context.TestPropertySource;
 
 import pl.essay.angular.security.UserSession;
-import pl.essay.imangular.model.BillOfMaterial;
-import pl.essay.imangular.model.BillOfMaterialFlatListLine;
-import pl.essay.imangular.model.BillOfMaterialInStock;
-import pl.essay.imangular.model.BillOfMaterialInStockDao;
-import pl.essay.imangular.model.ItemDao;
-import pl.essay.imangular.service.BillOfMaterialServiceImpl;
+import pl.essay.imangular.domain.bom.BillOfMaterial;
+import pl.essay.imangular.domain.bom.BillOfMaterialFlatListLine;
+import pl.essay.imangular.domain.bom.BillOfMaterialInStock;
+import pl.essay.imangular.domain.bom.BillOfMaterialInStockDao;
+import pl.essay.imangular.domain.bom.BillOfMaterialServiceImpl;
+import pl.essay.imangular.domain.item.ItemDao;
 
 import org.mockito.runners.*;
 

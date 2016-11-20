@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.essay.generic.controller.BaseController;
 import pl.essay.generic.dao.SetWithCountHolder;
-import pl.essay.imangular.controller.BaseController;
 
 @RestController
 public class UserController extends BaseController {

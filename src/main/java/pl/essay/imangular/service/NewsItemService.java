@@ -2,7 +2,7 @@ package pl.essay.imangular.service;
 
 import pl.essay.generic.dao.ListingParamsHolder;
 import pl.essay.generic.dao.SetWithCountHolder;
-import pl.essay.imangular.model.NewsItem;
+import pl.essay.imangular.domain.news.NewsItem;
 
 public interface NewsItemService {
 

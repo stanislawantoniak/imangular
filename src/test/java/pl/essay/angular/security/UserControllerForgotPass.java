@@ -24,8 +24,6 @@ import static org.mockito.Mockito.*;
 import org.mockito.runners.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.hamcrest.collection.IsCollectionWithSize.*;
-import static org.hamcrest.core.Is.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
