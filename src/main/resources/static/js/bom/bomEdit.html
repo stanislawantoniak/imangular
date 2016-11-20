@@ -1,9 +1,10 @@
 
-<div class="container col-sm-6 col-xs-12">
+<div class="container">
 	<div class="block-header">
 		<h2>{{translator.label.bomEditRecipePageHeader}}</h2>
 	</div>
-	<div class="card" ng-if="!authenticated">
+	<div>
+	<div class="card col-lg-6 col-sm-12 col-xs-12" ng-if="!authenticated">
 		<div class="alert alert-warning c-black" role="alert">
 			<h4>
 				{{translator.label.notLoggedInTeaser}} <a href="/login"><i
@@ -11,7 +12,7 @@
 			</h4>
 		</div>
 	</div>
-	<div class="card" ng-cloak>
+	<div class="card col-lg-6 col-sm-12 col-xs-12" ng-cloak>
 		<div id="profile-main" class="pm-body clearfix">
 			<div class="pmb-block">
 				<div class="pmbb-header">
@@ -129,7 +130,7 @@
 			</div>
 
 		</div>
-
+		</div>
 	</div>
 	<div class="row m-b-20" ng-if="false">
 		<div class="col-sm-12">
