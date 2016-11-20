@@ -34,7 +34,7 @@ public class ItemDaoImpl extends GenericDaoHbnImpl<Item> implements ItemDao {
 	public List<ItemIdNameIsComposedQueryResult> getAllItemsInShort(){
 		return (List<ItemIdNameIsComposedQueryResult>) getSession()
 				.createQuery(
-						"select new pl.essay.imangular.model.IdNameIsComposedQueryResult("+
+						"select new pl.essay.imangular.domain.item.ItemIdNameIsComposedQueryResult("+
 								"i.id, i.name, i.isComposed) "+
 						"from Item i order by i.name") 
 				.list();
