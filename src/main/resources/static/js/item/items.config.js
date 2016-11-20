@@ -170,7 +170,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGR
 				})
 	}
 
-//	get items for select in item component edit form
+	//	get items for select in item component edit form
 	if (authService.session.isSupervisor){
 		self.service.fetchAnyData('/items/forselect/'+self.itemId).then(function(response){
 			self.itemsForSelect = response;//[];

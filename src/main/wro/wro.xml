@@ -82,8 +82,8 @@
 		<js>/js/user/userservice.js</js>
 		<js>/js/item/items.config.js</js>
 		<js>/js/item/itemservice.js</js>
-		<js>/js/itemGR/itemGRs.config.js</js>
-		<js>/js/itemGR/itemGRService.js</js>
+		<js>/js/itemgr/itemgrs.config.js</js>
+		<js>/js/itemgr/itemgrService.js</js>
 		<js>/js/bom/boms.config.js</js>
 		<js>/js/bom/bomservice.js</js>
 		<js>/js/news/news.config.js</js>
