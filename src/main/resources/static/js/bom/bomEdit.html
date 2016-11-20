@@ -3,7 +3,6 @@
 	<div class="block-header">
 		<h2>{{translator.label.bomEditRecipePageHeader}}</h2>
 	</div>
-	<div class="row">
 	<div class="card col-lg-12 col-sm-12 col-xs-12" ng-if="!authenticated">
 		<div class="alert alert-warning c-black" role="alert">
 			<h4>
@@ -12,7 +11,10 @@
 			</h4>
 		</div>
 	</div>
-	<div class="card col-lg-12 col-sm-12 col-xs-12" ng-cloak>
+	</div>
+	<div class="row">
+
+<div class="card col-lg-12 col-sm-12 col-xs-12" ng-cloak>
 		<div id="profile-main" class="pm-body clearfix">
 			<div class="pmb-block">
 				<div class="pmbb-header">
@@ -130,12 +132,6 @@
 			</div>
 
 		</div>
-		</div>
-	</div>
-	<div class="row m-b-20" ng-if="false">
-		<div class="col-sm-12">
-			nav.authService.session::{{nav.authService.session}} <br>item::bomCtrl.bom
-
 		</div>
 	</div>
 </div>
