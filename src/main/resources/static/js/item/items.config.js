@@ -170,18 +170,29 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGR
 				})
 	}
 
-	//	get items for select in item component edit form
+	//	get stuff needed for select in edit forms
 	if (authService.session.isSupervisor){
-		self.service.fetchAnyData('/items/forselect/'+self.itemId).then(function(response){
-			self.itemsForSelect = response;//[];
-			/*angular.forEach(response, function(row) { 
-				self.itemsForSelect.push({value: row.id, text: row.name});
-			})
-			 */;
-			 //console.log('items for select',self.itemsForSelect);
-		}, function(){
-			console.log('get items for select - fail');
-		})
+		self
+		.service
+		.fetchAnyData('/items/forselect/'+self.itemId)
+		.then(
+				function(response){
+					self.itemsForSelect = response;
+				}, function(){
+					console.log('get items for select - fail');
+				});
+		
+		self
+		.serviceGR
+		.fetchAll()
+		.then(
+				function(response){
+					/console.log("GR::",response);
+					self.gameReleases = response.collection; 
+				},
+				function(errResponse){
+					console.error('Error while fetching game releases');
+				});
 	};
 
 	self.setEditRowContext = function(){
@@ -254,19 +265,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGR
 		return res.promise;
 	};
 
-	self
-	.serviceGR
-	.fetchAll()
-	.then(
-			function(response){
-				console.log("GR::",response);
-				self.gameReleases = response.collection; 
-			},
-			function(errResponse){
-				console.error('Error while fetching game releases');
-			});
-
-	console.log('itemEdit controller - ending');
+	//console.log('itemEdit controller - ending');
 }]);
 
 
