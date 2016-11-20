@@ -18,8 +18,8 @@ itemGRApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
 }]);
 
-itemGRApp.controller( 'itemGRslist', ['$q','$scope','$http','translator','itemGRService', 'ngTableParams',
-                                      function itemGRsController( $q,  $scope,   $http,  translator,  itemGRService, ngTableParams) {
+itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService', 'ngTableParams',
+                                      function itemGRsController( $q,  translator,  itemGRService, ngTableParams) {
 
 	var self = this;
 	self.service = itemGRService;
@@ -27,40 +27,13 @@ itemGRApp.controller( 'itemGRslist', ['$q','$scope','$http','translator','itemGR
 
 	self.fetchAllGrs = function(){
 		self.service.fetchAll().then(function(response) {
-
-			console.log(response);
+			//console.log(response);
 			self.grs = response.collection;
 		}, function(){
 			console.log('get game releases from service - fail');
 		})
 	};
-
 	self.fetchAllGrs();
-
-	this.userTable = new ngTableParams({
-		page: 1,            // show first page
-		count: 25,
-		sorting: {
-			username: 'asc'     // initial sorting
-		}
-
-	}, {
-		total: 0, 
-		getData: function($defer, params) {
-
-			//console.log('get data 1');
-			console.log(params.orderBy());
-			console.log(params);
-			self
-			.service
-			.fetchAll(params.page(), params.count(), params.orderBy())
-			.then( function(response){
-				//console.log("response::",response);
-				params.total(response.totalRows);
-				$defer.resolve(response.collection);
-			} );
-		}
-	})
 
 	self.deleteGRPromise = function(obj){ 
 
@@ -111,7 +84,7 @@ itemGRApp.controller( 'itemGRslist', ['$q','$scope','$http','translator','itemGR
 
 }]);
 
-itemGRApp.controller( 'itemGRedit', ['$http', 'itemGRService', '$state',  function($http, itemGRService, $state ) {
+itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state',  function(itemGRService, $state ) {
 	var self = this;
 	self.service = itemGRService;
 	
@@ -126,7 +99,7 @@ itemGRApp.controller( 'itemGRedit', ['$http', 'itemGRService', '$state',  functi
 		.createOrUpdate(self.gr)
 		.then( 
 				function(response){
-					console.log("sussecd");
+					//console.log("sussecd");
 					$state.go('root.itemGRs');
 				},	function(errResponse){
 					console.error('Error while creating/saving GR');
