@@ -29,7 +29,7 @@ itemApp
 }]);
 
 itemApp
-.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService',  'newsService', function bomsController($scope, $http, translator, bomService, newsService ) {
+.controller( 'bomslist', ['translator', 'bomService',  'newsService', function bomsController( translator, bomService, newsService ) {
 
 	var self = this;
 	self.bomService = bomService;
@@ -44,7 +44,7 @@ itemApp
 			});
 
 	self.fetchAllBoms = function(){
-		console.log('starting fetching boms');
+		//console.log('starting fetching boms');
 		self.bomService.fetchAll().then(
 				function(response) {
 					self.boms = response.collection;
@@ -61,7 +61,7 @@ itemApp
 								bom.bgmClass = bgmClass;
 
 							});
-					console.log('boms::',self.boms);
+					//console.log('boms::',self.boms);
 				}, function(){
 					console.log('get boms from service - fail');
 				})
@@ -82,8 +82,8 @@ itemApp
 
 }]);
 
-itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bomService', 'newsService',
-                                  function bomsController($scope, $state, $http, translator, bomService, newsService ) {
+itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsService',
+                                  function bomsController( $state,  translator, bomService, newsService ) {
 
 	var self = this;
 	self.bomService = bomService;
@@ -144,8 +144,8 @@ itemApp.controller( 'bomWizard', ['$scope', '$state', '$http', 'translator', 'bo
 
 }]);
 
-itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q', 'translator', 'bomStockService', 'bomService', 'dialogFactory', 
-                                function bomsController($scope, $state, $stateParams, $http, $q, translator, bomStockService, bomService, dialogFactory ) {
+itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bomStockService', 'bomService', 'dialogFactory', 
+                                function bomsController( $state, $stateParams,  $q, translator, bomStockService, bomService, dialogFactory ) {
 
 	//console.log('bomEdit ctrl starting');
 
@@ -217,7 +217,7 @@ itemApp.controller( 'bomEdit', ['$scope', '$state', '$stateParams', '$http', '$q
 		var res = $q.defer();
 
 		self
-		.service
+		.bomService
 		.deleteEntity(self.bom.id).
 		then( function(response){
 			$state.go('root.boms');

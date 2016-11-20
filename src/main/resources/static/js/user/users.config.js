@@ -18,8 +18,8 @@ userApp.config(['$stateProvider', function( $stateProvider ) {
 	})
 }]);
 
-userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userService',  'ngTableParams',
-                         function( $q,   $http,   $scope,   translator,   userService,    ngTableParams ) {
+userApp.controller( 'userslist', ['$q', 'translator', 'userService',  'ngTableParams',
+                                  function( $q,   translator,   userService,    ngTableParams ) {
 
 	var self = this;
 	self.service = userService;
@@ -31,15 +31,15 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 		//console.log('starting fetching users');
 		self.service.fetchAll().then(function(response) {
 			//console.log('users fetched '+response.length);
-			console.log(response);
+			//console.log(response);
 			self.users = response.collection;
 		}, function(){
 			console.log('get users from service - fail');
 		})
 	};
-	
+
 	self.fetchAllUsers();
-	
+
 	self.deleteUserPromise = function(obj){ 
 
 		var res = $q.defer();
@@ -117,22 +117,26 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 userApp.controller( 'useredit', ['$http', '$stateParams', '$state', 'userService',   function($http, $stateParams, $state, userService ) {
 	var self = this;
 	self.service = userService;
-	
+
 	var userId = $stateParams.id;
 	//fetch user - when adding user get empty user but populated with all roles
 
-	self.service.fetch(userId).then(function(response) {
-		self.user = response;
-		self.user.enabledPreselected = self.user.enabled;
-		self.rolesForToggle = [];
-		angular.forEach(self.user.allRoles, function(row) { 
-			self.rolesForToggle.push({role: row, enabled : self.user.rolesSelected[row] != null});
-		});
-		//console.log("toggle",self.rolesForToggle);
-		//console.log(self.user);
-	}, function(){
-		console.log('get user from service - fail');
-	});
+	self
+	.service
+	.fetch(userId)
+	.then(
+			function(response) {
+				self.user = response;
+				self.user.enabledPreselected = self.user.enabled;
+				self.rolesForToggle = [];
+				angular.forEach(self.user.allRoles, function(row) { 
+					self.rolesForToggle.push({role: row, enabled : self.user.rolesSelected[row] != null});
+				});
+				//console.log("toggle",self.rolesForToggle);
+				//console.log(self.user);
+			}, function(){
+				console.log('get user from service - fail');
+			});
 
 	self.userExists = false;
 	self.userChecked = "";
