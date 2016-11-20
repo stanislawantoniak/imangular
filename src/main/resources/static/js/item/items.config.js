@@ -187,7 +187,6 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGR
 		.fetchAll()
 		.then(
 				function(response){
-					/console.log("GR::",response);
 					self.gameReleases = response.collection; 
 				},
 				function(errResponse){
