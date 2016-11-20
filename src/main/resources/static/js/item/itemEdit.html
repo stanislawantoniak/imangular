@@ -28,179 +28,12 @@
 						</ul>
 				</div>
 				<div id="item-data" class="pmbb-body p-l-30 m-t-20"
-					data-ng-if="!itemCtrl.editItemContext">
-					<div class="pmbb-view">
-						<dl class="dl-horizontal">
-							<dt>{{translator.label.itemslistitemstableheadingname}}</dt>
-							<dd>{{ itemCtrl.item.name }}</dd>
-						</dl>
-						<div
-							ng-if="!itemCtrl.addItemCtx || itemCtrl.addItemCtx && itemCtrl.item.isComposed">
-							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingiscomposed}}</dt>
-								<dd>
-									<i ng-if="itemCtrl.item.isComposed"
-										class="zmdi zmdi-check zmdi-hc-fw"></i> <i
-										ng-if="!itemCtrl.item.isComposed"
-										class="zmdi zmdi-minus zmdi-hc-fw"></i>
-								</dd>
-							</dl>
-
-							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingCanBeSplit}}</dt>
-								<dd>
-									<i ng-if="itemCtrl.item.canBeSplit"
-										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
-										ng-if="!itemCtrl.item.canBeSplit"
-										class="zmdi zmdi-minus zmdi-hc-fw"></i>
-								</dd>
-							</dl>
-							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingwheremanufactured}}</dt>
-								<dd>{{itemCtrl.item.whereManufactured}}</dd>
-							</dl>
-							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingisavailableinothersources}}</dt>
-								<dd>
-									<i ng-if="itemCtrl.item.isAvailableInOtherSources"
-										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
-										ng-if="!itemCtrl.item.isAvailableInOtherSources"
-										class="zmdi zmdi-minus zmdi-hc-fw"></i>
-								</dd>
-							</dl>
-							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingothersources}}</dt>
-								<dd>{{itemCtrl.item.otherSources}}</dd>
-							</dl>
-							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingisused}}</dt>
-								<dd>
-									<i ng-if="itemCtrl.item.isUsed"
-										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
-										ng-if="!itemCtrl.item.isUsed"
-										class="zmdi zmdi-minus zmdi-hc-fw"></i>
-								</dd>
-							</dl>
-							<dl class="dl-horizontal">
-								<dt>{{translator.label.itemslistitemstableheadingBgmColor}}</dt>
-								<dd><button ng-if="itemCtrl.item.bgmColor != null" class="btn" ng-class="itemCtrl.item.bgmClass">{{itemCtrl.item.bgmColor}}</button></dd>
-							</dl>
-						</div>
-
-					</div>
+					data-ng-if="!itemCtrl.editItemContext" ng-include src="'js/item/itemEdit/itemEditItemDetails.html'">
+				
 				</div>
 				<div id="item-edit" class="pmbb-body p-l-30"
 					data-ng-if="itemCtrl.editItemContext">
-					<form class="pmbb-edit" role="form" name="uform"
-						ng-submit="itemCtrl.createOrUpdateItem()">
-
-						<dl class="dl-horizontal">
-							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingname}}</dt>
-							<dd>
-								<div class="fg-line"
-									ng-class="{'has-warning':itemCtrl.itemExists}">
-									<input data-ng-model="itemCtrl.item.name" type="text"
-										pattern=".{3,}" required
-										title="{{ translator.label.itemNameAtLeast3Chars }}"
-										class="form-control"> <small class="help-block"
-										ng-if="itemCtrl.itemExists && itemCtrl.itemChecked == itemCtrl.item.name"><strong>{{itemCtrl.itemChecked}}
-									</strong> {{translator.label.itemNameExistsError}} </small>
-								</div>
-							</dd>
-						</dl>
-
-						<dl class="dl-horizontal">
-							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingCanBeSplit}}</dt>
-							<dd>
-								<div class="fg-line toggle-switch m-t-10" data-ts-color="green">
-									<input ng-model="itemCtrl.item.canBeSplit" id="canBeSplit"
-										type="checkbox" hidden="hidden"> <label
-										class="ts-helper" for="canBeSplit"></label>
-								</div>
-							</dd>
-						</dl>
-
-						<dl class="dl-horizontal">
-							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingwheremanufactured}}</dt>
-							<dd>
-								<div class="fg-line">
-									<input data-ng-model="itemCtrl.item.whereManufactured"
-										type="text" class="form-control">
-								</div>
-							</dd>
-						</dl>
-
-						<dl class="dl-horizontal">
-							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingisavailableinothersources}}</dt>
-							<dd>
-								<div class="fg-line toggle-switch m-t-10" data-ts-color="green">
-									<input ng-model="itemCtrl.item.isAvailableInOtherSources"
-										id="isAvailableInOtherSources" type="checkbox" hidden="hidden">
-									<label class="ts-helper" for="isAvailableInOtherSources"></label>
-								</div>
-							</dd>
-						</dl>
-
-						<dl class="dl-horizontal">
-							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingothersources}}</dt>
-							<dd>
-								<div class="fg-line">
-									<input data-ng-model="itemCtrl.item.otherSources" type="text"
-										class="form-control">
-								</div>
-							</dd>
-						</dl>
-
-						<dl class="dl-horizontal">
-							<dt class="p-t-10">{{translator.label.itemslistitemstableheadingBgmColor}}</dt>
-							<dd>
-								<div class="fg-line">
-									<select data-ng-model="itemCtrl.item.bgmColor" type="text"
-										class="form-control">
-										<option class="bgm-pink">bgm-pink</option>
-										<option class="bgm-red">bgm-red</option>
-										<option class="bgm-purple">bgm-purple</option>
-										<option class="bgm-deeppurple">bgm-deeppurple</option>
-										<option class="bgm-indigo">bgm-indigo</option>
-										<option class="bgm-blue">bgm-blue</option>
-										<option class="bgm-lightblue">bgm-lightblue</option>
-										<option class="bgm-cyan">bgm-cyan</option>
-										<option class="bgm-teal">bgm-teal</option>
-										<option class="bgm-green">bgm-green</option>
-										<option class="bgm-lightgreen">bgm-lightgreen</option>
-										<option class="bgm-lime">bgm-lime</option>
-										<option class="bgm-yellow">bgm-yellow</option>
-										<option class="bgm-amber">bgm-amber</option>
-										<option class="bgm-orange">bgm-orange</option>
-										<option class="bgm-deeporange">bgm-deeporange</option>
-										<option class="bgm-brown">bgm-brown</option>
-										<option class="bgm-gray">bgm-gray</option>
-										<option class="bgm-bluegray">bgm-bluegray</option>
-										<option class="bgm-black">bgm-black</option>
-									</select>
-								</div>
-							</dd>
-						</dl>
-
-						<div class="m-t-30">
-							<div class="pull-right m-t-20"
-								ng-class="{'has-error':uform.$invalid}">
-								<button class="btn btn-primary waves-effect" type="submit"
-									uib-popover="{{translator.label.edituserinvalidforminfo}}"
-									popover-trigger="none" uib-popover-placement="top-left"
-									uib-popover-is-open="(userCtrl.userExists && userCtrl.userChecked == userCtrl.user.username)">
-									<i class="fa fa-save"></i>
-									{{translator.label.edititembuttonsave}}
-								</button>
-							</div>
-							<a ng-click="itemCtrl.unsetEditItemContext()"
-								class="btn btn-default m-t-20 waves-effect"> <i
-								class="fa fa-undo"></i>
-								{{translator.label.edititembuttoncancel}}
-							</a>
-						</div>
-					</form>
-
+					<div ng-include src="'js/item/itemEdit/itemEditForm.html'"></div>
 				</div>
 
 			</div>
@@ -213,56 +46,8 @@
 						{{itemCtrl.inserted_}}
 						</h3>
 				</div>
-				<div class="pmbb-body p-l-30">
-					<form name="addIC" role="form" class="form-horizontal"
-						ng-submit="itemCtrl.createOrUpdateItemComponent(itemCtrl.inserted)">
-						<div class="form-group">
-							<label class="col-md-3 col-xs-12 control-label">
-								{{translator.label.edititemheadercomponentname}} </label>
-							<div class="col-md-8 col-xs-12">
-								<div class="input-group">
-									<select class="form-control" name="component"
-										ng-model="itemCtrl.inserted.component"
-										ng-options="item.name for item in itemCtrl.itemsForSelect"
-										required>
-										<option value="">--------</option>
-									</select> <span ng-show="addIC.component.$error.itemFromSelect">Select!!!!</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 col-xs-12 control-label">
-								{{translator.label.edititemheadercomponentquantity}} </label>
-							<div class="col-md-8 col-xs-12">
-								<div class="input-group">
-									<input class="form-control"
-										ng-model="itemCtrl.inserted.quantity" type="text" only-digits
-										required />
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 col-xs-12 control-label">
-								{{translator.label.edititemheadercomponentremarks}} </label>
-							<div class="col-md-8 col-xs-12">
-								<div class="input-group">
-									<textarea class="form-control" cols="60"
-										ng-model="itemCtrl.inserted.remarks" />
-								</div>
-							</div>
-						</div>
-
-						<button class="btn btn-primary pull-right" type="submit">
-							<i class="fa fa-save"></i>
-							{{translator.label.componenteditformbuttonsave}}
-						</button>
-						<a ng-click="itemCtrl.cancelAddComponent()"
-							class="btn btn-default"> <i class="fa fa-undo"></i>
-							{{translator.label.componenteditformbuttoncancel}}
-						</a>
-					</form>
-				</div>
+				<div class="pmbb-body p-l-30" ng-include
+					src="'js/item/itemEdit/itemEditAddComponentForm.html'"></div>
 			</div>
 
 			<div id="component-list" class="pmb-block"
@@ -287,101 +72,8 @@
 							</ul></li>
 					</ul>
 				</div>
-				<div class="pmbb-body p-l-30">
-					<table class="table m-t-20 m-b-20 ng-table"
-						ng-class="{'table-hover' : !itemCtrl.editRowContext}">
-						<thead>
-							<tr>
-								<th width="5%" ng-if="!itemCtrl.editRowContext"></th>
-								<th width="25%">{{translator.label.edititemheadercomponentname}}</th>
-								<!-- 							<th width="25%">{{translator.label.edititemheadercomponentname}}
-									ui-sel</th>
-		-->
-								<th width="10%">{{translator.label.edititemheadercomponentquantity}}</th>
-								<th width="45%">{{translator.label.edititemheadercomponentremarks}}</th>
-								<th width="15%" ng-show="nav.authService.session.isSupervisor">{{translator.label.edititemheadingactions}}</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<tr
-								ng-repeat="itemComponent in itemCtrl.item.components  | orderBy : ['+remarks','+componentName']"
-								ng-class="{'active' : rowform.$visible}">
-								<td ng-if="!itemCtrl.editRowContext"><button
-										class="btn btn-default btn-sm"
-										ui-sref="root.itemDetails({id:itemComponent.componentId})">
-										<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
-									</button></td>
-
-								<td><span editable-select="itemComponent.componentId"
-									e-name="component"
-									e-ng-options="item.name for item in itemCtrl.itemsForSelect"
-									e-form="rowform"> {{ itemComponent.componentName }} </span></td>
-								<!--  
-								<td><span editable-ui-select="itemComponent.component"
-									e-ng-model="itemComponent.component" e-form="rowform"
-									data-e-name="component" name="component" theme="bootstrap">
-										{{ itemComponent.componentName }} <editable-ui-select-match
-											placeholder="selrct  item ...">
-										{{$select.selected.value}} </editable-ui-select-match> <editable-ui-select-choices
-											repeat="item in itemCtrl.itemsForSelect | filter : $select.search">
-										{{ item.text }} <small>(#{{item.value}})</small> </editable-ui-select-choices>
-								</span></td>
--->
-								<td><span editable-text="itemComponent.quantity"
-									e-name=quantity "
-								e-form="rowform" e-only-digits>
-										{{ itemComponent.quantity }} </span></td>
-
-								<td><span editable-textarea="itemComponent.remarks"
-									e-rows="2" e-cols="60" e-name="remarks" e-form="rowform">
-										{{ itemComponent.remarks }} </span> <span
-									editable-text="itemComponent.$$hashKey" e-name="$$hashKey"
-									e-form="rowform" e-class="hidden"> <span
-										editable-text="itemComponent.id" e-name="id" e-form="rowform"
-										e-class="hidden"></span></td>
-
-								<td ng-show="nav.authService.session.isSupervisor">
-									<form editable-form name="rowform"
-										onshow="itemCtrl.setEditRowContext()"
-										onaftersave="itemCtrl.setEditRowContext()"
-										onbeforesave="itemCtrl.createOrUpdateItemComponent($data)"
-										ng-show="rowform.$visible" class="form-buttons form-inline">
-
-										<button type="submit" ng-disabled="rowform.$waiting"
-											class="btn btn-success">
-											<i class="zmdi zmdi-check"></i>
-										</button>
-
-										<button type="button" ng-disabled="rowform.$waiting"
-											ng-click="itemCtrl.cancelEditRow(this)"
-											class="btn btn-default">
-											<i class="zmdi zmdi-close"></i>
-										</button>
-
-									</form>
-									<div ng-show="!rowform.$visible && !itemCtrl.editRowContext">
-										<button class="btn btn-default" ng-click="rowform.$show()">
-											<i class="zmdi zmdi-edit"></i>
-										</button>
-										<button class="btn btn-default"
-											ng-click="itemCtrl.deleteDialog.open(itemComponent)"
-											swal-exec swal-object="itemComponent"
-											swal-dialog-title="{{translator.label.itemslistdeletecomponentheading +' '+itemComponent.componentName}}?"
-											swal-main-text="{{translator.label.itemslistdeletecomponentwarning}}"
-											swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
-											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
-											swal-exec-fn-on-confirm="itemCtrl.deleteItemComponentPromise"
-											growl-on-confirm-success-title="{{translator.label.itemsdeletecomponentsuccessheading}}"
-											growl-on-confirm-failure-title="{{translator.label.itemsdeletecomponentfailureheading}}"
-											growl-on-cancel-text="{{translator.label.itemdeletecomponentoncancelinfo}}">
-											<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
-										</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<div class="pmbb-body p-l-30" ng-include
+					src="'js/item/itemEdit/itemEditComponentTable.html'"></div>
 			</div>
 
 			<div id="used-in-list" class="pmb-block" ng-if="itemCtrl.item.isUsed">
@@ -393,29 +85,9 @@
 				</div>
 				<div class="pmbb-body p-l-30">
 					<div class="row">
-						<div class=" col-sm-6 col-xs-12">
-							<table class="table table-striped m-t-10 m-b-20">
-								<thead>
-									<tr>
-										<th width="10%"></th>
-										<th width="65%">{{translator.label.edititemheaderusedinname}}</th>
-										<th width="25%">{{translator.label.edititemheaderusedinquantity}}</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr
-										ng-repeat="parentItem in itemCtrl.item.usedIn | booleanValueFilter : 'parent.canBeSplit' : true | orderBy : ['-quantity','+parent.name']">
-										<td><button class="btn btn-default btn-sm"
-												ui-sref="root.itemDetails({id : parentItem.parent.id})">
-												<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
-											</button></td>
-
-										<td>{{ parentItem.parent.name }}</td>
-										<td>{{ parentItem.quantity }}</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class=" col-sm-6 col-xs-12" ng-include
+					src="'js/item/itemEdit/itemEditUsedInTable.html'">
+							
 						</div>
 					</div>
 				</div>

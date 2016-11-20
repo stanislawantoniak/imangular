@@ -18,6 +18,7 @@ var materialAdmin = angular
 		 'dashboard', 
 		 'users', 
 		 'items',
+		 'itemGRs',
 		 'boms',
 		 'news',
 		 'toolbox',

@@ -25,7 +25,13 @@
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-view-list-alt "></i>
 				{{ authenticated ? translator.label.leftpanelmenumanageitems : translator.label.leftpanelmenubrowseitems}}</a></li>
-				
+
+		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a data-ui-sref="root.itemGRs"
+			data-ng-click="mactrl.sidebarStat($event)"><i
+				class="zmdi zmdi-calendar "></i>
+				{{ translator.label.leftpanelmenubrowseitemGRs }}</a></li>
+
+	
 		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a data-ui-sref="root.users"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-accounts-alt"></i>

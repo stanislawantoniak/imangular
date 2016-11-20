@@ -56,6 +56,9 @@
 								<td data-title="translator.label.itemslistitemstableheadingothersources" sortable="'otherSources'"
 									filter="{ 'otherSources': 'text' }">{{item.otherSources}}</td>
 								<td>
+								<td data-title="translator.label.itemslistitemstableheadingGameRelease" sortable="'gameRelease.name'"
+									filter="{ 'gameRelease.name': 'text' }">{{item.gameRelease.name}}</td>
+								<td>
 									<button class="btn btn-default btn-sm waves-effect"
 										ui-sref="root.itemDetails({id: item.id})">{{translator.label.itemslistitemstableshowbutton}}</button>
 

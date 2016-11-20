@@ -2,6 +2,7 @@ package pl.essay.generic.dao;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -11,12 +12,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CriteriaBuilder<T extends Object> {
-	
+
 	protected static final Logger logger = LoggerFactory.getLogger(CriteriaBuilder.class);
 
 	private Class<T> domainClass;
 
 	private Criteria criteria; 
+	
+	private Session session;
+	
 	public Criteria get(){
 
 		return this.criteria;
@@ -27,7 +31,8 @@ public class CriteriaBuilder<T extends Object> {
 	 */
 	public CriteriaBuilder(Session session, Class<T> c){
 		this.domainClass = c;
-		this.criteria = session.createCriteria(this.domainClass);
+		this.session = session;
+		this.criteria = this.session.createCriteria(this.domainClass);
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 	};
 
@@ -62,8 +67,10 @@ public class CriteriaBuilder<T extends Object> {
 
 	/*
 	 * accepts map for string pairs:
-	 * field - domain property to filter
-	 * searchstring - string to be filtered by
+	 * key - domain property to filter, associated entities are accepted but only first level
+	 * 		like forItem.name is ok, but forItem.gameRelease.name is not 
+	 *	 
+	 * value == searchstring - string to be filtered by
 	 * 
 	 * filtersstring fields only adding like %querystring% for each field
 	 * 
@@ -72,13 +79,35 @@ public class CriteriaBuilder<T extends Object> {
 
 		for (Map.Entry<String, String> pair: filters.entrySet()){
 
-			Criterion restriction = Restrictions
-					.like(pair.getKey(), "%"+pair.getValue()+"%")
-					.ignoreCase();
-
-			logger.trace("adding and like filters :: "+pair.getKey()+" / "+pair.getValue());
-			this.criteria
-			.add(restriction); 
+			String key = pair.getKey();
+			if (key.contains(".")){
+				
+				String association = StringUtils.substringBefore(key, ".");
+				String alias = StringUtils.substringBefore(key, ".")+"Association";
+				String associationProperty = StringUtils.substringAfter(key, ".");
+				
+				logger.trace("adding association and like filter for:: "+key+" / "+pair.getValue());
+				logger.trace("association::",association);
+				logger.trace("alias::",alias);
+				logger.trace("associationProperty::",associationProperty);
+				
+				this.criteria
+				.createAlias(association, alias)
+			    .add( Restrictions
+			    		.like( 
+			    				alias+"."+associationProperty, 
+			    				"%"+pair.getValue()+"%"
+			    				) 
+			    		);
+				
+			} else {
+			
+				logger.trace("adding and like filters :: "+key+" / "+pair.getValue());
+				this.criteria
+				.add(Restrictions
+						.like(key, "%"+pair.getValue()+"%")
+						.ignoreCase());
+			}
 		} 
 		return this;
 	} 

@@ -2,12 +2,21 @@
 
 //Register `users` component, along with its associated controller and template
 var userApp = angular.module('users', ['translationService','checklist-model','generic-restservice','xeditable']);
-userApp.config(function mainController( ) {
+userApp.config(['$stateProvider', function( $stateProvider ) {
 
-	//console.log('users config starting');
-
-	//console.log('users config ending');
-});
+	$stateProvider
+	.state ('root.users', {
+		url: '/users',
+		templateUrl : 'js/user/userList.html',
+		controller : 'userslist as usersCtrl'
+	})
+	.state('root.useradd', {
+		url: '/users/add/:id',
+		templateUrl : 'js/user/userEdit.html',
+		controller : 'useredit',
+		controllerAs : 'userCtrl'
+	})
+}]);
 
 userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userService',  'ngTableParams',
                          function( $q,   $http,   $scope,   translator,   userService,    ngTableParams ) {
@@ -30,32 +39,6 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 	};
 	
 	self.fetchAllUsers();
-	
-	//table for items
-	this.userTable = new ngTableParams({
-		page: 1,            // show first page
-		count: 25,
-		sorting: {
-			username: 'asc'     // initial sorting
-		}
-
-	}, {
-		total: 0, 
-		getData: function($defer, params) {
-
-			//console.log('get data 1');
-			console.log(params.orderBy());
-			console.log(params);
-			self
-			.service
-			.fetchAll(params.page(), params.count(), params.orderBy())
-			.then( function(response){
-				//console.log("response::",response);
-				params.total(response.totalRows);
-				$defer.resolve(response.collection);
-			} );
-		}
-	})
 	
 	self.deleteUserPromise = function(obj){ 
 
@@ -131,12 +114,10 @@ userApp.controller( 'userslist', ['$q', '$http', '$scope', 'translator', 'userSe
 	//console.log('userslist controller - ending');
 }]);
 
-userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userService',   function($http, $stateParams,$location, userService ) {
+userApp.controller( 'useredit', ['$http', '$stateParams', '$state', 'userService',   function($http, $stateParams, $state, userService ) {
 	var self = this;
 	self.service = userService;
-
-	console.log('userEdit controller starting');
-
+	
 	var userId = $stateParams.id;
 	//fetch user - when adding user get empty user but populated with all roles
 
@@ -184,5 +165,4 @@ userApp.controller( 'useredit', ['$http', '$stateParams', '$location', 'userServ
 		)
 	}
 
-	console.log('userEdit controller - ending');
 }]);

@@ -33,27 +33,8 @@
 								<div class="fg-line">
 									<select ng-class="newsCtrl.bgmClass"
 										data-ng-model="newsCtrl.news.bgmColor" type="text"
-										class="form-control">
-										<option class="bgm-pink">bgm-pink</option>
-										<option class="bgm-red">bgm-red</option>
-										<option class="bgm-purple">bgm-purple</option>
-										<option class="bgm-deeppurple">bgm-deeppurple</option>
-										<option class="bgm-indigo">bgm-indigo</option>
-										<option class="bgm-blue">bgm-blue</option>
-										<option class="bgm-lightblue">bgm-lightblue</option>
-										<option class="bgm-cyan">bgm-cyan</option>
-										<option class="bgm-teal">bgm-teal</option>
-										<option class="bgm-green">bgm-green</option>
-										<option class="bgm-lightgreen">bgm-lightgreen</option>
-										<option class="bgm-lime">bgm-lime</option>
-										<option class="bgm-yellow">bgm-yellow</option>
-										<option class="bgm-amber">bgm-amber</option>
-										<option class="bgm-orange">bgm-orange</option>
-										<option class="bgm-deeporange">bgm-deeporange</option>
-										<option class="bgm-brown">bgm-brown</option>
-										<option class="bgm-gray">bgm-gray</option>
-										<option class="bgm-bluegray">bgm-bluegray</option>
-										<option class="bgm-black">bgm-black</option>
+										class="form-control" ng-include="'js/common/bgm-colors.html'">
+										
 									</select> <a class="btn btn-default pull-right"
 										ng-click="newsCtrl.applyBgmColor()">Zastosuj</a>
 								</div>

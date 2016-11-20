@@ -3,16 +3,29 @@
 //Register `items` component, along with its associated controller and template
 var itemApp = angular.module('items', ['translationService','toolbox', 'checklist-model','xeditable','ui.select', 'ngTable']);
 
-itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
+itemApp.config(['$stateProvider', function( $stateProvider ) {
 
-	//console.log('items config starting');
-
-	//console.log('items config ending');
+	$stateProvider
+	.state ('root.items', {
+		url: '/items',
+		templateUrl : 'js/item/itemList.html',
+		controller : 'itemslist as itemsCtrl'
+	})
+	.state ('root.itemDetails', {
+		url: '/items/itemdetails/:id',
+		templateUrl : 'js/item/itemEdit.html',
+		controller : 'itemEdit as itemCtrl'
+	})
+	.state ('root.itemAdd', {
+		url: '/items/additem/:id',
+		templateUrl : 'js/item/itemEdit.html',
+		controller : 'itemEdit as itemCtrl'
+	})
 
 }]);
 
-itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemService', 'ngTableParams',
-                                  function itemsController( $q,  $scope,   $http,  translator,  itemService,  ngTableParams ) {
+itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemService',  'ngTableParams',
+                                  function itemsController( $q,  $scope,   $http,  translator,  itemService, ngTableParams ) {
 
 	var self = this;
 	self.service = itemService;
@@ -32,7 +45,7 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 			//console.log('page::',params.page());
 			//console.log('count::',params.count());
 			//console.log('orderBy::',params.orderBy());
-			//console.log('filter::',params.filter());
+			console.log('filter::',params.filter());
 
 			self
 			.service
@@ -65,13 +78,14 @@ itemApp.controller( 'itemslist', ['$q','$scope','$http','translator','itemServic
 	}
 }]);
 
-itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', '$location',  'translator','itemService', 'itemComponentService', 'authService',
-                                 function itemsController(  $q, $state,  $stateParams,  $scope,  $http,    $location, translator, itemService, itemComponentService, authService ) {
+itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http', 'itemGRService', 'translator','itemService', 'itemComponentService', 'authService',
+                                 function itemsController(  $q, $state,  $stateParams,  $scope,  $http,  itemGRService, translator, itemService, itemComponentService, authService ) {
 	//console.log('itemEdit controller starting');
 
 	var self = this;
 	self.service = itemService;
 	self.componentService = itemComponentService;
+	self.serviceGR = itemGRService;
 
 	self.addItemCtx = false;
 
@@ -106,7 +120,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 						var bgmClass = {};
 						bgmClass[self.item.bgmColor] = true;;
 						self.item.bgmClass = bgmClass;
-						
+
 						self.service
 						.fetchAnyData('/itemrest/associations/'+self.itemId)
 						.then( 
@@ -168,20 +182,20 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 		}, function(){
 			console.log('get items for select - fail');
 		})
-	}
+	};
 
 	self.setEditRowContext = function(){
 		self.editRowContext = true;
-	}
+	};
 
 	self.cancelEditRow = function(formScope){
 		self.unsetEditRowContext();
 		formScope['rowform'].$cancel();
-	}
+	};
 
 	self.unsetEditRowContext = function(){
 		self.editRowContext = false;
-	}
+	};
 
 	self.unsetEditRowContext();
 
@@ -200,27 +214,27 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 		},	function(errResponse){
 			console.error('Error while creating/saving component');
 		});
-	}
+	};
 
 	self.setAddComponentCtx = function(){
 		self.addItemCtx = true;
 		self.setEditRowContext();
-	}
+	};
 	self.unsetAddComponentCtx = function(){
 		self.addItemCtx = false;
 		self.unsetEditRowContext();
-	}	
+	}	;
 	self.addItemComponent = function() {
 		self.inserted = {};
 		self.inserted.id = 0;
 		self.inserted.component = {value: "", text: "-------"};
 		//self.inserted.component.value = 0;
 		self.setAddComponentCtx();
-	}
+	};
 	self.cancelAddComponent	= function(){
 		self.inserted = {};
 		self.unsetAddComponentCtx();
-	}
+	};
 
 	self.deleteItemComponentPromise = function(ic){
 		var res = $q.defer();
@@ -238,10 +252,21 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams','$scope', '$http'
 		});
 
 		return res.promise;
+	};
 
-	}
+	self
+	.serviceGR
+	.fetchAll()
+	.then(
+			function(response){
+				console.log("GR::",response);
+				self.gameReleases = response.collection; 
+			},
+			function(errResponse){
+				console.error('Error while fetching game releases');
+			});
 
-	//console.log('itemEdit controller - ending');
+	console.log('itemEdit controller - ending');
 }]);
 
 

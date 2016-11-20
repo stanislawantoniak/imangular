@@ -3,6 +3,7 @@ generic;translations
 "leftpanelmenumanageBoms", "Moje zadania"
 "leftpanelmenumanageitems","Produkty"
 "leftpanelmenubrowseitems","Przeglądaj produkty"
+"leftpanelmenubrowseitemGRs","Aktualizacje gry"
 "leftpanelmenumanageUsers", "Użytkownicy"
 "leftpanelmenumanageNews", "Artykuły"
 "navbarmenuactionlogin","Zaloguj się"
@@ -24,6 +25,8 @@ generic;translations
 dahsboard;translations
 "dashboardcontent","Strona główna"
 
+"itemGRlistheading","Aktualizacje gry"
+
 itemslist;translations
 "itemslisttitle","Produkty"
 "itemslistheading","Zarządzaj produktami"
@@ -37,6 +40,7 @@ itemslist;translations
 "itemslistitemstableheadingwheremanufactured","Gdzie produkowany"
 "itemslistitemstableheadingisavailableinothersources","Czy dostępny w innych źródłach"
 "itemslistitemstableheadingothersources","Inne źródła"
+"itemslistitemstableheadingGameRelease","Aktualizacja gry"
 "itemslistitemstableheadingBgmColor","Kolor kafelka"
 "itemslistitemstableheadingisused","Jest składnikiem innych produktów"
 "edititemheaderusedinname","Można odzyskać z"

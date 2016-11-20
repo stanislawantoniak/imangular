@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -22,6 +24,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.Type;
@@ -73,6 +77,11 @@ public class Item {
 	//@JsonManagedReference(value="usedIn")
 	@JsonIgnore 
 	private Set<ItemComponent> usedIn = new HashSet<ItemComponent>();
+	
+	@ManyToOne
+	@Fetch(FetchMode.JOIN)
+	@JoinColumn(referencedColumnName = "id", nullable = true)
+	private ItemGameRelease gameRelease;	
 
 	@Column @Type(type="yes_no")
 	private Boolean canBeSplit = false;
@@ -267,6 +276,14 @@ public class Item {
 		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.isComposed;
 	}
 
+	public ItemGameRelease getGameRelease(){
+		return this.gameRelease;
+	}
+	public void setGameRelease(ItemGameRelease gr){
+		this.gameRelease = gr;
+	}
+	
+	
 	@JsonIgnore
 	public String getDafaulSortColumn(){
 		return "name";

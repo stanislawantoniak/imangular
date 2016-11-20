@@ -1,0 +1,99 @@
+<form class="pmbb-edit" role="form" name="uform"
+	ng-submit="itemCtrl.createOrUpdateItem()">
+	<pre ng-if="false">{{ itemCtrl.item | json}}</pre>
+
+	<dl class="dl-horizontal">
+		<dt class="p-t-10">{{translator.label.itemslistitemstableheadingname}}</dt>
+		<dd>
+			<div class="fg-line" ng-class="{'has-warning':itemCtrl.itemExists}">
+				<input data-ng-model="itemCtrl.item.name" type="text"
+					pattern=".{3,}" required
+					title="{{ translator.label.itemNameAtLeast3Chars }}"
+					class="form-control"> <small class="help-block"
+					ng-if="itemCtrl.itemExists && itemCtrl.itemChecked == itemCtrl.item.name"><strong>{{itemCtrl.itemChecked}}
+				</strong> {{translator.label.itemNameExistsError}} </small>
+			</div>
+		</dd>
+	</dl>
+
+	<dl class="dl-horizontal">
+		<dt class="p-t-10">{{translator.label.itemslistitemstableheadingCanBeSplit}}</dt>
+		<dd>
+			<div class="fg-line toggle-switch m-t-10" data-ts-color="green">
+				<input ng-model="itemCtrl.item.canBeSplit" id="canBeSplit"
+					type="checkbox" hidden="hidden"> <label class="ts-helper"
+					for="canBeSplit"></label>
+			</div>
+		</dd>
+	</dl>
+
+	<dl class="dl-horizontal">
+		<dt class="p-t-10">{{translator.label.itemslistitemstableheadingwheremanufactured}}</dt>
+		<dd>
+			<div class="fg-line">
+				<input data-ng-model="itemCtrl.item.whereManufactured" type="text"
+					class="form-control">
+			</div>
+		</dd>
+	</dl>
+
+	<dl class="dl-horizontal">
+		<dt class="p-t-10">{{translator.label.itemslistitemstableheadingisavailableinothersources}}</dt>
+		<dd>
+			<div class="fg-line toggle-switch m-t-10" data-ts-color="green">
+				<input ng-model="itemCtrl.item.isAvailableInOtherSources"
+					id="isAvailableInOtherSources" type="checkbox" hidden="hidden">
+				<label class="ts-helper" for="isAvailableInOtherSources"></label>
+			</div>
+		</dd>
+	</dl>
+
+	<dl class="dl-horizontal">
+		<dt class="p-t-10">{{translator.label.itemslistitemstableheadingothersources}}</dt>
+		<dd>
+			<div class="fg-line">
+				<input data-ng-model="itemCtrl.item.otherSources" type="text"
+					class="form-control">
+			</div>
+		</dd>
+	</dl>
+
+	<dl class="dl-horizontal">
+		<dt class="p-t-10">{{translator.label.itemGRlistheading}}</dt>
+		<dd>
+			<div class="fg-line">
+				<select class="form-control" name="component"
+					ng-model="itemCtrl.item.gameRelease"
+					ng-options="gr.name for gr in itemCtrl.gameReleases" required>
+					<option value="">--------</option>
+				</select>
+			</div>
+		</dd>
+	</dl>
+
+	<dl class="dl-horizontal">
+		<dt class="p-t-10">{{translator.label.itemslistitemstableheadingBgmColor}}</dt>
+		<dd>
+			<div class="fg-line">
+				<select data-ng-model="itemCtrl.item.bgmColor" type="text"
+					class="form-control" ng-include="'js/common/bgm-colors.html'">
+				</select>
+			</div>
+		</dd>
+	</dl>
+
+	<div class="m-t-30">
+		<div class="pull-right m-t-20" ng-class="{'has-error':uform.$invalid}">
+			<button class="btn btn-primary waves-effect" type="submit"
+				uib-popover="{{translator.label.edituserinvalidforminfo}}"
+				popover-trigger="none" uib-popover-placement="top-left"
+				uib-popover-is-open="(userCtrl.userExists && userCtrl.userChecked == userCtrl.user.username)">
+				<i class="fa fa-save"></i> {{translator.label.edititembuttonsave}}
+			</button>
+		</div>
+		<a ng-click="itemCtrl.unsetEditItemContext()"
+			class="btn btn-default m-t-20 waves-effect"> <i
+			class="fa fa-undo"></i> {{translator.label.edititembuttoncancel}}
+		</a>
+	</div>
+</form>

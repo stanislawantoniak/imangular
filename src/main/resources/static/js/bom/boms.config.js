@@ -3,27 +3,33 @@
 //Register `boms` component, along with its associated controller and template
 var bomApp = angular.module('boms', ['translationService','toolbox', 'checklist-model','xeditable','ui.select']);
 
-itemApp.config(['$stateProvider', function mainController( $stateProvider ) {
+itemApp
+.config(['$stateProvider', function mainController( $stateProvider ) {
 
 	//console.log('boms config starting');
 
 	$stateProvider
-
+	.state ('root.boms', {
+		url: '/boms',
+		templateUrl : 'js/bom/bomList.html',
+		controller : 'bomslist as bomsCtrl'
+	})
 	.state ('root.bomDetails', {
 		url: '/boms/details/:id',
-		templateUrl : 'js/item/bomEdit.html',
+		templateUrl : 'js/bom/bomEdit.html',
 		controller : 'bomEdit as bomCtrl'
 	})
 	.state('root.bomWizard', {
 		url: '/boms/wizard',
-		templateUrl : 'js/item/bomWizzard.html',
+		templateUrl : 'js/bom/bomWizzard.html',
 		controller : 'bomWizard as bomCtrl'
 	});
 
 	//console.log('boms config ending');
 }]);
 
-itemApp.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService',  'newsService', function bomsController($scope, $http, translator, bomService, newsService ) {
+itemApp
+.controller( 'bomslist', ['$scope', '$http', 'translator', 'bomService',  'newsService', function bomsController($scope, $http, translator, bomService, newsService ) {
 
 	var self = this;
 	self.bomService = bomService;

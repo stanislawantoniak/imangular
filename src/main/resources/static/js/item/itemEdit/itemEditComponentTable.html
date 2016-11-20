@@ -1,0 +1,92 @@
+<table class="table m-t-20 m-b-20 ng-table"
+	ng-class="{'table-hover' : !itemCtrl.editRowContext}">
+	<thead>
+		<tr>
+			<th width="5%" ng-if="!itemCtrl.editRowContext"></th>
+			<th width="25%">{{translator.label.edititemheadercomponentname}}</th>
+			<!-- 							<th width="25%">{{translator.label.edititemheadercomponentname}}
+									ui-sel</th>
+		-->
+			<th width="10%">{{translator.label.edititemheadercomponentquantity}}</th>
+			<th width="45%">{{translator.label.edititemheadercomponentremarks}}</th>
+			<th width="15%" ng-show="nav.authService.session.isSupervisor">{{translator.label.edititemheadingactions}}</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr
+			ng-repeat="itemComponent in itemCtrl.item.components  | orderBy : ['+remarks','+componentName']"
+			ng-class="{'active' : rowform.$visible}">
+			<td ng-if="!itemCtrl.editRowContext"><button
+					class="btn btn-default btn-sm"
+					ui-sref="root.itemDetails({id:itemComponent.componentId})">
+					<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
+				</button></td>
+
+			<td><span editable-select="itemComponent.componentId"
+				e-name="component"
+				e-ng-options="item.name for item in itemCtrl.itemsForSelect"
+				e-form="rowform"> {{ itemComponent.componentName }} </span></td>
+			<!--  
+								<td><span editable-ui-select="itemComponent.component"
+									e-ng-model="itemComponent.component" e-form="rowform"
+									data-e-name="component" name="component" theme="bootstrap">
+										{{ itemComponent.componentName }} <editable-ui-select-match
+											placeholder="selrct  item ...">
+										{{$select.selected.value}} </editable-ui-select-match> <editable-ui-select-choices
+											repeat="item in itemCtrl.itemsForSelect | filter : $select.search">
+										{{ item.text }} <small>(#{{item.value}})</small> </editable-ui-select-choices>
+								</span></td>
+-->
+			<td><span editable-text="itemComponent.quantity" e-name=quantity
+				"
+								e-form="rowform" e-only-digits> {{
+					itemComponent.quantity }} </span></td>
+
+			<td><span editable-textarea="itemComponent.remarks" e-rows="2"
+				e-cols="60" e-name="remarks" e-form="rowform"> {{
+					itemComponent.remarks }} </span> <span
+				editable-text="itemComponent.$$hashKey" e-name="$$hashKey"
+				e-form="rowform" e-class="hidden"> <span
+					editable-text="itemComponent.id" e-name="id" e-form="rowform"
+					e-class="hidden"></span></td>
+
+			<td ng-show="nav.authService.session.isSupervisor">
+				<form editable-form name="rowform"
+					onshow="itemCtrl.setEditRowContext()"
+					onaftersave="itemCtrl.setEditRowContext()"
+					onbeforesave="itemCtrl.createOrUpdateItemComponent($data)"
+					ng-show="rowform.$visible" class="form-buttons form-inline">
+
+					<button type="submit" ng-disabled="rowform.$waiting"
+						class="btn btn-success">
+						<i class="zmdi zmdi-check"></i>
+					</button>
+
+					<button type="button" ng-disabled="rowform.$waiting"
+						ng-click="itemCtrl.cancelEditRow(this)" class="btn btn-default">
+						<i class="zmdi zmdi-close"></i>
+					</button>
+
+				</form>
+				<div ng-show="!rowform.$visible && !itemCtrl.editRowContext">
+					<button class="btn btn-default" ng-click="rowform.$show()">
+						<i class="zmdi zmdi-edit"></i>
+					</button>
+					<button class="btn btn-default"
+						ng-click="itemCtrl.deleteDialog.open(itemComponent)" swal-exec
+						swal-object="itemComponent"
+						swal-dialog-title="{{translator.label.itemslistdeletecomponentheading +' '+itemComponent.componentName}}?"
+						swal-main-text="{{translator.label.itemslistdeletecomponentwarning}}"
+						swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
+						swal-cancel-button="{{translator.label.edititembuttoncancel}}"
+						swal-exec-fn-on-confirm="itemCtrl.deleteItemComponentPromise"
+						growl-on-confirm-success-title="{{translator.label.itemsdeletecomponentsuccessheading}}"
+						growl-on-confirm-failure-title="{{translator.label.itemsdeletecomponentfailureheading}}"
+						growl-on-cancel-text="{{translator.label.itemdeletecomponentoncancelinfo}}">
+						<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
+					</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

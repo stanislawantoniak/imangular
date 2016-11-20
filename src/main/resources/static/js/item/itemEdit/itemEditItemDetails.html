@@ -1,0 +1,68 @@
+
+<div class="pmbb-view">
+	<dl class="dl-horizontal">
+		<dt>{{translator.label.itemslistitemstableheadingname}}</dt>
+		<dd>{{ itemCtrl.item.name }}</dd>
+	</dl>
+	<div
+		ng-if="!itemCtrl.addItemCtx || itemCtrl.addItemCtx && itemCtrl.item.isComposed">
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingiscomposed}}</dt>
+			<dd>
+				<i ng-if="itemCtrl.item.isComposed"
+					class="zmdi zmdi-check zmdi-hc-fw"></i> <i
+					ng-if="!itemCtrl.item.isComposed"
+					class="zmdi zmdi-minus zmdi-hc-fw"></i>
+			</dd>
+		</dl>
+
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingCanBeSplit}}</dt>
+			<dd>
+				<i ng-if="itemCtrl.item.canBeSplit"
+					class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
+					ng-if="!itemCtrl.item.canBeSplit"
+					class="zmdi zmdi-minus zmdi-hc-fw"></i>
+			</dd>
+		</dl>
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingwheremanufactured}}</dt>
+			<dd>{{itemCtrl.item.whereManufactured}}</dd>
+		</dl>
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingisavailableinothersources}}</dt>
+			<dd>
+				<i ng-if="itemCtrl.item.isAvailableInOtherSources"
+					class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
+					ng-if="!itemCtrl.item.isAvailableInOtherSources"
+					class="zmdi zmdi-minus zmdi-hc-fw"></i>
+			</dd>
+		</dl>
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingothersources}}</dt>
+			<dd>{{itemCtrl.item.otherSources}}</dd>
+		</dl>
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingisused}}</dt>
+			<dd>
+				<i ng-if="itemCtrl.item.isUsed" class="zmdi zmdi-check zmdi-hc-fw">
+				</i> <i ng-if="!itemCtrl.item.isUsed" class="zmdi zmdi-minus zmdi-hc-fw"></i>
+			</dd>
+		</dl>
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingGameRelease}}</dt>
+			<dd>
+				{{itemCtrl.item.gameRelease.name}} <small><p>{{itemCtrl.item.gameRelease.description}}</p></small>
+			</dd>
+
+		</dl>
+		<dl class="dl-horizontal">
+			<dt>{{translator.label.itemslistitemstableheadingBgmColor}}</dt>
+			<dd>
+				<button ng-if="itemCtrl.item.bgmColor != null" class="btn"
+					ng-class="itemCtrl.item.bgmClass">{{itemCtrl.item.bgmColor}}</button>
+			</dd>
+		</dl>
+	</div>
+
+</div>

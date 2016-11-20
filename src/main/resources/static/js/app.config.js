@@ -17,69 +17,16 @@ materialAdmin
 	// ALSO url '/home', overriding its parent's activation
 	.state('parent.index', {url: '/index'} )
 
-	.state ('root', { //contains navigation
+	.state ('root', { 							//contains navigation
 		url: '',
 		templateUrl: 'js/common/common.html'
-	})
-
-	.state ('root.dashboard', {
-		url: '/',
-		templateUrl : 'js/dashboard/dashboard.html',
-		controller : 'dashboard as dashCtrl'
-	})
-	.state ('root.users', {
-		url: '/users',
-		templateUrl : 'js/user/userList.html',
-		controller : 'userslist as usersCtrl'
-	})
-	.state('root.useradd', {
-		url: '/users/add/:id',
-		templateUrl : 'js/user/userEdit.html',
-		controller : 'useredit',
-		controllerAs : 'userCtrl'
-	})
-
-	.state ('root.items', {
-		url: '/items',
-		templateUrl : 'js/item/itemList.html',
-		controller : 'itemslist as itemsCtrl'
-	})
-	.state ('root.itemDetails', {
-		url: '/items/itemdetails/:id',
-		templateUrl : 'js/item/itemEdit.html',
-		controller : 'itemEdit as itemCtrl'
-	})
-	.state ('root.itemAdd', {
-		url: '/items/additem/:id',
-		templateUrl : 'js/item/itemEdit.html',
-		controller : 'itemEdit as itemCtrl'
-	})
-
-	.state ('root.boms', {
-		url: '/boms',
-		templateUrl : 'js/item/bomList.html',
-		controller : 'bomslist as bomsCtrl'
 	})
 	.state ('login', {
 		url: '/login',
 		templateUrl : 'js/common/login.html',
 		controller : 'login as login'
 	})
-	.state ('root.news', {
-		url: '/news',
-		templateUrl : 'js/news/newsList.html',
-		controller : 'newsList as newsCtrl'
-	})
-	.state ('root.newsDetails', {
-		url: '/news/details/:id',
-		templateUrl : 'js/news/newsEdit.html',
-		controller : 'newsEdit as newsCtrl'
-	})
-	.state ('root.newsAdd', {
-		url: '/news/add/:id',
-		templateUrl : 'js/news/newsEdit.html',
-		controller : 'newsEdit as newsCtrl'
-	});
+
 
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 

@@ -9,8 +9,8 @@ var login = angular
 ] );
 
 login
-.config(						['$httpProvider', 
-        						 function mainController(  $httpProvider ) {
+.config(['$httpProvider', 
+         function mainController(  $httpProvider ) {
 
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
@@ -53,7 +53,7 @@ login
 
 	self.isResetPassError = function(){
 		var result = self.resetPassError  //there was error returned
-					&&	self.userSent == authService.credentials.username ; //and username was not changed since then
+		&&	self.userSent == authService.credentials.username ; //and username was not changed since then
 		return result;
 	}
 

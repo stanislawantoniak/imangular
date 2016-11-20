@@ -1,0 +1,22 @@
+<table class="table table-striped m-t-10 m-b-20">
+	<thead>
+		<tr>
+			<th width="10%"></th>
+			<th width="65%">{{translator.label.edititemheaderusedinname}}</th>
+			<th width="25%">{{translator.label.edititemheaderusedinquantity}}</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr
+			ng-repeat="parentItem in itemCtrl.item.usedIn | booleanValueFilter : 'parent.canBeSplit' : true | orderBy : ['-quantity','+parent.name']">
+			<td><button class="btn btn-default btn-sm"
+					ui-sref="root.itemDetails({id : parentItem.parent.id})">
+					<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
+				</button></td>
+
+			<td>{{ parentItem.parent.name }}</td>
+			<td>{{ parentItem.quantity }}</td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,46 @@
+<form name="addIC" role="form" class="form-horizontal"
+	ng-submit="itemCtrl.createOrUpdateItemComponent(itemCtrl.inserted)">
+	<div class="form-group">
+		<label class="col-md-3 col-xs-12 control-label">
+			{{translator.label.edititemheadercomponentname}} </label>
+		<div class="col-md-8 col-xs-12">
+			<div class="input-group">
+				<select class="form-control" name="component"
+					ng-model="itemCtrl.inserted.component"
+					ng-options="item.name for item in itemCtrl.itemsForSelect" required>
+					<option value="">--------</option>
+				</select> <span ng-show="addIC.component.$error.itemFromSelect">Select!!!!</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-3 col-xs-12 control-label">
+			{{translator.label.edititemheadercomponentquantity}} </label>
+		<div class="col-md-8 col-xs-12">
+			<div class="input-group">
+				<input class="form-control" ng-model="itemCtrl.inserted.quantity"
+					type="text" only-digits required />
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-3 col-xs-12 control-label">
+			{{translator.label.edititemheadercomponentremarks}} </label>
+		<div class="col-md-8 col-xs-12">
+			<div class="input-group">
+				<textarea class="form-control" cols="60"
+					ng-model="itemCtrl.inserted.remarks" />
+			</div>
+		</div>
+	</div>
+
+	<button class="btn btn-primary pull-right" type="submit">
+		<i class="fa fa-save"></i>
+		{{translator.label.componenteditformbuttonsave}}
+	</button>
+	<a ng-click="itemCtrl.cancelAddComponent()" class="btn btn-default">
+		<i class="fa fa-undo"></i>
+		{{translator.label.componenteditformbuttoncancel}}
+	</a>
+</form>

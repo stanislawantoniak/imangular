@@ -53,7 +53,6 @@ public class UserT implements UserDetails{
 
 	@Column
 	@NotNull(message="Name must not be empty")
-	@Size(min=8, message="Name must be at least 8 characters long")
 	private String username = "";
 
 	@Column

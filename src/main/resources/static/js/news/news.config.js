@@ -4,6 +4,27 @@
 var newsApp = angular.module('news', ['translationService','toolbox', 'checklist-model','xeditable','ui.select', 'ngTable', 'textAngular']);
 
 newsApp
+.config(['$stateProvider', function( $stateProvider ) {
+
+	$stateProvider
+	.state ('root.news', {
+		url: '/news',
+		templateUrl : 'js/news/newsList.html',
+		controller : 'newsList as newsCtrl'
+	})
+	.state ('root.newsDetails', {
+		url: '/news/details/:id',
+		templateUrl : 'js/news/newsEdit.html',
+		controller : 'newsEdit as newsCtrl'
+	})
+	.state ('root.newsAdd', {
+		url: '/news/add/:id',
+		templateUrl : 'js/news/newsEdit.html',
+		controller : 'newsEdit as newsCtrl'
+	});
+}]);
+
+newsApp
 .controller( 'newsList', ['$q','$scope','$http','translator','newsService', 'ngTableParams',
                           function newsController( $q,  $scope,   $http,  translator,  newsService,  ngTableParams ) {
 

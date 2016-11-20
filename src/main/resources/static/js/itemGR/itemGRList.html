@@ -1,0 +1,110 @@
+
+<div class="container">
+	<div class="block-header">
+		<h2>{{translator.label.itemGRlistheading}}</h2>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+
+				<div class="card-header">
+					<button class="btn btn-default waves-effect"
+						ng-hide="itemGRsCtrl.editContext"
+						ng-click="itemGRsCtrl.fetchAllGRs()">
+						<i class="zmdi zmdi-refresh zmdi-hc-fw"></i>
+						{{translator.label.userslistheadingbuttonrefresh}}
+					</button>
+					<div class="pull-right">
+						<button class="btn btn-default waves-effect"
+							ng-hide="itemGRsCtrl.editContext"
+							ui-sref="root.itemGRadd({id : 0})">
+							<i class="zmdi zmdi-plus zmdi-hc-fw"></i> Dodaj
+						</button>
+					</div>
+				</div>
+
+				<div class="card-body">
+					<table class="table table-hover table-responsive">
+						<thead>
+							<tr>
+								<th width="5%">
+									{{translator.label.userslistuserstableheadingid}}</th>
+								<th width="25%">Nazwa</th>
+
+								<th width="25%">Opis</th>
+								<th width="25%">{{translator.label.userslistuserstableheadingactions}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="gr in itemGRsCtrl.grs | orderBy : ['+name']">
+								<td>{{gr.id == 0 ? '-' : gr.id}}</td>
+
+								<td><span editable-text="gr.name" e-name="name"
+									e-form="rowform" e-required> {{ gr.name || 'empty'}} </span></td>
+
+								<td><span editable-textarea="gr.description" e-name="description"
+									e-form="rowform" e-required e-cols="60"> {{ gr.description || 'empty'}} </span></td>
+
+								<td>
+									<form editable-form name="rowform"
+										onshow="itemGRsCtrl.setEditRowContext()"
+										onaftersave="itemGRsCtrl.setEditRowContext()"
+										onbeforesave="itemGRsCtrl.createOrUpdateGR($data,gr.id)"
+										ng-show="rowform.$visible" class="form-buttons form-inline">
+										<button type="submit" ng-disabled="rowform.$waiting"
+											class="btn btn-default waves-effect">
+											<i class="zmdi zmdi-check"></i>
+										</button>
+										<button type="button" ng-disabled="rowform.$waiting"
+											ng-click="itemGRsCtrl.cancelEditRow(this)"
+											class="btn btn-default waves-effect">
+											<i class="zmdi zmdi-close"></i>
+										</button>
+									</form>
+									<div ng-show="!rowform.$visible && !itemGRsCtrl.editContext">
+
+										<button class="btn btn-default btn-sm waves-effect"
+											ng-click="rowform.$show()">
+											{{translator.label.userslistuserstablebuttonedit}}</button>
+										<button class="btn btn-default btn-sm waves-effect" swal-exec
+											swal-object="user"
+											swal-dialog-title="Na pewno chcesz usun¹æ"
+											swal-main-text="{{translator.label.userslistdeletewarning}}"
+											swal-confirm-button="{{translator.label.userslistuserstablebuttondelete}}"
+											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
+											swal-exec-fn-on-confirm="itemGRsCtrl.deleteGRPromise"
+											growl-on-confirm-success-title="{{translator.label.usersdeletesuccessheading}}"
+											growl-on-confirm-failure-title="{{translator.label.usersdeletefailureheading}}"
+											growl-on-cancel-text="Pozycja nie zosta³a usuniêta">
+											{{translator.label.userslistuserstablebuttondelete}}</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- delete dialog-->
+<div class="message-box animated fadeIn" id="message-box-default"
+	ng-class="itemGRsCtrl.deleteDialog.getClass()" ng-if="false">
+	<div class="mb-container">
+		<div class="mb-middle">
+			<div class="mb-title">
+				<span class="fa fa-scissors"></span>{{translator.label.userslistdeletewarning}}
+				{{itemGRsCtrl.deleteDialog.object.username}}?
+			</div>
+			<div class="mb-content"></div>
+			<div class="mb-footer">
+				<button class="btn btn-default btn-lg"
+					ng-click="itemGRsCtrl.deleteDialog.close()">{{translator.label.edititembuttoncancel}}</button>
+				<button class="btn btn-default btn-lg pull-right"
+					ng-click="itemGRsCtrl.deleteGR()">{{translator.label.userslistuserstablebuttondelete}}</button>
+			</div>
+		</div>
+	</div>
+</div>
