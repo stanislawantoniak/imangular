@@ -1,4 +1,4 @@
-package pl.essay.imangular.service;
+package pl.essay.imangular.domain;
 
 import java.util.HashMap;
 import java.util.Map;

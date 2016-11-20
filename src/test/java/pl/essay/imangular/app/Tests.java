@@ -1,4 +1,4 @@
-package pl.essay;
+package pl.essay.imangular.app;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

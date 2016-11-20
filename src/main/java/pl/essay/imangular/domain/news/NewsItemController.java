@@ -17,7 +17,6 @@ import pl.essay.angular.security.UserForm;
 import pl.essay.generic.controller.BaseController;
 import pl.essay.generic.dao.ListingParamsHolder;
 import pl.essay.generic.dao.SetWithCountHolder;
-import pl.essay.imangular.service.NewsItemService;
 
 @RestController
 public class NewsItemController extends BaseController {

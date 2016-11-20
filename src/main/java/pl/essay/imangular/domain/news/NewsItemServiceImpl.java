@@ -1,4 +1,4 @@
-package pl.essay.imangular.service;
+package pl.essay.imangular.domain.news;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.essay.generic.dao.ListingParamsHolder;
 import pl.essay.generic.dao.SetWithCountHolder;
-import pl.essay.imangular.domain.news.NewsItem;
-import pl.essay.imangular.domain.news.NewsItemDao;
 
 @Service
 @Transactional

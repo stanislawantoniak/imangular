@@ -1,4 +1,4 @@
-package pl.essay.imangular.service;
+package pl.essay.imangular.domain;
 
 /*
  * makes id for entity objects

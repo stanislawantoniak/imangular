@@ -55,7 +55,6 @@ public class UserControllerForgotPass {
 
 		//this.userServiceMock = mock(UserService.class);
 
-		UserT user = UserControllerUpdateUserTests.getUser("123456");
 		String hash = "hash";
 		when(userServiceMock.getUserByForgotPasswordHash(hash)).thenReturn( null );
 

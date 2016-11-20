@@ -1,4 +1,4 @@
-package pl.essay.imangular.service;
+package pl.essay.imangular.domain.bom;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +12,7 @@ import static org.mockito.Mockito.*;
 import org.springframework.test.context.TestPropertySource;
 
 import pl.essay.angular.security.UserSession;
+import pl.essay.imangular.domain.ItemTestData;
 import pl.essay.imangular.domain.bom.BillOfMaterial;
 import pl.essay.imangular.domain.bom.BillOfMaterialFlatListLine;
 import pl.essay.imangular.domain.bom.BillOfMaterialInStock;
