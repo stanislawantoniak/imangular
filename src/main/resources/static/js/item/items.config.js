@@ -24,11 +24,12 @@ itemApp.config(['$stateProvider', function( $stateProvider ) {
 
 }]);
 
-itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTableParams',
-                                  function itemsController( $q, translator,  itemService, ngTableParams ) {
+itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTableParams', 'growlService',
+                                  function itemsController( $q, translator,  itemService, ngTableParams, growlService ) {
 
 	var self = this;
 	self.service = itemService;
+	self.messageService = growlService;
 
 	//table for items
 	self.itemTable = new ngTableParams({
@@ -52,6 +53,9 @@ itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTablePara
 			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
 			.then( function(response){
 				//console.log("response::",response);
+				if (params.total() != 0){ //do not show message at first table data load
+					self.messageService.growl(translator.label.ListHasBeenRefreshed, 'info') ;
+				}
 				params.total(response.totalRows);
 				$defer.resolve(response.collection);
 			} );

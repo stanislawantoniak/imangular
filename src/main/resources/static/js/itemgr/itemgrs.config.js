@@ -18,16 +18,20 @@ itemGRApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
 }]);
 
-itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService', 'ngTableParams',
-                                      function itemGRsController( $q,  translator,  itemGRService, ngTableParams) {
+itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService', 'ngTableParams', 'growlService',
+                                      function itemGRsController( $q,  translator,  itemGRService, ngTableParams, growlService) {
 
 	var self = this;
+	var labels = translator;
 	self.service = itemGRService;
+	self.messageService = growlService;
 	self.editGRContext = false;
-
+	
 	self.fetchAllGrs = function(){
 		self.service.fetchAll().then(function(response) {
-			//console.log(response);
+			if (self.grs != null){ //do not show message at first table data load
+				self.messageService.growl( labels.label.ListHasBeenRefreshed, 'info') ;
+			}
 			self.grs = response.collection;
 		}, function(){
 			console.log('get game releases from service - fail');
@@ -45,11 +49,11 @@ itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService', 'ngTabl
 		.then( 
 				function(response){
 					self.fetchAllGrs();
-					res.resolve(translator.label.usersdeletesuccessinfo);
+					res.resolve(labels.label.usersdeletesuccessinfo);
 				},
 				function(errResponse){
 					console.error('Error while deleting GR');
-					res.reject(translator.label.usersdeletefailureinfo);
+					res.reject(labels.label.usersdeletefailureinfo);
 				}
 		);
 

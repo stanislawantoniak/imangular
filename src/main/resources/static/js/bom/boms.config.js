@@ -29,14 +29,16 @@ itemApp
 }]);
 
 itemApp
-.controller( 'bomslist', ['translator', 'bomService',  'newsService', function bomsController( translator, bomService, newsService ) {
+.controller( 'bomslist', ['translator', 'bomService',  'newsService', 'growlService', 
+                          function bomsController( translator, bomService, newsService, growlService ) {
 
 	var self = this;
-	self.bomService = bomService;
-	self.newsService = newsService;
+	self.bomSrv = bomService;
+	self.newsSrv = newsService;
+	self.messageService = growlService;
 
 	self
-	.newsService
+	.newsSrv
 	.fetchByCategoryPublished('bom')
 	.then(
 			function(response){
@@ -45,7 +47,7 @@ itemApp
 
 	self.fetchAllBoms = function(){
 		//console.log('starting fetching boms');
-		self.bomService.fetchAll().then(
+		self.bomSrv.fetchAll().then(
 				function(response) {
 					self.boms = response.collection;
 					angular.forEach( 
@@ -70,7 +72,7 @@ itemApp
 	self.fetchAllBoms();
 
 	self.deleteBom = function(){
-		self.bomService.deleteEntity(self.deleteDialog.object.id).
+		self.bomSrv.deleteEntity(self.deleteDialog.object.id).
 		then( 
 				function(response){
 					self.fetchAllBoms();
@@ -86,13 +88,15 @@ itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsSe
                                   function bomsController( $state,  translator, bomService, newsService ) {
 
 	var self = this;
-	self.bomService = bomService;
+	self.bomSrv = bomService;
 	self.translator = translator;
 
-	self.newsService = newsService;
+	self.newsSrv = newsService;
+	
+	console.log(translator.label.itemusedinsheading);
 
 	self
-	.newsService
+	.newsSrv
 	.fetchByCategoryPublished('bomwizard')
 	.then(
 			function(response){
@@ -114,7 +118,7 @@ itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsSe
 	}
 
 	//get items for select in add bom
-	self.bomService.fetchAnyData('/items/forselect/0').then(function(response){
+	self.bomSrv.fetchAnyData('/items/forselect/0').then(function(response){
 
 		self.itemsForSelect = response;
 
@@ -132,7 +136,7 @@ itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsSe
 		}
 		//console.log('bom::',b);
 
-		self.bomService.createOrUpdate(b)
+		self.bomSrv.createOrUpdate(b)
 		.then( 
 				function(response){
 					//console.log('create item::',response);
@@ -144,14 +148,15 @@ itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsSe
 
 }]);
 
-itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bomStockService', 'bomService', 'dialogFactory', 
-                                function bomsController( $state, $stateParams,  $q, translator, bomStockService, bomService, dialogFactory ) {
+itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bomStockService', 'bomService', 'growlService', 
+                                function bomsController( $state, $stateParams,  $q, translator, bomStockService, bomService, growlService ) {
 
 	//console.log('bomEdit ctrl starting');
 
 	var self = this;
-	self.bomService = bomService;
+	self.bomSrv = bomService;
 	self.translator = translator;
+	self.msgService = growlService;
 
 	self.bomId = parseInt($stateParams.id);
 
@@ -162,7 +167,7 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 		bomRequest.requiredQuantity = self.bom.requiredQuantity;
 
 		//console.log('bomRequest::',bomRequest);
-		self.bomService.createOrUpdate(bomRequest)
+		self.bomSrv.createOrUpdate(bomRequest)
 		.then( function(response){
 			self.fetchBom();
 		},	function(errResponse){
@@ -175,8 +180,10 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 		.fetch(self.bomId)
 		.then(
 				function(response) {
+					if (self.bom != null) //show growl only when this is not first data load
+						self.msgService.growl(translator.label.BomSaved,'success');
 					self.bom = response;
-					//console.log('bom::',self.bom);
+					console.log('fetch bom::',self.bom);
 				}
 		)
 	};
@@ -202,7 +209,9 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 				remarks : req.stock.remarks
 		}
 		//console.log('stock :: ',stock);
-
+		
+		self.msgService.growl(translator.label.SavingAndRecalculatingBom,'info');
+		
 		bomStockService
 		.update(stock,0)
 		.then( 

@@ -88,7 +88,7 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		return getDomainClass().getName();
 	}
 
-	public void create(T t) {
+	public Serializable create(T t) {
 		Method method = ReflectionUtils.findMethod(
 				getDomainClass(), "setDateCreated",
 				new Class[] { Date.class });
@@ -97,8 +97,7 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 				method.invoke(t, new Date());
 			} catch (Exception e) { /* Ignore */ }
 		}
-		getSession().save(t);
-		//System.out.println("adding entity "+this.getDomainClassName()+"::"+t);
+		return getSession().save(t);
 	}
 
 	public void create(Iterable<T> entities) {

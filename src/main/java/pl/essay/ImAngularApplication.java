@@ -36,6 +36,7 @@ import pl.essay.toolbox.EmailSender;
 	"pl.essay.imangular.domain.item",
 	"pl.essay.imangular.domain.bom",
 	"pl.essay.imangular.domain.news",
+	"pl.essay.imangular.domain.sessioncatcher",
 	"pl.essay.imports"
 	
 })

@@ -19,6 +19,8 @@ generic;translations
 "clicktoedit","Kliknij żeby wyedytować."
 "clickto","Kliknij tutaj aby dodać nowe zadanie"
 "ToggleFullscreen","Pełny ekran"
+"ListHasBeenRefreshed","Lista odświeżona!"
+"PageHasBeenRefreshed","Strona odświeżona!"
 
 "notLoggedInTeaser","Uwaga: nie jesteś zalogowany i zadania, które założysz znikną jak opuścisz portal. Lepiej idz do strony logowania i czym prędzej załóż konto."
 
@@ -135,7 +137,7 @@ boms; boms
 "bomslistbomstableheading","Lista składników"
 "bomslistbomstableheadingid","Id zadania"
 "bomslistbomstableheadingname","Zadanie: zbudować "
-"bomslistbomstableheadingqty","Wymgana ilość"
+"bomslistbomstableheadingqty","Wymagana ilość"
 "bomslistbomstableheadingactions",""
 "bomslistbomstableeditbutton","Edytuj"
 "bomslistbomstabledeletebutton","Usun"
@@ -167,6 +169,8 @@ bom;edit
 "bomEditInStockQuantityLabel","Ilość którą już mam"
 "bomEditStockRemarksLabel","Moje uwagi"
 "bomEditStockDeleteRecipeButton","Usuń zadanie"
+"SavingAndRecalculatingBom","Zapisujemy i przeliczamy Twoje zadanie"
+"BomSaved","Twoje zadanie zostało przeliczone"
 
 "bomEditdeleteheading","Na pewno chcesz usunąć zadanie "
 "bomEditDeleteSuccessHeading", "Zadanie zostało skasowane"

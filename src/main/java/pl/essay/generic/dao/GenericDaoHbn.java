@@ -3,7 +3,7 @@ package pl.essay.generic.dao;
 import java.io.Serializable;
 
 public interface GenericDaoHbn<T extends Object> {
-	void create(T t);
+	Serializable create(T t);
 	void create(Iterable<T> t);
 	public T get(Serializable id);
 	public T load(Serializable id);

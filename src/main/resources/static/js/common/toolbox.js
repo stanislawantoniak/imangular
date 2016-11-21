@@ -1,42 +1,34 @@
 var toolbox = angular.module('toolbox',[]);
 
 toolbox
-.factory('dialogFactory', [function(){
-
-	var Service = function(){
-		this.dialogOpened = false;
-		this.object = {};
-		this.classes = 'open';
-
-		this.open = function(object){
-			this.object = object;
-			this.dialogOpened = true;
-		};
-
-		this.close = function(){
-			this.object = {};
-			this.dialogOpened = false;
-		};
-
-		this.getClass = function(){
-			if (this.dialogOpened)
-				return this.classes;
-		};
-
-		this.setClasses = function(c){
-			this.classes = c;
-		};
-
-	};
-
-	var Factory = {
-			getService : function(){ return new Service(); }
-	};
-
-	return Factory;
-
-}]);
-
+.service('growlService', function(){
+    var gs = {};
+    gs.growl = function(message, type) {
+     
+        $.growl({
+            message: message
+        },{
+            type: type,
+            allow_dismiss: false,
+            label: 'Cancel',
+            className: 'btn-xs btn-inverse',
+            placement: {
+                from: 'top',
+                align: 'right'
+            },
+            delay: 2500,
+            animate: {
+                    enter: 'animated rotateIn',
+                    exit: 'animated fadeOutUp'
+            },
+            offset: {
+                x: 20,
+                y: 85
+            }
+        });
+    }
+    return gs;
+});
 
 /*
  * filter for ng-repeat checking if boolean value in row is equal to required
@@ -104,7 +96,13 @@ toolbox
 		}
 	};
 })
-
+/*
+ * from stackoverflow
+ * 
+ * compiles element content 
+ * (ie when you want to show nice html view from editor or database)
+ * 
+ */
 .directive('dynamic', function ($compile) {
   return {
     restrict: 'A',
@@ -231,3 +229,43 @@ toolbox
 		}
 	}
 });
+
+/*
+ * obsolete, replaced by swalExec in the project
+ */
+toolbox
+.factory('dialogFactory', [function(){
+
+	var Service = function(){
+		this.dialogOpened = false;
+		this.object = {};
+		this.classes = 'open';
+
+		this.open = function(object){
+			this.object = object;
+			this.dialogOpened = true;
+		};
+
+		this.close = function(){
+			this.object = {};
+			this.dialogOpened = false;
+		};
+
+		this.getClass = function(){
+			if (this.dialogOpened)
+				return this.classes;
+		};
+
+		this.setClasses = function(c){
+			this.classes = c;
+		};
+
+	};
+
+	var Factory = {
+			getService : function(){ return new Service(); }
+	};
+
+	return Factory;
+
+}]);

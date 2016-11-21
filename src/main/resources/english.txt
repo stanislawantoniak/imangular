@@ -7,6 +7,7 @@ generic;translations
 "leftpanelmenumanageBoms", "Assignments"
 "leftpanelmenumanageitems","Manage Items"
 "leftpanelmenubrowseitems","Browse Items"
+"leftpanelmenubrowseitemGRs","Game releases"
 "leftpanelmenumanageUsers", "Manage Users"
 "leftpanelmenumanageNews", "Content news"
 "navbarmenuactionlogin","Sign in"
@@ -22,6 +23,8 @@ generic;translations
 "clicktoedit","Click on text to edit."
 "clickto","Click Here To Add New Assignment"
 "ToggleFullscreen","Toggle Fullscreen"
+"ListHasBeenRefreshed","The list has been refreshed!"
+"PageHasBeenRefreshed","The page has been refreshed!"
 
 "notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
 
@@ -172,6 +175,9 @@ bom;edit
 "bomEditInStockQuantityLabel","In stock"
 "bomEditStockRemarksLabel","My remarks"
 "bomEditStockDeleteRecipeButton","Remove assignment"
+"SavingAndRecalculatingBom","Started recalculating assignment"
+"BomSaved","Your assignment has been recalculated"
+
 
 "bomEditdeleteheading","Are you sure to delte this assignment"
 "bomEditDeleteSuccessHeading", "Assignment has beed deleted"

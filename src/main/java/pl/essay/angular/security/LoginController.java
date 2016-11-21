@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.essay.angular.sessioncatcher.SessionLogEntry;
+import pl.essay.angular.sessioncatcher.SessionLogEntryService;
 import pl.essay.generic.controller.BaseController;
 import pl.essay.imangular.domain.bom.BillOfMaterialService;
 
@@ -24,23 +26,26 @@ public class LoginController extends BaseController {
 
 	@Autowired 
 	UserService userService;
+	
+	@Autowired
+	SessionLogEntryService sessionService;
 
 	@Autowired
 	BillOfMaterialService bomService;
 
 	//this is protected resource used for authentication
 	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
-	public String user(HttpServletRequest request, HttpSession httpSession) {
+	public String user( HttpSession httpSession) {
 		print(httpSession);
-
-		//on successfull login usersession.authenticated is false 
+		
+				//on successfull login usersession.authenticated is false 
 		//it will change to true 2 lines below 
 		if (!this.userSession.getAuthenticated()) {// move all boms from anonymous to user (change owner on login)
 			
 			this.userSession.updateOnAuthentication();
 			this.bomService.moveBomsFromAnonymousToUser(this.userSession.getAnonymousSessionId(), this.userSession.getUser());
 		}
-		
+	
 		return this.userSession.toJson();
 	}
 
@@ -67,12 +72,19 @@ public class LoginController extends BaseController {
 	 * this is unprotected resource used for fetching data stored in usersession for guest user
 	 */
 	@RequestMapping(value = "common/userSession", method = RequestMethod.GET)
-	public String getSession(HttpSession httpSession) {
+	public String getSession(HttpServletRequest request, HttpSession httpSession) {
 
 		this.initFirstUser();
 
 		//this will save session id for anonymous user
 		this.userSession.setAnonymousSessionId(httpSession.getId());
+		
+		SessionLogEntry entry = new SessionLogEntry();
+		entry.setIp(request.getRemoteAddr());
+		entry.setSessionId(this.userSession.getAnonymousSessionId());
+		if (this.userSession.getUser() != null)
+			entry.setUserId(this.userSession.getUser().getId());
+		sessionService.addEntity( entry );
 
 		print(httpSession);
 
