@@ -127,7 +127,7 @@ public class BillOfMaterial {
 		this.requiredQuantity = q;
 	}
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm", timezone="CET")
 	public Date getDateCreated(){
 		return this.dateCreated;
 	}

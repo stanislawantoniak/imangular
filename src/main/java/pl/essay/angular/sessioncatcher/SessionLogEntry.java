@@ -64,7 +64,7 @@ public class SessionLogEntry {
 	public void setSessionId(String i){
 		this.sessionId = i;
 	}
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm:ss", timezone="CET")
 	public Date getDateCreated(){
 		return this.dateCreated;
 	}

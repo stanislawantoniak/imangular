@@ -151,7 +151,7 @@ public class UserT implements UserDetails{
 		return this.enabled;
 	}
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:mm", timezone="CET")
 	public Date getDateCreated(){
 		return this.dateCreated;
 	}
@@ -165,7 +165,7 @@ public class UserT implements UserDetails{
 		this.lastLoggedIn = d;
 	}
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:mm", timezone="CET")
 	public Date getLastLoggedIn(){
 		return this.lastLoggedIn;
 	}
