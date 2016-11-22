@@ -176,7 +176,7 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 	};
 
 	self.fetchBom = function(){
-		bomService
+		bomSrv
 		.fetch(self.bomId)
 		.then(
 				function(response) {
@@ -189,7 +189,7 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 	};
 
 	self.fetchRequirements = function(){
-		bomService
+		bomSrv
 		.fetchAnyData('/bomrest/requirements/'+self.bomId)
 		.then( 
 				function(response){
@@ -226,7 +226,7 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 		var res = $q.defer();
 
 		self
-		.bomService
+		.bomSrv
 		.deleteEntity(self.bom.id).
 		then( function(response){
 			$state.go('root.boms');
