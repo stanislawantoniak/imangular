@@ -83,7 +83,7 @@ public class LoginController extends BaseController {
 		entry.setIp(request.getRemoteAddr());
 		entry.setSessionId(this.userSession.getAnonymousSessionId());
 		if (this.userSession.getUser() != null)
-			entry.setUserId(this.userSession.getUser().getId());
+			entry.setUser(this.userSession.getUser());
 		sessionService.addEntity( entry );
 
 		print(httpSession);

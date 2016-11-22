@@ -7,10 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import pl.essay.angular.security.UserT;
 
 @Entity
 @DynamicInsert
@@ -31,7 +36,9 @@ public class SessionLogEntry {
 	@Column
 	private Date dateCreated;
 	
-	@Column int userId;
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id", nullable = true)
+	UserT user;
 
 	public SessionLogEntry(){
 	}
@@ -66,11 +73,11 @@ public class SessionLogEntry {
 		this.dateCreated = d;
 	}
 
-	public void setUserId(int id){
-		this.userId = id;
+	public void setUser(UserT u){
+		this.user = u;
 	}
-	public int getUserId(){
-		return this.userId;
+	public UserT getUser(){
+		return this.user;
 	}
 	
 	public String toString(){

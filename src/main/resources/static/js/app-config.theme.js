@@ -21,6 +21,7 @@ var materialAdmin = angular
 		 'itemGRs',
 		 'boms',
 		 'news',
+		 'logs',
 		 'toolbox',
 		 'authenticationService',
 		 'analytics'] );

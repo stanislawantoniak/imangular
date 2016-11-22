@@ -88,6 +88,8 @@
 		<js>/js/bom/bomservice.js</js>
 		<js>/js/news/news.config.js</js>
 		<js>/js/news/newsservice.js</js>
+		<js>/js/log/logs.config.js</js>
+		<js>/js/log/logsservice.js</js>
 	</group>
 	<group name="min-pack-im">
 		<group-ref>min-pack-im-cp</group-ref>

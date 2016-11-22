@@ -184,7 +184,7 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 					if (self.bom != null) //show growl only when this is not first data load
 						self.msgService.growl(translator.label.BomSaved,'success');
 					self.bom = response;
-					console.log('fetch bom::',self.bom);
+					//console.log('fetch bom::',self.bom);
 				}
 		)
 	};

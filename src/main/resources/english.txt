@@ -10,6 +10,7 @@ generic;translations
 "leftpanelmenubrowseitemGRs","Game releases"
 "leftpanelmenumanageUsers", "Manage Users"
 "leftpanelmenumanageNews", "Content news"
+"leftpanelmenumanageLogs","Activity Logs"
 "navbarmenuactionlogin","Sign in"
 "navbarmenuactionlogout","Sign out"
 "navbarloginpleaselogin","Please sign in"

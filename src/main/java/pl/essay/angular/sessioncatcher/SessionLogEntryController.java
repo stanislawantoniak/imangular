@@ -1,20 +1,26 @@
 package pl.essay.angular.sessioncatcher;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.essay.generic.controller.GenericRestControllerImpl;
-import pl.essay.generic.servicefacade.GenericServiceImpl;
+import pl.essay.angular.security.UserForm;
+import pl.essay.generic.dao.ListingParamsHolder;
+import pl.essay.generic.dao.SetWithCountHolder;
 
 @RestController
-public class SessionLogEntryController extends GenericRestControllerImpl<SessionLogEntry, GenericServiceImpl<SessionLogEntry>>{
+public class SessionLogEntryController {
 	
-	@RequestMapping(value = "/sessionlog/", method = RequestMethod.GET)
+	@Autowired 
+	private SessionLogEntryService sessionLogEntryService;
 	
-	public String  kick() {
-		return this.getDomainClassName();
+	@RequestMapping(value = "/sessionlogs", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
+	public SetWithCountHolder<SessionLogEntry>  getSessionLogWithParams(@RequestBody ListingParamsHolder filter) {
+		return this.sessionLogEntryService.listEntitiesPaginated( filter );
 	}
-
 
 }

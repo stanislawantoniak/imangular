@@ -29,7 +29,7 @@ public class ItemGameReleaseController extends BaseController {
 
 	@RequestMapping(value= "/itemgamereleases", method = {RequestMethod.GET})
 	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<SetWithCountHolder<ItemGameRelease>> listItemGameReleasesWithParams(){
+	public ResponseEntity<SetWithCountHolder<ItemGameRelease>> listItemGameReleases(){
 
 		SetWithCountHolder<ItemGameRelease> holder = this.itemGameReleaseService.listItemGameReleases();
 

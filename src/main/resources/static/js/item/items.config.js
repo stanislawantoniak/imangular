@@ -52,7 +52,7 @@ itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTablePara
 			.service
 			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
 			.then( function(response){
-				//console.log("response::",response);
+				console.log("response::",response);
 				if (params.total() != 0){ //do not show message at first table data load
 					self.messageService.growl(translator.label.ListHasBeenRefreshed, 'info') ;
 				}

@@ -11,38 +11,43 @@
 
 	<ul class="main-menu">
 
-		<li data-ui-sref-active="active"><a data-ui-sref="root.dashboard"
+		<li ui-sref-active="active"><a ui-sref="root.dashboard"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-home"></i>
 				{{translator.label.leftpanelmenuMainPage}}</a></li>
 
-		<li data-ui-sref-active="active"><a data-ui-sref="root.boms"
+		<li ui-sref-active="active"><a ui-sref="root.boms"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-view-quilt"></i>
 				{{translator.label.leftpanelmenumanageBoms}}</a></li>
 
-		<li data-ui-sref-active="active"><a data-ui-sref="root.items"
+		<li ui-sref-active="active"><a ui-sref="root.items"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-view-list-alt "></i>
 				{{ authenticated ? translator.label.leftpanelmenumanageitems : translator.label.leftpanelmenubrowseitems}}</a></li>
 
-		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a data-ui-sref="root.itemGRs"
+		<li ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a ui-sref="root.itemGRs"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-calendar "></i>
 				{{ translator.label.leftpanelmenubrowseitemGRs }}</a></li>
 
 	
-		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a data-ui-sref="root.users"
+		<li ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a ui-sref="root.users"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-accounts-alt"></i>
 				{{translator.label.leftpanelmenumanageUsers}}</a></li>
 
-		<li data-ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a data-ui-sref="root.news"
+		<li ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a ui-sref="root.news"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-border-color"></i>
 				{{translator.label.leftpanelmenumanageNews}}</a></li>
-
-		<li data-ui-sref-active="active" ng-if="false && nav.authService.session.isAdmin"><a 
+		
+		<li ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a ui-sref="root.logs"
+			data-ng-click="mactrl.sidebarStat($event)"><i
+				class="zmdi zmdi-watch"></i>
+				{{translator.label.leftpanelmenumanageLogs}}</a></li>
+				
+		<li ui-sref-active="active" ng-if="false && nav.authService.session.isAdmin"><a 
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-home"></i> debug</a></li>
 

@@ -6,6 +6,7 @@ generic;translations
 "leftpanelmenubrowseitemGRs","Aktualizacje gry"
 "leftpanelmenumanageUsers", "Użytkownicy"
 "leftpanelmenumanageNews", "Artykuły"
+"leftpanelmenumanageLogs","Logi aktywności"
 "navbarmenuactionlogin","Zaloguj się"
 "navbarmenuactionlogout","Wyloguj"
 "navbarloginpleaselogin","Prosimy o zalogowanie"

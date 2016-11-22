@@ -18,8 +18,8 @@ itemGRApp.config(['$stateProvider', function mainController( $stateProvider ) {
 
 }]);
 
-itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService', 'ngTableParams', 'growlService',
-                                      function itemGRsController( $q,  translator,  itemGRService, ngTableParams, growlService) {
+itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService',  'growlService',
+                                      function itemGRsController( $q,  translator,  itemGRService, growlService) {
 
 	var self = this;
 	var labels = translator;
