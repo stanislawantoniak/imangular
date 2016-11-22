@@ -176,7 +176,8 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 	};
 
 	self.fetchBom = function(){
-		bomSrv
+		self
+		.bomSrv
 		.fetch(self.bomId)
 		.then(
 				function(response) {
@@ -189,7 +190,8 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 	};
 
 	self.fetchRequirements = function(){
-		bomSrv
+		self
+		.bomSrv
 		.fetchAnyData('/bomrest/requirements/'+self.bomId)
 		.then( 
 				function(response){
