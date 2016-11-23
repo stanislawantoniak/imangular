@@ -18,9 +18,9 @@ public class CriteriaBuilder<T extends Object> {
 	private Class<T> domainClass;
 
 	private Criteria criteria; 
-	
+
 	private Session session;
-	
+
 	public Criteria get(){
 
 		return this.criteria;
@@ -79,36 +79,43 @@ public class CriteriaBuilder<T extends Object> {
 
 		for (Map.Entry<String, String> pair: filters.entrySet()){
 
-			String key = pair.getKey();
-			if (key.contains(".")){
-				
-				String association = StringUtils.substringBefore(key, ".");
-				String alias = StringUtils.substringBefore(key, ".")+"Association";
-				String associationProperty = StringUtils.substringAfter(key, ".");
-				
-				logger.trace("adding association and like filter for:: "+key+" / "+pair.getValue());
-				logger.trace("association::",association);
-				logger.trace("alias::",alias);
-				logger.trace("associationProperty::",associationProperty);
-				
-				this.criteria
-				.createAlias(association, alias)
-			    .add( Restrictions
-			    		.like( 
-			    				alias+"."+associationProperty, 
-			    				"%"+pair.getValue()+"%"
-			    				) 
-			    		);
-				
-			} else {
-			
-				logger.trace("adding and like filters :: "+key+" / "+pair.getValue());
-				this.criteria
-				.add(Restrictions
-						.like(key, "%"+pair.getValue()+"%")
-						.ignoreCase());
-			}
-		} 
+			/*	do not add criteria when search string is empty
+			*	ngtable passes empty string for search value when filter 
+			*	comes from select 
+			*	
+			*/
+			if (!"".equals(pair.getValue())){ 
+				String key = pair.getKey();
+				if (key.contains(".")){
+					//build criteria for nested select
+					String association = StringUtils.substringBefore(key, ".");
+					String alias = StringUtils.substringBefore(key, ".")+"Association";
+					String associationProperty = StringUtils.substringAfter(key, ".");
+
+					logger.trace("adding association and like filter for:: "+key+" / "+pair.getValue());
+					logger.trace("association::",association);
+					logger.trace("alias::",alias);
+					logger.trace("associationProperty::",associationProperty);
+
+					this.criteria
+					.createAlias(association, alias)
+					.add( Restrictions
+							.like( 
+									alias+"."+associationProperty, 
+									"%"+pair.getValue()+"%"
+									) 
+							);
+
+				} else {
+
+					logger.trace("adding and like filters :: "+key+" / "+pair.getValue());
+					this.criteria
+					.add(Restrictions
+							.like(key, "%"+pair.getValue()+"%")
+							.ignoreCase());
+				}
+			} 
+		}
 		return this;
 	} 
 
