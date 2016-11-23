@@ -24,11 +24,12 @@ itemApp.config(['$stateProvider', function( $stateProvider ) {
 
 }]);
 
-itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTableParams', 'growlService',
-                                  function itemsController( $q, translator,  itemService, ngTableParams, growlService ) {
+itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTableParams', 'growlService', 'itemGRService',
+                                  function itemsController( $q, translator,  itemService, ngTableParams, growlService, itemGRService ) {
 
 	var self = this;
 	self.service = itemService;
+	self.GRservice = itemGRService;
 	self.messageService = growlService;
 
 	//table for items
@@ -52,7 +53,7 @@ itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTablePara
 			.service
 			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
 			.then( function(response){
-				console.log("response::",response);
+				//console.log("response::",response);
 				if (params.total() != 0){ //do not show message at first table data load
 					self.messageService.growl(translator.label.ListHasBeenRefreshed, 'info') ;
 				}
@@ -80,6 +81,42 @@ itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTablePara
 
 		return res.promise;
 	}
+
+	self.getGRsPromise = getGRs;
+
+	function getGRs(){
+		var grs = [];
+
+		var res = $q.defer();
+
+		self
+		.GRservice
+		.fetchAll()
+		.then( 
+				function(response){
+					angular
+					.forEach( 
+							response.collection,
+							function(gr) {
+								grs.push(
+										{ 
+											id: gr.name,
+											title: gr.name
+										}
+								);								
+							}
+					);
+					res.resolve(grs);
+				},
+				function(errResponse){
+					console.error('Error while getching game releases');
+					res.reject('Error while getching game releases');
+				});
+
+		return res.promise;
+	}
+
+
 }]);
 
 itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGRService', 'translator','itemService', 'itemComponentService', 'authService',
@@ -185,7 +222,7 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGR
 				}, function(){
 					console.log('get items for select - fail');
 				});
-		
+
 		self
 		.serviceGR
 		.fetchAll()

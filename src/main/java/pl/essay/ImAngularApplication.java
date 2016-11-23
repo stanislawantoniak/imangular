@@ -78,6 +78,7 @@ public class ImAngularApplication {
 					"/boms/**","/bomrest/**","/bomstockrest/**",
 					"/newsitems/**","/newsitemrest/**",
 					"/sessionlog/",
+					"/itemgamereleases",
 					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			
 			and()

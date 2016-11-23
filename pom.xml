@@ -267,7 +267,7 @@
 					<dependency>
 						<groupId>org.webjars.bower</groupId>
 						<artifactId>ng-table</artifactId>
-						<version>0.8.3</version>
+						<version>1.0.0-beta.9</version>
 					</dependency>
 					<dependency>
 						<groupId>org.webjars.bower</groupId>

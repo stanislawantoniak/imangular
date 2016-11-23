@@ -30,7 +30,7 @@
 							<tr ng-repeat="item in $data">
 								<td data-title="translator.label.itemslistitemstableheadingid">{{item.id}}</td>
 								<td data-title="translator.label.itemslistitemstableheadingname"
-									sortable="'name'" filter="{ 'name': 'text' }">{{item.name}}</td>
+									sortable="'name'" filter="{ name: 'text' }">{{item.name}}</td>
 								<td data-title="translator.label.itemslistitemstableheadingiscomposed"><div class="text-center"
 										style="font-size: 150%;">
 										<i ng-show="item.isComposed"
@@ -45,7 +45,7 @@
 									</div></td>
 								<td data-title="translator.label.itemslistitemstableheadingwheremanufactured"
 									sortable="'whereManufactured'"
-									filter="{ 'whereManufactured': 'text' }">{{item.whereManufactured}}</td>
+									filter="{ whereManufactured: 'text' }">{{item.whereManufactured}}</td>
 								<td data-title="translator.label.itemslistitemstableheadingisavailableinothersources"><div
 										class="text-center" style="font-size: 150%;">
 										<i ng-show="item.isAvailableInOtherSources"
@@ -54,10 +54,10 @@
 											class="zmdi zmdi-minus zmdi-hc-fw"></i>
 									</div></td>
 								<td data-title="translator.label.itemslistitemstableheadingothersources" sortable="'otherSources'"
-									filter="{ 'otherSources': 'text' }">{{item.otherSources}}</td>
+									filter="{ otherSources: 'text' }">{{item.otherSources}}</td>
 								<td>
 								<td data-title="translator.label.itemslistitemstableheadingGameRelease" sortable="'gameRelease.name'"
-									filter="{ 'gameRelease.name': 'text' }">{{item.gameRelease.name}}</td>
+									filter="{ 'gameRelease.name': 'select' }" filter-data="itemsCtrl.getGRsPromise">{{ item.gameRelease.name }}</td>
 								<td>
 									<button class="btn btn-default btn-sm waves-effect"
 										ui-sref="root.itemDetails({id: item.id})">{{translator.label.itemslistitemstableshowbutton}}</button>

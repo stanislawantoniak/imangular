@@ -38,11 +38,12 @@
 		<js>webjar:waves/0.7.5/dist/waves.min.js</js>
 		<js>webjar:oclazyload/1.0.9/ocLazyLoad.min.js</js>
 		<js>webjar:angular-bootstrap/0.14.3/ui-bootstrap-tpls.min.js</js>
-
+		
 	 	<!-- Common Vendors -->
 		<js>webjar:malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></js>
-		<js>webjar:ng-table/0.8.3/dist/ng-table.min.js</js>
- 
+		
+		<js>webjar:ng-table/1.0.0-beta.9/dist/ng-table.min.js</js>
+  		
 		<js>webjar:bootstrap-sweetalert/0.4.3/lib/sweet-alert.min.js</js>
 		<css>webjar:bootstrap-sweetalert/0.4.3/lib/sweet-alert.css</css>
 		
