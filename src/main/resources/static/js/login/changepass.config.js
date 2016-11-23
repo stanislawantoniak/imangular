@@ -29,7 +29,7 @@ changepass
 	var fullPath = $location.absUrl();
 	
 	self.hash = fullPath.substring(fullPath.lastIndexOf('/')+1);
-	console.log('hash extracted:: ', self.hash);
+	//console.log('hash extracted:: ', self.hash);
 
 	self.getUsernameForHash = function(){
 		$http

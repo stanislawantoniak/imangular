@@ -16,7 +16,7 @@ toolbox
                 from: 'top',
                 align: 'right'
             },
-            delay: 2500,
+            delay: 1200,
             animate: {
                     enter: 'animated rotateIn',
                     exit: 'animated fadeOutUp'
