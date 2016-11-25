@@ -49,11 +49,11 @@ itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService',  'growl
 		.then( 
 				function(response){
 					self.fetchAllGrs();
-					res.resolve(labels.label.usersdeletesuccessinfo);
+					res.resolve("Aktualizacja usunięta");
 				},
 				function(errResponse){
 					console.error('Error while deleting GR');
-					res.reject(labels.label.usersdeletefailureinfo);
+					res.reject("wystąpił problem i nie udało się usunąć aktualizacji");
 				}
 		);
 
