@@ -28,8 +28,6 @@ generic;translations
 dahsboard;translations
 "dashboardcontent","Strona główna"
 
-"itemGRlistheading","Aktualizacje gry"
-
 itemslist;translations
 "itemslisttitle","Produkty"
 "itemslistheading","Zarządzaj produktami"
@@ -209,3 +207,8 @@ changepass;page
 "HashNotFoundTitle","Nieprawidłowy link!"
 "HashNotFoundText","Link, który kliknąłeś jest nieprawidłowy. Możliwe że był już wykorzystany albo stracił ważność. Jeśli chcesz zmienić hasło przejdź do strony logowania i spróbuj jeszcze raz zresetować hasło."
 "HashNotFoundGoToLogin","Przejdź do strony logowania"
+
+
+"itemGRlistheading","Aktualizacje gry"
+"itemGRlistGameReleaseLabelName","Nazwa aktualizacji"
+"itemGRlistGameReleaseLabelDescription","Opis"

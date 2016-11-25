@@ -1,5 +1,7 @@
 package pl.essay.imangular.domain.item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -127,14 +129,14 @@ public class ItemServiceImpl implements ItemService{
 	 * must not contain the item for which we prepare the list
 	 * and components that are in the item
 	 * 
-	 * (to be done later: and any components that contain theitem in descendants)
+	 * (to be done later: and any components that contain the item in descendants)
 	 * 
 	 * term - to be done later - for fetching narrowed by name select list (for ui-select)
 	 * 
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public Map<String,ItemIdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term){
+	public List<ItemIdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term){
 		Map<String,ItemIdNameIsComposedQueryResult> theMap = new TreeMap<String,ItemIdNameIsComposedQueryResult>();
 		//copy all the result to map
 		for (ItemIdNameIsComposedQueryResult i : itemDao.getAllItemsInShort()){
@@ -142,7 +144,7 @@ public class ItemServiceImpl implements ItemService{
 			theMap.put(i.name, i);
 		}
 		//remove from map the item for which we build select list
-		//if id == 0 then itos select for create bom
+		//if id == 0 then it's select for create bom
 		if (itemId != 0){
 			Item item = this.itemDao.get(itemId);
 			theMap.remove(item.getName()); // name is safeas we have primary key on name
@@ -150,7 +152,12 @@ public class ItemServiceImpl implements ItemService{
 				theMap.remove(ic.getComponentName());
 			}
 		}
-		return theMap;
+		//move all the items to a simple list
+		List<ItemIdNameIsComposedQueryResult> theList = new ArrayList<ItemIdNameIsComposedQueryResult>();
+		for (Map.Entry<String, ItemIdNameIsComposedQueryResult> entry : theMap.entrySet())
+			theList.add(entry.getValue());
+		
+		return theList;
 	}
 
 }

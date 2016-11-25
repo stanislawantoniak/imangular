@@ -41,20 +41,20 @@
 								<dl class="dl-horizontal">
 									<dt class="p-t-10">{{translator.label.bomWizardStep1}}</dt>
 									<dd>
-										<select class="form-control" name="component"
-											ng-model="bomCtrl.bom.item"
+										<select class="form-control" name="forItem"
+											ng-model="bomCtrl.bom.forItem"
 											ng-options="item.name for item in bomCtrl.itemsForSelect"
 											required>
 											<option value="">--------</option>
-										</select> <small ng-show="bomCtrl.bom.item === null">{{
+										</select> <small ng-show="bomCtrl.bom.forItem === null">{{
 											translator.label.bomWizardStep1Desc }}</small>
 									</dd>
 								</dl>
 								<dl class="dl-horizontal">
 									<dt class="p-t-10">{{translator.label.bomWizardStep2}}</dt>
 									<dd>
-										<input class="form-control" name="quantity"
-											ng-model="bomCtrl.bom.quantity" only-digits required /> <small>{{
+										<input class="form-control" name="requiredQuantity"
+											ng-model="bomCtrl.bom.requiredQuantity" only-digits required /> <small>{{
 											translator.label.bomWizardStep2Desc }}</small>
 									</dd>
 								</dl>

@@ -13,124 +13,130 @@
 	</div>
 	<div class="row">
 
-<div class="card col-lg-12 col-sm-12 col-xs-12" ng-cloak>
-		<div id="profile-main" class="pm-body clearfix">
-			<div class="pmb-block">
-				<div class="pmbb-header">
-					<h2>
-						<i class="zmdi zmdi-shield-check zmdi-hc-fw"></i>
-						{{translator.label.bomEditRecipeHeader}}
-						</h3>
+		<div class="card col-lg-12 col-sm-12 col-xs-12" ng-cloak>
+			<div id="profile-main" class="pm-body clearfix">
+				<div class="pmb-block">
+					<div class="pmbb-header">
+						<h2>
+							<i class="zmdi zmdi-shield-check zmdi-hc-fw"></i>
+							{{translator.label.bomEditRecipeHeader}}
+							</h3>
 
-						<ul class="actions">
-							<li class="dropdown" uib-dropdown><a href=""
-								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a swal-exec swal-object="bom"
-										swal-dialog-title="{{translator.label.bomslistdeletewarning +' '+bomCtrl.bom.forItem.name}}?"
-										swal-main-text="{{translator.label.itemslistdeletewarning}}"
-										swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
-										swal-cancel-button="{{translator.label.edititembuttoncancel}}"
-										swal-exec-fn-on-confirm="bomCtrl.deleteBomPromise"
-										growl-on-confirm-success-title="{{translator.label.bomEditDeleteSuccessHeading}}"
-										growl-on-confirm-failure-title="{{translator.label.bomEditDeleteFailureHeading}}"
-										growl-on-cancel-text="{{translator.label.bomEditDeleteOnCancelInfo}}"><i
-											class="zmdi zmdi-close m-r-10"></i>{{translator.label.bomEditStockDeleteRecipeButton}}</a></li>
+							<ul class="actions">
+								<li class="dropdown" uib-dropdown><a href=""
+									uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
+								</a>
+									<ul class="dropdown-menu dropdown-menu-right">
+										<li><a swal-exec swal-object="bom"
+											swal-dialog-title="{{translator.label.bomslistdeletewarning +' '+bomCtrl.bom.forItem.name}}?"
+											swal-main-text="{{translator.label.itemslistdeletewarning}}"
+											swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"
+											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
+											swal-exec-fn-on-confirm="bomCtrl.deleteBomPromise"
+											growl-on-confirm-success-title="{{translator.label.bomEditDeleteSuccessHeading}}"
+											growl-on-confirm-failure-title="{{translator.label.bomEditDeleteFailureHeading}}"
+											growl-on-cancel-text="{{translator.label.bomEditDeleteOnCancelInfo}}"><i
+												class="zmdi zmdi-close m-r-10"></i>{{translator.label.bomEditStockDeleteRecipeButton}}</a></li>
 
-								</ul></li>
-						</ul>
-				</div>
-				<div id="item-data" class="pmbb-body p-l-30 m-t-20">
-					<div class="pmbb-view">
-						<h4>
-							{{translator.label.bomEditRecipeLabel1}} <a class="m-l-20"
-								editable-text="bomCtrl.bom.requiredQuantity"
-								e-style="text-align:center; max-width: 55px;" onaftersave="bomCtrl.createOrUpdateBomQuantity()"
-								e-only-digits> {{ bomCtrl.bom.requiredQuantity }}<i
-								class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i>
-							</a> &nbsp;{{translator.label.pcs}}
-							{{translator.label.bomEditRecipeLabel2}}
-							{{bomCtrl.bom.forItem.name }}
-						</h4>
+									</ul></li>
+							</ul>
+					</div>
+					<div id="item-data" class="pmbb-body p-l-30 m-t-20">
+						<div class="pmbb-view">
+							<h4>
+								{{translator.label.bomEditRecipeLabel1}} <a class="m-l-20"
+									editable-text="bomCtrl.bom.requiredQuantity"
+									e-style="text-align:center; max-width: 55px;"
+									onaftersave="bomCtrl.createOrUpdateBomQuantity()" e-only-digits>
+									{{ bomCtrl.bom.requiredQuantity }}<i
+									class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i>
+								</a> &nbsp;{{translator.label.pcs}}
+								{{translator.label.bomEditRecipeLabel2}}
+								{{bomCtrl.bom.forItem.name }} <a
+									ui-sref="root.itemDetails({id:bomCtrl.bom.forItem.id})"> <i
+									class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
+								</a>
+							</h4>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div id="requirements-list" class="pmb-block" ng-cloak>
-				<div class="pmbb-header">
-					<h2>
-						<i class="zmdi zmdi-format-list-numbered zmdi-hc-fw"></i>
-						{{translator.label.itemcomponentsheading}}
-						</h3>
-						<ul class="actions" ng-if="false">
-							<li class="dropdown" uib-dropdown><a href=""
-								uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li ng-if="itemCtrl.item.isComposed"><a
-										ng-click="itemCtrl.fetchItem()"><i
-											class="zmdi zmdi-refresh m-r-10"></i>{{translator.label.userslistheadingbuttonrefresh}}</a></li>
-									<li><a ng-if="nav.authService.session.isSupervisor"
-										ng-click="itemCtrl.addItemComponent()"><i
-											class="zmdi zmdi-plus m-r-10"></i>{{translator.label.editcomponentsbuttonadd}}</a></li>
-								</ul></li>
-						</ul>
+				<div id="requirements-list" class="pmb-block" ng-cloak>
+					<div class="pmbb-header">
+						<h2>
+							<i class="zmdi zmdi-format-list-numbered zmdi-hc-fw"></i>
+							{{translator.label.itemcomponentsheading}}
+							</h3>
+							<ul class="actions" ng-if="false">
+								<li class="dropdown" uib-dropdown><a href=""
+									uib-dropdown-toggle> <i class="zmdi zmdi-settings"></i>
+								</a>
+									<ul class="dropdown-menu dropdown-menu-right">
+										<li ng-if="itemCtrl.item.isComposed"><a
+											ng-click="itemCtrl.fetchItem()"><i
+												class="zmdi zmdi-refresh m-r-10"></i>{{translator.label.userslistheadingbuttonrefresh}}</a></li>
+										<li><a ng-if="nav.authService.session.isSupervisor"
+											ng-click="itemCtrl.addItemComponent()"><i
+												class="zmdi zmdi-plus m-r-10"></i>{{translator.label.editcomponentsbuttonadd}}</a></li>
+									</ul></li>
+							</ul>
+					</div>
+					<div class="pmbb-body">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th width="5%"></th>
+									<th width="15%">{{translator.label.bomEditComponentLabel}}</th>
+									<th width="5%" class="text-center">{{translator.label.bomEditIsComposed}}</th>
+									<th width="10%">{{translator.label.bomEditRequiredQuantityLabel}}</th>
+									<th width="10%">{{translator.label.bomEditRequiredEffectiveQuantityLabel}}</th>
+									<th width="10%" class="text-center">{{translator.label.bomEditInStockQuantityLabel}}</th>
+									<th width="15%">{{translator.label.bomEditStockRemarksLabel}}</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr
+									ng-repeat="req in bomCtrl.bom.requirementsList | orderBy : ['-forItem.isComposed','+forItem.name']">
+									<td><button class="btn btn-default btn-sm"
+											ui-sref="root.itemDetails({id:req.forItem.id})">
+											<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
+										</button></td>
+
+									<td>{{ req.forItem.name }}</td>
+
+									<td class="text-center"><i
+										ng-show="req.forItem.isComposed"
+										class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
+										ng-hide="req.forItem.isComposed"
+										class="zmdi zmdi-minus zmdi-hc-fw"></i></td>
+
+									<td class="text-center">{{ req.requiredQuantity }}</td>
+
+									<td class="text-center">{{ req.effectiveRequiredQuantity
+										}}</td>
+
+									<td class="text-center"><a
+										editable-text="req.stock.inStockQuantity"
+										e-style="text-align:center; max-width: 35px;"
+										onaftersave="bomCtrl.saveStock(req)" e-only-digits> {{
+											req.stock.inStockQuantity }} <i
+											class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i>
+
+									</a></td>
+
+									<td><a editable-textarea="req.stock.remarks"
+										e-style="text-align:center; min-width: 95px;"
+										onaftersave="bomCtrl.saveStock(req)">{{ req.stock.remarks
+											}}<i class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				<div class="pmbb-body">
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th width="5%"></th>
-								<th width="15%">{{translator.label.bomEditComponentLabel}}</th>
-								<th width="5%" class="text-center">{{translator.label.bomEditIsComposed}}</th>
-								<th width="10%">{{translator.label.bomEditRequiredQuantityLabel}}</th>
-								<th width="10%">{{translator.label.bomEditRequiredEffectiveQuantityLabel}}</th>
-								<th width="10%" class="text-center">{{translator.label.bomEditInStockQuantityLabel}}</th>
-								<th width="15%">{{translator.label.bomEditStockRemarksLabel}}</th>
-							</tr>
-						</thead>
 
-						<tbody>
-							<tr
-								ng-repeat="req in bomCtrl.bom.requirementsList | orderBy : ['-forItem.isComposed','+forItem.name']">
-								<td><button class="btn btn-default btn-sm"
-										ui-sref="root.itemDetails({id:req.forItem.id})">
-										<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
-									</button></td>
-
-								<td>{{ req.forItem.name }}</td>
-
-								<td class="text-center"><i ng-show="req.forItem.isComposed"
-									class="zmdi zmdi-check zmdi-hc-fw"> </i> <i
-									ng-hide="req.forItem.isComposed"
-									class="zmdi zmdi-minus zmdi-hc-fw"></i></td>
-
-								<td class="text-center">{{ req.requiredQuantity }}</td>
-
-								<td class="text-center">{{ req.effectiveRequiredQuantity }}</td>
-
-								<td class="text-center"><a
-									editable-text="req.stock.inStockQuantity"
-									e-style="text-align:center; max-width: 35px;"
-									onaftersave="bomCtrl.saveStock(req)" e-only-digits> {{
-										req.stock.inStockQuantity }} <i
-										class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i>
-
-								</a></td>
-
-								<td><a editable-textarea="req.stock.remarks"
-								e-style="text-align:center; min-width: 95px;"
-									onaftersave="bomCtrl.saveStock(req)">{{ req.stock.remarks
-										}}<i class="zmdi zmdi-edit zmdi-hc-fw m-l-10 f-300"></i></td>
-
-							</tr>
-						</tbody>
-					</table>
-				</div>
 			</div>
-
-		</div>
 		</div>
 	</div>
 </div>

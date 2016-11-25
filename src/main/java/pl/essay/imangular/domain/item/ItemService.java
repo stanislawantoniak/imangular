@@ -1,5 +1,6 @@
 package pl.essay.imangular.domain.item;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,5 +24,5 @@ public interface ItemService {
 	public boolean existsItem(String name);
 	public Item getItemByName(String name);
 	
-	public Map<String,ItemIdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term);
+	public List<ItemIdNameIsComposedQueryResult> getAllItemsInShort(int itemId, String term);
 }

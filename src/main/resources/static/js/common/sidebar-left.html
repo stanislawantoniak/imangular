@@ -26,7 +26,7 @@
 				class="zmdi zmdi-view-list-alt "></i>
 				{{ authenticated ? translator.label.leftpanelmenumanageitems : translator.label.leftpanelmenubrowseitems}}</a></li>
 
-		<li ui-sref-active="active" ng-if="nav.authService.session.isAdmin"><a ui-sref="root.itemGRs"
+		<li ui-sref-active="active" ><a ui-sref="root.itemGRs"
 			data-ng-click="mactrl.sidebarStat($event)"><i
 				class="zmdi zmdi-calendar "></i>
 				{{ translator.label.leftpanelmenubrowseitemGRs }}</a></li>

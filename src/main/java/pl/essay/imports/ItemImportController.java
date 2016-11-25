@@ -77,6 +77,7 @@ public class ItemImportController {
 						if (!component.cid.equals("") && component.quantity > 0){
 							Product componentProduct = importer.getProducts().get(component.cid);
 							if (componentProduct != null){
+								
 								Item componentItem = this.itemService.getItemById(componentProduct.itemId);
 
 								ic.setParent(parent);

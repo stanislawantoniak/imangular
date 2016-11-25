@@ -15,7 +15,7 @@
 						<i class="zmdi zmdi-refresh zmdi-hc-fw"></i>
 						{{translator.label.userslistheadingbuttonrefresh}}
 					</button>
-					<div class="pull-right">
+					<div class="pull-right" ng-if="nav.authService.session.isSupervisor">
 						<button class="btn btn-default waves-effect"
 							ng-hide="itemGRsCtrl.editContext"
 							ui-sref="root.itemGRadd({id : 0})">
@@ -25,15 +25,15 @@
 				</div>
 
 				<div class="card-body">
-					<table class="table table-hover table-responsive">
+					<table class="table table-hover table-striped table-responsive">
 						<thead>
 							<tr>
 								<th width="5%">
 									{{translator.label.userslistuserstableheadingid}}</th>
-								<th width="25%">Nazwa</th>
+								<th width="25%">{{ translator.label.itemGRlistGameReleaseLabelName }}</th>
 
-								<th width="25%">Opis</th>
-								<th width="25%">{{translator.label.userslistuserstableheadingactions}}</th>
+								<th width="25%">{{ translator.label.itemGRlistGameReleaseLabelDescription }}</th>
+								<th width="25%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -46,7 +46,7 @@
 								<td><span editable-textarea="gr.description" e-name="description"
 									e-form="rowform" e-required e-cols="60"> {{ gr.description || 'empty'}} </span></td>
 
-								<td>
+								<td ng-if="nav.authService.session.isSupervisor">
 									<form editable-form name="rowform"
 										onshow="itemGRsCtrl.setEditRowContext()"
 										onaftersave="itemGRsCtrl.setEditRowContext()"
@@ -69,14 +69,14 @@
 											{{translator.label.userslistuserstablebuttonedit}}</button>
 										<button class="btn btn-default btn-sm waves-effect" swal-exec
 											swal-object="user"
-											swal-dialog-title="Na pewno chcesz usun¹æ"
+											swal-dialog-title="Na pewno chcesz usunï¿½ï¿½"
 											swal-main-text="{{translator.label.userslistdeletewarning}}"
 											swal-confirm-button="{{translator.label.userslistuserstablebuttondelete}}"
 											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
 											swal-exec-fn-on-confirm="itemGRsCtrl.deleteGRPromise"
 											growl-on-confirm-success-title="{{translator.label.usersdeletesuccessheading}}"
 											growl-on-confirm-failure-title="{{translator.label.usersdeletefailureheading}}"
-											growl-on-cancel-text="Pozycja nie zosta³a usuniêta">
+											growl-on-cancel-text="Pozycja nie zostaï¿½a usuniï¿½ta">
 											{{translator.label.userslistuserstablebuttondelete}}</button>
 									</div>
 								</td>

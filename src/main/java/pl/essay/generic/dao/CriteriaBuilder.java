@@ -123,7 +123,6 @@ public class CriteriaBuilder<T extends Object> {
 	 * add a filter for strict matching
 	 * field - domain property to filter
 	 * match - string to be filtered by
-	 * 
 	 */
 	public CriteriaBuilder<T> addStrictMatchingFilter(String field, Object match) { 
 

@@ -1,6 +1,7 @@
 package pl.essay.imangular.domain.item;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -94,11 +95,7 @@ public class ItemController extends BaseController {
 	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Integer> createItemComponent(@RequestBody ItemComponent itemComponent){
 
-		//Item parent = itemComponent.getParent();
-		//parent.addComponent(itemComponent);
-
 		this.itemService.addOrUpdateItemComponent(itemComponent);
-		//this.itemService.addOrUpdateItemComponent(itemComponent);
 
 		return new ResponseEntity<Integer>(itemComponent.getId(), HttpStatus.OK);
 	}
@@ -184,13 +181,11 @@ public class ItemController extends BaseController {
 	}
 
 	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String,ItemIdNameIsComposedQueryResult> > itemsForSelect(@PathVariable("id") int id) {
+	public ResponseEntity<List<ItemIdNameIsComposedQueryResult> > itemsForSelect(@PathVariable("id") int id) {
 
-		return new ResponseEntity<Map<String,ItemIdNameIsComposedQueryResult>>(
+		return new ResponseEntity<List<ItemIdNameIsComposedQueryResult>>(
 				this.itemService.getAllItemsInShort(id, "term"),  
 				HttpStatus.OK
 				);
-
 	}
-
 }

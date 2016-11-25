@@ -36,8 +36,7 @@ public class ItemGameReleaseController extends BaseController {
 
 	}
 
-	@RequestMapping(value= "/itemgamereleases", method = {RequestMethod.POST})
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
+	@RequestMapping(value= "/itemgamereleases/", method = {RequestMethod.POST})
 	public ResponseEntity<SetWithCountHolder<ItemGameRelease>> listItemGameReleasesWithParams(@RequestBody ListingParamsHolder filter){
 
 		SetWithCountHolder<ItemGameRelease> holder = this.itemGameReleaseService.listItemGameReleasesPaginated(filter);

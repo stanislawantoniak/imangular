@@ -54,7 +54,7 @@ public class ItemComponent {
 	@Fetch(FetchMode.JOIN)
 	@NotNull(message="Component must not be empty")
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	@JsonBackReference(value="usedIn")
+	//@JsonBackReference(value="usedIn")
 	private Item component;
 
 	@Column
@@ -129,11 +129,11 @@ public class ItemComponent {
 
 		if ( !(other instanceof ItemComponent) ) return false;
 
-		final ItemComponent b2 = (ItemComponent) other;
+		final ItemComponent otherIC = (ItemComponent) other;
 
 		EqualsBuilder eb = new EqualsBuilder();
-		eb.append(b2.parent.getName(), this.parent.getName());
-		eb.append(b2.component.getName(), this.component.getName());
+		eb.append(otherIC.parent.getName(), this.parent.getName());
+		eb.append(otherIC.component.getName(), this.component.getName());
 		
 		return eb.isEquals();
 	}

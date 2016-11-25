@@ -7,7 +7,7 @@
 			<div class="input-group">
 				<select class="form-control" name="component"
 					ng-model="itemCtrl.inserted.component"
-					ng-options="item.name for item in itemCtrl.itemsForSelect" required>
+					ng-options="item.name for item in itemCtrl.itemsForSelect track by item.id" required>
 					<option value="">--------</option>
 				</select> <span ng-show="addIC.component.$error.itemFromSelect">Select!!!!</span>
 			</div>

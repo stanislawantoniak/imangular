@@ -64,7 +64,7 @@
 			<div class="fg-line">
 				<select class="form-control" name="component"
 					ng-model="itemCtrl.item.gameRelease"
-					ng-options="gr.name for gr in itemCtrl.gameReleases">
+					ng-options="gr.name for gr in itemCtrl.gameReleases track by gr.id">
 					<option value="">--------</option>
 				</select>
 			</div>

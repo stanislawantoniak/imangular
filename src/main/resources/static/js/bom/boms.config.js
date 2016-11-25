@@ -92,8 +92,6 @@ itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsSe
 	self.translator = translator;
 
 	self.newsSrv = newsService;
-	
-	console.log(translator.label.itemusedinsheading);
 
 	self
 	.newsSrv
@@ -104,18 +102,9 @@ itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsSe
 			});
 
 	self.bom = {
-			item : null,
-			quantity : 1
+			id : 0,
+			requiredQuantity : 1
 	};
-
-	self.selectItem = function(i){
-		//console.log('sel');
-		self.bom.item = i;
-	}
-
-	self.itemSelected = function(){
-		return self.bom.item != null;
-	}
 
 	//get items for select in add bom
 	self.bomSrv.fetchAnyData('/items/forselect/0').then(function(response){
@@ -129,14 +118,9 @@ itemApp.controller( 'bomWizard', ['$state',  'translator', 'bomService', 'newsSe
 
 	self.createOrUpdateBom = function(){
 
-		var b = {
-				id : 0,
-				forItem : self.bom.item.id,
-				requiredQuantity : self.bom.quantity
-		}
-		//console.log('bom::',b);
+		//console.log('bom::',self.bom);
 
-		self.bomSrv.createOrUpdate(b)
+		self.bomSrv.createOrUpdate(self.bom)
 		.then( 
 				function(response){
 					//console.log('create item::',response);

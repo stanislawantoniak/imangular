@@ -19,14 +19,14 @@
 			ng-class="{'active' : rowform.$visible}">
 			<td ng-if="!itemCtrl.editRowContext"><button
 					class="btn btn-default btn-sm"
-					ui-sref="root.itemDetails({id:itemComponent.componentId})">
+					ui-sref="root.itemDetails({id:itemComponent.component.id})">
 					<i class="zmdi zmdi-open-in-browser zmdi-hc-fw f-20"></i>
 				</button></td>
 
-			<td><span editable-select="itemComponent.componentId"
+			<td><span editable-select="itemComponent.component"
 				e-name="component"
-				e-ng-options="item.name for item in itemCtrl.itemsForSelect"
-				e-form="rowform"> {{ itemComponent.componentName }} </span></td>
+				e-ng-options="item.name for item in itemCtrl.itemsForSelect track by item.id"
+				e-form="rowform"> {{ itemComponent.component.name }} </span></td>
 			<!--  
 								<td><span editable-ui-select="itemComponent.component"
 									e-ng-model="itemComponent.component" e-form="rowform"
@@ -49,6 +49,9 @@
 				editable-text="itemComponent.$$hashKey" e-name="$$hashKey"
 				e-form="rowform" e-class="hidden"> <span
 					editable-text="itemComponent.id" e-name="id" e-form="rowform"
+					e-class="hidden"></span>
+					<span
+					editable-select="itemComponent.parent" e-name="parent" e-form="rowform"
 					e-class="hidden"></span></td>
 
 			<td ng-show="nav.authService.session.isSupervisor">
@@ -67,8 +70,11 @@
 						ng-click="itemCtrl.cancelEditRow(this)" class="btn btn-default">
 						<i class="zmdi zmdi-close"></i>
 					</button>
+				<pre ng-if="false">model::{{ itemComponent | json }}</pre>
+				<pre ng-if="false">$data::{{ rowform.$data | json }}</pre>
+				
+				</form> 
 
-				</form>
 				<div ng-show="!rowform.$visible && !itemCtrl.editRowContext">
 					<button class="btn btn-default" ng-click="rowform.$show()">
 						<i class="zmdi zmdi-edit"></i>
