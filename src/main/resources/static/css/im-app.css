@@ -131,3 +131,7 @@ textarea.form-control {
 	width: 100%;
 }
 
+.ng-table select.form-control {
+	padding: 8px 10px !important;
+}
+

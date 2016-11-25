@@ -17,6 +17,7 @@ generic;translations
 "navbarlogincanlogout","You can sign out here"
 "navbarlanguagecanchoose","You can choose your language here"
 "refreshbutton","Refresh"
+"resetFilter","Reset filter"
 "searchwidgettext","Search"
 "booleanyes","Yes"
 "booleanno","No"
@@ -216,4 +217,5 @@ bom;edit
 
 "itemGRlistheading","Browse Game Releases"
 "itemGRlistGameReleaseLabelName","Release Name"
+"itemGRlistGameReleaseReleaseDate","Release Date"
 "itemGRlistGameReleaseLabelDescription","Description"

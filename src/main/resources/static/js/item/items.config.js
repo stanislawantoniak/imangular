@@ -167,10 +167,10 @@ itemApp.controller( 'itemEdit', ['$q','$state', '$stateParams', '$http', 'itemGR
 						.fetchAnyData('/itemrest/associations/'+self.itemId)
 						.then( 
 								function(response){
-									console.log('item 1::',self.item);
+									//console.log('item 1::',self.item);
 									self.item.components = response.components;
 									self.item.usedIn = response.usedIn;
-									console.log('item 2::',self.item);
+									//console.log('item 2::',self.item);
 								},
 								function(){
 									console.log('get item from service - fail');

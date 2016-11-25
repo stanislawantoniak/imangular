@@ -11,11 +11,18 @@
 				<div class="card-header">
 					<button class="btn btn-default waves-effect"
 						ng-click="itemsCtrl.itemTable.reload()">
-						<i class="zmdi zmdi-refresh zmdi-hc-fw"></i>
+						<i class="zmdi zmdi-refresh-sync zmdi-hc-fw"></i>
 						{{translator.label.itemslistheadingbuttonrefresh}}
 					</button>
+					<button class="btn btn-default btn-sm waves-effect"
+						ng-click="itemsCtrl.itemTable.filter({})">
+						<i class="zmdi zmdi-refresh-sync-alert"></i>
+						{{translator.label.resetFilter}}
+					</button>
+
 					<div class="pull-right">
-						<button class="btn btn-default" href data-ui-sref="root.itemAdd({id:0})"
+						<button class="btn btn-default" href
+							data-ui-sref="root.itemAdd({id:0})"
 							ng-show="nav.authService.session.isSupervisor">
 							<i class="zmdi zmdi-plus zmdi-hc-fw"></i>
 							{{translator.label.itemslistheadingbuttonadditem}}
@@ -31,40 +38,49 @@
 								<td data-title="translator.label.itemslistitemstableheadingid">{{item.id}}</td>
 								<td data-title="translator.label.itemslistitemstableheadingname"
 									sortable="'name'" filter="{ name: 'text' }">{{item.name}}</td>
-								<td data-title="translator.label.itemslistitemstableheadingiscomposed"><div class="text-center"
-										style="font-size: 150%;">
+								<td
+									data-title="translator.label.itemslistitemstableheadingiscomposed"><div
+										class="text-center" style="font-size: 150%;">
 										<i ng-show="item.isComposed"
 											class="zmdi zmdi-check zmdi-hc-fw"></i> <i
 											ng-hide="item.isComposed" class="zmdi zmdi-minus zmdi-hc-fw"></i>
 									</div></td>
-								<td data-title="translator.label.itemslistitemstableheadingCanBeSplit"><div class="text-center"
-										style="font-size: 150%;">
+								<td
+									data-title="translator.label.itemslistitemstableheadingCanBeSplit"><div
+										class="text-center" style="font-size: 150%;">
 										<i ng-show="item.canBeSplit"
 											class="zmdi zmdi-check zmdi-hc-fw"></i> <i
 											ng-hide="item.canBeSplit" class="zmdi zmdi-minus zmdi-hc-fw"></i>
 									</div></td>
-								<td data-title="translator.label.itemslistitemstableheadingwheremanufactured"
+								<td
+									data-title="translator.label.itemslistitemstableheadingwheremanufactured"
 									sortable="'whereManufactured'"
 									filter="{ whereManufactured: 'text' }">{{item.whereManufactured}}</td>
-								<td data-title="translator.label.itemslistitemstableheadingisavailableinothersources"><div
+								<td
+									data-title="translator.label.itemslistitemstableheadingisavailableinothersources"><div
 										class="text-center" style="font-size: 150%;">
 										<i ng-show="item.isAvailableInOtherSources"
 											class="zmdi zmdi-check zmdi-hc-fw"></i> <i
 											ng-hide="item.isAvailableInOtherSources"
 											class="zmdi zmdi-minus zmdi-hc-fw"></i>
 									</div></td>
-								<td data-title="translator.label.itemslistitemstableheadingothersources" sortable="'otherSources'"
-									filter="{ otherSources: 'text' }">{{item.otherSources}}</td>
+								<td
+									data-title="translator.label.itemslistitemstableheadingothersources"
+									sortable="'otherSources'" filter="{ otherSources: 'text' }">{{item.otherSources}}</td>
 								<td>
-								<td data-title="translator.label.itemslistitemstableheadingGameRelease" sortable="'gameRelease.name'"
-									filter="{ 'gameRelease.name': 'select' }" filter-data="itemsCtrl.getGRsPromise">{{ item.gameRelease.name }}</td>
+								<td
+									data-title="translator.label.itemslistitemstableheadingGameRelease"
+									sortable="'gameRelease.name'"
+									filter="{ 'gameRelease.name': 'select' }"
+									filter-data="itemsCtrl.getGRsPromise">{{
+									item.gameRelease.name }}</td>
 								<td>
 									<button class="btn btn-default btn-sm waves-effect"
 										ui-sref="root.itemDetails({id: item.id})">{{translator.label.itemslistitemstableshowbutton}}</button>
 
 									<button class="btn btn-default btn-sm waves-effect"
-										ng-show="nav.authService.session.isSupervisor && !item.isUsed" swal-exec
-										swal-object="item"
+										ng-show="nav.authService.session.isSupervisor && !item.isUsed"
+										swal-exec swal-object="item"
 										swal-dialog-title="{{translator.label.itemslistdeleteheading +' '+item.name}}?"
 										swal-main-text="{{translator.label.itemslistdeletewarning}}"
 										swal-confirm-button="{{translator.label.itemslistitemstablebuttondelete}}"

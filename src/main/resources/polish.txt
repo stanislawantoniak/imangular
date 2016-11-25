@@ -13,6 +13,7 @@ generic;translations
 "navbarlogincanlogout","Tutaj możesz się wylogować"
 "navbarlanguagecanchoose","Tutaj możesz wybrać swój język"
 "refreshbutton","Odśwież"
+"resetFilter","Wyczyść filtry"
 "searchwidgettext","Szukaj"
 "booleanyes","tak"
 "booleanno","nie"
@@ -211,4 +212,5 @@ changepass;page
 
 "itemGRlistheading","Aktualizacje gry"
 "itemGRlistGameReleaseLabelName","Nazwa aktualizacji"
+"itemGRlistGameReleaseReleaseDate","Data aktualizacji"
 "itemGRlistGameReleaseLabelDescription","Opis"
