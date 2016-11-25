@@ -1,5 +1,7 @@
 package pl.essay.imangular.domain.item;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,27 +26,38 @@ public class ItemGameRelease {
 
 	@Column
 	private String description;
-	
-	//setters & getters
-		public void setId(int id){
-			this.id = id;
-		}
-		public int getId(){
-			return this.id;
-		}
 
-		public void setName(String name){
-			this.name = name;
-		}
-		public String getName(){
-			return this.name;
-		}
-		
-		public void setDescription(String d){
-			this.description = d;
-		}
-		public String getDescription(){
-			return this.description;
-		}
-	
+	@Column
+	private Date releaseDate;
+
+	//setters & getters
+	public void setId(int id){
+		this.id = id;
+	}
+	public int getId(){
+		return this.id;
+	}
+
+	public void setName(String name){
+		this.name = name;
+	}
+	public String getName(){
+		return this.name;
+	}
+
+	public void setDescription(String d){
+		this.description = d;
+	}
+	public String getDescription(){
+		return this.description;
+	}
+
+	public void setReleaseDate(Date d){
+		this.releaseDate = d;
+	}
+
+	public Date getReleaseDate(){
+		return this.releaseDate;
+	}
+
 }
