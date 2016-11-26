@@ -4,6 +4,27 @@
 		<h2>{{translator.label.itemGRlistheading}}</h2>
 	</div>
 
+	<div class="row" ng-if="false">
+		<div class="col-lg-8">
+			<div class="card">
+				<div class="card-header">
+					<p class="input-group">
+						<input type="text" class="form-control"
+							uib-datepicker-popup="{{format}}" ng-model="itemGRsCtrls.xx"
+							is-open="popup1.opened" datepicker-options="dateOptions"
+							ng-required="true" close-text="Close"
+							alt-input-formats="altInputFormats" /> <span
+							class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open1()">
+								<i class="glyphicon glyphicon-calendar"></i>
+							</button>
+						</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
@@ -12,10 +33,12 @@
 					<button class="btn btn-default waves-effect"
 						ng-hide="itemGRsCtrl.editContext"
 						ng-click="itemGRsCtrl.fetchAllGrs()">
-						<i class="zmdi zmdi-refresh zmdi-hc-fw"></i>
+						<i class="zmdi zmdi-refresh-sync zmdi-hc-fw"></i>
 						{{translator.label.userslistheadingbuttonrefresh}}
 					</button>
-					<div class="pull-right" ng-if="nav.authService.session.isSupervisor">
+
+					<div class="pull-right"
+						ng-if="nav.authService.session.isSupervisor">
 						<button class="btn btn-default waves-effect"
 							ng-hide="itemGRsCtrl.editContext"
 							ui-sref="root.itemGRadd({id : 0})">
@@ -30,26 +53,35 @@
 							<tr>
 								<th width="5%">
 									{{translator.label.userslistuserstableheadingid}}</th>
-								<th width="25%">{{ translator.label.itemGRlistGameReleaseLabelName }}</th>
+								<th width="25%">{{
+									translator.label.itemGRlistGameReleaseLabelName }}</th>
+								<th width="25%">{{
+									translator.label.itemGRlistGameReleaseReleaseDate }}</th>
 
-								<th width="25%">{{ translator.label.itemGRlistGameReleaseLabelDescription }}</th>
+								<th width="25%">{{
+									translator.label.itemGRlistGameReleaseLabelDescription }}</th>
 								<th width="25%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="gr in itemGRsCtrl.grs | orderBy : ['+name']">
+							<tr
+								ng-repeat="gr in itemGRsCtrl.grs | orderBy : ['-releaseDate']">
 								<td>{{gr.id == 0 ? '-' : gr.id}}</td>
 
 								<td><span editable-text="gr.name" e-name="name"
 									e-form="rowform" e-required> {{ gr.name || 'empty'}} </span></td>
 
-								<td><span editable-textarea="gr.description" e-name="description"
-									e-form="rowform" e-required e-cols="60"> {{ gr.description || 'empty'}} </span></td>
+								<td><span editable-date="gr.releaseDate"
+									e-name="releaseDate" e-form="rowform" e-required> {{
+										gr.releaseDate || 'empty'}} </span></td>
 
-								<td ng-if="nav.authService.session.isSupervisor">
+								<td><span editable-textarea="gr.description"
+									e-name="description" e-form="rowform" e-required e-cols="60">
+										{{ gr.description || 'empty'}} </span></td>
+
+								<td ng-show="nav.authService.session.isSupervisor">
 									<form editable-form name="rowform"
 										onshow="itemGRsCtrl.setEditRowContext()"
-										onaftersave="itemGRsCtrl.setEditRowContext()"
 										onbeforesave="itemGRsCtrl.createOrUpdateGR($data,gr.id)"
 										ng-show="rowform.$visible" class="form-buttons form-inline">
 										<button type="submit" ng-disabled="rowform.$waiting"
@@ -61,15 +93,14 @@
 											class="btn btn-default waves-effect">
 											<i class="zmdi zmdi-close"></i>
 										</button>
-									</form>
+									</form> <pre ng-if="false">{{ rowform | json }}</pre>
 									<div ng-show="!rowform.$visible && !itemGRsCtrl.editContext">
-
 										<button class="btn btn-default btn-sm waves-effect"
 											ng-click="rowform.$show()">
-											{{translator.label.userslistuserstablebuttonedit}}</button>
+											<i class="zmdi zmdi-edit  zmdi-hc-fw"></i>
+										</button>
 										<button class="btn btn-default btn-sm waves-effect" swal-exec
-											swal-object="gr"
-											swal-dialog-title="Na pewno chcesz usunąć"
+											swal-object="gr" swal-dialog-title="Na pewno chcesz usunąć"
 											swal-main-text="{{translator.label.userslistdeletewarning}}"
 											swal-confirm-button="{{translator.label.userslistuserstablebuttondelete}}"
 											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
@@ -77,7 +108,8 @@
 											growl-on-confirm-success-title="{{translator.label.usersdeletesuccessheading}}"
 											growl-on-confirm-failure-title="{{translator.label.usersdeletefailureheading}}"
 											growl-on-cancel-text="Pozycja nie została usunięta">
-											{{translator.label.userslistuserstablebuttondelete}}</button>
+											<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
+										</button>
 									</div>
 								</td>
 							</tr>

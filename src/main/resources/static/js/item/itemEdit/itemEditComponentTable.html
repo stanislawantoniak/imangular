@@ -1,4 +1,4 @@
-<table class="table m-t-20 m-b-20 ng-table"
+<table class="table m-t-20 m-b-20"
 	ng-class="{'table-hover' : !itemCtrl.editRowContext}">
 	<thead>
 		<tr>
@@ -72,7 +72,7 @@
 				<pre ng-if="false">$data::{{ rowform.$data | json }}</pre>
 				
 				</form> 
-
+				<pre ng-if="false">{{ rowform | json}}</pre>
 				<div ng-show="!rowform.$visible && !itemCtrl.editRowContext">
 					<button class="btn btn-default" ng-click="rowform.$show()">
 						<i class="zmdi zmdi-edit zmdi-hc-fw"></i>

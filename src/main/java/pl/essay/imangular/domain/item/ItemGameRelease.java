@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @DynamicInsert
 @DynamicUpdate
@@ -21,7 +23,7 @@ public class ItemGameRelease {
 	private int id;
 
 	@Column
-	@NotNull(message="Name must not be empty")
+	@NotNull(message="Release name must not be empty")
 	private String name;
 
 	@Column
@@ -55,7 +57,8 @@ public class ItemGameRelease {
 	public void setReleaseDate(Date d){
 		this.releaseDate = d;
 	}
-
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="CET")
 	public Date getReleaseDate(){
 		return this.releaseDate;
 	}

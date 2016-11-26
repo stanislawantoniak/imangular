@@ -3,7 +3,7 @@ generic;translations
 "domain","eliczile.pl"
 "httpsDomain","https://eliczile.pl"
 "leftpanelcaption","Navigation"
-"leftpanelmenuMainPage","Main Page"
+"leftpanelmenuMainPage","Home Page"
 "leftpanelmenumanageBoms", "Assignments"
 "leftpanelmenumanageitems","Manage Items"
 "leftpanelmenubrowseitems","Browse Items"
