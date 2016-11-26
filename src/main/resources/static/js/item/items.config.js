@@ -11,6 +11,12 @@ itemApp.config(['$stateProvider', function( $stateProvider ) {
 		templateUrl : 'js/item/itemList.html',
 		controller : 'itemslist as itemsCtrl'
 	})
+	$stateProvider
+	.state ('root.itemsByGR', {
+		url: '/items/byGameRelease/:gameRelease',
+		templateUrl : 'js/item/itemList.html',
+		controller : 'itemslist as itemsCtrl'
+	})
 	.state ('root.itemDetails', {
 		url: '/items/itemdetails/:id',
 		templateUrl : 'js/item/itemEdit.html',
@@ -24,13 +30,17 @@ itemApp.config(['$stateProvider', function( $stateProvider ) {
 
 }]);
 
-itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTableParams', 'growlService', 'itemGRService',
-                                  function itemsController( $q, translator,  itemService, ngTableParams, growlService, itemGRService ) {
+itemApp.controller( 'itemslist', ['$q','$stateParams', '$state', 'translator','itemService',  'ngTableParams', 'growlService', 'itemGRService',
+                                  function itemsController( $q, $stateParams, $state, translator,  itemService, ngTableParams, growlService, itemGRService ) {
 
 	var self = this;
 	self.service = itemService;
 	self.GRservice = itemGRService;
 	self.messageService = growlService;
+	
+	//console.log('$stateParams::',$stateParams);
+
+	self.gameReleaseForFilter = $stateParams.gameRelease ? $stateParams.gameRelease : '';
 
 	//table for items
 	self.itemTable = new ngTableParams({
@@ -38,6 +48,9 @@ itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTablePara
 		count: 25,
 		sorting: {
 			name: 'asc'     // initial sorting
+		},
+		filter: {
+			'gameRelease.name' : self.gameReleaseForFilter // initial filtering
 		}
 
 	}, {
@@ -52,16 +65,24 @@ itemApp.controller( 'itemslist', ['$q','translator','itemService',  'ngTablePara
 			self
 			.service
 			.fetchAll(params.page(), params.count(), params.orderBy(), params.filter())
-			.then( function(response){
-				//console.log("response::",response);
-				if (params.total() != 0){ //do not show message at first table data load
-					self.messageService.growl(translator.label.ListHasBeenRefreshed, 'info') ;
-				}
-				params.total(response.totalRows);
-				$defer.resolve(response.collection);
-			} );
+			.then( 
+					function(response){
+						//console.log("response::",response);
+						if (params.total() != 0){ //do not show message at first table data load
+							self.messageService.growl(translator.label.ListHasBeenRefreshed, 'info') ;
+						}
+						params.total(response.totalRows);
+						$defer.resolve(response.collection);
+					} );
 		}
 	})
+	
+	self.resetFilters = function(){
+		if (self.gameReleaseForFilter) //we are in itemsByGR context - just go to items
+			$state.go('^.items',{});
+		else                           //in items context reset filter
+			self.itemTable.filter({});
+	}
 
 	self.deleteItemPromise = function(item){
 		var res = $q.defer();

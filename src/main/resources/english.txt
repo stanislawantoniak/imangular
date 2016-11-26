@@ -221,3 +221,4 @@ bom;edit
 "itemGRlistGameReleaseLabelName","Release Name"
 "itemGRlistGameReleaseReleaseDate","Release Date"
 "itemGRlistGameReleaseLabelDescription","Description"
+"itemGRListSeeProductButton","See Items"

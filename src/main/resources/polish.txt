@@ -216,3 +216,4 @@ changepass;page
 "itemGRlistGameReleaseLabelName","Nazwa aktualizacji"
 "itemGRlistGameReleaseReleaseDate","Data aktualizacji"
 "itemGRlistGameReleaseLabelDescription","Opis"
+"itemGRListSeeProductButton","Zobacz produkty"

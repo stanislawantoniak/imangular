@@ -53,14 +53,16 @@
 							<tr>
 								<th width="5%">
 									{{translator.label.userslistuserstableheadingid}}</th>
-								<th width="25%">{{
+								<th width="20%">{{
 									translator.label.itemGRlistGameReleaseLabelName }}</th>
-								<th width="25%">{{
+								<th width="10%">{{
 									translator.label.itemGRlistGameReleaseReleaseDate }}</th>
 
-								<th width="25%">{{
+								<th width="30%">{{
 									translator.label.itemGRlistGameReleaseLabelDescription }}</th>
-								<th width="25%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
+									
+								<th width="10%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
+								<th width="15%" ></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -94,16 +96,20 @@
 											<i class="zmdi zmdi-close"></i>
 										</button>
 									</form> <pre ng-if="false">{{ rowform | json }}</pre>
-									<div ng-show="!rowform.$visible && !itemGRsCtrl.editContext">
+									<div 
+										ng-show="!rowform.$visible && !itemGRsCtrl.editContext" >
 										<button class="btn btn-default btn-sm waves-effect"
-										popover-placement="top" popover-trigger="mouseenter" popover="{{ translator.label.EditRowPopoverText }}"
+											popover-placement="top" popover-trigger="mouseenter"
+											popover="{{ translator.label.EditRowPopoverText }}"
 											ng-click="rowform.$show()">
 											<i class="zmdi zmdi-edit  zmdi-hc-fw"></i>
 										</button>
-										<button class="btn btn-default btn-sm waves-effect" 
-											popover-placement="top" popover-trigger="mouseenter" popover="{{ translator.label.DeleteRowPopoverText }}"
-											swal-exec
-											swal-object="gr" swal-dialog-title="Na pewno chcesz usunąć"
+
+										<button class="btn btn-default btn-sm waves-effect"
+											popover-placement="top" popover-trigger="mouseenter"
+											popover="{{ translator.label.DeleteRowPopoverText }}"
+											swal-exec swal-object="gr"
+											swal-dialog-title="Na pewno chcesz usunąć"
 											swal-main-text="{{translator.label.userslistdeletewarning}}"
 											swal-confirm-button="{{translator.label.userslistuserstablebuttondelete}}"
 											swal-cancel-button="{{translator.label.edititembuttoncancel}}"
@@ -114,6 +120,13 @@
 											<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
 										</button>
 									</div>
+								</td>
+								<td>
+										<button class="btn btn-default btn-sm waves-effect pull-right"
+											ui-sref="root.itemsByGR({ gameRelease: gr.name})">
+											<i class="zmdi zmdi-receipt zmdi-hc-fw"></i>{{
+											translator.label.itemGRListSeeProductButton }}
+										</button>
 								</td>
 							</tr>
 						</tbody>
