@@ -74,10 +74,11 @@
 				</form> 
 				<pre ng-if="false">{{ rowform | json}}</pre>
 				<div ng-show="!rowform.$visible && !itemCtrl.editRowContext">
-					<button class="btn btn-default" ng-click="rowform.$show()">
+					<button class="btn btn-default" ng-click="rowform.$show()" popover-placement="top" popover-trigger="mouseenter" popover="{{ translator.label.EditRowPopoverText }}">
 						<i class="zmdi zmdi-edit zmdi-hc-fw"></i>
 					</button>
 					<button class="btn btn-default"
+					popover-placement="top" popover-trigger="mouseenter" popover="{{ translator.label.DeleteRowPopoverText }}"
 						ng-click="itemCtrl.deleteDialog.open(itemComponent)" swal-exec
 						swal-object="itemComponent"
 						swal-dialog-title="{{translator.label.itemslistdeletecomponentheading +' '+itemComponent.componentName}}?"

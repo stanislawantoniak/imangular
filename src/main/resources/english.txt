@@ -27,6 +27,8 @@ generic;translations
 "ToggleFullscreen","Toggle Fullscreen"
 "ListHasBeenRefreshed","The list has been refreshed!"
 "PageHasBeenRefreshed","The page has been refreshed!"
+"DeleteRowPopoverText","Delete Row"
+"EditRowPopoverText","Edit Row"
 
 "notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
 

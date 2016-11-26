@@ -96,10 +96,13 @@
 									</form> <pre ng-if="false">{{ rowform | json }}</pre>
 									<div ng-show="!rowform.$visible && !itemGRsCtrl.editContext">
 										<button class="btn btn-default btn-sm waves-effect"
+										popover-placement="top" popover-trigger="mouseenter" popover="{{ translator.label.EditRowPopoverText }}"
 											ng-click="rowform.$show()">
 											<i class="zmdi zmdi-edit  zmdi-hc-fw"></i>
 										</button>
-										<button class="btn btn-default btn-sm waves-effect" swal-exec
+										<button class="btn btn-default btn-sm waves-effect" 
+											popover-placement="top" popover-trigger="mouseenter" popover="{{ translator.label.DeleteRowPopoverText }}"
+											swal-exec
 											swal-object="gr" swal-dialog-title="Na pewno chcesz usunąć"
 											swal-main-text="{{translator.label.userslistdeletewarning}}"
 											swal-confirm-button="{{translator.label.userslistuserstablebuttondelete}}"

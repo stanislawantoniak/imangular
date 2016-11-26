@@ -23,6 +23,8 @@ generic;translations
 "ToggleFullscreen","Pełny ekran"
 "ListHasBeenRefreshed","Lista odświeżona!"
 "PageHasBeenRefreshed","Strona odświeżona!"
+"DeleteRowPopoverText","Usuń wiersz"
+"EditRowPopoverText","Edytuj wiersz"
 
 "notLoggedInTeaser","Uwaga: nie jesteś zalogowany i zadania, które założysz znikną jak opuścisz portal. Lepiej idz do strony logowania i czym prędzej załóż konto."
 
