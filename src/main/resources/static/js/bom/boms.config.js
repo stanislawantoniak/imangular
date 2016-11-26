@@ -47,23 +47,31 @@ itemApp
 
 	self.fetchAllBoms = function(){
 		//console.log('starting fetching boms');
-		self.bomSrv.fetchAll().then(
+		self
+		.bomSrv
+		.fetchAll()
+		.then(
 				function(response) {
 					self.boms = response.collection;
+					console.log('boms from backend::',self.boms);
 					angular.forEach( 
 							self.boms, 
 							function(bom) {
 								//prepare map for ngClass with background color
 								var bgmClass = {};
-								if (bom.forItem.bgmColor= null){
+								if (bom.forItem.bgmColor != null){
 									bgmClass[bom.forItem.bgmColor] = true;
-								}
-								bgmClass['bg-lime'] = bom.forItem.canBeSplit;
-								bgmClass['bgm-gray'] = !bom.forItem.canBeSplit;
+								} else
+
+									if (bom.forItem.canBeSplit)
+										bgmClass['bgm-lime'] = true;
+									else
+										bgmClass['bgm-gray'] = true;
+
 								bom.bgmClass = bgmClass;
 
 							});
-					//console.log('boms::',self.boms);
+					console.log('boms processed::',self.boms);
 				}, function(){
 					console.log('get boms from service - fail');
 				})
@@ -195,9 +203,9 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 				remarks : req.stock.remarks
 		}
 		//console.log('stock :: ',stock);
-		
+
 		self.msgService.growl(translator.label.SavingAndRecalculatingBom,'info');
-		
+
 		bomStockService
 		.update(stock,0)
 		.then( 
