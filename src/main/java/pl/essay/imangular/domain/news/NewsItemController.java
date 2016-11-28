@@ -27,18 +27,18 @@ public class NewsItemController extends BaseController {
 
 	@RequestMapping(value = "/newsitems", method = RequestMethod.GET)
 	public SetWithCountHolder<NewsItem> listNewsItems() {
-		return this.newsItemService.listNewsItems();
+		return this.newsItemService.listEntities();
 	}
 	
 	@RequestMapping(value= "/newsitems", method = {RequestMethod.POST})
 	public SetWithCountHolder<NewsItem>listNewsItemsWithParams(@RequestBody ListingParamsHolder filter){
-		return this.newsItemService.listNewsItemsPaginated(filter); 
+		return this.newsItemService.listEntitiesPaginated(filter); 
 	}
 
 	@RequestMapping(value = "/newsitemrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<NewsItem> getnews(@PathVariable("id") int id) {
-		NewsItem news = (id != 0 ? this.newsItemService.getNewsItemById(id) : new NewsItem());
+		NewsItem news = (id != 0 ? this.newsItemService.getEntityById( id ) : new NewsItem());
 		return new ResponseEntity<NewsItem>(news, HttpStatus.OK);
 	}
 
@@ -46,7 +46,7 @@ public class NewsItemController extends BaseController {
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<Void> updateNewsItem(@PathVariable long id, @RequestBody NewsItem news){
 
-		this.newsItemService.updateNewsItem(news);;
+		this.newsItemService.updateEntity( news );;
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -55,7 +55,7 @@ public class NewsItemController extends BaseController {
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<Integer> createNewsItem(@RequestBody NewsItem news){
 
-		this.newsItemService.addNewsItem(news);
+		this.newsItemService.addEntity( news );
 		
 		return new ResponseEntity<Integer>(news.getId(), HttpStatus.OK);
 	}
@@ -64,14 +64,14 @@ public class NewsItemController extends BaseController {
 	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<Void> deleteNewsItem(@PathVariable int id){
 
-		NewsItem news = this.newsItemService.getNewsItemById(id);
+		NewsItem news = this.newsItemService.getEntityById( id );
 		if (news == null){			 
 			logger.debug("NewsItem " +id+ " does not exist but requested delete");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
 		logger.debug("before delete news: "+news);
-		this.newsItemService.removeNewsItem(id);
+		this.newsItemService.removeEntity( id );
 		logger.debug("after delete news: "+news);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
