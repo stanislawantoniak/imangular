@@ -144,9 +144,23 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 
 	public SetWithCountHolder<T> getAll() {
 		
-		long totalRows = this.getTotalRowsOnCriteria(this.getCriteriaBuilder().get());
+		long totalRows = this
+				.getTotalRowsOnCriteria(
+					this
+					.getCriteriaBuilder()
+					.get()
+					.setCacheable(true)
+					.setCacheRegion("rx1")
+					);
 		
-		return this.getSetWithCountHolder(this.getCriteriaBuilder().get(), totalRows);
+		return this.getSetWithCountHolder(
+				this
+				.getCriteriaBuilder()
+				.get()
+				.setCacheable(true)
+				.setCacheRegion("rx1"),
+				totalRows
+				);
 	}
 
 
@@ -175,12 +189,14 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 						
 						this.getCriteriaBuilder()
 						.addStrictMatchingFilter(field, match)
-						.get(), 
+						.get()
+						.setCacheable(true),
 
 						this.getTotalRowsOnCriteria(
 								this.getCriteriaBuilder()
 								.addStrictMatchingFilter(field, match)
 								.get()
+								.setCacheable(true)
 								)
 						);
 

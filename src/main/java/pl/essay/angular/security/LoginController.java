@@ -38,7 +38,7 @@ public class LoginController extends BaseController {
 	public String user( HttpSession httpSession) {
 		print(httpSession);
 		
-				//on successfull login usersession.authenticated is false 
+		//on successfull login usersession.authenticated is false 
 		//it will change to true 2 lines below 
 		if (!this.userSession.getAuthenticated()) {// move all boms from anonymous to user (change owner on login)
 			

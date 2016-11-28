@@ -2,6 +2,8 @@ package pl.essay.imangular.domain.news;
 
 
 import java.util.Date;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,11 +26,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.essay.angular.security.UserT;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @DynamicInsert
 @DynamicUpdate
 public class NewsItem {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
 	private int id;
 
