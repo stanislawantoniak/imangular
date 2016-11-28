@@ -35,6 +35,8 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import pl.essay.imangular.domain.gamerelease.ItemGameRelease;
+
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

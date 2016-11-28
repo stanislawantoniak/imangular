@@ -1,4 +1,4 @@
-package pl.essay.imangular.domain.item;
+package pl.essay.imangular.domain.gamerelease;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
