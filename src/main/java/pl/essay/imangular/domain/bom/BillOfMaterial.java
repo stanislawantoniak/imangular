@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Fetch;
@@ -56,10 +57,12 @@ public class BillOfMaterial {
 	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade={CascadeType.ALL})
 	@JsonIgnore
 	@JsonManagedReference(value="stocks")
+	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<BillOfMaterialInStock> stocks = new HashSet<BillOfMaterialInStock>();
 
 	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade={CascadeType.ALL})
 	@JsonManagedReference(value="requirementsList")
+	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<BillOfMaterialFlatListLine> requirementsList = new HashSet<BillOfMaterialFlatListLine>();
 
 	@Column

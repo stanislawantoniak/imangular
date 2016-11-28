@@ -150,7 +150,7 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 					.getCriteriaBuilder()
 					.get()
 					.setCacheable(true)
-					.setCacheRegion("rx1")
+					.setCacheRegion("cache.getAll")
 					);
 		
 		return this.getSetWithCountHolder(
@@ -158,7 +158,7 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 				.getCriteriaBuilder()
 				.get()
 				.setCacheable(true)
-				.setCacheRegion("rx1"),
+				.setCacheRegion("cache.getAll"),
 				totalRows
 				);
 	}
@@ -190,13 +190,15 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 						this.getCriteriaBuilder()
 						.addStrictMatchingFilter(field, match)
 						.get()
-						.setCacheable(true),
+						.setCacheable(true)
+						.setCacheRegion("cache.getListByStrictPropertyMatch"),
 
 						this.getTotalRowsOnCriteria(
 								this.getCriteriaBuilder()
 								.addStrictMatchingFilter(field, match)
 								.get()
 								.setCacheable(true)
+								.setCacheRegion("cache.getListByStrictPropertyMatch")
 								)
 						);
 
