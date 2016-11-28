@@ -18,8 +18,6 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.validation.constraints.*;
 
 @Entity

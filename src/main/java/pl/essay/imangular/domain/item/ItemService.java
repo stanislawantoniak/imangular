@@ -1,7 +1,6 @@
 package pl.essay.imangular.domain.item;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import pl.essay.generic.dao.ListingParamsHolder;
