@@ -13,35 +13,35 @@ import pl.essay.generic.dao.SetWithCountHolder;
 public class GenericServiceImpl<T extends Object> implements GenericService<T> {
 
 	@Autowired
-	private GenericDaoHbn<T> dao;
+	protected GenericDaoHbn<T> templateEntityDao;
 		
 	@Override
 	public Serializable addEntity(T e) {
-		return this.dao.create( e );
+		return this.templateEntityDao.create( e );
 	}
 
 	@Override
 	public void updateEntity(T e) {
-		this.dao.update( e );
+		this.templateEntityDao.update( e );
 	}
 
 	@Override
 	public SetWithCountHolder<T> listEntities() {
-		return this.dao.getAll();
+		return this.templateEntityDao.getAll();
 	}
 
 	@Override
 	public SetWithCountHolder<T> listEntitiesPaginated(ListingParamsHolder params) {
-		return this.dao.getAll( params );
+		return this.templateEntityDao.getAll( params );
 	}
 
 	@Override
-	public T getEntityById(int id) {
-		return this.dao.get( id );
+	public T getEntityById(Serializable id) {
+		return this.templateEntityDao.get( id );
 	}
 
 	@Override
-	public void removeEntity(int id) {
-		this.dao.deleteById( id );
+	public void removeEntity(Serializable id) {
+		this.templateEntityDao.deleteById( id );
 	}
 }

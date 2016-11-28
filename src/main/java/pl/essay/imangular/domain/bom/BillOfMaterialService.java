@@ -5,15 +5,10 @@ import java.util.List;
 
 import pl.essay.angular.security.UserT;
 import pl.essay.generic.dao.SetWithCountHolder;
+import pl.essay.generic.servicefacade.GenericService;
 
-public interface BillOfMaterialService {
+public interface BillOfMaterialService extends GenericService<BillOfMaterial>{
 
-	public long addBom(BillOfMaterial bom);
-	public void updateBom(BillOfMaterial bom);
-	public SetWithCountHolder<BillOfMaterial> listBoms();
-	public BillOfMaterial getBomById(long id);
-	public void removeBom(long id);
-	
 	public void removeStockFromBom( long idstock);
 	public void updateStockInBom(BillOfMaterialInStock stock);
 	public void createStockInBom(BillOfMaterialInStock stock);

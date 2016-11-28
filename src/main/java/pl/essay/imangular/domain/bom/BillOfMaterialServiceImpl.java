@@ -1,5 +1,6 @@
 package pl.essay.imangular.domain.bom;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.essay.angular.security.UserSession;
 import pl.essay.angular.security.UserT;
 import pl.essay.generic.dao.SetWithCountHolder;
+import pl.essay.generic.servicefacade.GenericServiceImpl;
 import pl.essay.imangular.domain.item.Item;
 import pl.essay.imangular.domain.item.ItemComponent;
 import pl.essay.imangular.domain.item.ItemDao;
 
 @Service
 @Transactional
-public class BillOfMaterialServiceImpl implements BillOfMaterialService {
+public class BillOfMaterialServiceImpl extends GenericServiceImpl<BillOfMaterial> implements BillOfMaterialService {
 	
 	protected static final Logger logger = LoggerFactory.getLogger(BillOfMaterialController.class);
 
@@ -38,7 +40,7 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	private UserSession userSession;
 
 	@Override
-	public long addBom(BillOfMaterial bom) {
+	public Serializable addEntity(BillOfMaterial bom) {
 
 		//set both user and anonymous user 
 		//if user is not logged in then null is placed in owner property - that is fine
@@ -56,16 +58,11 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	 * 
 	 * @see pl.essay.imangular.service.BillOfMaterialService#updateBom(pl.essay.imangular.model.BillOfMaterial)
 	 */
-	public void updateBom(BillOfMaterial bom) {
+	public void updateEntity(BillOfMaterial bom) {
 		BillOfMaterial bomFromDb = this.bomDao.get(bom.getId());
 		bomFromDb.setRequiredQuantity(bom.getRequiredQuantity());
 		bom = this.calculateBom(bomFromDb);
 		this.bomDao.update(bom);
-	}
-
-	@Override
-	public SetWithCountHolder<BillOfMaterial> listBoms() {
-		return this.bomDao.getAll();
 	}
 
 	@Override
@@ -84,7 +81,7 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 	}
 
 	@Override
-	public BillOfMaterial getBomById(long id) {
+	public BillOfMaterial getEntityById(Serializable id) {
 		BillOfMaterial bom = this.bomDao.get(id);
 
 		//load lazy loaded list while in transaction
@@ -92,11 +89,6 @@ public class BillOfMaterialServiceImpl implements BillOfMaterialService {
 		bom.getStocks().size();
 
 		return bom;
-	}
-
-	@Override
-	public void removeBom(long id) {
-		this.bomDao.deleteById(id);;
 	}
 
 	@Override

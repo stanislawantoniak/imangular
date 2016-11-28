@@ -11,7 +11,7 @@ public interface GenericService<T extends Object>{
 	public void updateEntity(T i);
 	public SetWithCountHolder<T> listEntities();
 	public SetWithCountHolder<T> listEntitiesPaginated(ListingParamsHolder params);
-	public T getEntityById(int id);
-	public void removeEntity(int id);
+	public T getEntityById(Serializable id);
+	public void removeEntity(Serializable id);
 	
 }

@@ -27,18 +27,6 @@ public class BillOfMaterialController extends BaseController {
 	@Autowired private BillOfMaterialService bomService;
 	@Autowired private ItemService itemService;
 
-	@RequestMapping(value = "/kick/", method = RequestMethod.GET)
-	public ResponseEntity<Void>  kick() {
-		//this.kickCreate();
-		SetWithCountHolder<BillOfMaterial> boms = this.bomService.listBoms();
-		for(BillOfMaterial bom : boms.getCollection()){
-			BillOfMaterial b = this.bomService.getBomById(bom.getId());
-			b.setRequiredQuantity(2);
-			this.bomService.updateBom(bom);
-		}
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-
 	@RequestMapping(value = "/boms", method = RequestMethod.GET)
 	public SetWithCountHolder<BillOfMaterial> listBoms() {
 		if (this.userSession.getUser() != null){
@@ -59,7 +47,7 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value = "/bomrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BillOfMaterial> getBom(@PathVariable("id") long id) {
 	
-		BillOfMaterial bom = (id != 0 ? this.bomService.getBomById(id) : new BillOfMaterial());//init bom or get from db 
+		BillOfMaterial bom = (id != 0 ? this.bomService.getEntityById( id ) : new BillOfMaterial());//init bom or get from db 
 		return new ResponseEntity<BillOfMaterial>(bom, HttpStatus.OK);
 	}
 
@@ -69,7 +57,7 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomrest/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateBillOfMaterial(@PathVariable long id, @RequestBody BillOfMaterial bom){
 
-		this.bomService.updateBom( bom );
+		this.bomService.updateEntity( bom );
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -86,7 +74,7 @@ public class BillOfMaterialController extends BaseController {
 
 		Item forItem = this.itemService.getItemById(bom.getForItem().getId());
 		bom.setForItem(forItem);
-		this.bomService.addBom( bom );
+		this.bomService.addEntity( bom );
 		logger.debug("after create bom data: "+bom);
 
 		return new ResponseEntity<Long>(bom.getId(), HttpStatus.OK);
@@ -95,14 +83,14 @@ public class BillOfMaterialController extends BaseController {
 	@RequestMapping(value= "/bomrest/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteBillOfMaterial(@PathVariable long id){
 
-		BillOfMaterial bom = this.bomService.getBomById(id);
+		BillOfMaterial bom = this.bomService.getEntityById(id);
 		if (bom == null){			 
 			logger.debug("BillOfMaterial " +id+ " does not exist but requested delete");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
 		logger.debug("before delete bom: "+bom);
-		this.bomService.removeBom(id);
+		this.bomService.removeEntity(id);
 		logger.debug("after delete bom: "+bom);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
