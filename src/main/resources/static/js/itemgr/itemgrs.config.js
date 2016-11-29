@@ -11,7 +11,12 @@ itemGRApp.config(['$stateProvider', function mainController( $stateProvider ) {
 		controller : 'itemGRslist as itemGRsCtrl'
 	})
 	.state ('root.itemGRadd', {
-		url: '/itemGRs/add',
+		url: '/itemGRs/add/:id',
+		templateUrl : 'js/itemgr/itemGREdit.html',
+		controller : 'itemGRedit as itemGRCtrl'
+	})
+	.state ('root.itemGRedit', {
+		url: '/itemGRs/edit/:id',
 		templateUrl : 'js/itemgr/itemGREdit.html',
 		controller : 'itemGRedit as itemGRCtrl'
 	});
@@ -33,6 +38,7 @@ itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService',  'growl
 				self.messageService.growl( labels.label.ListHasBeenRefreshed, 'info') ;
 			}
 			self.grs = response.collection;
+			console.log('grs::',self.grs);
 		}, function(){
 			console.log('get game releases from service - fail');
 		})
@@ -88,26 +94,50 @@ itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService',  'growl
 
 }]);
 
-itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state',  function(itemGRService, $state ) {
+itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams',  
+                                     function(itemGRService, $state, $stateParams ) {
 	var self = this;
 	self.service = itemGRService;
 	
-	self.gr = {};
-
+	self.itemId = parseInt($stateParams.id);
+	console.log('id::',self.itemId);
+	
+	self.fetchGR = function(){
+		self.service
+		.fetch(self.itemId)
+		.then(
+				function(response) {
+					self.gr = response;
+					if (self.itemID == 0){
+						self.gr.id = 0;
+					}
+					console.log('gr::',self.gr);
+				}
+				)
+	};
+	
+	self.fetchGR();
+	
 	self.createOrUpdateGR = function(){
-		
-		self.gr.id = 0;
-		
+
 		self
 		.service
 		.createOrUpdate(self.gr)
 		.then( 
 				function(response){
-					//console.log("sussecd");
-					$state.go('root.itemGRs');
+					console.log("succeed",response);
+					$state.go('^.itemGRedit({id:response})');
 				},	function(errResponse){
 					console.error('Error while creating/saving GR');
 				});
 	}
+	
+	self.setAddStepCtx = function(){
+		self.addStepCtx = true;
+	}
+	self.unsetAddStepCtx = function(){
+		self.addStepCtx = false;
+	}
+	
 
 }]);

@@ -34,6 +34,7 @@ import pl.essay.toolbox.EmailSender;
 	"pl.essay.languages",
 	"pl.essay.angular.security",
 	"pl.essay.imangular.domain.item",
+	"pl.essay.imangular.domain.gamerelease",
 	"pl.essay.imangular.domain.bom",
 	"pl.essay.imangular.domain.news",
 	"pl.essay.imangular.domain.sessioncatcher",

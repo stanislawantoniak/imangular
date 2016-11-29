@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -20,12 +21,18 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.validation.constraints.*;
 
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Table
+@Table(
+		uniqueConstraints = @UniqueConstraint(
+				columnNames={"parent_id", "component_id"}
+				)
+		)
 @NamedQueries({
 	@NamedQuery(
 			name = "getComponentsByParent",
@@ -46,13 +53,13 @@ public class ItemComponent {
 	@Column
 	private Date dateCreated;
 
-	@ManyToOne//(fetch = FetchType.EAGER)
+	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	//@JsonBackReference(value="component")
 	private Item parent;
 
-	@ManyToOne//(fetch = FetchType.EAGER)
+	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@NotNull(message="Component must not be empty")
 	@JoinColumn(referencedColumnName = "id", nullable = false)

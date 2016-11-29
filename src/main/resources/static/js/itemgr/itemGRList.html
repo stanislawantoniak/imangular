@@ -61,8 +61,8 @@
 								<th width="30%">{{
 									translator.label.itemGRlistGameReleaseLabelDescription }}</th>
 									
-								<th width="10%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
-								<th width="15%" ></th>
+								<th width="15%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
+								<th width="5%" ></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -119,13 +119,22 @@
 											growl-on-cancel-text="Pozycja nie została usunięta">
 											<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
 										</button>
+										
+										<button class="btn btn-default btn-sm waves-effect pull-right"
+											popover-placement="top" popover-trigger="mouseenter"
+											popover="{{ translator.label.EditDetailsPopoverText }}"
+											ui-sref="root.itemGRedit({id : gr.id})">
+											<i class="zmdi zmdi-edit  zmdi-hc-fw"></i>{{ translator.label.DetailsButtonText }}
+										</button>
+										
 									</div>
 								</td>
 								<td>
 										<button class="btn btn-default btn-sm waves-effect pull-right"
+										popover-placement="top" popover-trigger="mouseenter"
+											popover="{{	translator.label.itemGRListSeeProductButton }}"
 											ui-sref="root.itemsByGR({ gameRelease: gr.name})">
-											<i class="zmdi zmdi-receipt zmdi-hc-fw"></i>{{
-											translator.label.itemGRListSeeProductButton }}
+											<i class="zmdi zmdi-receipt zmdi-hc-fw"></i>
 										</button>
 								</td>
 							</tr>

@@ -20,7 +20,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Cacheable
@@ -42,12 +42,11 @@ public class ItemGameRelease {
 	@Column
 	private Date releaseDate;
 	
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "parent", cascade={CascadeType.ALL})
+	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "gameRelease", cascade={CascadeType.ALL})
 	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	//@JsonManagedReference(value="component")
-	@JsonIgnore
-	private Set<GameReleaseStep> components = new HashSet<GameReleaseStep>();
-
+	@JsonManagedReference("steps")
+	private Set<GameReleaseStep> steps = new HashSet<GameReleaseStep>();
+	
 	//setters & getters
 	public void setId(int id){
 		this.id = id;
@@ -77,6 +76,14 @@ public class ItemGameRelease {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="CET")
 	public Date getReleaseDate(){
 		return this.releaseDate;
+	}
+	
+	public Set<GameReleaseStep> getSteps(){
+		return this.steps;
+	}
+	
+	public void setSteps(Set<GameReleaseStep> s){
+		this.steps = s;
 	}
 	
 }

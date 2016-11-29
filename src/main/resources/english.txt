@@ -29,6 +29,8 @@ generic;translations
 "PageHasBeenRefreshed","The page has been refreshed!"
 "DeleteRowPopoverText","Delete Row"
 "EditRowPopoverText","Edit Row"
+"EditDetailsPopoverText","Edit Details"
+"DetailsButtonText","Details"
 
 "notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
 

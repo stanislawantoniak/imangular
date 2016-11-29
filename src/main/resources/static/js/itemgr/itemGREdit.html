@@ -1,49 +1,100 @@
 <div class="container">
 
-	<div class="card">
-		<div class="card-header">
-			<h2>
-				<strong> Dodawanie aktualizacji gry </strong>
-			</h2>
-			<pre ng-if="false">{{ itemGRCtrl.gr | json }}</pre>
+	<div class="row">
+
+		<div class="col-lg-6 col-md-12">
+
+			<div class="card">
+				<div class="card-header">
+					<h2>
+						<strong> {{ translator.label.itemGREditHeading }} </strong>
+					</h2>
+					<pre ng-if="true">{{ itemGRCtrl.gr | json }}</pre>
+				</div>
+				<div class="card-body card-padding">
+					<form role="form" name="grform"
+						ng-submit="itemGRCtrl.createOrUpdateGR()">
+						<div class="form-group">
+							<div class="fg-line">
+								<label path="name" class="control-label" for="name"> {{
+									translator.label.itemGRlistGameReleaseLabelName }} </label> <input
+									id="name" class="form-control" ng-model="itemGRCtrl.gr.name"
+									type="text" required />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="fg-line">
+								<label path="releaseDate" class="control-label"
+									for="releaseDate"> {{
+									translator.label.itemGRlistGameReleaseReleaseDate }} </label> <input
+									id="releaseDate" class="form-control"
+									ng-model="itemGRCtrl.gr.releaseDate" type="date" required />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="fg-line">
+								<label path="description" class="control-label"
+									for="description"> {{
+									translator.label.itemGRlistGameReleaseLabelDescription }} </label>
+								<textarea id="pass" class="form-control"
+									ng-model="itemGRCtrl.gr.description" rows="5" />
+							</div>
+						</div>
+
+						<div class="pull-right m-t-20"
+							ng-class="{'has-error':uform.$invalid}">
+							<button class="btn btn-primary waves-effect" type="submit">
+
+								<i class="fa fa-save"></i>
+								{{translator.label.edituserbuttonsave}}
+							</button>
+						</div>
+						<a ui-sref="root.itemGRs"
+							class="btn btn-default m-t-20 waves-effect"> <i
+							class="fa fa-undo"></i> {{translator.label.edituserbuttoncancel}}
+						</a>
+					</form>
+				</div>
+			</div>
 		</div>
-		<div class="card-body card-padding">
-			<form role="form" name="grform"
-				ng-submit="itemGRCtrl.createOrUpdateGR()">
-				<div class="form-group">
-					<div class="fg-line">
-						<label path="name" class="control-label" for="name"> Nazwa
-							aktualizacji </label> <input id="name" class="form-control"
-							ng-model="itemGRCtrl.gr.name" type="text" required />
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="fg-line">
-						<label path="releaseDate" class="control-label" for="releaseDate"> Data
-							aktualizacji </label> <input id="releaseDate" class="form-control"
-							ng-model="itemGRCtrl.gr.releaseDate" type="date" required />
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="fg-line">
-						<label path="description" class="control-label" for="description">
-							Opis </label> <input id="pass" class="form-control"
-							ng-model="itemGRCtrl.gr.description" type="text" />
-					</div>
-				</div>
+		<div class="col-lg-6 col-md-12" ng-if="itemGRCtrl.gr.id != 0">
 
-				<div class="pull-right m-t-20"
-					ng-class="{'has-error':uform.$invalid}">
-					<button class="btn btn-primary waves-effect" type="submit">
-
-						<i class="fa fa-save"></i> {{translator.label.edituserbuttonsave}}
-					</button>
+			<div class="card">
+				<div class="listview lv-bordered lv-lg">
+					<div class="lv-header-alt clearfix">
+						<h2 class="lvh-label hidden-xs">{{
+							translator.label.itemGREditStepsHeading }}</h2>
+						<button class="btn btn-default waves-effect pull-right"
+							ng-hide="itemGRsCtrl.editContext" ng-click="itemGRCtrl.setAddStepCtx()">
+							<i class="zmdi zmdi-plus zmdi-hc-fw"></i> Dodaj
+						</button>
+					</div>
+					<div class="lv-body">
+						<div class="lv-item media" ng-if="itemGRCtrl.addStepCtx">
+													
+						</div>
+						<div class="lv-item media" ng-repeat="step in itemGRCtrl.gr.steps">
+							<div class="media-body">
+								<div class="lv-title">{{ step.description }}</div>
+								<ul class="lv-attrs">
+									<li>Date Created: 09/06/1988</li>
+									<li>Members: 78954</li>
+									<li>Published: No</li>
+								</ul>
+								<div class="lv-actions actions dropdown" uib-dropdown="">
+									<a class="dropdown-toggle" href="" uib-dropdown-toggle=""
+										aria-expanded="false" aria-haspopup="true"><i
+										class="zmdi zmdi-more-vert"></i></a>
+									<ul class="dropdown-menu dropdown-menu-right">
+										<li><a href="">Edit</a></li>
+										<li><a href="">Delete</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<a ui-sref="root.itemGRs" class="btn btn-default m-t-20 waves-effect">
-					<i class="fa fa-undo"></i>
-					{{translator.label.edituserbuttoncancel}}
-				</a>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

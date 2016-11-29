@@ -53,7 +53,7 @@ itemApp
 		.then(
 				function(response) {
 					self.boms = response.collection;
-					console.log('boms from backend::',self.boms);
+					//console.log('boms from backend::',self.boms);
 					angular.forEach( 
 							self.boms, 
 							function(bom) {
@@ -71,7 +71,7 @@ itemApp
 								bom.bgmClass = bgmClass;
 
 							});
-					console.log('boms processed::',self.boms);
+					//console.log('boms processed::',self.boms);
 				}, function(){
 					console.log('get boms from service - fail');
 				})
