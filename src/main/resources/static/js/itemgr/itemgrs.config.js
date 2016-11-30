@@ -128,8 +128,16 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 					} else {
 						if (self.gr.releaseDate !=  null)
 							self.gr.releaseDate = new Date(self.gr.releaseDate);
+						
+						//deserialize json in steps lines
+						angular.forEach( 
+								self.gr.steps, 
+								function(step){
+									step.linesArray = step.lines ? angular.fromJson(step.lines) : [{id: 1, text: ''}]; 
+								} )
+								
 					}
-					//console.log('gr::',self.gr);
+					//console.log('gr fetch::',self.gr);
 				}
 		)
 	};
@@ -138,12 +146,22 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 
 	self.createOrUpdateGR = function(){
 
+		//serialize json in steps lines
+		angular.forEach( 
+				self.gr.steps, 
+				function(step){
+					step.lines = step.linesArray ? angular.toJson(step.linesArray) : null; 
+				} 
+		);
+		
+		//console.log('gr update::',self.gr);
+
 		self
 		.service
 		.createOrUpdate(self.gr)
 		.then( 
 				function(response){
-					//console.log("succeed",response);
+					//console.log('succeed',response);
 					if ( self.itemId == 0){
 						self.itemId = parseInt(response);
 						$state.go('^.itemGRedit',{id: self.itemId});
@@ -166,6 +184,8 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 		}
 		else 
 			self.inserted.seq = 10;
+		
+		self.inserted.linesArray = [{id: 1, text: ''}];
 
 		self.addStepCtx = true;
 	}
@@ -217,15 +237,19 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 		self.editStepCtx = false;
 		self.fetchGR(); //refresh model in case it was edited
 	}
-	
+
 	self.saveStep = function(step){
 		delete step.editCtx;
 		self.createOrUpdateGR();
 		self.editStepCtx = false;
 	}
-	
+
 	self.isEditCtx = function(){
 		return self.editCtx || self.editStepCtx || self.addStepCtx;
+	}
+	
+	self.addLine = function(step){
+		step.linesArray.push({id: step.linesArray.length + 1, text: ''});
 	}
 
 }]);

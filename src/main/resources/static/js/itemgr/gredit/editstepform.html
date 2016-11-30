@@ -1,0 +1,39 @@
+
+<form class="ng-pristine ng-valid" role="form" name="save-step"
+	ng-submit="itemGRCtrl.saveStep(step)">
+	<div class="row">
+		<input ng-model="$$hashKey" class="hidden">
+
+		<div class="col-md-6">
+			<div class="form-group fg-line">
+				<label for="seq">{{ translator.label.itemGREditStepsOrder }}</label>
+				<input id="seq" class="form-control input-sm" ng-model="step.seq"
+					type="number">
+			</div>
+			<div class="form-group fg-line">
+				<label for="description">{{
+					translator.label.itemGREditStepsDescription }}</label>
+				<textarea id="description" class="form-control input-sm"
+					ng-model="step.description" />
+			</div>
+		</div>
+		<div class="col-md-6">
+			<label>Wskazówki</label>
+			<div class="form-group fg-line"
+				ng-repeat="line in step.linesArray | orderBy: 'id' track by line.id">
+				<input id="text" class="form-control input-sm" ng-model="line.text"
+					type="text">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<button class="btn btn-default m-r-20 m-b-10 waves-effect pull-right"
+			type="submit">
+			<i class="fa fa-save"></i> {{translator.label.SaveButtonText}}
+		</button>
+		<button ng-click="itemGRCtrl.unsetEditStepCtx(step)"
+			class="btn btn-default btn-sm  m-l-20 waves-effect">
+			<i class="fa fa-undo"></i> {{translator.label.edituserbuttoncancel}}
+		</button>
+	</div>
+</form>

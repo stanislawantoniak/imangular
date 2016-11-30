@@ -4,66 +4,30 @@
 
 		<div class="col-lg-6 col-md-12">
 
-			<div class="card">
-				<div class="card-header">
+			<div class="listview lv-bordered lv-lg">
+				<div class="lv-header-alt clearfix">
 					<div class="pull-left">
-						<h2>
+						<h2 class="lvh-label hidden-xs">
 							<strong> {{ translator.label.itemGREditHeading }} </strong>
 						</h2>
 					</div>
-					<button class="btn btn-default btn-sm waves-effect pull-right"
-						ng-click="itemGRCtrl.setEditCtx()" ng-show="!itemGRCtrl.isEditCtx()" ng-if="nav.authService.session.isSupervisor">
-						<i class="zmdi zmdi-edit  zmdi-hc-fw"></i>
-					</button>
+
+					<ul class="lv-actions actions" ng-show="!itemGRCtrl.isEditCtx()"
+						ng-if="nav.authService.session.isSupervisor">
+						<li><a ng-click="itemGRCtrl.setEditCtx()"> <i
+								class="zmdi zmdi-edit zmdi-hc-fw"></i>
+						</a></li>
+					</ul>
+
 					<pre ng-if="false">{{ itemGRCtrl.gr | json }}</pre>
 				</div>
-				<div class="card-body card-padding">
-					<form role="form" name="grform" class="ng-pristine ng-valid"
-						ng-submit="itemGRCtrl.createOrUpdateGR()">
-						<fieldset ng-disabled="!itemGRCtrl.editCtx">
-							<div class="form-group">
-								<div class="fg-line">
-									<label path="name" class="control-label" for="name"> {{
-										translator.label.itemGRlistGameReleaseLabelName }} </label> <input
-										id="name" class="form-control" ng-model="itemGRCtrl.gr.name"
-										type="text" required />
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="fg-line">
-									<label path="releaseDate" class="control-label"
-										for="releaseDate"> {{
-										translator.label.itemGRlistGameReleaseReleaseDate }} </label> <input
-										id="releaseDate" class="form-control"
-										ng-model="itemGRCtrl.gr.releaseDate" type="date" required />
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="fg-line">
-									<label path="description" class="control-label"
-										for="description"> {{
-										translator.label.itemGRlistGameReleaseLabelDescription }} </label>
-									<textarea id="pass" class="form-control"
-										ng-model="itemGRCtrl.gr.description" rows="5" />
-								</div>
-							</div>
+				<div class="card">
+					<div class="card-body card-padding lv-item">
 
-							<div class="pull-right m-t-20"
-								ng-class="{'has-error':uform.$invalid}">
-								<button class="btn btn-primary waves-effect" type="submit"
-									ng-if="itemGRCtrl.editCtx">
-									<i class="fa fa-save"></i>
-									{{translator.label.edituserbuttonsave}}
-								</button>
-							</div>
-							<button ng-click="itemGRCtrl.cancelEdit()"
-								class="btn btn-default m-t-20 waves-effect"
-								ng-if="itemGRCtrl.editCtx">
-								<i class="fa fa-undo"></i>
-								{{translator.label.edituserbuttoncancel}}
-							</button>
-						</fieldset>
-					</form>
+						<div  ng-include
+							src="'js/itemgr/gredit/greditform.html'"></div>
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -72,8 +36,10 @@
 			<div class="card">
 				<div class="listview lv-bordered lv-lg">
 					<div class="lv-header-alt clearfix">
-						<h2 class="lvh-label hidden-xs">{{
-							translator.label.itemGREditStepsHeading }}</h2>
+						<h2 class="lvh-label hidden-xs">
+							<strong>{{ translator.label.itemGREditStepsHeading }}</strong>
+						</h2>
+						<pre ng-if="false">{{ itemGRCtrl.inserted | json }}</pre>
 						<ul class="lv-actions actions" ng-show="!itemGRCtrl.isEditCtx()"
 							ng-if="nav.authService.session.isSupervisor">
 							<li><a ng-click="itemGRCtrl.setAddStepCtx()"> <i
@@ -84,89 +50,57 @@
 					<div class="lv-body">
 						<div class="lv-item media" ng-if="itemGRCtrl.addStepCtx">
 							<div class="media-body">
-								<form class="ng-pristine ng-valid" role="form" name="add-step"
-									ng-submit="itemGRCtrl.addStep()">
-									<div class="form-group fg-line">
-										<label for="seq">{{
-											translator.label.itemGREditStepsOrder }}</label> <input id="seq"
-											class="form-control input-sm"
-											ng-model="itemGRCtrl.inserted.seq" type="number">
-									</div>
-									<div class="form-group fg-line">
-										<label for="description">{{
-											translator.label.itemGREditStepsDescription }}</label>
-										<textarea id="description" class="form-control input-sm"
-											ng-model="itemGRCtrl.inserted.description" />
-									</div>
-									<button
-										class="btn btn-default m-r-10 m-b-10 waves-effect pull-right"
-										type="submit">
-										<i class="fa fa-save"></i>
-										{{translator.label.edituserbuttonsave}}
-									</button>
-									<button ng-click="itemGRCtrl.unsetAddStepCtx()"
-										class="btn btn-default btn-sm m-l-20 waves-effect"
-										ng-if="itemGRCtrl.addStepCtx">
-										<i class="fa fa-undo"></i>
-										{{translator.label.edituserbuttoncancel}}
-									</button>
-								</form>
+
+								<ul class="lv-actions actions"
+									ng-if="nav.authService.session.isSupervisor">
+									<li><a ng-click="itemGRCtrl.addLine(itemGRCtrl.inserted)">
+											<i class="zmdi zmdi-plus zmdi-hc-fw"></i>
+									</a></li>
+								</ul>
+								<div ng-include src="'js/itemgr/gredit/addstepform.html'"></div>
+
 							</div>
 						</div>
 						<div class="lv-item media"
 							ng-repeat="step in itemGRCtrl.gr.steps | orderBy : ['+seq']">
-							<div class="media-body" ng-hide="step.editCtx">
+							<div ng-hide="step.editCtx">
 								<div class="pull-left">
 									<ul class="lv-attrs">
 										<li>{{ step.seq }}</li>
 									</ul>
 								</div>
+								<div class="media-body">
 
-								<div class="lv-title">{{ step.description }}</div>
+									<div class="lv-title">{{ step.description }}</div>
+									<div class="lv-small"
+										ng-repeat="line in step.linesArray | orderBy: 'id' track by line.id">{{
+										line.text }}</div>
 
-								<div class="lv-actions actions dropdown" uib-dropdown=""
-									ng-show="!itemGRCtrl.isEditCtx()"
-									ng-if="nav.authService.session.isSupervisor">
-									<a class="dropdown-toggle" href="" uib-dropdown-toggle=""
-										aria-expanded="false" aria-haspopup="true"><i
-										class="zmdi zmdi-more-vert"></i></a>
-									<ul class="dropdown-menu dropdown-menu-right">
-										<li><a ng-click="itemGRCtrl.setEditStepCtx(step)"><i
-												class="zmdi zmdi-edit  zmdi-hc-fw"></i>{{
-												translator.label.EditDetailsPopoverText }}</a></li>
-										<li><a ng-click="itemGRCtrl.deleteStep( step )"><i
-												class="zmdi zmdi-delete  zmdi-hc-fw"></i>{{
-												translator.label.DeleteRowPopoverText }}</a></li>
-									</ul>
+									<div class="lv-actions actions dropdown" uib-dropdown=""
+										ng-show="!itemGRCtrl.isEditCtx()"
+										ng-if="nav.authService.session.isSupervisor">
+										<a class="dropdown-toggle" href="" uib-dropdown-toggle=""
+											aria-expanded="false" aria-haspopup="true"><i
+											class="zmdi zmdi-more-vert"></i></a>
+										<ul class="dropdown-menu dropdown-menu-right">
+											<li><a ng-click="itemGRCtrl.setEditStepCtx(step)"><i
+													class="zmdi zmdi-edit  zmdi-hc-fw"></i>{{
+													translator.label.EditDetailsPopoverText }}</a></li>
+											<li><a ng-click="itemGRCtrl.deleteStep( step )"><i
+													class="zmdi zmdi-delete  zmdi-hc-fw"></i>{{
+													translator.label.DeleteRowPopoverText }}</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-							<div class="media-body" ng-show="step.editCtx">
-								<form class="ng-pristine ng-valid" role="form" name="save-step"
-									ng-submit="itemGRCtrl.saveStep(step)">
-									<div class="form-group fg-line">
-										<label for="seq">{{
-											translator.label.itemGREditStepsOrder }}</label> <input id="seq"
-											class="form-control input-sm" ng-model="step.seq"
-											type="number">
-									</div>
-									<div class="form-group fg-line">
-										<label for="description">{{
-											translator.label.itemGREditStepsDescription }}</label>
-										<textarea id="description" class="form-control input-sm"
-											ng-model="step.description" />
-									</div>
-									<button
-										class="btn btn-default m-r-20 m-b-10 waves-effect pull-right"
-										type="submit">
-										<i class="fa fa-save"></i>
-										{{translator.label.SaveButtonText}}
-									</button>
-									<button ng-click="itemGRCtrl.unsetEditStepCtx(step)"
-										class="btn btn-default btn-sm  m-l-20 waves-effect">
-										<i class="fa fa-undo"></i>
-										{{translator.label.edituserbuttoncancel}}
-									</button>
-								</form>
+							<div class="media-body" ng-if="step.editCtx">
+								<ul class="lv-actions actions"
+									ng-if="nav.authService.session.isSupervisor">
+									<li><a ng-click="itemGRCtrl.addLine(step)"> <i
+											class="zmdi zmdi-plus zmdi-hc-fw"></i>
+									</a></li>
+								</ul>
+								<div ng-include src="'js/itemgr/gredit/editstepform.html'"></div>
 							</div>
 						</div>
 					</div>

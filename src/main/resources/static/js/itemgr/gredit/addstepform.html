@@ -1,0 +1,36 @@
+
+<form class="ng-pristine ng-valid" role="form" name="add-step"
+	ng-submit="itemGRCtrl.addStep()">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group fg-line">
+				<label for="seq">{{ translator.label.itemGREditStepsOrder }}</label>
+				<input id="seq" class="form-control input-sm"
+					ng-model="itemGRCtrl.inserted.seq" type="number">
+			</div>
+			<div class="form-group fg-line">
+				<label for="description">{{
+					translator.label.itemGREditStepsDescription }}</label>
+				<textarea id="description" class="form-control input-sm"
+					ng-model="itemGRCtrl.inserted.description" />
+			</div>
+		</div>
+		<div class="col-md-6">
+			<label>Wskazówki</label>
+			<div class="form-group fg-line"
+				ng-repeat="line in itemGRCtrl.inserted.linesArray | orderBy: 'id' track by line.id">
+				<input id="line" class="form-control input-sm" ng-model="line.text"
+					type="text">
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-default m-r-10 m-b-10 waves-effect pull-right"
+		type="submit">
+		<i class="fa fa-save"></i> {{translator.label.edituserbuttonsave}}
+	</button>
+	<button ng-click="itemGRCtrl.unsetAddStepCtx()"
+		class="btn btn-default btn-sm m-l-20 waves-effect"
+		ng-if="itemGRCtrl.addStepCtx">
+		<i class="fa fa-undo"></i> {{translator.label.edituserbuttoncancel}}
+	</button>
+</form>
