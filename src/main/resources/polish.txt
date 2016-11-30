@@ -27,6 +27,7 @@ generic;translations
 "EditRowPopoverText","Edytuj wiersz"
 "EditDetailsPopoverText","Edytuj szczegóły"
 "DetailsButtonText","Szczegóły"
+"SaveButtonText","Zapisz"
 
 "notLoggedInTeaser","Uwaga: nie jesteś zalogowany i zadania, które założysz znikną jak opuścisz portal. Lepiej idz do strony logowania i czym prędzej załóż konto."
 
@@ -219,7 +220,10 @@ changepass;page
 "itemGRlistGameReleaseReleaseDate","Data aktualizacji"
 "itemGRlistGameReleaseLabelDescription","Opis"
 "itemGRListSeeProductButton","Zobacz produkty"
+"itemGRStepDeletedInfo","Etap usunięty"
 
 "itemGREditHeading","Aktualizacja"
 "itemGREditStepsHeading","Etapy"
+"itemGREditStepsOrder","Kolejność"
+"itemGREditStepsDescription","Opis"
 

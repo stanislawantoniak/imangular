@@ -46,7 +46,6 @@ public class ItemGameReleaseController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/itemgamereleaserest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<ItemGameRelease> getItemGameRelease(@PathVariable("id") int id) {
 		logger.trace("Fetching ItemGameRelease with id " + id);
 		ItemGameRelease item = (id != 0 ? this.itemGameReleaseService.getEntityById(id) : new ItemGameRelease());//init item or get from db 
@@ -71,7 +70,7 @@ public class ItemGameReleaseController extends BaseController {
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-
+	
 	@RequestMapping(value= "/itemgamereleaserest/", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Integer> createItemGameRelease(@RequestBody ItemGameRelease item){
@@ -100,4 +99,12 @@ public class ItemGameReleaseController extends BaseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
+	@RequestMapping(value= "/gamereleasesteprest/{id}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
+	public ResponseEntity<Void> deleteGameReleaseStep(@PathVariable int id){
+
+		this.itemGameReleaseService.deleteStep(id);
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 }

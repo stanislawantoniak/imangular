@@ -42,11 +42,8 @@ public class GameReleaseStep {
 	private ItemGameRelease gameRelease;
 
 	@Column
-	@NotNull(message="Order must not be empty")
+	@NotNull(message="Sequence must not be empty")
 	private int seq;
-
-	@Column
-	private String name;
 
 	@Column
 	private String description;
@@ -75,13 +72,6 @@ public class GameReleaseStep {
 	}
 	public int getSeq(){
 		return this.seq;
-	}
-
-	public void setName(String name){
-		this.name = name;
-	}
-	public String getName(){
-		return this.name;
 	}
 
 	public void setDescription(String d){

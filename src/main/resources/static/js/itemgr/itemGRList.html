@@ -60,9 +60,9 @@
 
 								<th width="30%">{{
 									translator.label.itemGRlistGameReleaseLabelDescription }}</th>
-									
-								<th width="15%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
-								<th width="5%" ></th>
+
+								<th width="10%" ng-if="nav.authService.session.isSupervisor">{{translator.label.userslistuserstableheadingactions}}</th>
+								<th width="20%"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -75,7 +75,7 @@
 
 								<td><span editable-date="gr.releaseDate"
 									e-name="releaseDate" e-form="rowform" e-required> {{
-										gr.releaseDate || 'empty'}} </span></td>
+										gr.releaseDate | date:'yyyy-MM-dd' }} </span></td>
 
 								<td><span editable-textarea="gr.description"
 									e-name="description" e-form="rowform" e-required e-cols="60">
@@ -96,8 +96,7 @@
 											<i class="zmdi zmdi-close"></i>
 										</button>
 									</form> <pre ng-if="false">{{ rowform | json }}</pre>
-									<div 
-										ng-show="!rowform.$visible && !itemGRsCtrl.editContext" >
+									<div ng-show="!rowform.$visible && !itemGRsCtrl.editContext">
 										<button class="btn btn-default btn-sm waves-effect"
 											popover-placement="top" popover-trigger="mouseenter"
 											popover="{{ translator.label.EditRowPopoverText }}"
@@ -119,23 +118,23 @@
 											growl-on-cancel-text="Pozycja nie została usunięta">
 											<i class="zmdi zmdi-delete zmdi-hc-fw"></i>
 										</button>
-										
-										<button class="btn btn-default btn-sm waves-effect pull-right"
-											popover-placement="top" popover-trigger="mouseenter"
-											popover="{{ translator.label.EditDetailsPopoverText }}"
-											ui-sref="root.itemGRedit({id : gr.id})">
-											<i class="zmdi zmdi-edit  zmdi-hc-fw"></i>{{ translator.label.DetailsButtonText }}
-										</button>
-										
 									</div>
+
 								</td>
 								<td>
-										<button class="btn btn-default btn-sm waves-effect pull-right"
+									<button class="btn btn-default btn-sm waves-effect pull-right"
 										popover-placement="top" popover-trigger="mouseenter"
-											popover="{{	translator.label.itemGRListSeeProductButton }}"
-											ui-sref="root.itemsByGR({ gameRelease: gr.name})">
-											<i class="zmdi zmdi-receipt zmdi-hc-fw"></i>
-										</button>
+										popover="{{ nav.authService.session.isSupervisor ? translator.label.EditDetailsPopoverText : ''}}"
+										ui-sref="root.itemGRedit({id : gr.id})">
+										<i class="zmdi zmdi-edit  zmdi-hc-fw"></i>{{
+										translator.label.DetailsButtonText }}
+									</button>
+									<button class="btn btn-default btn-sm waves-effect pull-right"
+										popover-placement="top" popover-trigger="mouseenter"
+										popover="{{	translator.label.itemGRListSeeProductButton }}"
+										ui-sref="root.itemsByGR({ gameRelease: gr.name})">
+										<i class="zmdi zmdi-receipt zmdi-hc-fw"></i>
+									</button>
 								</td>
 							</tr>
 						</tbody>
@@ -143,5 +142,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row" ng-if="false'>
+		<pre>{{ itemGRsCtrl | json }}</pre>
 	</div>
 </div>

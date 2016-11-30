@@ -134,3 +134,11 @@ textarea.form-control {
 .ng-table select.form-control {
 	padding: 8px 10px !important;
 }
+
+.lvh-label {
+    font-size: 18px;
+}
+
+.listview .lv-attrs{
+	margin: 0 15px 0 0 !important;
+}

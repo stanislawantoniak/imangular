@@ -31,6 +31,7 @@ generic;translations
 "EditRowPopoverText","Edit Row"
 "EditDetailsPopoverText","Edit Details"
 "DetailsButtonText","Details"
+"SaveButtonText","Save"
 
 "notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
 
@@ -224,3 +225,10 @@ bom;edit
 "itemGRlistGameReleaseReleaseDate","Release Date"
 "itemGRlistGameReleaseLabelDescription","Description"
 "itemGRListSeeProductButton","See Items"
+"itemGRStepDeletedInfo","Step deleted"
+
+"itemGREditHeading","Game Release"
+"itemGREditStepsHeading","Steps"
+"itemGREditStepsOrder","Order"
+"itemGREditStepsDescription","Description"
+

@@ -31,14 +31,23 @@ itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService',  'growl
 	self.service = itemGRService;
 	self.messageService = growlService;
 	self.editGRContext = false;
-	
+
 	self.fetchAllGrs = function(){
 		self.service.fetchAll().then(function(response) {
 			if (self.grs != null){ //do not show message at first table data load
 				self.messageService.growl( labels.label.ListHasBeenRefreshed, 'info') ;
 			}
-			self.grs = response.collection;
-			console.log('grs::',self.grs);
+			self.grs = [];
+			angular.forEach( 
+					response.collection, 
+					function(row){
+						if (row.releaseDate != null)
+							row.releaseDate = new Date(row.releaseDate);
+						this.push(row)
+					}, 
+					self.grs
+			);
+			//console.log('grs::',self.grs);
 		}, function(){
 			console.log('get game releases from service - fail');
 		})
@@ -94,15 +103,21 @@ itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService',  'growl
 
 }]);
 
-itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams',  
-                                     function(itemGRService, $state, $stateParams ) {
+itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '$filter', '$http', 'growlService', 'translator',
+                                     function(itemGRService, $state, $stateParams, $filter, $http, growlService, translator ) {
 	var self = this;
 	self.service = itemGRService;
-	
+	self.messageService = growlService;
+
 	self.itemId = parseInt($stateParams.id);
-	console.log('id::',self.itemId);
-	
+	self.editCtx = false;
+	self.editStepCtx = false;
+	self.addStepCtx = false;
+
+	//console.log('id::',self.itemId);
+
 	self.fetchGR = function(){
+		self.gr = {};
 		self.service
 		.fetch(self.itemId)
 		.then(
@@ -110,14 +125,17 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams',
 					self.gr = response;
 					if (self.itemID == 0){
 						self.gr.id = 0;
+					} else {
+						if (self.gr.releaseDate !=  null)
+							self.gr.releaseDate = new Date(self.gr.releaseDate);
 					}
-					console.log('gr::',self.gr);
+					//console.log('gr::',self.gr);
 				}
-				)
+		)
 	};
-	
+
 	self.fetchGR();
-	
+
 	self.createOrUpdateGR = function(){
 
 		self
@@ -125,19 +143,89 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams',
 		.createOrUpdate(self.gr)
 		.then( 
 				function(response){
-					console.log("succeed",response);
-					$state.go('^.itemGRedit({id:response})');
+					//console.log("succeed",response);
+					if ( self.itemId == 0){
+						self.itemId = parseInt(response);
+						$state.go('^.itemGRedit',{id: self.itemId});
+					} else {
+						self.fetchGR();
+					}
 				},	function(errResponse){
 					console.error('Error while creating/saving GR');
 				});
 	}
-	
+
 	self.setAddStepCtx = function(){
+
+		self.inserted = { };
+
+		var len = self.gr.steps.length;
+		if (len > 0){
+			var stepsSorted = $filter('orderBy')(self.gr.steps, 'seq');
+			self.inserted.seq = stepsSorted[len-1].seq + 10;
+		}
+		else 
+			self.inserted.seq = 10;
+
 		self.addStepCtx = true;
 	}
 	self.unsetAddStepCtx = function(){
 		self.addStepCtx = false;
 	}
+	self.setEditCtx = function(){
+		self.editCtx = true;
+	}
+	if (self.itemId == 0)
+		self.setEditCtx();
+
+	self.unsetEditCtx = function(){
+		self.editCtx = false;
+	}
+
+	self.cancelEdit = function(){
+		if (self.itemId == 0)
+			$state.go('^.itemGRs');
+		else 
+			self.unsetEditCtx();
+	}
+
+	self.addStep = function(){
+		self.gr.steps.push(self.inserted);
+		//console.log('add step gr::',self.gr);
+		self.createOrUpdateGR();
+		self.unsetAddStepCtx();
+	}
+
+	self.deleteStep = function( step ){
+		$http
+		.delete('/gamereleasesteprest/'+step.id)
+		.then( 
+				function(response){
+					self.fetchGR();
+					self.messageService.growl(translator.label.itemGRStepDeletedInfo, 'info');
+				}
+		)
+	}
+
+	self.setEditStepCtx = function(step){
+		step.editCtx = true;
+		self.editStepCtx = true;
+	}
+
+	self.unsetEditStepCtx = function(step){
+		delete step.editCtx;
+		self.editStepCtx = false;
+		self.fetchGR(); //refresh model in case it was edited
+	}
 	
+	self.saveStep = function(step){
+		delete step.editCtx;
+		self.createOrUpdateGR();
+		self.editStepCtx = false;
+	}
+	
+	self.isEditCtx = function(){
+		return self.editCtx || self.editStepCtx || self.addStepCtx;
+	}
 
 }]);
