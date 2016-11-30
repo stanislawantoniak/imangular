@@ -30,7 +30,7 @@ import javax.validation.constraints.*;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(
 		uniqueConstraints = @UniqueConstraint(
-				columnNames={"parent_id", "component_id"}
+				columnNames={"parent_id", "component_id", "remarks"}
 				)
 		)
 @NamedQueries({
@@ -43,10 +43,10 @@ import javax.validation.constraints.*;
 			query = "select ic from ItemComponent ic where component.id = :id"
 			)
 }		)
-//@SequenceGenerator(name="itemcomponent_seq", initialValue=1, allocationSize=100)
+
 public class ItemComponent {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="itemcomponent_seq")
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
 	private int id;
 
@@ -143,6 +143,7 @@ public class ItemComponent {
 		EqualsBuilder eb = new EqualsBuilder();
 		eb.append(otherIC.parent.getName(), this.parent.getName());
 		eb.append(otherIC.component.getName(), this.component.getName());
+		eb.append(otherIC.remarks, this.remarks);
 		
 		return eb.isEquals();
 	}
@@ -152,6 +153,7 @@ public class ItemComponent {
 		HashCodeBuilder hcb = new HashCodeBuilder();
 		hcb.append(this.parent.getName());
 		hcb.append(this.component.getName());
+		hcb.append(this.remarks);
 		return hcb.toHashCode();
 	}
 }

@@ -127,7 +127,6 @@ public class ItemServiceImpl implements ItemService{
 	 *  when id == 0 then it is list for create bom - need to exclude not composed items
 	 *  
 	 * must not contain the item for which we prepare the list
-	 * and components that are in the item
 	 * 
 	 * (to be done later: and any components that contain the item in descendants)
 	 * 
@@ -147,10 +146,14 @@ public class ItemServiceImpl implements ItemService{
 		//if id == 0 then it's select for create bom
 		if (itemId != 0){
 			Item item = this.itemDao.get(itemId);
-			theMap.remove(item.getName()); // name is safeas we have primary key on name
+			theMap.remove(item.getName()); // name is safe as we have primary key on name
+			
+			/* this part is removed as there can be the same item in components many times
+			 * on various steps of assembling parent item 
 			for (ItemComponent ic : item.getComponents()){
 				theMap.remove(ic.getComponentName());
 			}
+			*/
 		}
 		//move all the items to a simple list
 		List<ItemIdNameIsComposedQueryResult> theList = new ArrayList<ItemIdNameIsComposedQueryResult>();
