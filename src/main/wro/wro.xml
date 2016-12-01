@@ -4,13 +4,13 @@
 	- change names to these 3 groups 
 	- change js and css urls in html files: loginpage, index and changepasspage
 	-->
-	<group name="min-pack-im-1.1.2">
+	<group name="min-pack-im-1.1.3">
 		<group-ref>min-pack-im</group-ref>
 	</group>
-	<group name="min-pack-im-cp-1.1.2">
+	<group name="min-pack-im-cp-1.1.3">
 		<group-ref>min-pack-im-cp</group-ref>
 	</group>
-	<group name="im-app-1.1.2">
+	<group name="im-app-1.1.3">
 		<group-ref>im-app</group-ref>
 	</group>
 	
@@ -25,7 +25,7 @@
 
 	</group>
 
-	<group name="skin-1.1.2">
+	<group name="skin-1.1.3">
 	
 		<group-ref>min-pack-skin</group-ref>
 		
