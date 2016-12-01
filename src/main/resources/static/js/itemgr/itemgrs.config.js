@@ -144,7 +144,7 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$scope', '$state','$state
 								self.gr.steps, 
 								function(step){
 									step.linesArray = step.lines ? angular.fromJson(step.lines) : [{id: 1, text: ''}]; 
-									if (step.image) step.image = atob(step.image);
+									if (step.image) step.imageDecoded = atob(step.image);
 								} )
 
 					}
@@ -162,6 +162,8 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$scope', '$state','$state
 				self.gr.steps, 
 				function(step){
 					step.lines = step.linesArray ? angular.toJson(step.linesArray) : null; 
+					delete step.linesArray;
+					delete step.imageDecoded;
 				} 
 		);
 
