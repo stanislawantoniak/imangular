@@ -33,7 +33,7 @@ public class ImageController extends BaseController {
 		Image img = this.imageService.getEntityById(id);
 		
 		String imgString = DatatypeConverter.printBase64Binary(img.getImage());
-		System.out.println("get img:: "+imgString);
+		//System.out.println("get img:: "+imgString);
 				
 		InputStream in1 = new ByteArrayInputStream(img.getImage());
 		IOUtils.copy(in1, response.getOutputStream());  
