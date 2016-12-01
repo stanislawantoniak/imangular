@@ -2,6 +2,7 @@ package pl.essay.imangular.domain.gamerelease;
 
 import java.io.IOException;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Fetch;
@@ -33,7 +35,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 		)
 @DynamicInsert
 @DynamicUpdate
-
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class GameReleaseStep {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
