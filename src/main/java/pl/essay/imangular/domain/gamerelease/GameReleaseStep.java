@@ -1,16 +1,20 @@
 package pl.essay.imangular.domain.gamerelease;
 
+import java.io.IOException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.DynamicInsert;
@@ -50,6 +54,9 @@ public class GameReleaseStep {
 
 	@Column @Type(type="text")
 	private String lines;	
+	
+	@Column
+	private byte[] image;
 
 	//setters & getters
 	public void setId(int id){
@@ -86,6 +93,12 @@ public class GameReleaseStep {
 	}
 	public String getLines(){
 		return this.lines;
+	}
+	public byte[] getImage(){
+		return this.image;
+	}
+	public void setImage(byte[] i){
+		this.image = i;
 	}
 
 	@Override

@@ -80,6 +80,7 @@ public class ImAngularApplication {
 					"/boms/**","/bomrest/**","/bomstockrest/**",
 					"/newsitems/**","/newsitemrest/**",
 					"/sessionlog/",
+					"/gamereleasesteprest/fileupload/**",
 					"/itemgamereleases/**","/itemgamereleaserest/**",
 					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			

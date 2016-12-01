@@ -1,5 +1,9 @@
 package pl.essay.imangular.domain.gamerelease;
 
+
+import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +48,7 @@ public class ItemGameReleaseController extends BaseController {
 		return new ResponseEntity<SetWithCountHolder<ItemGameRelease>>(holder, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(value = "/itemgamereleaserest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ItemGameRelease> getItemGameRelease(@PathVariable("id") int id) {
 		logger.trace("Fetching ItemGameRelease with id " + id);
@@ -70,7 +74,7 @@ public class ItemGameReleaseController extends BaseController {
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value= "/itemgamereleaserest/", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Integer> createItemGameRelease(@RequestBody ItemGameRelease item){
@@ -104,6 +108,17 @@ public class ItemGameReleaseController extends BaseController {
 	public ResponseEntity<Void> deleteGameReleaseStep(@PathVariable int id){
 
 		this.itemGameReleaseService.deleteStep(id);
+
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value= "/gamereleasesteprest/fileupload/{id}", method = {RequestMethod.POST})
+	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
+	public ResponseEntity<Void> uploadImage(
+			@RequestBody byte[] file, 
+			@PathVariable int id){
+
+		this.itemGameReleaseService.setImageOnStep(id, file);
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

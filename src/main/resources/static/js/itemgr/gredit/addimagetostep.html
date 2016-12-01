@@ -1,0 +1,26 @@
+</br>
+<form role="form" name="grform" class="ng-pristine ng-valid"
+	ng-submit="itemGRCtrl.saveImage(step)">
+
+	<div ng-hide="!itemGRCtrl.imageSrc" class="fileinput-preview thumbnail">
+		<img ng-src="{{ itemGRCtrl.imageSrc }}" />
+	</div>
+	<br />
+	<div class="fileinput fileinput-new">
+		<span class="btn btn-default btn-file waves-effect"> <i class="zmdi zmdi-folder-outline m-r-10"></i>{{
+			translator.label.SelectImageButtonText }}<input type="file"
+			ng-file-select="onFileSelect($files)">
+		</span>
+	</div>
+	<button
+		class="btn btn-default btn-icon-text waves-effect pull-right"
+		type="submit">
+		<i class="zmdi zmdi-check-all"></i> {{
+		translator.label.SaveButtonText }}
+	</button>
+	<button
+		class="btn btn-default btn-sm btn-icon-text waves-effect pull-left"
+		ng-click="itemGRCtrl.unsetAddImageCtx(step)">
+		{{ translator.label.CancelButtonText }}
+	</button>
+</form>

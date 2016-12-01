@@ -32,6 +32,10 @@ generic;translations
 "EditDetailsPopoverText","Edit Details"
 "DetailsButtonText","Details"
 "SaveButtonText","Save"
+"CancelButtonText","Cancel"
+"AddImagePopoverText","Add Image"
+"SelectImageButtonText","Select Image"
+"ChangeImageButtonText","Change Image"
 
 "notLoggedInTeaser","Notice: you are not signed in. All your assignments will disappear as soon as you leave this portal. Better go to login page and sign up!"
 

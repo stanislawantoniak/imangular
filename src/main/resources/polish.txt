@@ -28,6 +28,11 @@ generic;translations
 "EditDetailsPopoverText","Edytuj szczegóły"
 "DetailsButtonText","Szczegóły"
 "SaveButtonText","Zapisz"
+"AddImagePopoverText","Dodaj zdjęcie"
+"CancelButtonText","Anuluj"
+"AddImagePopoverText","Dodaj zdjęcie"
+"SelectImageButtonText","Wybierz zdjęcie"
+"ChangeImageButtonText","Zmień zdjęcie"
 
 "notLoggedInTeaser","Uwaga: nie jesteś zalogowany i zadania, które założysz znikną jak opuścisz portal. Lepiej idz do strony logowania i czym prędzej załóż konto."
 

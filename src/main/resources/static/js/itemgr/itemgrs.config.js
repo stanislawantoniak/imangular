@@ -103,8 +103,8 @@ itemGRApp.controller( 'itemGRslist', ['$q','translator','itemGRService',  'growl
 
 }]);
 
-itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '$filter', '$http', 'growlService', 'translator',
-                                     function(itemGRService, $state, $stateParams, $filter, $http, growlService, translator ) {
+itemGRApp.controller( 'itemGRedit', ['itemGRService', '$scope', '$state','$stateParams', '$filter', '$http', 'growlService', 'translator', 'fileReader',
+                                     function(itemGRService, $scope, $state, $stateParams, $filter, $http, growlService, translator,fileReader ) {
 	var self = this;
 	self.service = itemGRService;
 	self.messageService = growlService;
@@ -113,6 +113,16 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 	self.editCtx = false;
 	self.editStepCtx = false;
 	self.addStepCtx = false;
+	self.addImageCtx = false;
+
+	$scope.getFile = function (file) {
+		fileReader.readAsDataUrl(file, $scope)
+		.then(
+				function(result) {
+					self.imageSrc = result;
+				}
+		);
+	};
 
 	//console.log('id::',self.itemId);
 
@@ -128,14 +138,15 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 					} else {
 						if (self.gr.releaseDate !=  null)
 							self.gr.releaseDate = new Date(self.gr.releaseDate);
-						
+
 						//deserialize json in steps lines
 						angular.forEach( 
 								self.gr.steps, 
 								function(step){
 									step.linesArray = step.lines ? angular.fromJson(step.lines) : [{id: 1, text: ''}]; 
+									if (step.image) step.image = atob(step.image);
 								} )
-								
+
 					}
 					//console.log('gr fetch::',self.gr);
 				}
@@ -153,7 +164,7 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 					step.lines = step.linesArray ? angular.toJson(step.linesArray) : null; 
 				} 
 		);
-		
+
 		//console.log('gr update::',self.gr);
 
 		self
@@ -184,7 +195,7 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 		}
 		else 
 			self.inserted.seq = 10;
-		
+
 		self.inserted.linesArray = [{id: 1, text: ''}];
 
 		self.addStepCtx = true;
@@ -244,10 +255,34 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$state','$stateParams', '
 		self.editStepCtx = false;
 	}
 
-	self.isEditCtx = function(){
-		return self.editCtx || self.editStepCtx || self.addStepCtx;
+	self.setAddImageCtx = function(step){
+		step.addImageCtx = true;
+		self.editStepCtx = true;
 	}
-	
+
+	self.unsetAddImageCtx = function(step){
+		delete step.addImageCtx;
+		delete self.imageSrc;
+		self.editStepCtx = false;
+	}
+
+	self.saveImage = function(step){
+		$http
+		.post('/gamereleasesteprest/fileupload/'+step.id, self.imageSrc)
+		.then( 
+				function(response){
+					delete step.addImageCtx;
+					delete self.imageSrc;
+					self.editStepCtx = false;
+					self.fetchGR();
+				}
+		)
+	}
+
+	self.isEditCtx = function(){
+		return self.editCtx || self.editStepCtx || self.addStepCtx || self.addImageCtx;
+	}
+
 	self.addLine = function(step){
 		step.linesArray.push({id: step.linesArray.length + 1, text: ''});
 	}

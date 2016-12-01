@@ -19,13 +19,12 @@
 						</a></li>
 					</ul>
 
-					<pre ng-if="false">{{ itemGRCtrl.gr | json }}</pre>
+					<pre ng-if="t">{{ itemGRCtrl.gr | json }}</pre>
 				</div>
 				<div class="card">
 					<div class="card-body card-padding lv-item">
 
-						<div  ng-include
-							src="'js/itemgr/gredit/greditform.html'"></div>
+						<div ng-include src="'js/itemgr/gredit/greditform.html'"></div>
 
 					</div>
 				</div>
@@ -75,6 +74,10 @@
 									<div class="lv-small"
 										ng-repeat="line in step.linesArray | orderBy: 'id' track by line.id">{{
 										line.text }}</div>
+									<div ng-hide="!step.image || step.addImageCtx"
+										class="fileinput-preview thumbnail">
+										<img ng-src="{{ step.image }}" />
+									</div>
 
 									<div class="lv-actions actions dropdown" uib-dropdown=""
 										ng-show="!itemGRCtrl.isEditCtx()"
@@ -84,10 +87,13 @@
 											class="zmdi zmdi-more-vert"></i></a>
 										<ul class="dropdown-menu dropdown-menu-right">
 											<li><a ng-click="itemGRCtrl.setEditStepCtx(step)"><i
-													class="zmdi zmdi-edit  zmdi-hc-fw"></i>{{
+													class="zmdi zmdi-edit zmdi-hc-fw m-r-10"></i>{{
 													translator.label.EditDetailsPopoverText }}</a></li>
+											<li><a ng-click="itemGRCtrl.setAddImageCtx(step)"><i
+													class="zmdi zmdi-image-alt  zmdi-hc-fw m-r-10"></i>{{
+													translator.label.AddImagePopoverText }}</a></li>
 											<li><a ng-click="itemGRCtrl.deleteStep( step )"><i
-													class="zmdi zmdi-delete  zmdi-hc-fw"></i>{{
+													class="zmdi zmdi-delete  zmdi-hc-fw m-r-10"></i>{{
 													translator.label.DeleteRowPopoverText }}</a></li>
 										</ul>
 									</div>
@@ -102,6 +108,10 @@
 								</ul>
 								<div ng-include src="'js/itemgr/gredit/editstepform.html'"></div>
 							</div>
+							<div class="media-body" ng-if="step.addImageCtx">
+								<div ng-include src="'js/itemgr/gredit/addimagetostep.html'"></div>
+							</div>
+							<pre ng-if="false">{{ step | json }}</pre>
 						</div>
 					</div>
 				</div>

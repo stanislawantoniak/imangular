@@ -1,7 +1,9 @@
 package pl.essay.imangular.domain.gamerelease;
 
+import java.io.IOException;
 import java.io.Serializable;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ public class ItemGameReleaseServiceImpl extends GenericServiceImpl<ItemGameRelea
 	@Autowired 
 	private GameReleaseStepDao stepDao; 
 
+	@Override
 	public void deleteStep(Serializable id){
 		
 		GameReleaseStep step = this.stepDao.get(id);
@@ -23,4 +26,12 @@ public class ItemGameReleaseServiceImpl extends GenericServiceImpl<ItemGameRelea
 		step.setGameRelease(null);
 		this.templateEntityDao.update(gr);
 	}
+	@Override
+	@Transactional
+	public void setImageOnStep(Serializable id, byte[] img){
+		GameReleaseStep step = this.stepDao.get(id);
+		step.setImage( img );
+		this.stepDao.update(step);
+	}
+	
 }

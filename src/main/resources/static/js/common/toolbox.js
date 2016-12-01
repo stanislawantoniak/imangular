@@ -2,32 +2,32 @@ var toolbox = angular.module('toolbox',[]);
 
 toolbox
 .service('growlService', function(){
-    var gs = {};
-    gs.growl = function(message, type) {
-     
-        $.growl({
-            message: message
-        },{
-            type: type,
-            allow_dismiss: false,
-            label: 'Cancel',
-            className: 'btn-xs btn-inverse',
-            placement: {
-                from: 'top',
-                align: 'right'
-            },
-            delay: 1200,
-            animate: {
-                    enter: 'animated rotateIn',
-                    exit: 'animated fadeOutUp'
-            },
-            offset: {
-                x: 20,
-                y: 85
-            }
-        });
-    }
-    return gs;
+	var gs = {};
+	gs.growl = function(message, type) {
+
+		$.growl({
+			message: message
+		},{
+			type: type,
+			allow_dismiss: false,
+			label: 'Cancel',
+			className: 'btn-xs btn-inverse',
+			placement: {
+				from: 'top',
+				align: 'right'
+			},
+			delay: 1200,
+			animate: {
+				enter: 'animated rotateIn',
+				exit: 'animated fadeOutUp'
+			},
+			offset: {
+				x: 20,
+				y: 85
+			}
+		});
+	}
+	return gs;
 });
 
 /*
@@ -104,16 +104,16 @@ toolbox
  * 
  */
 .directive('dynamic', function ($compile) {
-  return {
-    restrict: 'A',
-    replace: true,
-    link: function (scope, ele, attrs) {
-      scope.$watch(attrs.dynamic, function(html) {
-        ele.html(html);
-        $compile(ele.contents())(scope);
-      });
-    }
-  };
+	return {
+		restrict: 'A',
+		replace: true,
+		link: function (scope, ele, attrs) {
+			scope.$watch(attrs.dynamic, function(html) {
+				ele.html(html);
+				$compile(ele.contents())(scope);
+			});
+		}
+	};
 })
 
 .directive('swalExec', function(){
@@ -269,3 +269,62 @@ toolbox
 	return Factory;
 
 }]);
+
+toolbox
+.directive("ngFileSelect",function(){
+
+	return {
+		link: function($scope,el){
+
+			el.bind("change", function(e){
+				var file = (e.srcElement || e.target).files[0];
+				$scope.getFile(file);
+			})
+
+		}
+
+	}
+});
+
+toolbox
+.factory("fileReader",
+		["$q", "$log", 
+		 function ($q, $log) {
+	 
+    var onLoad = function(reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
+                deferred.resolve(reader.result);
+            });
+        };
+    };
+
+    var onError = function (reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
+                deferred.reject(reader.result);
+            });
+        };
+    };
+
+    var getReader = function(deferred, scope) {
+        var reader = new FileReader();
+        reader.onload = onLoad(reader, deferred, scope);
+        reader.onerror = onError(reader, deferred, scope);
+        return reader;
+    };
+
+    var readAsDataURL = function (file, scope) {
+        var deferred = $q.defer();
+         
+        var reader = getReader(deferred, scope);         
+        reader.readAsDataURL(file);
+         
+        return deferred.promise;
+    };
+
+    return {
+        readAsDataUrl: readAsDataURL  
+    };
+}]);
+
