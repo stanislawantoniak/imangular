@@ -3,6 +3,8 @@ package pl.essay.imangular.domain.gamerelease;
 
 import java.io.IOException;
 
+import javax.xml.bind.DatatypeConverter;
+
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,10 +117,12 @@ public class ItemGameReleaseController extends BaseController {
 	@RequestMapping(value= "/gamereleasesteprest/fileupload/{id}", method = {RequestMethod.POST})
 	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
 	public ResponseEntity<Void> uploadImage(
-			@RequestBody byte[] file, 
-			@PathVariable int id){
-
-		this.itemGameReleaseService.setImageOnStep(id, file);
+			@RequestBody String file, 
+			@PathVariable int id) throws IOException{
+		
+		this.itemGameReleaseService.setImageOnStep(id, DatatypeConverter.parseBase64Binary( file ));
+		
+		//System.out.println("save img:: "+ file );
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

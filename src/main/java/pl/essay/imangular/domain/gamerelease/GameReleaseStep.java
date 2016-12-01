@@ -1,7 +1,5 @@
 package pl.essay.imangular.domain.gamerelease;
 
-import java.io.IOException;
-
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -44,7 +40,7 @@ public class GameReleaseStep {
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
-	@JoinColumn(referencedColumnName = "id", nullable = false)
+	@JoinColumn(referencedColumnName = "id", nullable = true)
 	@JsonBackReference("steps")
 	private ItemGameRelease gameRelease;
 
@@ -59,7 +55,7 @@ public class GameReleaseStep {
 	private String lines;	
 	
 	@Column
-	private byte[] image;
+	private Integer image;
 
 	//setters & getters
 	public void setId(int id){
@@ -97,10 +93,10 @@ public class GameReleaseStep {
 	public String getLines(){
 		return this.lines;
 	}
-	public byte[] getImage(){
+	public Integer getImage(){
 		return this.image;
 	}
-	public void setImage(byte[] i){
+	public void setImage(Integer i){
 		this.image = i;
 	}
 

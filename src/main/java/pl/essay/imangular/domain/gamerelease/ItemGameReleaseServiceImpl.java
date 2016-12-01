@@ -1,14 +1,13 @@
 package pl.essay.imangular.domain.gamerelease;
 
-import java.io.IOException;
 import java.io.Serializable;
-
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.essay.generic.servicefacade.GenericServiceImpl;
+import pl.essay.imangular.domain.image.Image;
+import pl.essay.imangular.domain.image.ImageDao;
 
 @Service
 @Transactional
@@ -16,7 +15,9 @@ public class ItemGameReleaseServiceImpl extends GenericServiceImpl<ItemGameRelea
 	
 	@Autowired 
 	private GameReleaseStepDao stepDao; 
-
+	@Autowired 
+	private ImageDao imageDao;
+	
 	@Override
 	public void deleteStep(Serializable id){
 		
@@ -26,11 +27,16 @@ public class ItemGameReleaseServiceImpl extends GenericServiceImpl<ItemGameRelea
 		step.setGameRelease(null);
 		this.templateEntityDao.update(gr);
 	}
+	
 	@Override
-	@Transactional
-	public void setImageOnStep(Serializable id, byte[] img){
+	public void setImageOnStep(Serializable id, byte[] i){
 		GameReleaseStep step = this.stepDao.get(id);
-		step.setImage( img );
+		if (step.getImage() != null)
+			this.imageDao.deleteById(step.getImage());
+		Image img = new Image();
+		img.setImage( i );
+		this.imageDao.create(img);
+		step.setImage( img.getId() );
 		this.stepDao.update(step);
 	}
 	

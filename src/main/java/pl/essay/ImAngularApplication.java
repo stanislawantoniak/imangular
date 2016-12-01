@@ -38,6 +38,7 @@ import pl.essay.toolbox.EmailSender;
 	"pl.essay.imangular.domain.bom",
 	"pl.essay.imangular.domain.news",
 	"pl.essay.imangular.domain.sessioncatcher",
+	"pl.essay.imangular.domain.image",
 	"pl.essay.imports"
 	
 })
@@ -81,6 +82,7 @@ public class ImAngularApplication {
 					"/newsitems/**","/newsitemrest/**",
 					"/sessionlog/",
 					"/gamereleasesteprest/fileupload/**",
+					"/imagerest/**",
 					"/itemgamereleases/**","/itemgamereleaserest/**",
 					"/items/**", "/itemscount/**", "/itemrest/**").permitAll().anyRequest().authenticated().
 			

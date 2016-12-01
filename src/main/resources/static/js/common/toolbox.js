@@ -322,9 +322,28 @@ toolbox
          
         return deferred.promise;
     };
+    
+    var readAsArrayBuffer = function (file, scope) {
+        var deferred = $q.defer();
+         
+        var reader = getReader(deferred, scope);         
+        reader.readAsArrayBuffer(file);
+         
+        return deferred.promise;
+    };
+    var readAsText = function (file, scope) {
+        var deferred = $q.defer();
+         
+        var reader = getReader(deferred, scope);         
+        reader.readAsText(file);
+         
+        return deferred.promise;
+    };
 
     return {
-        readAsDataUrl: readAsDataURL  
+        readAsDataUrl: readAsDataURL,
+        readAsArrayBuffer: readAsArrayBuffer,
+        readAsText : readAsText
     };
 }]);
 

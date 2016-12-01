@@ -119,6 +119,7 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$scope', '$state','$state
 		fileReader.readAsDataUrl(file, $scope)
 		.then(
 				function(result) {
+					self.imageFileName = file;
 					self.imageSrc = result;
 				}
 		);
@@ -144,7 +145,6 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$scope', '$state','$state
 								self.gr.steps, 
 								function(step){
 									step.linesArray = step.lines ? angular.fromJson(step.lines) : [{id: 1, text: ''}]; 
-									if (step.image) step.imageDecoded = atob(step.image);
 								} )
 
 					}
@@ -163,7 +163,6 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$scope', '$state','$state
 				function(step){
 					step.lines = step.linesArray ? angular.toJson(step.linesArray) : null; 
 					delete step.linesArray;
-					delete step.imageDecoded;
 				} 
 		);
 
@@ -268,15 +267,31 @@ itemGRApp.controller( 'itemGRedit', ['itemGRService', '$scope', '$state','$state
 		self.editStepCtx = false;
 	}
 
+	var b64EncodeUnicode = function(str) {
+	    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+	        return String.fromCharCode('0x' + p1);
+	    }));
+	}
 	self.saveImage = function(step){
-		$http
-		.post('/gamereleasesteprest/fileupload/'+step.id, self.imageSrc)
-		.then( 
-				function(response){
-					delete step.addImageCtx;
-					delete self.imageSrc;
-					self.editStepCtx = false;
-					self.fetchGR();
+		//console.log('file ::',self.imageFileName);
+		
+		fileReader
+		.readAsDataUrl(self.imageFileName, $scope)
+		.then(
+
+				function(result) {
+					var res = result.substr(result.indexOf(',')+1);
+					//console.log('res::',res);
+					$http
+					.post('/gamereleasesteprest/fileupload/'+step.id, res)
+					.then( 
+							function(response){
+								delete step.addImageCtx;
+								delete self.imageSrc;
+								self.editStepCtx = false;
+								self.fetchGR();
+							}
+					)
 				}
 		)
 	}

@@ -76,7 +76,7 @@
 										line.text }}</div>
 									<div ng-hide="!step.image || step.addImageCtx"
 										class="fileinput-preview thumbnail">
-										<img ng-src="{{ step.imageDecoded }}" />
+										<img ng-src="{{ '/imagerest/'+step.image+'.jpg' }}" />
 									</div>
 
 									<div class="lv-actions actions dropdown" uib-dropdown=""
@@ -89,7 +89,7 @@
 											<li><a ng-click="itemGRCtrl.setEditStepCtx(step)"><i
 													class="zmdi zmdi-edit zmdi-hc-fw m-r-10"></i>{{
 													translator.label.EditDetailsPopoverText }}</a></li>
-											<li ng-if="false" ><a ng-click="itemGRCtrl.setAddImageCtx(step)"><i
+											<li ng-if="true" ><a ng-click="itemGRCtrl.setAddImageCtx(step)"><i
 													class="zmdi zmdi-image-alt  zmdi-hc-fw m-r-10"></i>{{
 													step.image ? translator.label.ChangeImageButtonText :
 													translator.label.AddImagePopoverText }}</a></li>
