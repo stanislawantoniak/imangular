@@ -22,10 +22,13 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public void updateItem(Item i){
+		
+		Item itemFromDb = this.itemDao.get(i.getId());
+		
 		// update is composed, is used
-		i.setIsComposed(!i.getComponents().isEmpty());
+		i.setIsComposed(!itemFromDb.getComponents().isEmpty());
 		i.setIsUsed(false);
-		for (ItemComponent ic : i.getUsedIn()){
+		for (ItemComponent ic : itemFromDb.getUsedIn()){
 			if (ic.getParent().getCanBeSplit()){
 				i.setIsUsed(true);
 				break;
