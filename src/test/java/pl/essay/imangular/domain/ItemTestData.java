@@ -9,14 +9,14 @@ import pl.essay.imangular.domain.item.ItemComponent;
 
 
 /*
- * A 
+ * A = can be split = true
  * 		2 * B
  * 		3 * C
  * 		1 * D
- * B
+ * B - can be split = false
  * 		2 * D
  * 		3 * E
- * C
+ * C - can be split = true
  * 		2 * B
  * 		1 * F
  * 
@@ -37,6 +37,13 @@ import pl.essay.imangular.domain.item.ItemComponent;
  *  D = 4+12+1=17
  *  E = 6+18=24
  * 	F = 3 
+ * 
+ * 
+ * B,C,D - can be recovered from A
+ * B,F - can be recovered from C
+ * E - cannot be recovered
+ * 
+ * 
  * */
 
 public class ItemTestData {
@@ -56,6 +63,7 @@ public class ItemTestData {
 		 * 		3 * C
 		 * 		1 * D
 		 */
+		item("A").setCanBeSplit(true);
 		item("A").addComponent(ic(item("B"), 2));
 		item("A").addComponent(ic(item("C"), 3));
 		item("A").addComponent(ic(item("D"), 1));
@@ -64,6 +72,7 @@ public class ItemTestData {
 		 * 		2 * D
 		 * 		3 * E
 		 */
+		item("B").setCanBeSplit(false);
 		item("B").addComponent(ic(item("D"), 2));
 		item("B").addComponent(ic(item("E"), 3));
 		/*
@@ -71,6 +80,7 @@ public class ItemTestData {
 		 * 		2 * B
 		 * 		1 * F
 		 */
+		item("C").setCanBeSplit(true);
 		item("C").addComponent(ic(item("B"), 2));
 		item("C").addComponent(ic(item("F"), 1));
 		

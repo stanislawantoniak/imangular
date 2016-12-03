@@ -21,8 +21,6 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.validation.constraints.*;
 
 @Entity
@@ -129,7 +127,11 @@ public class ItemComponent {
 		return (this.component != null ? this.component.getId() : 0 );
 	}
 	public String toString(){
-		return "component id: "+this.getId()+" parent :: "+this.getParent().getId()+ ":: item: #"+this.getComponentId()+" "+this.getComponentName()+":: qty: "+this.getQuantity();
+		return "component id: "+this.getId()+
+				" parent :: "+this.getParent().getId()+ 
+				":: item: #"+this.getComponentId()+" "+
+				this.getComponentName()+
+				":: qty: "+this.getQuantity();
 	}
 	
 	@Override

@@ -22,6 +22,15 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public void updateItem(Item i){
+		// update is composed, is used
+		i.setIsComposed(!i.getComponents().isEmpty());
+		i.setIsUsed(false);
+		for (ItemComponent ic : i.getUsedIn()){
+			if (ic.getParent().getCanBeSplit()){
+				i.setIsUsed(true);
+				break;
+			}
+		}
 		this.itemDao.update(i);
 	}
 
@@ -74,9 +83,9 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public void removeItemComponent(int componentId){
 		ItemComponent ic = this.itemComponentDao.load(componentId);
-		Item item = ic.getParent();
-		item.removeComponent(ic);
-		this.itemDao.update(item);
+		Item parentItem = ic.getParent();
+		parentItem.removeComponent(ic);
+		this.itemDao.update(parentItem);
 	}
 
 	@Override
@@ -87,12 +96,16 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public int addOrUpdateItemComponent(ItemComponent component){
+		System.out.println("addOrUpdateItemComponent component item::"+component);
 
 		if (component.getId() == 0){
 			int itemId = component.getParent().getId();
-			Item item = this.itemDao.load(itemId);
-			item.addComponent(component);
-			this.itemDao.update(item);
+			Item paretnItem = this.itemDao.load(itemId);
+			Item componentItem = this.itemDao.load( component.getComponent().getId());
+			component.setComponent(componentItem);
+			paretnItem.addComponent(component);
+			System.out.println("addOrUpdateItemComponent component item::"+component.getComponent());
+			this.itemDao.update(paretnItem);
 		} else {
 			this.itemComponentDao.update(component);
 		}

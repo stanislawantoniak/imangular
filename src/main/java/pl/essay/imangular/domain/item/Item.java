@@ -198,37 +198,48 @@ public class Item {
 	 * adds component and 
 	 * - sets isComposed attribute in parent item
 	 * - sets isUsed in component only if the parent can be decomposed
-	 * 
 	 */
 	public void addComponent(ItemComponent ic){
 		ic.setParent(this);
 		this.components.remove(ic);			
 		this.components.add(ic);
 		this.isComposed = true;
-		//set isUsed in compoent only of the parent can be decomposed
-		if (this.canBeSplit)
+		ic.getComponent().getUsedIn().add(ic);
+		//set isUsed in component item only of the parent (this) can be decomposed
+		if (this.canBeSplit){
 			ic.getComponent().setIsUsed(true);
+			System.out.println("setting is used to true on "+ic.getComponent());
+		}
 		ic.setParent(this);
 	}
 
 	public void removeComponent(ItemComponent ic){
-		this.components.remove(ic);			
+		
+		this.components.remove(ic);
 		this.isComposed = (this.components.size() == 0 ? false : true );
-		//do something with isUsed in component only if can be decomposed
-		if (!this.canBeSplit){
+		
+		//do something with isUsed in component only if this can be decomposed
+		if (this.canBeSplit){
+			
 			Set<ItemComponent> usedIn = ic.getComponent().getUsedIn();
+			usedIn.remove(ic);
+			
+			//set to false and change in usedIn list iteration
+			ic.getComponent().setIsUsed(false);
+			System.out.println("setting is used to false on "+ic.getComponent());
+			
 			for (ItemComponent icUsedIn : usedIn){
-				//if component is used in a parent that is a building and it is not component just removed
-				if ( icUsedIn.getParent().canBeSplit && !ic.equals(icUsedIn)){
+				//if component is used in any parent that can be split 
+				if ( icUsedIn.getParent().canBeSplit ){
 					// set isUsed to true
 					ic.getComponent().setIsUsed(true);
+					System.out.println("setting is used to true on "+ic.getComponent());
 					break; //and break iteration
 				} 
-				//set to false on every iteration - if no decomposable parent is found
-				ic.getComponent().setIsUsed(false);
 			}
 
 			ic.setParent(null); //break relationship on the other side
+			ic.setComponent(null); //break relationship on the other side
 		}
 	}
 
@@ -281,7 +292,10 @@ public class Item {
 	}
 	
 	public String toString(){
-		return this.getId() + ":: name : "+this.getName()+":: is composed : "+this.isComposed;
+		return this.getId() + 
+				":: name : "+this.getName()+
+				":: is composed : "+this.isComposed+
+				":: is used : "+this.isUsed;
 	}
 
 	public ItemGameRelease getGameRelease(){
@@ -290,10 +304,9 @@ public class Item {
 	public void setGameRelease(ItemGameRelease gr){
 		this.gameRelease = gr;
 	}
-	
-	
+		
 	@JsonIgnore
-	public String getDafaulSortColumn(){
+	public String getDefaulSortColumn(){
 		return "name";
 	}
 
@@ -304,7 +317,7 @@ public class Item {
 		if ( !(other instanceof Item) ) return false;
 
 		final Item b2 = (Item) other;
-
+		
 		EqualsBuilder eb = new EqualsBuilder();
 		eb.append(b2.name, this.name);
 

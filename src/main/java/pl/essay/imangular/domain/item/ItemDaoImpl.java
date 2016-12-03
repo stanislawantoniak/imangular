@@ -8,12 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ItemDaoImpl extends GenericDaoHbnImpl<Item> implements ItemDao {
 
-	public void addComponent(ItemComponent ic){
-		Item item = super.load( ic.getParent().getId() );
-		item.addComponent( ic );
-		this.update(item);
-	}
-
 	@Override
 	public boolean existsItemByName(String name) {
 		Item item = this.getItemByName(name);
