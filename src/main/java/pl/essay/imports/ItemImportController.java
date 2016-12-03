@@ -7,10 +7,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.essay.angular.security.UserForm;
 import pl.essay.generic.dao.SetWithCountHolder;
 import pl.essay.imangular.domain.item.Item;
 import pl.essay.imangular.domain.item.ItemComponent;
@@ -29,7 +31,42 @@ public class ItemImportController {
 	@Autowired
 	public ItemService itemService;
 
+	@RequestMapping(value = "/fixdata", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
+	public ResponseEntity<String> fixData() {
+
+		String s = "";
+
+		SetWithCountHolder<Item> holder = this.itemService.listItems();
+
+		for (Item item : holder.getCollection()){
+
+
+			Item i  = this.itemService.getItemById(item.getId());
+
+			Boolean x = i.getIsUsed();
+			i.setIsUsed(false);
+
+			for (ItemComponent ic : i.getUsedIn()){
+				if (ic.getParent().getCanBeSplit()){
+					i.setIsUsed(true);
+					if ( x == false)
+						s+="isUsed set::"+i+"<br>";
+					break;
+				}
+			}
+
+			this.itemService.updateItem(i);
+		}
+
+		System.out.println("fix done!!!!!!!!!!!!!!!\n");
+		System.out.println(s);
+
+		return new ResponseEntity<String>("fix done!!!!!!!!!!!!!!!<br>"+s, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/importitems", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
 	public ResponseEntity<String> importItems() {
 
 		XLSProductsImporter importer = new XLSProductsImporter();
@@ -77,7 +114,7 @@ public class ItemImportController {
 						if (!component.cid.equals("") && component.quantity > 0){
 							Product componentProduct = importer.getProducts().get(component.cid);
 							if (componentProduct != null){
-								
+
 								Item componentItem = this.itemService.getItemById(componentProduct.itemId);
 
 								ic.setParent(parent);
