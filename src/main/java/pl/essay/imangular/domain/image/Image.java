@@ -1,5 +1,7 @@
 package pl.essay.imangular.domain.image;
 
+import java.util.Date;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @DynamicInsert
@@ -24,6 +28,9 @@ public class Image {
 	
 	@Column
 	private byte[] image;
+	
+	@Column
+	private Date dateCreated;
 
 	//setters & getters
 	public void setId(int id){
@@ -38,5 +45,13 @@ public class Image {
 	}
 	public void setImage(byte[] i){
 		this.image = i;
+	}
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm", timezone="CET")
+	public Date getDateCreated(){
+		return this.dateCreated;
+	}
+	
+	public void setDateCreated(Date d){
+		this.dateCreated = d;
 	}
 }
