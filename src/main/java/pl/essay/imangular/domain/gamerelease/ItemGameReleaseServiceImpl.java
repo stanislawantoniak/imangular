@@ -31,8 +31,6 @@ public class ItemGameReleaseServiceImpl extends GenericServiceImpl<ItemGameRelea
 	@Override
 	public void setImageOnStep(Serializable id, byte[] i){
 		GameReleaseStep step = this.stepDao.get(id);
-		if (step.getImage() != null)
-			this.imageDao.deleteById(step.getImage());
 		Image img = new Image();
 		img.setImage( i );
 		this.imageDao.create(img);
