@@ -199,10 +199,10 @@ itemApp.controller( 'bomEdit', ['$state', '$stateParams','$q', 'translator', 'bo
 				//id : typeof( req.stockId ) == "undefined" ? 0 : req.stockId,
 				bom : { id : self.bomId },
 				forItem : { id : req.forItem.id },
-				inStockQuantity : req.stock.inStockQuantity,
+				inStockQuantity : req.stock.inStockQuantity ? req.stock.inStockQuantity : 0,
 				remarks : req.stock.remarks
 		}
-		//console.log('stock :: ',stock);
+		console.log('stock :: ',stock);
 
 		self.msgService.growl(translator.label.SavingAndRecalculatingBom,'info');
 
