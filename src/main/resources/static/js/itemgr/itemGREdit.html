@@ -70,7 +70,7 @@
 								</div>
 								<div class="media-body">
 
-									<div class="lv-title">{{ step.description }}</div>
+									<div class="lv-title" style="white-space: normal;">{{ step.description }}</div>
 									<div class="lv-small"
 										ng-repeat="line in step.linesArray | orderBy: 'id' track by line.id">{{
 										line.text }}</div>
