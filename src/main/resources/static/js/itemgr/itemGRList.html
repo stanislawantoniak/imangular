@@ -78,8 +78,9 @@
 										gr.releaseDate | date:'yyyy-MM-dd' }} </span></td>
 
 								<td><span editable-textarea="gr.description"
-									e-name="description" e-form="rowform" e-required e-cols="60">
-										{{ gr.description || 'empty'}} </span></td>
+									e-style="height: auto !important;" e-name="description"
+									e-form="rowform" e-required e-cols="60" e-rows="6"> {{
+										gr.description || 'empty'}} </span></td>
 
 								<td ng-show="nav.authService.session.isSupervisor">
 									<form editable-form name="rowform"

@@ -48,7 +48,7 @@ public class GameReleaseStep {
 	@NotNull(message="Sequence must not be empty")
 	private int seq;
 
-	@Column
+	@Column @Type(type="text")
 	private String description;
 
 	@Column @Type(type="text")
