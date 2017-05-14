@@ -12,9 +12,9 @@
 
 ga('create', 'UA-87629565-1', 'auto');
 
-var analitics = angular.module('analytics', []);
+var analytics = angular.module('analytics', []);
 
-analitics 
+analytics 
 .run(['$window','$rootScope', '$location',  
       function ($window, $rootScope, $location  ) {
 

@@ -28,7 +28,8 @@
 
 angular.
 module('generic-restservice',[]).
-factory('restservice', ['$http', '$q', function($http, $q){
+factory('restservice', ['$http', '$q', '$window', '$location', 
+                        function($http, $q, $window, $location){
 
 	var Service = function(){
 		this.REST_SERVICE_ONE = '';
@@ -70,6 +71,16 @@ factory('restservice', ['$http', '$q', function($http, $q){
 				}
 			}
 			
+			/*
+			 * 
+			 $window.ga('send', 'pageview', 
+					{ page: $location.path()
+							+'/filter/'+filter
+							+'/page/'+pageNo
+							+'/perPage/'+pageSize
+							+'/orderBy/'+sortBy
+					});
+			*/
 			return this.postAnyData( this.REST_SERVICE_ALL, params); 
 		
 		} else {

@@ -30,14 +30,14 @@ itemApp.config(['$stateProvider', function( $stateProvider ) {
 
 }]);
 
-itemApp.controller( 'itemslist', ['$q','$stateParams', '$state', 'translator','itemService',  'ngTableParams', 'growlService', 'itemGRService',
-                                  function itemsController( $q, $stateParams, $state, translator,  itemService, ngTableParams, growlService, itemGRService ) {
+itemApp.controller( 'itemslist', ['$window', '$q','$stateParams', '$state', 'translator','itemService',  'ngTableParams', 'growlService', 'itemGRService',
+                                  function itemsController( $window, $q, $stateParams, $state, translator,  itemService, ngTableParams, growlService, itemGRService ) {
 
 	var self = this;
 	self.service = itemService;
 	self.GRservice = itemGRService;
 	self.messageService = growlService;
-	
+
 	//console.log('$stateParams::',$stateParams);
 
 	self.gameReleaseForFilter = $stateParams.gameRelease ? $stateParams.gameRelease : '';
@@ -76,7 +76,7 @@ itemApp.controller( 'itemslist', ['$q','$stateParams', '$state', 'translator','i
 					} );
 		}
 	})
-	
+
 	self.resetFilters = function(){
 		if (self.gameReleaseForFilter) //we are in itemsByGR context - just go to items
 			$state.go('^.items',{});
