@@ -29,7 +29,7 @@ import pl.essay.toolbox.EmailMaker;
 import pl.essay.toolbox.EmailSender;
 
 @SpringBootApplication
-@ComponentScan({
+@ComponentScan({ 
 	"pl.essay",
 	"pl.essay.languages",
 	"pl.essay.angular.security",
