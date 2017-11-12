@@ -4,38 +4,42 @@ public class Language {
 	private String name;
 	private String acronym;
 	private String flag;
-	
+
 	private Translator translator;
-		
-	public String getName(){
+
+	public String getName() {
 		return this.name;
 	};
-	public void setName(String l){
+
+	public void setName(String l) {
 		this.name = l;
 	};
-	
-	public String getAcronym(){
+
+	public String getAcronym() {
 		return this.acronym;
 	};
-	public void setAcronym(String l){
+
+	public void setAcronym(String l) {
 		this.acronym = l;
 	};
-	public String getFlag(){
+
+	public String getFlag() {
 		return this.flag;
 	};
-	public void setFlag(String l){
+
+	public void setFlag(String l) {
 		this.flag = l;
 	};
-	
-	public void setTranslator(Translator t){
+
+	public void setTranslator(Translator t) {
 		this.translator = t;
 	}
-	
-	public Translator getTranslator(){
+
+	public Translator getTranslator() {
 		return this.translator;
 	}
-	
-	public void addTranslations(Language l){
+
+	public void addTranslations(Language l) {
 		this.translator.addTranslations(l.getTranslator());
 	}
 }

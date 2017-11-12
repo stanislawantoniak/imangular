@@ -17,67 +17,70 @@ import org.springframework.stereotype.Component;
 import pl.essay.languages.*;
 
 @Component
-@Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class UserSession implements Serializable{
-	
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class UserSession implements Serializable {
+
 	protected static final Logger logger = LoggerFactory.getLogger(UserSession.class);
-	
+
 	@Autowired
 	UserService userService;
-	
-	@Autowired(required=true)
-	@Qualifier(value="polish")
+
+	@Autowired(required = true)
+	@Qualifier(value = "polish")
 	private Language languageSelected;
 
-	@Autowired(required=true)
-	@Qualifier(value="languages")
+	@Autowired(required = true)
+	@Qualifier(value = "languages")
 	private Languages languages;
 
-	private String name  = "Guest";
-	
+	private String name = "Guest";
+
 	private String anonymousSessionId;
 
 	private boolean authenticated = false;
-	
+
 	private boolean isAdmin = false;
 	private boolean isUser = false;
 	private boolean isSupervisor = false;
-	
+
 	private UserT user;
-	
-	public UserSession(){
+
+	public UserSession() {
 	}
 
-	public void setLanguageSelected(String c){
+	public void setLanguageSelected(String c) {
 		this.languageSelected = this.languages.getLanguage(c);
 	}
-	
-	public Language getLanguageSelected(){
+
+	public Language getLanguageSelected() {
 		return this.languageSelected;
 	}
-	
-	public UserT getUser(){
+
+	public UserT getUser() {
 		return this.user;
 	}
-	public void setUser(UserT u){
+
+	public void setUser(UserT u) {
 		this.user = u;
 	}
-	public void setAuthenticated(boolean u){
+
+	public void setAuthenticated(boolean u) {
 		this.authenticated = u;
 	}
-	public boolean getAuthenticated(){
+
+	public boolean getAuthenticated() {
 		return this.authenticated;
 	}
 
 	public void updateOnAuthentication() {
 
-		if (!this.authenticated){
-			
+		if (!this.authenticated) {
+
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-			if (auth != null){
+			if (auth != null) {
 
-				if (auth.isAuthenticated()){
+				if (auth.isAuthenticated()) {
 
 					Object principal = auth.getPrincipal();
 
@@ -85,7 +88,7 @@ public class UserSession implements Serializable{
 
 					if (principal instanceof UserDetails) {
 						username = ((UserDetails) principal).getUsername();
-						if (principal instanceof UserT){
+						if (principal instanceof UserT) {
 							this.user = (UserT) principal;
 							logger.trace("before lastloggedin");
 							this.userService.setDateLastLoggedIn(user);
@@ -95,8 +98,8 @@ public class UserSession implements Serializable{
 					}
 
 					this.name = username;
-					
-					for (GrantedAuthority a : auth.getAuthorities()){
+
+					for (GrantedAuthority a : auth.getAuthorities()) {
 						if (a.getAuthority().equals(UserForm.roleAdmin))
 							this.isAdmin = true;
 						if (a.getAuthority().equals(UserForm.roleSupervisor))
@@ -104,32 +107,27 @@ public class UserSession implements Serializable{
 						if (a.getAuthority().equals(UserForm.roleUser))
 							this.isUser = true;
 					}
-					
-					
+
 				}
 			}
 		}
 	}
-	
-	public void setAnonymousSessionId(String id){
+
+	public void setAnonymousSessionId(String id) {
 		if (this.anonymousSessionId == null)
 			this.anonymousSessionId = id;
 	}
-	
-	public String getAnonymousSessionId(){
+
+	public String getAnonymousSessionId() {
 		return this.anonymousSessionId;
 	}
 
-	public String toJson(){
+	public String toJson() {
 
-		return
-				"{\n"+
-				"\"name\":\""+this.name+"\",\n"+
-				"\"languageSelectedFlag\":\""+this.languageSelected.getFlag()+"\"\n"+
-				(this.isAdmin ? ",\"isAdmin\":"+this.isAdmin : "")+
-				(this.isSupervisor ? ",\"isSupervisor\":"+this.isSupervisor : "")+
-				(this.isUser ? ",\"isUser\":"+this.isUser+"\n" : "")+
-				"}";
+		return "{\n" + "\"name\":\"" + this.name + "\",\n" + "\"languageSelectedFlag\":\""
+				+ this.languageSelected.getFlag() + "\"\n" + (this.isAdmin ? ",\"isAdmin\":" + this.isAdmin : "")
+				+ (this.isSupervisor ? ",\"isSupervisor\":" + this.isSupervisor : "")
+				+ (this.isUser ? ",\"isUser\":" + this.isUser + "\n" : "") + "}";
 	}
 
 }

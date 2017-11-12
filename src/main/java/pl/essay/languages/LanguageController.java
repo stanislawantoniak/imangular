@@ -15,18 +15,19 @@ import pl.essay.angular.security.UserSession;
 
 @RestController
 public class LanguageController {
-	
+
 	protected static final Logger logger = LoggerFactory.getLogger(LanguageController.class);
 
-	//with scope session
+	// with scope session
 	@Autowired
 	protected UserSession userSession;
 
 	@Autowired
-	protected Languages languages; 
-	
+	protected Languages languages;
+
 	@Value("${eliczile.domain}")
 	private String domain;
+
 	/*
 	 * returns translations for the user selected language
 	 * 
@@ -35,17 +36,17 @@ public class LanguageController {
 	 * adds domain name to be used in angular
 	 * 
 	 */
-	@RequestMapping(value = "/common/labels", method = RequestMethod.GET )
-	public Map<String,String> getLabels() {
-		
+	@RequestMapping(value = "/common/labels", method = RequestMethod.GET)
+	public Map<String, String> getLabels() {
+
 		Language lSelected = this.userSession.getLanguageSelected();
-		logger.trace("language selected: "+lSelected.getName());
-		
-		Map<String,String> translations = lSelected.getTranslator().getTranslations();
-		
+		logger.trace("language selected: " + lSelected.getName());
+
+		Map<String, String> translations = lSelected.getTranslator().getTranslations();
+
 		return translations;
 	}
-	
+
 	@RequestMapping(value = "/common/languages", method = RequestMethod.GET)
 	public List<Language> getLanguages() {
 		return this.languages.getLanguages();

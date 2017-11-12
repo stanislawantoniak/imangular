@@ -26,25 +26,15 @@ import javax.validation.constraints.*;
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Table(
-		uniqueConstraints = @UniqueConstraint(
-				columnNames={"parent_id", "component_id", "remarks"}
-				)
-		)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "parent_id", "component_id", "remarks" }))
 @NamedQueries({
-	@NamedQuery(
-			name = "getComponentsByParent",
-			query = "select ic from ItemComponent ic where parent.id = :id"
-			),
-	@NamedQuery(
-			name = "getComponentsByUsedIn",
-			query = "select ic from ItemComponent ic where component.id = :id"
-			)
-}		)
+		@NamedQuery(name = "getComponentsByParent", query = "select ic from ItemComponent ic where parent.id = :id"),
+		@NamedQuery(name = "getComponentsByUsedIn", query = "select ic from ItemComponent ic where component.id = :id") })
 
 public class ItemComponent {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int id;
 
@@ -54,14 +44,14 @@ public class ItemComponent {
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	//@JsonBackReference(value="component")
+	// @JsonBackReference(value="component")
 	private Item parent;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
-	@NotNull(message="Component must not be empty")
+	@NotNull(message = "Component must not be empty")
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	//@JsonBackReference(value="usedIn")
+	// @JsonBackReference(value="usedIn")
 	private Item component;
 
 	@Column
@@ -72,73 +62,82 @@ public class ItemComponent {
 	@Column
 	private String remarks = "";
 
-	public ItemComponent(){
+	public ItemComponent() {
 	}
 
-	public ItemComponent(Item parent){
+	public ItemComponent(Item parent) {
 		this.parent = parent;
 	}
 
-	//setters & getters
-	public Item getParent(){
+	// setters & getters
+	public Item getParent() {
 		return this.parent;
 	}
-	public void setParent(Item i){
+
+	public void setParent(Item i) {
 		this.parent = i;
-	}	
-	public void setId(int i){
+	}
+
+	public void setId(int i) {
 		this.id = i;
 	}
-	public int getId(){
+
+	public int getId() {
 		return this.id;
 	}
 
-	public void setQuantity(int q){
+	public void setQuantity(int q) {
 		this.quantity = q;
 	}
-	public int getQuantity(){
+
+	public int getQuantity() {
 		return this.quantity;
 	}
-	public void setRemarks(String r){
+
+	public void setRemarks(String r) {
 		this.remarks = r;
 	}
-	public String getRemarks(){
+
+	public String getRemarks() {
 		return this.remarks;
 	}
-	public void setComponent(Item q){
+
+	public void setComponent(Item q) {
 		this.component = q;
 	}
-	public Item getComponent(){
+
+	public Item getComponent() {
 		return this.component;
 	}
-	
-	public Date getDateCreated(){
+
+	public Date getDateCreated() {
 		return this.dateCreated;
 	}
-	
-	public void setDateCreated(Date d){
+
+	public void setDateCreated(Date d) {
 		this.dateCreated = d;
 	}
-	
-	public String getComponentName(){
+
+	public String getComponentName() {
 		return (this.component != null ? this.component.getName() : "");
 	}
-	public int getComponentId(){
-		return (this.component != null ? this.component.getId() : 0 );
+
+	public int getComponentId() {
+		return (this.component != null ? this.component.getId() : 0);
 	}
-	public String toString(){
-		return "component id: "+this.getId()+
-				" parent :: "+this.getParent().getId()+ 
-				":: item: #"+this.getComponentId()+" "+
-				this.getComponentName()+
-				":: qty: "+this.getQuantity();
+
+	public String toString() {
+		return "component id: " + this.getId() + " parent :: " + this.getParent().getId() + ":: item: #"
+				+ this.getComponentId() + " " + this.getComponentName() + ":: qty: " + this.getQuantity();
 	}
-	
+
 	@Override
 	public boolean equals(Object other) {
-		if (this == other) return true;
+		if (this == other)
+			return true;
 
-		if ( !(other instanceof ItemComponent) ) return false;
+		if (!(other instanceof ItemComponent))
+			return false;
 
 		final ItemComponent otherIC = (ItemComponent) other;
 
@@ -146,7 +145,7 @@ public class ItemComponent {
 		eb.append(otherIC.parent.getName(), this.parent.getName());
 		eb.append(otherIC.component.getName(), this.component.getName());
 		eb.append(otherIC.remarks, this.remarks);
-		
+
 		return eb.isEquals();
 	}
 

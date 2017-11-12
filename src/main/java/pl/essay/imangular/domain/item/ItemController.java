@@ -24,7 +24,6 @@ import pl.essay.generic.controller.BaseController;
 import pl.essay.generic.dao.ListingParamsHolder;
 import pl.essay.generic.dao.SetWithCountHolder;
 
-
 @RestController
 public class ItemController extends BaseController {
 
@@ -44,16 +43,15 @@ public class ItemController extends BaseController {
 	}
 
 	/*
-	 * this service is called on validate edit entity form
-	 * - id => id of edited added item (0 for new entity)
-	 * - itemname -> name entered by user
+	 * this service is called on validate edit entity form - id => id of edited
+	 * added item (0 for new entity) - itemname -> name entered by user
 	 * 
-	 * service returns ok if entity is found and its id is different than supplied in request
-	 * otherwise it returns http_notfound
+	 * service returns ok if entity is found and its id is different than supplied
+	 * in request otherwise it returns http_notfound
 	 * 
 	 */
 	@RequestMapping(value = "/itemexists/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
 	public ResponseEntity<Void> userExists(@RequestBody String itemname, @PathVariable int id) {
 
 		ResponseEntity<Void> notFound = new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -65,11 +63,11 @@ public class ItemController extends BaseController {
 			else
 				return notFound;
 		else
-			return notFound;	
+			return notFound;
 	}
 
-	@RequestMapping(value= "/items", method = {RequestMethod.POST})
-	public ResponseEntity<SetWithCountHolder<Item>> listItemsWithParams(@RequestBody ListingParamsHolder filter){
+	@RequestMapping(value = "/items", method = { RequestMethod.POST })
+	public ResponseEntity<SetWithCountHolder<Item>> listItemsWithParams(@RequestBody ListingParamsHolder filter) {
 
 		SetWithCountHolder<Item> holder = this.itemService.listItemsPaginated(filter);
 
@@ -77,9 +75,8 @@ public class ItemController extends BaseController {
 
 	}
 
-
-	@RequestMapping(value= "/itemrest/associations/{itemId}", method = {RequestMethod.GET})
-	public ResponseEntity<Map<String, Set<ItemComponent>>> usedInItem(@PathVariable int itemId){
+	@RequestMapping(value = "/itemrest/associations/{itemId}", method = { RequestMethod.GET })
+	public ResponseEntity<Map<String, Set<ItemComponent>>> usedInItem(@PathVariable int itemId) {
 
 		Item item = this.itemService.getItemById(itemId);
 		Map<String, Set<ItemComponent>> map = new HashMap<String, Set<ItemComponent>>();
@@ -89,30 +86,30 @@ public class ItemController extends BaseController {
 		return new ResponseEntity<Map<String, Set<ItemComponent>>>(map, HttpStatus.OK);
 
 	}
-	
-	//update or add component
-	@RequestMapping(value= "/componentrest", method = {RequestMethod.POST})
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<Integer> createItemComponent(@RequestBody ItemComponent itemComponent){
+
+	// update or add component
+	@RequestMapping(value = "/componentrest", method = { RequestMethod.POST })
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
+	public ResponseEntity<Integer> createItemComponent(@RequestBody ItemComponent itemComponent) {
 
 		this.itemService.addOrUpdateItemComponent(itemComponent);
 
 		return new ResponseEntity<Integer>(itemComponent.getId(), HttpStatus.OK);
 	}
 
-	//update or add component
-	@RequestMapping(value= "/componentrest/{id}", method = {RequestMethod.PUT})
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<Void> updateItemComponent(@PathVariable int id, @RequestBody ItemComponent itemComponent){
+	// update or add component
+	@RequestMapping(value = "/componentrest/{id}", method = { RequestMethod.PUT })
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
+	public ResponseEntity<Void> updateItemComponent(@PathVariable int id, @RequestBody ItemComponent itemComponent) {
 
 		this.itemService.addOrUpdateItemComponent(itemComponent);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value= "/componentrest/{componentId}", method = {RequestMethod.DELETE})
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<Void> deleteItemComponent( @PathVariable("componentId") int componentId	){
+	@RequestMapping(value = "/componentrest/{componentId}", method = { RequestMethod.DELETE })
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
+	public ResponseEntity<Void> deleteItemComponent(@PathVariable("componentId") int componentId) {
 
 		this.itemService.removeItemComponent(componentId);
 
@@ -122,70 +119,68 @@ public class ItemController extends BaseController {
 	@RequestMapping(value = "/itemrest/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Item> getItem(@PathVariable("id") int id) {
 		logger.trace("Fetching Item with id " + id);
-		Item item = (id != 0 ? this.itemService.getItemById(id) : new Item());//init item or get from db 
+		Item item = (id != 0 ? this.itemService.getItemById(id) : new Item());// init item or get from db
 		return new ResponseEntity<Item>(item, HttpStatus.OK);
 	}
 
-	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<Void> updateItem(@PathVariable int id, @RequestBody Item item){
+	@RequestMapping(value = "/itemrest/{id}", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
+	public ResponseEntity<Void> updateItem(@PathVariable int id, @RequestBody Item item) {
 
-		logger.trace("update item data: "+item);
+		logger.trace("update item data: " + item);
 
 		Item itemFromDB = this.itemService.getItemById(id);
-		if (itemFromDB == null){
-			logger.trace("Item "+id+" does not exist, update failed");
+		if (itemFromDB == null) {
+			logger.trace("Item " + id + " does not exist, update failed");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
-		logger.trace("before update item data: "+itemFromDB);
-		this.itemService.updateItem( item );
-		logger.trace("after update item data: "+itemFromDB);
+		logger.trace("before update item data: " + itemFromDB);
+		this.itemService.updateItem(item);
+		logger.trace("after update item data: " + itemFromDB);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value= "/itemrest/", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<Integer> createItem(@RequestBody Item item){
+	@RequestMapping(value = "/itemrest/", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
+	public ResponseEntity<Integer> createItem(@RequestBody Item item) {
 
-		logger.trace("create itemform data: "+item);
+		logger.trace("create itemform data: " + item);
 
-		if ( this.itemService.existsItem( item.getName() ) ){
+		if (this.itemService.existsItem(item.getName())) {
 			System.out.println("Item with name " + item.getName() + " already exist and requested create");
-			return new ResponseEntity<Integer>(0,HttpStatus.CONFLICT);
+			return new ResponseEntity<Integer>(0, HttpStatus.CONFLICT);
 		}
 
-		logger.trace("before create item data: "+item);
-		this.itemService.addItem( item );
-		logger.trace("after create item data: "+item);
+		logger.trace("before create item data: " + item);
+		this.itemService.addItem(item);
+		logger.trace("after create item data: " + item);
 
 		return new ResponseEntity<Integer>(item.getId(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value= "/itemrest/{id}", method = RequestMethod.DELETE)
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public ResponseEntity<Void> deleteItem(@PathVariable int id){
+	@RequestMapping(value = "/itemrest/{id}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
+	public ResponseEntity<Void> deleteItem(@PathVariable int id) {
 
 		Item item = this.itemService.getItemById(id);
-		if (item == null){			 
-			logger.trace("Item " +id+ " does not exist but requested delete");
+		if (item == null) {
+			logger.trace("Item " + id + " does not exist but requested delete");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
-		logger.trace("before delete item: "+item);
+		logger.trace("before delete item: " + item);
 		this.itemService.removeItem(id);
-		logger.trace("after delete item: "+item);
+		logger.trace("after delete item: " + item);
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/items/forselect/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<ItemIdNameIsComposedQueryResult> > itemsForSelect(@PathVariable("id") int id) {
+	public ResponseEntity<List<ItemIdNameIsComposedQueryResult>> itemsForSelect(@PathVariable("id") int id) {
 
 		return new ResponseEntity<List<ItemIdNameIsComposedQueryResult>>(
-				this.itemService.getAllItemsInShort(id, "term"),  
-				HttpStatus.OK
-				);
+				this.itemService.getAllItemsInShort(id, "term"), HttpStatus.OK);
 	}
 }

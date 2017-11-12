@@ -2,7 +2,6 @@ package pl.essay.angular.security;
 
 import java.nio.charset.Charset;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,19 +18,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.essay.angular.security.UserController;
 import pl.essay.angular.security.UserService;
 
-
 import static org.mockito.Mockito.*;
 import org.mockito.runners.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
 @RunWith(MockitoJUnitRunner.class)
 @RestClientTest(UserController.class)
-@TestPropertySource(locations="classpath:test.properties")
+@TestPropertySource(locations = "classpath:test.properties")
 public class UserControllerForgotPass {
 
-	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
+			MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 
 	private MockMvc mockMvc;
 
@@ -42,65 +40,54 @@ public class UserControllerForgotPass {
 	private UserService userServiceMock;
 
 	@Before
-	public void setup() 
-	{
+	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 
 	@Test
-	public void testGetUsernameWhenHashNotExists() throws Exception{
+	public void testGetUsernameWhenHashNotExists() throws Exception {
 
-		//assertEquals("0==0", 0,1);
+		// assertEquals("0==0", 0,1);
 
-		//this.userServiceMock = mock(UserService.class);
+		// this.userServiceMock = mock(UserService.class);
 
 		String hash = "hash";
-		when(userServiceMock.getUserByForgotPasswordHash(hash)).thenReturn( null );
+		when(userServiceMock.getUserByForgotPasswordHash(hash)).thenReturn(null);
 
-		//System.out.println(requestJson);
-		
-		MockHttpServletRequestBuilder req = get("/getusername/"+hash)
-				.contentType(APPLICATION_JSON_UTF8);
+		// System.out.println(requestJson);
 
-		//System.out.println(APPLICATION_JSON_UTF8);
-		
+		MockHttpServletRequestBuilder req = get("/getusername/" + hash).contentType(APPLICATION_JSON_UTF8);
+
+		// System.out.println(APPLICATION_JSON_UTF8);
+
 		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-		
-		mockMvc.perform(
-				req
-				)
-		.andExpect(status().isNotFound())
-		.andExpect( content().string("not found"));
+
+		mockMvc.perform(req).andExpect(status().isNotFound()).andExpect(content().string("not found"));
 
 	}
+
 	@Test
-	public void testGetUsernameWhenHashExists() throws Exception{
+	public void testGetUsernameWhenHashExists() throws Exception {
 
-		//assertEquals("0==0", 0,1);
+		// assertEquals("0==0", 0,1);
 
-		//this.userServiceMock = mock(UserService.class);
+		// this.userServiceMock = mock(UserService.class);
 
 		UserT user = UserControllerUpdateUserTests.getUser("123456");
 		String hash = "hash";
-		when(userServiceMock.getUserByForgotPasswordHash(hash)).thenReturn( user );
+		when(userServiceMock.getUserByForgotPasswordHash(hash)).thenReturn(user);
 
-		//System.out.println(requestJson);
-		
-		MockHttpServletRequestBuilder req = get("/getusername/"+hash)
-				.contentType(APPLICATION_JSON_UTF8);
+		// System.out.println(requestJson);
+
+		MockHttpServletRequestBuilder req = get("/getusername/" + hash).contentType(APPLICATION_JSON_UTF8);
 
 		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-		
-		mockMvc.perform(
-				req
-				)
-		.andExpect(status().isOk())		
-		.andExpect( content().string(user.getUsername())); 
-		
-		//assertEquals("",1,2);
+
+		mockMvc.perform(req).andExpect(status().isOk()).andExpect(content().string(user.getUsername()));
+
+		// assertEquals("",1,2);
 
 	}
-	
-	
+
 }

@@ -7,6 +7,8 @@ import pl.essay.generic.dao.GenericDaoHbn;
 @Transactional
 public interface UserDao extends GenericDaoHbn<UserT> {
 	public UserT getUserByName(String name);
+
 	public boolean existsUserByName(String name);
+
 	public UserT getUserByForgotPasswordHash(String hash);
 }

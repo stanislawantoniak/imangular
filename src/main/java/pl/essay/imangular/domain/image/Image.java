@@ -21,37 +21,41 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Image {
-	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int id;
-	
+
 	@Column
 	private byte[] image;
-	
+
 	@Column
 	private Date dateCreated;
 
-	//setters & getters
-	public void setId(int id){
+	// setters & getters
+	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId(){
+
+	public int getId() {
 		return this.id;
 	}
 
-	public byte[] getImage(){
+	public byte[] getImage() {
 		return this.image;
 	}
-	public void setImage(byte[] i){
+
+	public void setImage(byte[] i) {
 		this.image = i;
 	}
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm", timezone="CET")
-	public Date getDateCreated(){
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd, HH:mm", timezone = "CET")
+	public Date getDateCreated() {
 		return this.dateCreated;
 	}
-	
-	public void setDateCreated(Date d){
+
+	public void setDateCreated(Date d) {
 		this.dateCreated = d;
 	}
 }

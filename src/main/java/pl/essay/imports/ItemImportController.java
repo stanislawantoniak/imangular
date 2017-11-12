@@ -24,7 +24,6 @@ import pl.essay.imangular.domain.item.ItemService;
  * uses non secure data insert methods (insert associated components not updating items)
  */
 
-
 @RestController
 public class ItemImportController {
 
@@ -32,26 +31,25 @@ public class ItemImportController {
 	public ItemService itemService;
 
 	@RequestMapping(value = "/fixdata", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
+	@PreAuthorize("hasRole('" + UserForm.roleAdmin + "')")
 	public ResponseEntity<String> fixData() {
 
 		String s = "";
 
 		SetWithCountHolder<Item> holder = this.itemService.listItems();
 
-		for (Item item : holder.getCollection()){
+		for (Item item : holder.getCollection()) {
 
-
-			Item i  = this.itemService.getItemById(item.getId());
+			Item i = this.itemService.getItemById(item.getId());
 
 			Boolean x = i.getIsUsed();
 			i.setIsUsed(false);
 
-			for (ItemComponent ic : i.getUsedIn()){
-				if (ic.getParent().getCanBeSplit()){
+			for (ItemComponent ic : i.getUsedIn()) {
+				if (ic.getParent().getCanBeSplit()) {
 					i.setIsUsed(true);
-					if ( x == false)
-						s+="isUsed set::"+i+"<br>";
+					if (x == false)
+						s += "isUsed set::" + i + "<br>";
 					break;
 				}
 			}
@@ -62,25 +60,26 @@ public class ItemImportController {
 		System.out.println("fix done!!!!!!!!!!!!!!!\n");
 		System.out.println(s);
 
-		return new ResponseEntity<String>("fix done!!!!!!!!!!!!!!!<br>"+s, HttpStatus.OK);
+		return new ResponseEntity<String>("fix done!!!!!!!!!!!!!!!<br>" + s, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/importitems", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('"+UserForm.roleAdmin+"')")
+	@PreAuthorize("hasRole('" + UserForm.roleAdmin + "')")
 	public ResponseEntity<String> importItems() {
 
 		XLSProductsImporter importer = new XLSProductsImporter();
 		importer.importFile("skladniki.xlsx");
 
 		String s = "";
-		//add items with no components - they will be added in step 2- when all item are existing
-		for (Map.Entry<String,Product> p : importer.getProducts().entrySet()){
-			System.out.print(p.getKey()+":: "+p.getValue());
+		// add items with no components - they will be added in step 2- when all item
+		// are existing
+		for (Map.Entry<String, Product> p : importer.getProducts().entrySet()) {
+			System.out.print(p.getKey() + ":: " + p.getValue());
 			Product product = p.getValue();
-			if (! this.itemService.existsItem(product.name)){
+			if (!this.itemService.existsItem(product.name)) {
 				Item item = new Item();
 				item.setName(product.name);
-				item.setCanBeSplit( ! product.isBuilding );
+				item.setCanBeSplit(!product.isBuilding);
 				item.setIsAvailableInOtherSources(product.otherSources);
 				item.setOtherSources(product.otherSourceName);
 				item.setWhereManufactured(product.whereManufactured);
@@ -89,7 +88,7 @@ public class ItemImportController {
 			} else {
 				Item item = this.itemService.getItemByName(product.name);
 				product.itemId = item.getId();
-				s += "product exists: "+product.id+"\n";
+				s += "product exists: " + product.id + "\n";
 			}
 			System.gc();
 		}
@@ -98,22 +97,22 @@ public class ItemImportController {
 
 		Collection<ItemComponent> icList = new LinkedHashSet<ItemComponent>();
 
-		//add components - fast not secure
-		for (Map.Entry<String,Product> p : importer.getProducts().entrySet()){
-			System.out.print(p.getKey()+":: "+p.getValue());
+		// add components - fast not secure
+		for (Map.Entry<String, Product> p : importer.getProducts().entrySet()) {
+			System.out.print(p.getKey() + ":: " + p.getValue());
 			Product product = p.getValue();
-			if (product.isComposed){
+			if (product.isComposed) {
 
 				Item parent = this.itemService.getItemById(product.itemId);
 
-				if (parent != null){
+				if (parent != null) {
 
-					for (Map.Entry<String, Product.Component> c : product.components.entrySet()){
+					for (Map.Entry<String, Product.Component> c : product.components.entrySet()) {
 						Product.Component component = c.getValue();
 						ItemComponent ic = new ItemComponent();
-						if (!component.cid.equals("") && component.quantity > 0){
+						if (!component.cid.equals("") && component.quantity > 0) {
 							Product componentProduct = importer.getProducts().get(component.cid);
-							if (componentProduct != null){
+							if (componentProduct != null) {
 
 								Item componentItem = this.itemService.getItemById(componentProduct.itemId);
 
@@ -123,47 +122,45 @@ public class ItemImportController {
 
 								String remarks = component.desc;
 
-								//if in remarks there is a number then convert string to "1 Etap", "2 Etap" etc
-								try { 
+								// if in remarks there is a number then convert string to "1 Etap", "2 Etap" etc
+								try {
 
 									Integer.parseInt(remarks);
-									remarks += " Etap"; //this will run only if the remarksholds a number
+									remarks += " Etap"; // this will run only if the remarksholds a number
 
-								} catch( Exception e){
-									//just ignore
+								} catch (Exception e) {
+									// just ignore
 								}
 
 								ic.setRemarks(remarks);
 
-								if (ic.getParent() != null 
-										&& ic.getComponent()!= null
-										&& ic.getQuantity() > 0 
+								if (ic.getParent() != null && ic.getComponent() != null && ic.getQuantity() > 0
 										&& ic.getRemarks() != null)
 									icList.add(ic);
-								else 
-									s += "error in component "+componentProduct+"\n";
-							} 
+								else
+									s += "error in component " + componentProduct + "\n";
+							}
 						}
 					}
-				} else 
-					s+= "item for product not found "+product+"\n";
+				} else
+					s += "item for product not found " + product + "\n";
 				System.gc();
 			}
 		}
 
 		this.itemService.addItemComponentFastNotSecure(icList);
 
-		//memory cleanup
+		// memory cleanup
 		importer = null;
 		icList = null;
 		System.gc();
 
 		SetWithCountHolder<Item> holder = this.itemService.listItems();
-		for (Item item : holder.getCollection()){
-			Item i  = this.itemService.getItemById(item.getId());
+		for (Item item : holder.getCollection()) {
+			Item i = this.itemService.getItemById(item.getId());
 			i.setIsComposed(!i.getComponents().isEmpty());
-			for (ItemComponent ic : i.getUsedIn()){
-				if (ic.getParent().getCanBeSplit()){
+			for (ItemComponent ic : i.getUsedIn()) {
+				if (ic.getParent().getCanBeSplit()) {
 					i.setIsUsed(true);
 					break;
 				}

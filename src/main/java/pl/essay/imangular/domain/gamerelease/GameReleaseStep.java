@@ -24,17 +24,14 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(
-		uniqueConstraints = @UniqueConstraint(
-				columnNames={"game_release_id", "seq"}
-				)
-		)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "game_release_id", "seq" }))
 @DynamicInsert
 @DynamicUpdate
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class GameReleaseStep {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int id;
 
@@ -45,66 +42,76 @@ public class GameReleaseStep {
 	private ItemGameRelease gameRelease;
 
 	@Column
-	@NotNull(message="Sequence must not be empty")
+	@NotNull(message = "Sequence must not be empty")
 	private int seq;
 
-	@Column @Type(type="text")
+	@Column
+	@Type(type = "text")
 	private String description;
 
-	@Column @Type(type="text")
-	private String lines;	
-	
+	@Column
+	@Type(type = "text")
+	private String lines;
+
 	@Column
 	private Integer image;
 
-	//setters & getters
-	public void setId(int id){
+	// setters & getters
+	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId(){
+
+	public int getId() {
 		return this.id;
 	}
 
-	public ItemGameRelease getGameRelease(){
+	public ItemGameRelease getGameRelease() {
 		return this.gameRelease;
 	}
 
-	public void setGameRelease(ItemGameRelease i){
+	public void setGameRelease(ItemGameRelease i) {
 		this.gameRelease = i;
 	}
 
-	public void setSeq(int o){
+	public void setSeq(int o) {
 		this.seq = o;
 	}
-	public int getSeq(){
+
+	public int getSeq() {
 		return this.seq;
 	}
 
-	public void setDescription(String d){
+	public void setDescription(String d) {
 		this.description = d;
 	}
-	public String getDescription(){
+
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setLines(String d){
+	public void setLines(String d) {
 		this.lines = d;
 	}
-	public String getLines(){
+
+	public String getLines() {
 		return this.lines;
 	}
-	public Integer getImage(){
+
+	public Integer getImage() {
 		return this.image;
 	}
-	public void setImage(Integer i){
+
+	public void setImage(Integer i) {
 		this.image = i;
 	}
 
 	@Override
 	public boolean equals(Object other) {
-		if (this == other) return true;
+		if (this == other)
+			return true;
 
-		if ( !(other instanceof GameReleaseStep) ) return false;
+		if (!(other instanceof GameReleaseStep))
+			return false;
 
 		final GameReleaseStep otherStep = (GameReleaseStep) other;
 

@@ -7,6 +7,6 @@ import pl.essay.generic.servicefacade.GenericServiceImpl;
 
 @Service
 @Transactional
-public class NewsItemServiceImpl extends GenericServiceImpl<NewsItem> implements NewsItemService{
+public class NewsItemServiceImpl extends GenericServiceImpl<NewsItem> implements NewsItemService {
 
 }

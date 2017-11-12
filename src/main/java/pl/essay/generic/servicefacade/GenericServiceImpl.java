@@ -14,15 +14,15 @@ public class GenericServiceImpl<T extends Object> implements GenericService<T> {
 
 	@Autowired
 	protected GenericDaoHbn<T> templateEntityDao;
-		
+
 	@Override
 	public Serializable addEntity(T e) {
-		return this.templateEntityDao.create( e );
+		return this.templateEntityDao.create(e);
 	}
 
 	@Override
 	public void updateEntity(T e) {
-		this.templateEntityDao.update( e );
+		this.templateEntityDao.update(e);
 	}
 
 	@Override
@@ -32,16 +32,16 @@ public class GenericServiceImpl<T extends Object> implements GenericService<T> {
 
 	@Override
 	public SetWithCountHolder<T> listEntitiesPaginated(ListingParamsHolder params) {
-		return this.templateEntityDao.getAll( params );
+		return this.templateEntityDao.getAll(params);
 	}
 
 	@Override
 	public T getEntityById(Serializable id) {
-		return this.templateEntityDao.get( id );
+		return this.templateEntityDao.get(id);
 	}
 
 	@Override
 	public void removeEntity(Serializable id) {
-		this.templateEntityDao.deleteById( id );
+		this.templateEntityDao.deleteById(id);
 	}
 }

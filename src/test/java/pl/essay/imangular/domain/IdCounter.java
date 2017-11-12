@@ -5,12 +5,13 @@ package pl.essay.imangular.domain;
  *  
  */
 public class IdCounter {
-	
+
 	int id = 1;
-	
-	public IdCounter(){};
-	
-	public int get(){
+
+	public IdCounter() {
+	};
+
+	public int get() {
 		return id++;
 	}
 

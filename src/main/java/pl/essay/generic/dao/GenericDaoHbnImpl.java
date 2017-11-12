@@ -32,7 +32,7 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 
 	public SessionFactory getSessionFactory() {
 
-		if (this.sessionFactory == null){
+		if (this.sessionFactory == null) {
 			if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
 				throw new NullPointerException("Not a hibernate factory exception");
 			}
@@ -42,20 +42,17 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		return this.sessionFactory;
 	}
 
-	private String getDefaultSortColumn(){
+	private String getDefaultSortColumn() {
 
 		String sortColumn = "";
 
-		Method method = ReflectionUtils
-				.findMethod(
-						getDomainClass(), 
-						"getDefaultSortColumn"
-						);
+		Method method = ReflectionUtils.findMethod(getDomainClass(), "getDefaultSortColumn");
 		if (method != null) {
 			try {
-				T t = this.getDomainClass().newInstance(); //get instance of generic class
-				sortColumn = (String) method.invoke( t );
-			} catch (Exception e) {} //ignore
+				T t = this.getDomainClass().newInstance(); // get instance of generic class
+				sortColumn = (String) method.invoke(t);
+			} catch (Exception e) {
+			} // ignore
 		}
 
 		return sortColumn;
@@ -63,12 +60,10 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 
 	protected Session getSession() {
 		try {
-			//System.out.println("get current session success");
+			// System.out.println("get current session success");
 			return getSessionFactory().getCurrentSession();
-		} 
-		catch (HibernateException e) 
-		{
-			//System.out.println("get current session fail");
+		} catch (HibernateException e) {
+			// System.out.println("get current session fail");
 			return getSessionFactory().openSession();
 		}
 	}
@@ -76,10 +71,8 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 	@SuppressWarnings("unchecked")
 	private Class<T> getDomainClass() {
 		if (domainClass == null) {
-			ParameterizedType thisType =
-					(ParameterizedType) getClass().getGenericSuperclass();
-			this.domainClass =
-					(Class<T>) thisType.getActualTypeArguments()[0];
+			ParameterizedType thisType = (ParameterizedType) getClass().getGenericSuperclass();
+			this.domainClass = (Class<T>) thisType.getActualTypeArguments()[0];
 		}
 		return domainClass;
 	}
@@ -89,13 +82,12 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 	}
 
 	public Serializable create(T t) {
-		Method method = ReflectionUtils.findMethod(
-				getDomainClass(), "setDateCreated",
-				new Class[] { Date.class });
+		Method method = ReflectionUtils.findMethod(getDomainClass(), "setDateCreated", new Class[] { Date.class });
 		if (method != null) {
 			try {
 				method.invoke(t, new Date());
-			} catch (Exception e) { /* Ignore */ }
+			} catch (Exception e) {
+				/* Ignore */ }
 		}
 		return getSession().save(t);
 	}
@@ -105,7 +97,7 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		while (iterator.hasNext()) {
 			T t = iterator.next();
 			this.create(t);
-			//System.out.println("adding entity "+this.getDomainClassName()+"::"+t);
+			// System.out.println("adding entity "+this.getDomainClassName()+"::"+t);
 		}
 	}
 
@@ -117,118 +109,81 @@ public abstract class GenericDaoHbnImpl<T extends Object> implements GenericDaoH
 		return (T) getSession().load(getDomainClass(), id);
 	}
 
-	protected CriteriaBuilder<T> getCriteriaBuilder(){
-		CriteriaBuilder<T> criteriaBuilder = new CriteriaBuilder<T>(this.getSession(),this.getDomainClass());
+	protected CriteriaBuilder<T> getCriteriaBuilder() {
+		CriteriaBuilder<T> criteriaBuilder = new CriteriaBuilder<T>(this.getSession(), this.getDomainClass());
 		return criteriaBuilder;
 	}
-
 
 	/*
 	 * get set with list and total count
 	 */
 	@SuppressWarnings("unchecked")
-	protected SetWithCountHolder<T> getSetWithCountHolder(Criteria finalCriteria, long count){
-		return new SetWithCountHolder<T>( 
-				finalCriteria
-				.list(),
-				count
-				);
+	protected SetWithCountHolder<T> getSetWithCountHolder(Criteria finalCriteria, long count) {
+		return new SetWithCountHolder<T>(finalCriteria.list(), count);
 	}
-	
 
-	protected long getTotalRowsOnCriteria(Criteria criteria){
-		return (long) criteria
-				.setProjection(Projections.rowCount())
-				.uniqueResult();
+	protected long getTotalRowsOnCriteria(Criteria criteria) {
+		return (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 	}
 
 	public SetWithCountHolder<T> getAll() {
-		
-		long totalRows = this
-				.getTotalRowsOnCriteria(
-					this
-					.getCriteriaBuilder()
-					.get()
-					.setCacheable(true)
-					.setCacheRegion("cache.getAll")
-					);
-		
-		return this.getSetWithCountHolder(
-				this
-				.getCriteriaBuilder()
-				.get()
-				.setCacheable(true)
-				.setCacheRegion("cache.getAll"),
-				totalRows
-				);
-	}
 
+		long totalRows = this.getTotalRowsOnCriteria(
+				this.getCriteriaBuilder().get().setCacheable(true).setCacheRegion("cache.getAll"));
+
+		return this.getSetWithCountHolder(
+				this.getCriteriaBuilder().get().setCacheable(true).setCacheRegion("cache.getAll"), totalRows);
+	}
 
 	public SetWithCountHolder<T> getAll(ListingParamsHolder params) {
 
-		Criteria criteriaForCount = this
-				.getCriteriaBuilder()
-				.addAndLikeFilters(params.filterFields)
-				.get();
+		Criteria criteriaForCount = this.getCriteriaBuilder().addAndLikeFilters(params.filterFields).get();
 
 		long totalRows = this.getTotalRowsOnCriteria(criteriaForCount);
-		
-		Criteria finalCriteria = this
-				.getCriteriaBuilder()
-				.addAndLikeFilters(params.filterFields)
-				.addSortOrder(params.sortOrderFields)
-				.addPagination(params.pageNo, params.pageSize)
-				.get();
+
+		Criteria finalCriteria = this.getCriteriaBuilder().addAndLikeFilters(params.filterFields)
+				.addSortOrder(params.sortOrderFields).addPagination(params.pageNo, params.pageSize).get();
 
 		return this.getSetWithCountHolder(finalCriteria, totalRows);
 	}
-	
-	public SetWithCountHolder<T> getListByStrictPropertyMatch(String field, Object match){
+
+	public SetWithCountHolder<T> getListByStrictPropertyMatch(String field, Object match) {
 
 		return this.getSetWithCountHolder(
-						
-						this.getCriteriaBuilder()
-						.addStrictMatchingFilter(field, match)
-						.get()
-						.setCacheable(true)
+
+				this.getCriteriaBuilder().addStrictMatchingFilter(field, match).get().setCacheable(true)
 						.setCacheRegion("cache.getListByStrictPropertyMatch"),
 
-						this.getTotalRowsOnCriteria(
-								this.getCriteriaBuilder()
-								.addStrictMatchingFilter(field, match)
-								.get()
-								.setCacheable(true)
-								.setCacheRegion("cache.getListByStrictPropertyMatch")
-								)
-						);
+				this.getTotalRowsOnCriteria(this.getCriteriaBuilder().addStrictMatchingFilter(field, match).get()
+						.setCacheable(true).setCacheRegion("cache.getListByStrictPropertyMatch")));
 
 	}
 
-	public void update(T t) { 
-		//System.out.println("updating object "+t.getClass()+"::"+t.toString());
+	public void update(T t) {
+		// System.out.println("updating object "+t.getClass()+"::"+t.toString());
 		Session session = getSession();
 		session.update(t);
-		//session.flush();
+		// session.flush();
 	}
 
-	public void delete(T t) { 
+	public void delete(T t) {
 		Session session = getSession();
-		session.delete(t); 
+		session.delete(t);
 		session.flush();
 	}
 
-	public void deleteById(Serializable id) { 
+	public void deleteById(Serializable id) {
 		Session session = getSession();
 		T obj = session.load(getDomainClass(), id);
 		session.delete(obj);
 	}
 
 	public void deleteAll() {
-		getSession()
-		.createQuery("delete " + getDomainClassName())
-		.executeUpdate();
+		getSession().createQuery("delete " + getDomainClassName()).executeUpdate();
 	}
 
-	public boolean exists(Serializable id) { return (get(id) != null); }
+	public boolean exists(Serializable id) {
+		return (get(id) != null);
+	}
 
 }

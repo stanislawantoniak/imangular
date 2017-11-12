@@ -13,14 +13,14 @@ import org.apache.commons.io.IOUtils;
 
 public class FileToolBox {
 
-	public final static void saveStringAsFile(String s, String fileName){
+	public final static void saveStringAsFile(String s, String fileName) {
 		FileOutputStream is = null;
 		OutputStreamWriter osw = null;
 		Writer w = null;
 		try {
 			File saveFile = new File(fileName);
 			is = new FileOutputStream(saveFile);
-			osw = new OutputStreamWriter(is, "UTF-8");    
+			osw = new OutputStreamWriter(is, "UTF-8");
 			w = new BufferedWriter(osw);
 			w.write(s);
 			w.close();
@@ -54,7 +54,7 @@ public class FileToolBox {
 		}
 	}
 
-	public final static String readFileAsString(String filename ) {
+	public final static String readFileAsString(String filename) {
 
 		FileInputStream inputStream = null;
 
@@ -62,31 +62,31 @@ public class FileToolBox {
 
 		try {
 			inputStream = new FileInputStream(filename);
-			output = IOUtils.toString(inputStream,"UTF-8");
+			output = IOUtils.toString(inputStream, "UTF-8");
 		} catch (FileNotFoundException e) {
-			System.out.println("File does not  exist " + filename );
+			System.out.println("File does not  exist " + filename);
 		} catch (IOException e) {
-			System.out.println("Problem reading file " + filename );
+			System.out.println("Problem reading file " + filename);
 		} finally {
-			if (inputStream!=null)
+			if (inputStream != null)
 				try {
 					inputStream.close();
 				} catch (IOException e) {
-					System.out.println("Problem reading file " + filename );
+					System.out.println("Problem reading file " + filename);
 				}
 		}
 
 		return output;
 	}
 
-	public final static String listFilesInCatalog(String baseCat){
+	public final static String listFilesInCatalog(String baseCat) {
 		String list = "";
 		File catalog = new File(baseCat);
-		if (catalog.exists() && catalog.isDirectory()){
-			System.out.println("catalog exists:: "+baseCat);
+		if (catalog.exists() && catalog.isDirectory()) {
+			System.out.println("catalog exists:: " + baseCat);
 			String files[] = catalog.list();
-			for(String file: files)
-				list += file+"\n";
+			for (String file : files)
+				list += file + "\n";
 		}
 		return list;
 	}

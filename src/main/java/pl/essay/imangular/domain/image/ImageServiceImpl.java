@@ -8,6 +8,5 @@ import pl.essay.generic.servicefacade.GenericServiceImpl;
 @Service
 @Transactional
 public class ImageServiceImpl extends GenericServiceImpl<Image> implements ImageService {
-	
 
 }

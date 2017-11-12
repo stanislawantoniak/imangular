@@ -26,32 +26,33 @@ import pl.essay.imangular.domain.item.Item;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-//@Table(uniqueConstraints = {
-//		@UniqueConstraint(columnNames = {"bom","for_item"})}
-//		)
+// @Table(uniqueConstraints = {
+// @UniqueConstraint(columnNames = {"bom","for_item"})}
+// )
 public class BillOfMaterialInStock {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // , generator="item_seq")
 	@Column
 	private long id;
-	
+
 	@Column
 	private Date dateCreated;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	@JsonBackReference(value="stocks")
+	@JsonBackReference(value = "stocks")
 	private BillOfMaterial bom;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Item forItem;
-	
+
 	@Column
-	//@NotNull
+	// @NotNull
 	private Boolean ignoreRequirement = false;
-	
+
 	@Column
 	@NotNull
 	@DecimalMin("0")
@@ -65,87 +66,92 @@ public class BillOfMaterialInStock {
 	@Column
 	private String remarks;
 
-	public BillOfMaterialInStock(){};
+	public BillOfMaterialInStock() {
+	};
 
-	public BillOfMaterialInStock(long id){
+	public BillOfMaterialInStock(long id) {
 		this.id = id;
 	};
 
-	public long getId(){
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(long id){
+	public void setId(long id) {
 		this.id = id;
 	}
-	
-	public Date getDateCreated(){
+
+	public Date getDateCreated() {
 		return this.dateCreated;
 	}
-	
-	public void setDateCreated(Date d){
+
+	public void setDateCreated(Date d) {
 		this.dateCreated = d;
 	}
-	public BillOfMaterial getBom(){
+
+	public BillOfMaterial getBom() {
 		return this.bom;
 	}
 
-	public void setBom(BillOfMaterial b){
+	public void setBom(BillOfMaterial b) {
 		this.bom = b;
 	}
 
-	public Item getForItem(){
+	public Item getForItem() {
 		return this.forItem;
 	}
 
-	public void setForItem(Item item){
+	public void setForItem(Item item) {
 		this.forItem = item;
 	}
-	
-	public Boolean getIgnoreRequirement(){
+
+	public Boolean getIgnoreRequirement() {
 		return this.ignoreRequirement;
 	}
-	
-	public void setIgnoreRequirement(Boolean i){
+
+	public void setIgnoreRequirement(Boolean i) {
 		this.ignoreRequirement = i;
 	}
 
-	public int getInStockQuantity(){
+	public int getInStockQuantity() {
 		return this.inStockQuantity;
 	}
 
-	public void setInStockQuantity(int q){
+	public void setInStockQuantity(int q) {
 		this.inStockQuantity = q;
-	}	
-	public int getConsumedStockQuantity(){
+	}
+
+	public int getConsumedStockQuantity() {
 		return this.consumedStockQuantity;
 	}
 
-	public void setConsumedStockQuantity(int q){
+	public void setConsumedStockQuantity(int q) {
 		this.consumedStockQuantity = q;
 	}
 
-	public String getRemarks(){
+	public String getRemarks() {
 		return this.remarks;
 	};
-	public void setRemarks(String w){
+
+	public void setRemarks(String w) {
 		this.remarks = w;
 	};
 
 	@Override
-	public String toString(){
-		return "stock :: "+this.getId()+
-				", stock.bom :: "+ this.bom.getId()+
-				( this.getForItem() != null ? ", stock.forItem :: "+ this.getForItem() : "" )+
-				( this.inStockQuantity != null ? ", stock.qty :: "+ this.inStockQuantity : "" )+
-				( this.consumedStockQuantity!= null ? ", consumedStock.qty :: "+ this.consumedStockQuantity : "" )+
-				( this.remarks != null ? ", stock.remarks :: "+ this.remarks : "" );
+	public String toString() {
+		return "stock :: " + this.getId() + ", stock.bom :: " + this.bom.getId()
+				+ (this.getForItem() != null ? ", stock.forItem :: " + this.getForItem() : "")
+				+ (this.inStockQuantity != null ? ", stock.qty :: " + this.inStockQuantity : "")
+				+ (this.consumedStockQuantity != null ? ", consumedStock.qty :: " + this.consumedStockQuantity : "")
+				+ (this.remarks != null ? ", stock.remarks :: " + this.remarks : "");
 	}
 
 	public boolean equals(Object other) {
-		if (this == other) return true;
+		if (this == other)
+			return true;
 
-		if ( !(other instanceof BillOfMaterialInStock) ) return false;
+		if (!(other instanceof BillOfMaterialInStock))
+			return false;
 
 		final BillOfMaterialInStock b2 = (BillOfMaterialInStock) other;
 
@@ -159,7 +165,7 @@ public class BillOfMaterialInStock {
 	}
 
 	@Override
-	public int hashCode() { //todo - add extra fields like user/session when it is time
+	public int hashCode() { // todo - add extra fields like user/session when it is time
 		HashCodeBuilder hcb = new HashCodeBuilder();
 		hcb.append(this.getBom().hashCode());
 		hcb.append(this.getForItem().hashCode());

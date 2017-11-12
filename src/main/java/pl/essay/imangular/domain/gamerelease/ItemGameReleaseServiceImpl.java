@@ -12,30 +12,30 @@ import pl.essay.imangular.domain.image.ImageDao;
 @Service
 @Transactional
 public class ItemGameReleaseServiceImpl extends GenericServiceImpl<ItemGameRelease> implements ItemGameReleaseService {
-	
-	@Autowired 
-	private GameReleaseStepDao stepDao; 
-	@Autowired 
+
+	@Autowired
+	private GameReleaseStepDao stepDao;
+	@Autowired
 	private ImageDao imageDao;
-	
+
 	@Override
-	public void deleteStep(Serializable id){
-		
+	public void deleteStep(Serializable id) {
+
 		GameReleaseStep step = this.stepDao.get(id);
 		ItemGameRelease gr = step.getGameRelease();
 		gr.getSteps().remove(step);
 		step.setGameRelease(null);
 		this.templateEntityDao.update(gr);
 	}
-	
+
 	@Override
-	public void setImageOnStep(Serializable id, byte[] i){
+	public void setImageOnStep(Serializable id, byte[] i) {
 		GameReleaseStep step = this.stepDao.get(id);
 		Image img = new Image();
-		img.setImage( i );
+		img.setImage(i);
 		this.imageDao.create(img);
-		step.setImage( img.getId() );
+		step.setImage(img.getId());
 		this.stepDao.update(step);
 	}
-	
+
 }

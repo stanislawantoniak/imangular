@@ -37,31 +37,32 @@ import pl.essay.imangular.domain.item.Item;
 @DynamicUpdate
 
 public class BillOfMaterial {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // , generator="item_seq")
 	@Column
 	private long id;
-	
+
 	@Column
 	private String anonymousOwner;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = true)
-	@JsonIgnore //never ever serialize userdetails - there is pass in it!
+	@JsonIgnore // never ever serialize userdetails - there is pass in it!
 	UserT userOwner;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	private Item forItem;	
+	private Item forItem;
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade={CascadeType.ALL})
+	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade = { CascadeType.ALL })
 	@JsonIgnore
-	@JsonManagedReference(value="stocks")
+	@JsonManagedReference(value = "stocks")
 	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<BillOfMaterialInStock> stocks = new HashSet<BillOfMaterialInStock>();
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade={CascadeType.ALL})
-	@JsonManagedReference(value="requirementsList")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "bom", cascade = { CascadeType.ALL })
+	@JsonManagedReference(value = "requirementsList")
 	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<BillOfMaterialFlatListLine> requirementsList = new HashSet<BillOfMaterialFlatListLine>();
 
@@ -69,87 +70,94 @@ public class BillOfMaterial {
 	@NotNull
 	@DecimalMin("1")
 	private Integer requiredQuantity;
-	
+
 	@Column
 	private Date dateCreated;
 
-	public BillOfMaterial(){};
-	
-	public BillOfMaterial(long id){ this.id = id;};
+	public BillOfMaterial() {
+	};
 
-	public long getId(){
+	public BillOfMaterial(long id) {
+		this.id = id;
+	};
+
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(long id){
+	public void setId(long id) {
 		this.id = id;
 	}
-	
-	public String getAnonymousUser(){
+
+	public String getAnonymousUser() {
 		return this.anonymousOwner;
 	}
-	public void setAnonymousUser(String u){
+
+	public void setAnonymousUser(String u) {
 		this.anonymousOwner = u;
 	}
-	public UserT getUserOwner(){
+
+	public UserT getUserOwner() {
 		return this.userOwner;
 	}
-	
-	public void setUserOwner(UserT u){
+
+	public void setUserOwner(UserT u) {
 		this.userOwner = u;
 	}
 
-	public Item getForItem(){
+	public Item getForItem() {
 		return this.forItem;
 	}
 
-	public void setForItem(Item item){
+	public void setForItem(Item item) {
 		this.forItem = item;
 	}
 
-	public Set<BillOfMaterialInStock> getStocks(){
+	public Set<BillOfMaterialInStock> getStocks() {
 		return this.stocks;
 	}
 
-	public void setStocks(Set<BillOfMaterialInStock> s){
+	public void setStocks(Set<BillOfMaterialInStock> s) {
 		this.stocks = s;
 	}
 
-	public Set<BillOfMaterialFlatListLine> getRequirementsList(){
+	public Set<BillOfMaterialFlatListLine> getRequirementsList() {
 		return this.requirementsList;
 	}
 
-	public void setRequirementsList(Set<BillOfMaterialFlatListLine> r){
+	public void setRequirementsList(Set<BillOfMaterialFlatListLine> r) {
 		this.requirementsList = r;
 	}
-	public int getRequiredQuantity(){
+
+	public int getRequiredQuantity() {
 		return this.requiredQuantity;
 	}
 
-	public void setRequiredQuantity(int q){
+	public void setRequiredQuantity(int q) {
 		this.requiredQuantity = q;
 	}
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm", timezone="CET")
-	public Date getDateCreated(){
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd, HH:mm", timezone = "CET")
+	public Date getDateCreated() {
 		return this.dateCreated;
 	}
-	
-	public void setDateCreated(Date d){
+
+	public void setDateCreated(Date d) {
 		this.dateCreated = d;
 	}
-	
+
 	@Override
-	public String toString(){
-		return "bom :: "+this.getId()+
-				( this.forItem != null ? "  bom.forItem :: "+ this.forItem.getId() : "");
+	public String toString() {
+		return "bom :: " + this.getId() + (this.forItem != null ? "  bom.forItem :: " + this.forItem.getId() : "");
 	}
 
 	@Override
 	public boolean equals(Object other) {
-		if (this == other) return true;
+		if (this == other)
+			return true;
 
-		if ( !(other instanceof BillOfMaterial) ) return false;
+		if (!(other instanceof BillOfMaterial))
+			return false;
 
 		final BillOfMaterial b2 = (BillOfMaterial) other;
 
@@ -159,8 +167,9 @@ public class BillOfMaterial {
 		return eb.isEquals();
 
 	}
+
 	@Override
-	public int hashCode() { //todo - add extra fields like user/session when it is time
+	public int hashCode() { // todo - add extra fields like user/session when it is time
 		HashCodeBuilder hcb = new HashCodeBuilder();
 		hcb.append(this.getForItem().hashCode());
 		return hcb.toHashCode();

@@ -29,20 +29,20 @@ public class ImageController extends BaseController {
 	@Autowired
 	private ImageService imageService;
 
-	@RequestMapping(value="/imagerest/{id}.jpg")
-	public void getImage(HttpServletResponse response , @PathVariable("id") int id) throws IOException {
+	@RequestMapping(value = "/imagerest/{id}.jpg")
+	public void getImage(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
 
 		Image img = this.imageService.getEntityById(id);
 
 		response.setContentType("image/jpg");
-		SimpleDateFormat dateFormat=new SimpleDateFormat( "EEE, dd MMM yyyy HH:mm:ss z",Locale.US);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
 		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-	
-		response.addHeader("Last-Modified", dateFormat.format(img.getDateCreated()));   
-		response.addHeader("Expires", dateFormat.format(DateUtils.addMonths(new Date(), 3) ));
+
+		response.addHeader("Last-Modified", dateFormat.format(img.getDateCreated()));
+		response.addHeader("Expires", dateFormat.format(DateUtils.addMonths(new Date(), 3)));
 
 		InputStream in1 = new ByteArrayInputStream(img.getImage());
-		IOUtils.copy(in1, response.getOutputStream());  
+		IOUtils.copy(in1, response.getOutputStream());
 
 	}
 }

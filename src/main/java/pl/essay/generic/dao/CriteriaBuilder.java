@@ -17,135 +17,120 @@ public class CriteriaBuilder<T extends Object> {
 
 	private Class<T> domainClass;
 
-	private Criteria criteria; 
+	private Criteria criteria;
 
 	private Session session;
 
-	public Criteria get(){
+	public Criteria get() {
 
 		return this.criteria;
 	}
 
 	/*
-	 * creates blank criteria (for all rows) 
+	 * creates blank criteria (for all rows)
 	 */
-	public CriteriaBuilder(Session session, Class<T> c){
+	public CriteriaBuilder(Session session, Class<T> c) {
 		this.domainClass = c;
 		this.session = session;
 		this.criteria = this.session.createCriteria(this.domainClass);
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 	};
 
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-	 * accepts map for string pairs:
-	 * sortColumn - domain property 
-	 * sortDirection - asc for ascending, any other for descending order, it is always uppercased so do not worry about case
+	/*
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	 * * * * * * * * * * * * * * * * * * * * accepts map for string pairs:
+	 * sortColumn - domain property sortDirection - asc for ascending, any other for
+	 * descending order, it is always uppercased so do not worry about case
 	 * 
-	 * if the map is null or empty = ignored, returns builder
-	 ** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	 * if the map is null or empty = ignored, returns builder * * * * * * * * * * *
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	 * * * * * * * * *
 	 */
-	public CriteriaBuilder<T> addSortOrder(Map<String,String> sortFields) { 
+	public CriteriaBuilder<T> addSortOrder(Map<String, String> sortFields) {
 
 		if (sortFields == null || sortFields.isEmpty())
 			return this;
 
-		for (Map.Entry<String, String> pair: sortFields.entrySet()){
-			Order order; 
-			if ("ASC".equals(pair.getValue().toUpperCase())){ 
-				order = Order.asc(pair.getKey()); 
-			} else { 
-				order = Order.desc(pair.getKey()); 
-			} 
-			this.criteria
-			.addOrder(order); 
+		for (Map.Entry<String, String> pair : sortFields.entrySet()) {
+			Order order;
+			if ("ASC".equals(pair.getValue().toUpperCase())) {
+				order = Order.asc(pair.getKey());
+			} else {
+				order = Order.desc(pair.getKey());
+			}
+			this.criteria.addOrder(order);
 
-			logger.trace("adding sort order :: "+order.getPropertyName()+" / is ascending ::"+order.isAscending());
+			logger.trace(
+					"adding sort order :: " + order.getPropertyName() + " / is ascending ::" + order.isAscending());
 		}
 
 		return this;
-	} 
+	}
 
 	/*
-	 * accepts map for string pairs:
-	 * key - domain property to filter, associated entities are accepted but only first level
-	 * 		like forItem.name is ok, but forItem.gameRelease.name is not 
-	 *	 
+	 * accepts map for string pairs: key - domain property to filter, associated
+	 * entities are accepted but only first level like forItem.name is ok, but
+	 * forItem.gameRelease.name is not
+	 * 
 	 * value == searchstring - string to be filtered by
 	 * 
 	 * filtersstring fields only adding like %querystring% for each field
 	 * 
 	 */
-	public CriteriaBuilder<T> addAndLikeFilters(Map<String,String> filters) { 
+	public CriteriaBuilder<T> addAndLikeFilters(Map<String, String> filters) {
 
-		for (Map.Entry<String, String> pair: filters.entrySet()){
+		for (Map.Entry<String, String> pair : filters.entrySet()) {
 
-			/*	do not add criteria when search string is empty
-			*	ngtable passes empty string for search value when filter 
-			*	comes from select 
-			*	
-			*/
-			if (!"".equals(pair.getValue())){ 
+			/*
+			 * do not add criteria when search string is empty ngtable passes empty string
+			 * for search value when filter comes from select
+			 * 
+			 */
+			if (!"".equals(pair.getValue())) {
 				String key = pair.getKey();
-				if (key.contains(".")){
-					//build criteria for nested select
+				if (key.contains(".")) {
+					// build criteria for nested select
 					String association = StringUtils.substringBefore(key, ".");
-					String alias = StringUtils.substringBefore(key, ".")+"Association";
+					String alias = StringUtils.substringBefore(key, ".") + "Association";
 					String associationProperty = StringUtils.substringAfter(key, ".");
 
-					logger.trace("adding association and like filter for:: "+key+" / "+pair.getValue());
-					logger.trace("association::",association);
-					logger.trace("alias::",alias);
-					logger.trace("associationProperty::",associationProperty);
+					logger.trace("adding association and like filter for:: " + key + " / " + pair.getValue());
+					logger.trace("association::", association);
+					logger.trace("alias::", alias);
+					logger.trace("associationProperty::", associationProperty);
 
-					this.criteria
-					.createAlias(association, alias)
-					.add( Restrictions
-							.like( 
-									alias+"."+associationProperty, 
-									"%"+pair.getValue()+"%"
-									) 
-							);
+					this.criteria.createAlias(association, alias)
+							.add(Restrictions.like(alias + "." + associationProperty, "%" + pair.getValue() + "%"));
 
 				} else {
 
-					logger.trace("adding and like filters :: "+key+" / "+pair.getValue());
-					this.criteria
-					.add(Restrictions
-							.like(key, "%"+pair.getValue()+"%")
-							.ignoreCase());
+					logger.trace("adding and like filters :: " + key + " / " + pair.getValue());
+					this.criteria.add(Restrictions.like(key, "%" + pair.getValue() + "%").ignoreCase());
 				}
-			} 
+			}
 		}
 		return this;
-	} 
+	}
 
 	/*
-	 * add a filter for strict matching
-	 * field - domain property to filter
-	 * match - string to be filtered by
+	 * add a filter for strict matching field - domain property to filter match -
+	 * string to be filtered by
 	 */
-	public CriteriaBuilder<T> addStrictMatchingFilter(String field, Object match) { 
+	public CriteriaBuilder<T> addStrictMatchingFilter(String field, Object match) {
 
+		Criterion restriction = Restrictions.eq(field, match);
 
-		Criterion restriction = Restrictions
-				.eq(field, match);
-
-		logger.trace("adding strict matching filter for field :: "+field+" == "+match);
-		this.criteria
-		.add(restriction); 
-
-		return this;
-	} 
-
-
-	public CriteriaBuilder<T> addPagination(int pageNo, int pageSize) { 
-
-		this.criteria
-		.setFirstResult((pageNo - 1) * pageSize)
-		.setMaxResults(pageSize);
+		logger.trace("adding strict matching filter for field :: " + field + " == " + match);
+		this.criteria.add(restriction);
 
 		return this;
 	}
 
+	public CriteriaBuilder<T> addPagination(int pageNo, int pageSize) {
+
+		this.criteria.setFirstResult((pageNo - 1) * pageSize).setMaxResults(pageSize);
+
+		return this;
+	}
 
 }

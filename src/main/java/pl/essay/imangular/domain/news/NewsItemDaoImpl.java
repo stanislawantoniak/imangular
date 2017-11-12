@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public class NewsItemDaoImpl extends GenericDaoHbnImpl<NewsItem> implements NewsItemDao {
 
 	@Override
-	public SetWithCountHolder<NewsItem> listNewsItemsByCategory(String cat){
+	public SetWithCountHolder<NewsItem> listNewsItemsByCategory(String cat) {
 
 		CriteriaBuilder<NewsItem> criteriaBuilder = this.getCriteriaBuilder();
 		criteriaBuilder.addStrictMatchingFilter("category", cat);
@@ -19,15 +19,11 @@ public class NewsItemDaoImpl extends GenericDaoHbnImpl<NewsItem> implements News
 		CriteriaBuilder<NewsItem> criteriaBuilderForCount = this.getCriteriaBuilder();
 		criteriaBuilderForCount.addStrictMatchingFilter("category", cat);
 
-		return 	this.getSetWithCountHolder(
+		return this.getSetWithCountHolder(
 
-				criteriaBuilder.get(), 
-				
-				(long) criteriaBuilderForCount
-				.get()
-				.setProjection(Projections.rowCount())
-				.uniqueResult()
-				);
+				criteriaBuilder.get(),
+
+				(long) criteriaBuilderForCount.get().setProjection(Projections.rowCount()).uniqueResult());
 
 	}
 }

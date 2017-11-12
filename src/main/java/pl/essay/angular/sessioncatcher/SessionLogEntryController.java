@@ -13,14 +13,14 @@ import pl.essay.generic.dao.SetWithCountHolder;
 
 @RestController
 public class SessionLogEntryController {
-	
-	@Autowired 
+
+	@Autowired
 	private SessionLogEntryService sessionLogEntryService;
-	
+
 	@RequestMapping(value = "/sessionlogs", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('"+UserForm.roleSupervisor+"')")
-	public SetWithCountHolder<SessionLogEntry>  getSessionLogWithParams(@RequestBody ListingParamsHolder filter) {
-		return this.sessionLogEntryService.listEntitiesPaginated( filter );
+	@PreAuthorize("hasRole('" + UserForm.roleSupervisor + "')")
+	public SetWithCountHolder<SessionLogEntry> getSessionLogWithParams(@RequestBody ListingParamsHolder filter) {
+		return this.sessionLogEntryService.listEntitiesPaginated(filter);
 	}
 
 }

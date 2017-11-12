@@ -23,65 +23,71 @@ import pl.essay.angular.security.UserT;
 
 public class SessionLogEntry {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int id;
-	
-	@Column 
+
+	@Column
 	private String ip;
-	
+
 	@Column
 	private String sessionId;
-	
+
 	@Column
 	private Date dateCreated;
-	
+
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = true)
 	UserT user;
 
-	public SessionLogEntry(){
+	public SessionLogEntry() {
 	}
 
-	//setters & getters
-	public void setId(int id){
+	// setters & getters
+	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId(){
+
+	public int getId() {
 		return this.id;
 	}
 
-	public String getIp(){
+	public String getIp() {
 		return this.ip;
 	}
-	public void setIp(String i){
+
+	public void setIp(String i) {
 		this.ip = i;
 	}
 
-	public String getSessionId(){
+	public String getSessionId() {
 		return this.sessionId;
 	}
-	public void setSessionId(String i){
+
+	public void setSessionId(String i) {
 		this.sessionId = i;
 	}
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm:ss", timezone="CET")
-	public Date getDateCreated(){
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd, HH:mm:ss", timezone = "CET")
+	public Date getDateCreated() {
 		return this.dateCreated;
 	}
-	
-	public void setDateCreated(Date d){
+
+	public void setDateCreated(Date d) {
 		this.dateCreated = d;
 	}
 
-	public void setUser(UserT u){
+	public void setUser(UserT u) {
 		this.user = u;
 	}
-	public UserT getUser(){
+
+	public UserT getUser() {
 		return this.user;
 	}
-	
-	public String toString(){
-		return this.getId() +" ip:: "+this.getIp();
+
+	public String toString() {
+		return this.getId() + " ip:: " + this.getIp();
 	}
 
 }

@@ -1,6 +1,5 @@
 package pl.essay.imangular.domain.bom;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,101 +25,105 @@ import pl.essay.imangular.domain.item.Item;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-//@Table(uniqueConstraints = {
-//@UniqueConstraint(columnNames = {"bom","for_item"})}
-//)
+// @Table(uniqueConstraints = {
+// @UniqueConstraint(columnNames = {"bom","for_item"})}
+// )
 
 public class BillOfMaterialFlatListLine {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // , generator="item_seq")
 	@Column
 	private long id;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
-	@JsonBackReference(value="requirementsList")
+	@JsonBackReference(value = "requirementsList")
 	private BillOfMaterial bom;
 
 	@ManyToOne
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(referencedColumnName = "id", nullable = false)
 	private Item forItem;
-	
-	@OneToOne( cascade = {CascadeType.ALL} )
+
+	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(referencedColumnName = "id", nullable = true)
 	private BillOfMaterialInStock stock;
 
 	@Column
-	//@NotNull
+	// @NotNull
 	@DecimalMin("0")
 	private Long requiredQuantity;
 
 	@Column
-	//@NotNull
+	// @NotNull
 	@DecimalMin("0")
 	private Long effectiveRequiredQuantity;
 
+	public BillOfMaterialFlatListLine() {
+	};
 
-	public BillOfMaterialFlatListLine(){};
-
-	public long getId(){
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(long id){
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public BillOfMaterial getBom(){
+	public BillOfMaterial getBom() {
 		return this.bom;
 	}
 
-	public void setBom(BillOfMaterial b){
+	public void setBom(BillOfMaterial b) {
 		this.bom = b;
 	}
 
-	public Item getForItem(){
+	public Item getForItem() {
 		return this.forItem;
 	}
 
-	public void setForItem(Item item){
+	public void setForItem(Item item) {
 		this.forItem = item;
 	}
 
-	public Long getRequiredQuantity(){
+	public Long getRequiredQuantity() {
 		return this.requiredQuantity;
 	}
 
-	public void setRequiredQuantity(Long q){
+	public void setRequiredQuantity(Long q) {
 		this.requiredQuantity = q;
-	}		
-	public Long getEffectiveRequiredQuantity(){
+	}
+
+	public Long getEffectiveRequiredQuantity() {
 		return this.effectiveRequiredQuantity;
 	}
 
-	public void setEffectiveRequiredQuantity(Long q){
+	public void setEffectiveRequiredQuantity(Long q) {
 		this.effectiveRequiredQuantity = q;
 	}
-	
-	public BillOfMaterialInStock getStock(){
+
+	public BillOfMaterialInStock getStock() {
 		return this.stock;
 	}
-	
-	public void setStock(BillOfMaterialInStock s){
+
+	public void setStock(BillOfMaterialInStock s) {
 		this.stock = s;
 	}
-	
+
 	@Override
-	public String toString(){
-		return "requirement :: ("+this.getId()+", qtyRequired = "+this.requiredQuantity+", effective ="+this.effectiveRequiredQuantity+")"+
-				", bom :: ("+ this.bom +")"+
-				", forItem :: ("+ this.forItem +")";
+	public String toString() {
+		return "requirement :: (" + this.getId() + ", qtyRequired = " + this.requiredQuantity + ", effective ="
+				+ this.effectiveRequiredQuantity + ")" + ", bom :: (" + this.bom + ")" + ", forItem :: (" + this.forItem
+				+ ")";
 	}
 
 	public boolean equals(Object other) {
-		if (this == other) return true;
+		if (this == other)
+			return true;
 
-		if ( !(other instanceof BillOfMaterialFlatListLine) ) return false;
+		if (!(other instanceof BillOfMaterialFlatListLine))
+			return false;
 
 		final BillOfMaterialFlatListLine b2 = (BillOfMaterialFlatListLine) other;
 
@@ -134,7 +137,7 @@ public class BillOfMaterialFlatListLine {
 	}
 
 	@Override
-	public int hashCode() { //todo - add extra fields like user/session when it is time
+	public int hashCode() { // todo - add extra fields like user/session when it is time
 		HashCodeBuilder hcb = new HashCodeBuilder();
 		hcb.append(this.getBom().hashCode());
 		hcb.append(this.getForItem().hashCode());

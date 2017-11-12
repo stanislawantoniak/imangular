@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ItemGameReleaseDaoImpl extends GenericDaoHbnImpl<ItemGameRelease> implements ItemGameReleaseDao {
 
-	
 }

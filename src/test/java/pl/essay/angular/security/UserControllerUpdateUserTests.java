@@ -38,7 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestClientTest(UserController.class)
 public class UserControllerUpdateUserTests {
 
-	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
+			MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 
 	private MockMvc mockMvc;
 
@@ -54,12 +55,12 @@ public class UserControllerUpdateUserTests {
 	}
 
 	@Test
-	public void testUpdateUser_WhenUserExists() throws Exception{
-		//user exists
+	public void testUpdateUser_WhenUserExists() throws Exception {
+		// user exists
 
-		//assertEquals("0==0", 0,1);
+		// assertEquals("0==0", 0,1);
 
-		//this.userServiceMock = mock(UserService.class);
+		// this.userServiceMock = mock(UserService.class);
 
 		UserT user = getUser("123456");
 		UserForm uf = getUserForm("changed");
@@ -70,35 +71,31 @@ public class UserControllerUpdateUserTests {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-		String requestJson=ow.writeValueAsString( uf );
+		String requestJson = ow.writeValueAsString(uf);
 
-		//System.out.println(requestJson);
-		
-		MockHttpServletRequestBuilder req = put("/userrest/"+id)
-				.contentType(APPLICATION_JSON_UTF8)
+		// System.out.println(requestJson);
+
+		MockHttpServletRequestBuilder req = put("/userrest/" + id).contentType(APPLICATION_JSON_UTF8)
 				.content(requestJson);
 
-		//System.out.println(APPLICATION_JSON_UTF8);
-		
-		mockMvc.perform(
-				req
-				)
-		.andExpect(status().isOk());
+		// System.out.println(APPLICATION_JSON_UTF8);
+
+		mockMvc.perform(req).andExpect(status().isOk());
 
 		ArgumentCaptor<UserT> userCaptured = ArgumentCaptor.forClass(UserT.class);
-		verify(userServiceMock).updateUser( userCaptured.capture() );
+		verify(userServiceMock).updateUser(userCaptured.capture());
 		assertEquals("changed", userCaptured.getValue().getPassword());
 		assertEquals("bolko@wp.pl", userCaptured.getValue().getUsername());
 
 	}
-	
+
 	@Test
-	public void testUpdateUser_WhenUserDoesNotExist() throws Exception{
-		//user does not exist - should be returned http.not_found
+	public void testUpdateUser_WhenUserDoesNotExist() throws Exception {
+		// user does not exist - should be returned http.not_found
 
-		//assertEquals("0==0", 0,1);
+		// assertEquals("0==0", 0,1);
 
-		//this.userServiceMock = mock(UserService.class);
+		// this.userServiceMock = mock(UserService.class);
 
 		UserForm uf = getUserForm("changed");
 		int id = uf.getId();
@@ -108,30 +105,26 @@ public class UserControllerUpdateUserTests {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-		String requestJson=ow.writeValueAsString( uf );
+		String requestJson = ow.writeValueAsString(uf);
 
-		//System.out.println(requestJson);
+		// System.out.println(requestJson);
 
-		MockHttpServletRequestBuilder req = put("/userrest/"+id)
-				.contentType(APPLICATION_JSON_UTF8)
+		MockHttpServletRequestBuilder req = put("/userrest/" + id).contentType(APPLICATION_JSON_UTF8)
 				.content(requestJson);
 
-		//System.out.println(APPLICATION_JSON_UTF8);
+		// System.out.println(APPLICATION_JSON_UTF8);
 
-		mockMvc.perform(
-				req
-				)
-		.andExpect(status().isNotFound());
+		mockMvc.perform(req).andExpect(status().isNotFound());
 
 	}
 
 	@Test
-	public void testUpdateUser_WhenUserExistsAndInputPassEmpty() throws Exception{
-		//user exists but passowrd in put was empty - should not change
+	public void testUpdateUser_WhenUserExistsAndInputPassEmpty() throws Exception {
+		// user exists but passowrd in put was empty - should not change
 
-		//assertEquals("0==0", 0,1);
+		// assertEquals("0==0", 0,1);
 
-		//this.userServiceMock = mock(UserService.class);
+		// this.userServiceMock = mock(UserService.class);
 
 		UserT user = getUser("123456");
 		UserForm uf = getUserForm("");
@@ -142,28 +135,24 @@ public class UserControllerUpdateUserTests {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-		String requestJson=ow.writeValueAsString( uf );
+		String requestJson = ow.writeValueAsString(uf);
 
-		//System.out.println(requestJson);
-		
-		MockHttpServletRequestBuilder req = put("/userrest/"+id)
-				.contentType(APPLICATION_JSON_UTF8)
+		// System.out.println(requestJson);
+
+		MockHttpServletRequestBuilder req = put("/userrest/" + id).contentType(APPLICATION_JSON_UTF8)
 				.content(requestJson);
 
-		//System.out.println(APPLICATION_JSON_UTF8);
-		
-		mockMvc.perform(
-				req
-				)
-		.andExpect(status().isOk());
+		// System.out.println(APPLICATION_JSON_UTF8);
+
+		mockMvc.perform(req).andExpect(status().isOk());
 
 		ArgumentCaptor<UserT> userCaptured = ArgumentCaptor.forClass(UserT.class);
-		verify(userServiceMock).updateUser( userCaptured.capture() );
+		verify(userServiceMock).updateUser(userCaptured.capture());
 		assertEquals("123456", userCaptured.getValue().getPassword());
 
 	}
-	
-	public static final UserT getUser(String pass){
+
+	public static final UserT getUser(String pass) {
 		UserT user = new UserT();
 		user.setEnabled(true);
 		user.setId(12);
@@ -173,7 +162,7 @@ public class UserControllerUpdateUserTests {
 		return user;
 	}
 
-	public static final UserForm getUserForm(String pass){
+	public static final UserForm getUserForm(String pass) {
 		UserForm user = new UserForm();
 		user.setEnabled(true);
 		user.setId(12);
@@ -181,9 +170,9 @@ public class UserControllerUpdateUserTests {
 		user.setUsername("bolko@wp.pl");
 
 		List<String> roles = new ArrayList<String>();
-		roles = Arrays.asList(new String[]{"ADMIN","USER"});
+		roles = Arrays.asList(new String[] { "ADMIN", "USER" });
 
-		user.setRolesSelected( roles );
+		user.setRolesSelected(roles);
 		return user;
 	}
 

@@ -1,6 +1,5 @@
 package pl.essay.imangular.domain.news;
 
-
 import java.util.Date;
 
 import javax.persistence.Cacheable;
@@ -32,124 +31,133 @@ import pl.essay.angular.security.UserT;
 @DynamicUpdate
 public class NewsItem {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int id;
 
-	@Column @Type(type="yes_no")
+	@Column
+	@Type(type = "yes_no")
 	private Boolean isPublished = false;
 
 	@Column
-	@NotNull(message="Title must not be empty")
+	@NotNull(message = "Title must not be empty")
 	private String title;
-	
-	@Column @Type(type="text")
+
+	@Column
+	@Type(type = "text")
 	private String content;
 
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", nullable = true)
-	//@JsonIgnore //never serialize userdetails - there is pass in it!
+	// @JsonIgnore //never serialize userdetails - there is pass in it!
 	UserT createdBy;
-	
+
 	@Column
 	private Date dateCreated;
-	
-	@Column 
+
+	@Column
 	private String category;
-	
-	@Column 
+
+	@Column
 	private String bgmColor;
 
-	@Column 
+	@Column
 	private Integer priority;
 
-	public NewsItem(){
+	public NewsItem() {
 	}
 
-	public NewsItem(int id){
+	public NewsItem(int id) {
 		this.id = id;
 	}
 
-	//setters & getters
-	public void setId(int id){
+	// setters & getters
+	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId(){
+
+	public int getId() {
 		return this.id;
 	}
-	
-	public void setTitle(String name){
+
+	public void setTitle(String name) {
 		this.title = name;
 	}
-	
-	public String getTitle(){
+
+	public String getTitle() {
 		return this.title;
 	}
-	public void setContent(String name){
+
+	public void setContent(String name) {
 		this.content = name;
 	}
-	
-	public String getContent(){
+
+	public String getContent() {
 		return this.content;
 	}
-	
-	public void setIsPublished(Boolean p){
+
+	public void setIsPublished(Boolean p) {
 		this.isPublished = p;
 	}
-	public boolean getIsPublished(){
+
+	public boolean getIsPublished() {
 		return this.isPublished;
 	}
 
-	public UserT getCreatedBy(){
+	public UserT getCreatedBy() {
 		return this.createdBy;
 	}
-	
-	public void setCreatedBy(UserT u){
+
+	public void setCreatedBy(UserT u) {
 		this.createdBy = u;
 	}
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:00", timezone="CET")
-	public Date getDateCreated(){
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd,HH:00", timezone = "CET")
+	public Date getDateCreated() {
 		return this.dateCreated;
 	}
-	
-	public void setDateCreated(Date d){
+
+	public void setDateCreated(Date d) {
 		this.dateCreated = d;
 	}
-	
-	public void setPriority(Integer o){
+
+	public void setPriority(Integer o) {
 		this.priority = o;
 	}
-	public Integer getPriority(){
+
+	public Integer getPriority() {
 		return this.priority;
 	}
-	
-	public void setCategory(String c){
+
+	public void setCategory(String c) {
 		this.category = c;
 	}
-	
-	public String getCategory(){
+
+	public String getCategory() {
 		return this.category;
 	}
-	
-	public void setBgmColor(String c){
+
+	public void setBgmColor(String c) {
 		this.bgmColor = c;
 	}
-	
-	public String getBgmColor(){
+
+	public String getBgmColor() {
 		return this.bgmColor;
 	}
-	
+
 	@JsonIgnore
-	public String getDefaulSortColumn(){
+	public String getDefaulSortColumn() {
 		return "order";
 	}
 
 	@Override
 	public boolean equals(Object other) {
-		if (this == other) return true;
+		if (this == other)
+			return true;
 
-		if ( !(other instanceof NewsItem) ) return false;
+		if (!(other instanceof NewsItem))
+			return false;
 
 		final NewsItem b2 = (NewsItem) other;
 

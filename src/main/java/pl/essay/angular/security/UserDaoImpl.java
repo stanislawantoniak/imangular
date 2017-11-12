@@ -10,22 +10,19 @@ import pl.essay.generic.dao.GenericDaoHbnImpl;
 
 @Repository
 public class UserDaoImpl extends GenericDaoHbnImpl<UserT> implements UserDao {
-	
+
 	protected static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
-	
+
 	public UserT getUserByName(String name) {
 
 		CriteriaBuilder<UserT> criteriaBuilder = this.getCriteriaBuilder();
 		criteriaBuilder.addStrictMatchingFilter("username", name);
-		
-		UserT user = (UserT) 
-				criteriaBuilder
-				.get()
-				.uniqueResult();
-		
+
+		UserT user = (UserT) criteriaBuilder.get().uniqueResult();
+
 		if (user == null)
-			throw (new UsernameNotFoundException("User "+name+" not found."));
-		else 
+			throw (new UsernameNotFoundException("User " + name + " not found."));
+		else
 			return user;
 	}
 
@@ -33,24 +30,19 @@ public class UserDaoImpl extends GenericDaoHbnImpl<UserT> implements UserDao {
 
 		try {
 			this.getUserByName(name);
-		} catch ( Exception e ) {
+		} catch (Exception e) {
 			logger.debug(e.getLocalizedMessage());
 			return false;
 		}
 		return true;
-	}	
+	}
 
+	public UserT getUserByForgotPasswordHash(String hash) {
 
-	public UserT getUserByForgotPasswordHash(String hash){
-		
-			
 		CriteriaBuilder<UserT> criteriaBuilder = this.getCriteriaBuilder();
 		criteriaBuilder.addStrictMatchingFilter("forgotPasswordHash", hash);
-		
-		return (UserT) 
-				criteriaBuilder
-				.get()
-				.uniqueResult();
+
+		return (UserT) criteriaBuilder.get().uniqueResult();
 	}
 
 }

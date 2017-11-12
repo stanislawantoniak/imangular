@@ -21,33 +21,33 @@ public class EmailMaker {
 	@Value("${eliczile.appname}")
 	private String appname;
 
-	public EmailMaker(String file){
+	public EmailMaker(String file) {
 
 		try {
 			InputStream is = getClass().getClassLoader().getResourceAsStream(file);
 
-			if (is == null){
+			if (is == null) {
 				this.template = "null";
-				logger.error("Problem getting email template form resource file "+file);
-				
-			} else 
+				logger.error("Problem getting email template form resource file " + file);
 
-				this.template = IOUtils.toString(is,"UTF-8");
+			} else
+
+				this.template = IOUtils.toString(is, "UTF-8");
 		} catch (IOException e) {
-			logger.error("Problem getting email template form classpath file "+file, e);
+			logger.error("Problem getting email template form classpath file " + file, e);
 		}
 
 	}
 
-	public String getMail(Map<String,String> placeholderMap){
+	public String getMail(Map<String, String> placeholderMap) {
 
 		String emailBody = this.template;
 
-		for(Map.Entry<String,String> placeHolder: placeholderMap.entrySet())
+		for (Map.Entry<String, String> placeHolder : placeholderMap.entrySet())
 			emailBody = emailBody.replace(placeHolder.getKey(), placeHolder.getValue());
 
-		emailBody = emailBody.replace("@domain@",this.domain);
-		emailBody = emailBody.replace("@domainname@", this.appname );
+		emailBody = emailBody.replace("@domain@", this.domain);
+		emailBody = emailBody.replace("@domainname@", this.appname);
 
 		return emailBody;
 	}

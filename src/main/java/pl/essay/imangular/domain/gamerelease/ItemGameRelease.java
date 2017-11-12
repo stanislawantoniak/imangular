@@ -29,62 +29,67 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @DynamicInsert
 @DynamicUpdate
 public class ItemGameRelease {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)//, generator="item_seq")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // , generator="item_seq")
 	@Column
 	private int id;
 
 	@Column
-	@NotNull(message="Release name must not be empty")
+	@NotNull(message = "Release name must not be empty")
 	private String name;
 
-	@Column @Type(type="text")
+	@Column
+	@Type(type = "text")
 	private String description;
 
 	@Column
 	private Date releaseDate;
-	
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "gameRelease", cascade={CascadeType.ALL})
+
+	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "gameRelease", cascade = { CascadeType.ALL })
 	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	@JsonManagedReference("steps")
 	private Set<GameReleaseStep> steps = new HashSet<GameReleaseStep>();
-	
-	//setters & getters
-	public void setId(int id){
+
+	// setters & getters
+	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId(){
+
+	public int getId() {
 		return this.id;
 	}
 
-	public void setName(String name){
+	public void setName(String name) {
 		this.name = name;
 	}
-	public String getName(){
+
+	public String getName() {
 		return this.name;
 	}
 
-	public void setDescription(String d){
+	public void setDescription(String d) {
 		this.description = d;
 	}
-	public String getDescription(){
+
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setReleaseDate(Date d){
+	public void setReleaseDate(Date d) {
 		this.releaseDate = d;
 	}
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="CET")
-	public Date getReleaseDate(){
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "CET")
+	public Date getReleaseDate() {
 		return this.releaseDate;
 	}
-	
-	public Set<GameReleaseStep> getSteps(){
+
+	public Set<GameReleaseStep> getSteps() {
 		return this.steps;
 	}
-	
-	public void setSteps(Set<GameReleaseStep> s){
+
+	public void setSteps(Set<GameReleaseStep> s) {
 		this.steps = s;
 	}
-	
+
 }

@@ -9,9 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import pl.essay.generic.dao.GenericDaoHbnImpl;
 
-
 @Repository
-public class ItemComponentDaoImpl extends GenericDaoHbnImpl<ItemComponent> implements ItemComponentDao{
+public class ItemComponentDaoImpl extends GenericDaoHbnImpl<ItemComponent> implements ItemComponentDao {
 
 	@Override
 	public ItemComponent load(Serializable id) {
@@ -24,13 +23,8 @@ public class ItemComponentDaoImpl extends GenericDaoHbnImpl<ItemComponent> imple
 	@SuppressWarnings("unchecked")
 	public Set<ItemComponent> getItemComponentsByParent(int id) {
 		System.out.println("getItemComponentsByParent");
-		return new HashSet<ItemComponent>(
-				(List<ItemComponent>)
-				getSession()
-				.getNamedQuery("getComponentsByParent") 
-				.setParameter("id", id)
-				.list()
-				);
+		return new HashSet<ItemComponent>((List<ItemComponent>) getSession().getNamedQuery("getComponentsByParent")
+				.setParameter("id", id).list());
 	}
 
 }

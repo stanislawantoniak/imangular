@@ -5,16 +5,16 @@ import java.util.Map;
 public class ListingParamsHolder {
 
 	public Integer pageNo;
-	public Integer pageSize; 
+	public Integer pageSize;
 
-	//expecting pairs like 
-	//"name":"asc"
-	//"name":"desc"
+	// expecting pairs like
+	// "name":"asc"
+	// "name":"desc"
 	public Map<String, String> sortOrderFields;
-	
-	//expecting pairs like
-	//"name":"Kowal"
-	//"age":"23"
+
+	// expecting pairs like
+	// "name":"Kowal"
+	// "age":"23"
 	public Map<String, String> filterFields;
-	
+
 }
